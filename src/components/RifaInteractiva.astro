@@ -130,8 +130,8 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           <span>{totalDisponibles} Boletos Disponibles ({totalDisponibles * 2} números)</span>
         </span>
         <span class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-          <span>{totalOcupados} Boletos Apartados / Pagados</span>
+          <span class="w-3 h-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-500"></span>
+          <span>{totalOcupados} {totalOcupados === 1 ? 'Boleto Vendido' : 'Boletos Vendidos'}</span>
         </span>
         <span class="text-[#EF7B38]">{porcentajeProgreso}% Recaudado</span>
       </div>
@@ -158,15 +158,15 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </div>
 
       <div class="flex items-center gap-2">
-        <span class="px-2 py-1 rounded-lg bg-gray-200 border border-gray-300 font-title font-bold text-xs text-gray-500 line-through">
-          #12 <span class="text-gray-400">[11 · 61]</span>
+        <span class="px-2 py-1 rounded-lg bg-gradient-to-r from-orange-500 to-amber-600 border border-orange-600 font-title font-bold text-xs text-white shadow-xs">
+          #50 <span class="text-amber-100">[49 · 99]</span>
         </span>
-        <span>Pagado</span>
+        <span class="font-medium text-gray-700">Ya Vendido</span>
       </div>
 
       <div class="flex items-center gap-2">
-        <span class="px-2 py-1 rounded-lg bg-[#EF7B38] text-white font-title font-bold text-xs shadow-sm">
-          #99 <span class="text-white">[48 · 98]</span>
+        <span class="px-2 py-1 rounded-lg bg-[#1C1814] text-white border border-[#EF7B38] font-title font-bold text-xs shadow-sm">
+          #02 <span class="text-[#EF7B38]">[01 · 51]</span>
         </span>
         <span>Tu Selección</span>
       </div>
@@ -196,12 +196,12 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               <button
                 type="button"
                 disabled
-                class="w-full py-2 px-1 rounded-xl bg-gray-100 border border-gray-300 text-gray-400 font-title flex flex-col items-center justify-center cursor-not-allowed select-none opacity-60 shadow-inner"
-                title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - PAGADO`}
+                class="w-full py-2 px-1 rounded-xl bg-gradient-to-br from-orange-500 via-[#EF7B38] to-amber-600 border-2 border-orange-600/70 text-white font-title flex flex-col items-center justify-center cursor-not-allowed select-none shadow-sm relative group overflow-hidden"
+                title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - YA VENDIDO`}
               >
-                <span class="text-[10px] font-bold text-gray-500">#{boleto.idStr}</span>
-                <span class="text-xs font-mono font-bold line-through">{boleto.num1} · {boleto.num2}</span>
-                <span class="text-[8px] uppercase tracking-tight text-gray-400">Vendido</span>
+                <span class="text-[10px] font-bold text-amber-100">#{boleto.idStr}</span>
+                <span class="text-xs font-mono font-black text-white">{boleto.num1} · {boleto.num2}</span>
+                <span class="text-[8px] uppercase tracking-wider font-bold bg-black/25 px-1.5 py-0.5 rounded-full text-white mt-0.5">Vendido</span>
               </button>
             );
           } else if (boleto.estado === 'Apartado') {
@@ -411,11 +411,11 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .boleto-btn.selected-boleto {
-    background: linear-gradient(135deg, #EF7B38 0%, #B84E20 100%) !important;
-    border-color: #B8860B !important;
+    background: linear-gradient(135deg, #1C1814 0%, #2D241E 100%) !important;
+    border-color: #EF7B38 !important;
     color: #FFFFFF !important;
     transform: scale(1.06);
-    box-shadow: 0 8px 20px rgba(239, 123, 56, 0.45);
+    box-shadow: 0 8px 20px rgba(28, 24, 20, 0.35);
     z-index: 10;
   }
   .boleto-btn.selected-boleto span {
