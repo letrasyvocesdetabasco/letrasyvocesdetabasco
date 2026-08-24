@@ -24,29 +24,14 @@
     }
   ],
   "boletos_ocupados": {
-    "1": {
+    "50": {
       "estado": "Pagado",
-      "numeros": ["00", "50"],
-      "participante": "Participante Registrado en Notion",
-      "fecha": "2026-08-16"
-    },
-    "5": {
-      "estado": "Apartado",
-      "numeros": ["04", "54"],
-      "participante": "Participante Registrado en Notion",
-      "fecha": "2026-08-16"
-    },
-    "12": {
-      "estado": "Pagado",
-      "numeros": ["11", "61"],
-      "participante": "Sociedad Civil Pro-Cultura",
-      "fecha": "2026-08-16"
-    },
-    "25": {
-      "estado": "Apartado",
-      "numeros": ["24", "74"],
-      "participante": "Miembro Afiliado LVT",
-      "fecha": "2026-08-16"
+      "numeros": [
+        "49",
+        "99"
+      ],
+      "participante": "Boleto Vendido",
+      "fecha": "2026-08-24"
     }
   }
 }
