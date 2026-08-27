@@ -14,7 +14,6 @@ const datosBancarios = boletosData.datos_bancarios || {
 };
 
 // Generación de los 50 Boletos Dobles (cada uno con 2 números del 00 al 99)
-// Boleto 1: 00 y 50, Boleto 2: 01 y 51, ..., Boleto 50: 49 y 99
 export interface BoletoDoble {
   id: number;
   idStr: string;
@@ -68,7 +67,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </h2>
 
       <p class="font-serif italic text-base sm:text-xl text-[#555555] leading-relaxed max-w-3xl mx-auto">
-        «50 boletos dobles (100 números). Cada boleto otorga <strong>dos números oficiales</strong> con triple oportunidad de ganar uno de nuestros <strong>tres grandes lotes literarios y de gala (+ $5,400 MXN en premios)</strong>».
+        «50 boletos dobles (100 números). Cada boleto otorga <strong>dos números oficiales</strong> con triple oportunidad de ganar uno de nuestros <strong>tres grandes lotes de premios (+$4,500 MXN en premios)</strong>».
       </p>
 
       <!-- Insignias de resumen rápido -->
@@ -83,7 +82,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           💵 <strong>$100 MXN / Boleto</strong>
         </span>
         <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5 text-amber-700">
-          🏆 <strong>3 Lotes de Premios (+$5,400 MXN)</strong>
+          🏆 <strong>3 Lotes de Premios ($4,565 MXN)</strong>
         </span>
       </div>
     </div>
@@ -97,10 +96,10 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
             🌟 Lote Completo de Premios · Obras de Lujo en Pasta Dura
           </div>
           <h3 class="text-2xl sm:text-3xl lg:text-4xl font-title font-black text-[#222222]">
-            Ediciones en Pasta Dura, Bocinas Bluetooth, Alta Perfumería & Antologías LVT
+            Ediciones en Pasta Dura, Audio Bluetooth, Alta Perfumería & Antologías LVT
           </h3>
           <p class="text-sm sm:text-base text-[#555555] font-sans leading-relaxed">
-            Destacamos obras maestras universales ilustradas en <strong>Pasta Dura de Lujo</strong> (<em>La Divina Comedia</em>, <em>Poesía Prehispánica Flor y Canto</em>, <em>El Arte de la Guerra</em> y <em>El Príncipe</em>), acompañadas de la <strong>Trilogía Oficial de Antologías LVT</strong>, audio Bluetooth y perfumería fina.
+            Destacamos obras maestras universales ilustradas en <strong>Pasta Dura de Lujo</strong> (<em>La Divina Comedia</em>, <em>Poesía Prehispánica Flor y Canto</em>, <em>El Arte de la Guerra</em> y <em>El Príncipe</em>), acompañadas de la <strong>Trilogía Oficial de Antologías LVT</strong>, bocina Bluetooth y perfumería fina.
           </p>
           <div class="pt-2 flex flex-wrap items-center gap-4">
             <a href="#selector-boletos" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#EF7B38] hover:bg-[#D96827] text-white font-title font-bold text-sm transition-all shadow-md hover:shadow-lg">
@@ -127,7 +126,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               loading="lazy"
             />
             <div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-xs text-white text-[10px] font-title font-bold px-3 py-1 rounded-full border border-white/20">
-              Gran Total: $5,415 MXN en Premios
+              Gran Total: $4,565 MXN en Premios
             </div>
           </div>
         </div>
@@ -168,7 +167,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               </span>
             </div>
 
-            {/* Imagen del Lote / Canasta de Premios */}
+            {/* Imagen del Lote */}
             <div class="py-4 flex justify-center items-center">
               <div class="relative w-full rounded-2xl overflow-hidden bg-[#FDFBF7] border border-[#E6DCCE] p-2 flex items-center justify-center min-h-[220px]">
                 <img
@@ -228,7 +227,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         </span>
         <span class="flex items-center gap-2">
           <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 shadow-xs"></span>
-          <span>{totalOcupados} {totalOcupados === 1 ? 'Boleto Apartado' : 'Boletos Apartados'}</span>
+          <span>{totalOcupados} Boletos Apartados</span>
         </span>
         <span class="text-[#EF7B38] font-black text-sm">{porcentajeProgreso}% Colocado</span>
       </div>
@@ -677,7 +676,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         contadorBoletosTexto.textContent = `${cantidadBoletos} ${cantidadBoletos === 1 ? 'boleto doble' : 'boletos dobles'} (${cantidadNumeros} números)`;
       }
 
-      // Preparar mensaje para WhatsApp con estructura lista para n8n/Hermes
       const nombreComprador = (inputNombre && inputNombre.value.trim()) || 'Participante LVT';
       const telComprador = (inputTel && inputTel.value.trim()) || 'No especificado';
       const folioReserva = generarFolio();
@@ -702,7 +700,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       btnVerFicha.classList.remove('opacity-50', 'pointer-events-none');
     }
 
-    // Toggle de boletos
     botonesBoletos.forEach(btn => {
       btn.addEventListener('click', () => {
         const id = parseInt(btn.getAttribute('data-id') || '0', 10);
@@ -724,7 +721,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       });
     });
 
-    // Quitar desde badge
     contenedorSeleccionados.addEventListener('click', (e) => {
       const target = e.target;
       if (target && target.getAttribute('data-quitar-id')) {
@@ -736,11 +732,9 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       }
     });
 
-    // Actualizar datos al tipear nombre o teléfono
     if (inputNombre) inputNombre.addEventListener('input', actualizarInterfaz);
     if (inputTel) inputTel.addEventListener('input', actualizarInterfaz);
 
-    // Limpiar
     if (btnLimpiar) {
       btnLimpiar.addEventListener('click', () => {
         boletosSeleccionados = [];
@@ -751,7 +745,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       });
     }
 
-    // Buscador de Números
     if (inputBuscar) {
       inputBuscar.addEventListener('input', (e) => {
         const valor = e.target.value.trim().padStart(2, '0');
@@ -778,7 +771,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       });
     }
 
-    // Selección al Azar
     if (btnAzar) {
       btnAzar.addEventListener('click', () => {
         const disponibles = Array.from(document.querySelectorAll('.boleto-btn:not(.selected-boleto)'));
@@ -790,7 +782,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       });
     }
 
-    // Copiar CLABE al Portapapeles
     if (btnCopiarClabe) {
       btnCopiarClabe.addEventListener('click', async () => {
         const clabe = datosBancarios.clabe;
@@ -817,7 +808,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       });
     }
 
-    // Modal de Ficha Digital
     if (btnVerFicha && modalFicha) {
       btnVerFicha.addEventListener('click', () => {
         if (boletosSeleccionados.length === 0) return;

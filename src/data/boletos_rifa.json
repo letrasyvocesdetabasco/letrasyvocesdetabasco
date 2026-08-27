@@ -21,33 +21,28 @@
       "icono": "🥇",
       "badge": "Premio Mayor",
       "imagen": "/assets/rifa/premio_1_lote_magno.webp",
-      "valor_estimado": "$2,170 MXN",
+      "valor_estimado": "$1,690 MXN",
       "color_tema": "#EF7B38",
       "items": [
         {
           "categoria": "Edición de Lujo · Pasta Dura",
           "nombre": "La Divina Comedia (Dante Alighieri) — Pasta Dura Ilustrada",
-          "detalle": "Edición íntegra con las magistrales ilustraciones clásicas de Gustave Doré en pasta dura de lujo (Valor $400)."
+          "detalle": "Edición íntegra con las magistrales ilustraciones clásicas de Gustave Doré en pasta dura de lujo."
         },
         {
           "categoria": "Edición de Lujo · Pasta Dura",
           "nombre": "Poesía Prehispánica: Flor y Canto — Pasta Dura Bilingüe",
-          "detalle": "Edición especial bilingüe (Español-Náhuatl) en pasta dura, Col. Arte y Letras Fractales (Valor $200)."
+          "detalle": "Edición especial bilingüe (Español-Náhuatl) en pasta dura, Col. Arte y Letras Fractales."
         },
         {
           "categoria": "Trilogía de Antologías LVT",
           "nombre": "Trilogía de Antologías Oficiales de la Sociedad Literaria LVT (3 Libros)",
-          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región» ($130 c/u, Total $390)."
+          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
         },
         {
           "categoria": "Alta Perfumería de Lujo",
-          "nombre": "Perfume L'Bel BLEU femme Parfum (50 ml Sellado)",
-          "detalle": "Alta perfumería francesa femenina en caja sellada con finos acordes florales (Valor $890)."
-        },
-        {
-          "categoria": "Cuidado e Hidratación",
-          "nombre": "Loción Hidratante Perfumada L'Bel BLEU femme (130 ml)",
-          "detalle": "Tratamiento hidratante perfumado de absorción sedosa para todo el cuerpo (Valor $290)."
+          "nombre": "Dúo de Alta Perfumería Francesa L'Bel BLEU femme (Parfum 50ml + Loción 130ml)",
+          "detalle": "Perfume Parfum sellado de acordes florales más loción hidratante perfumada de absorción sedosa."
         }
       ]
     },
@@ -60,33 +55,28 @@
       "icono": "🥈",
       "badge": "Segundo Lugar",
       "imagen": "/assets/rifa/premio_2_lote_estrategia.webp",
-      "valor_estimado": "$1,656 MXN",
+      "valor_estimado": "$1,786 MXN",
       "color_tema": "#B8860B",
       "items": [
         {
           "categoria": "Dispositivo de Audio",
           "nombre": "Bocina Portátil Bluetooth Select 4 Go",
-          "detalle": "Audio inalámbrico envolvente de alta fidelidad, diseño ultra compacto con correa (Valor $500)."
+          "detalle": "Audio inalámbrico envolvente de alta fidelidad, diseño ultra compacto con correa de transporte."
         },
         {
           "categoria": "Edición de Lujo · Pasta Dura",
           "nombre": "El Arte de la Guerra & El Libro de los Cinco Anillos — Pasta Dura Ilustrada",
-          "detalle": "Obras cumbres de Sun Tzu y Miyamoto Musashi, ilustrada por Marcos Castro en pasta dura (Valor $196)."
+          "detalle": "Obras cumbres de Sun Tzu y Miyamoto Musashi, ilustrada por Marcos Castro en pasta dura."
         },
         {
           "categoria": "Trilogía de Antologías LVT",
           "nombre": "Trilogía de Antologías Oficiales de la Sociedad Literaria LVT (3 Libros)",
-          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región» ($130 c/u, Total $390)."
+          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
         },
         {
-          "categoria": "Fragancia Fina",
-          "nombre": "Velvet Eau de Parfum con Aceite Natural de Patchouli (100 ml)",
-          "detalle": "Elegante fragancia de 3.4 fl. oz. con notas aromáticas de alta fijación (Valor $380)."
-        },
-        {
-          "categoria": "Spa Corporal",
-          "nombre": "Crema Corporal Lavi con Miel y Extractos de Orquídeas (250 ml)",
-          "detalle": "Hidratación profunda con ingredientes naturales para el cuidado de la piel (Valor $190)."
+          "categoria": "Fragancia Fina & Spa Corporal",
+          "nombre": "Set Velvet Parfum con Patchouli (100 ml) + Crema Corporal Lavi Orquídeas y Miel (250 ml)",
+          "detalle": "Elegante fragancia de 3.4 fl. oz. y tratamiento corporal hidratante profundo."
         }
       ]
     },
@@ -94,43 +84,28 @@
       "id": "premio-3",
       "lugar": "3° Premio Oficial",
       "lugar_corto": "3° Lugar",
-      "titulo": "Lote Clásicos, Música & Cuidado Integral",
+      "titulo": "Lote Clásicos, Letras & Cuidado Integral",
       "subtitulo": "Alineado con el Tercer Lugar del Sorteo de la Lotería Nacional (últimos 2 dígitos)",
       "icono": "🥉",
       "badge": "Tercer Lugar",
       "imagen": "/assets/rifa/premio_3_lote_clasicos.webp",
-      "valor_estimado": "$1,589 MXN",
+      "valor_estimado": "$1,089 MXN",
       "color_tema": "#8C6D46",
       "items": [
         {
-          "categoria": "Dispositivo de Audio",
-          "nombre": "Bocina Portátil Bluetooth Select 4 Go",
-          "detalle": "Bocina inalámbrica ligera para disfrutar de lecturas sonoras y música en cualquier lugar (Valor $500)."
-        },
-        {
           "categoria": "Edición de Lujo · Pasta Dura",
           "nombre": "El Príncipe de Nicolás Maquiavelo — Pasta Dura Ilustrada",
-          "detalle": "Edición especial de lujo ilustrada en pasta dura con diseño clásico renacentista (Valor $299)."
+          "detalle": "Edición especial de lujo ilustrada en pasta dura con diseño clásico renacentista."
         },
         {
           "categoria": "Trilogía de Antologías LVT",
           "nombre": "Trilogía de Antologías Oficiales de la Sociedad Literaria LVT (3 Libros)",
-          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región» ($130 c/u, Total $390)."
+          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
         },
         {
-          "categoria": "Cuidado Antiedad",
-          "nombre": "Arabela RECONSTRUCT Tratamiento para Manos Anti-Edad (50 g)",
-          "detalle": "Fórmula avanzada para regenerar y nutrir la piel de las manos (Valor $140)."
-        },
-        {
-          "categoria": "Aromaterapia y Bienestar",
-          "nombre": "Ciclo Ideal Spray Abdominal / Aromaterapia (60 ml)",
-          "detalle": "Spray auxiliar aromaterapéutico para confort y relajación corporal (Valor $160)."
-        },
-        {
-          "categoria": "Dermocosmética Purificante",
-          "nombre": "Arabela Zero Acné Gel de Ácido Salicílico y Árbol de Té (20 g)",
-          "detalle": "Gel de control de imperfecciones con activos purificantes (Valor $100)."
+          "categoria": "Trío Dermocosmético & Aromaterapia",
+          "nombre": "Set de Cuidado Integral: Arabela Reconstruct Manos (50g) + Spray Ciclo Ideal (60ml) + Gel Zero Acné (20g)",
+          "detalle": "Tratamiento antiedad para manos, auxiliar aromaterapéutico de confort y gel purificante."
         }
       ]
     }
