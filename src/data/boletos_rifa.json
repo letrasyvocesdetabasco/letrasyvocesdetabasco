@@ -2,25 +2,137 @@
   "precio_boleto": 100,
   "total_boletos_dobles": 50,
   "total_numeros": 100,
-  "sorteo_institucion": "Lotería Nacional de México (Con base en los últimos 2 dígitos de los premios mayores)",
+  "sorteo_institucion": "Lotería Nacional de México (Con base en los últimos 2 dígitos de los premios mayores oficiales)",
+  "sorteo_fecha_estimada": "Próximo sorteo oficial de la Lotería Nacional tras concluir la colocación de boletos",
+  "datos_bancarios": {
+    "institucion": "Klar",
+    "beneficiario": "Eva Guadalupe Pineda Cruz",
+    "clabe": "661180001685065113",
+    "concepto_sugerido": "RIFA LVT",
+    "whatsapp_contacto": "522205889391"
+  },
   "premios": [
     {
-      "lugar": "1° Lugar · Premio Mayor",
-      "titulo": "1° Gran Premio Mayor",
-      "descripcion": "Correspondiente al Premio Mayor del sorteo de la Lotería Nacional. Los detalles específicos del premio se darán a conocer próximamente por la directiva.",
-      "icono": "🥇"
+      "id": "premio-1",
+      "lugar": "1° Gran Premio Mayor",
+      "lugar_corto": "1° Lugar",
+      "titulo": "Lote Magno Universal & Alta Gala",
+      "subtitulo": "Alineado con el Premio Mayor del Sorteo de la Lotería Nacional (últimos 2 dígitos)",
+      "icono": "🥇",
+      "badge": "Premio Mayor",
+      "imagen": "/assets/rifa/premio_1_lote_magno.webp",
+      "valor_estimado": "$2,650+ MXN",
+      "color_tema": "#EF7B38",
+      "items": [
+        {
+          "categoria": "Edición de Lujo Pasta Dura",
+          "nombre": "La Divina Comedia (Dante Alighieri)",
+          "detalle": "Edición íntegra con las magistrales ilustraciones clásicas de Gustave Doré en pasta dura."
+        },
+        {
+          "categoria": "Edición de Lujo Pasta Dura",
+          "nombre": "Poesía Prehispánica: Flor y Canto",
+          "detalle": "Edición bilingüe (Español-Náhuatl) en pasta dura, Col. Arte y Letras Fractales."
+        },
+        {
+          "categoria": "Trilogía de Antologías LVT",
+          "nombre": "3 Libros Oficiales de la Sociedad Literaria LVT",
+          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+        },
+        {
+          "categoria": "Alta Perfumería de Lujo",
+          "nombre": "Perfume L'Bel BLEU femme Parfum (50 ml)",
+          "detalle": "Fragancia femenina de alta gama en caja sellada con finos acordes florales franceses."
+        },
+        {
+          "categoria": "Cuidado e Hidratación",
+          "nombre": "Loción Hidratante Perfumada L'Bel BLEU femme (130 ml)",
+          "detalle": "Tratamiento hidratante perfumado de absorción sedosa para todo el cuerpo."
+        }
+      ]
     },
     {
-      "lugar": "2° Lugar · Segundo Premio",
-      "titulo": "2° Premio Oficial",
-      "descripcion": "Correspondiente al Segundo Lugar del sorteo de la Lotería Nacional. Los detalles específicos del premio se darán a conocer próximamente.",
-      "icono": "🥈"
+      "id": "premio-2",
+      "lugar": "2° Premio Oficial",
+      "lugar_corto": "2° Lugar",
+      "titulo": "Lote Estrategia, Sonido & Bienestar",
+      "subtitulo": "Alineado con el Segundo Lugar del Sorteo de la Lotería Nacional (últimos 2 dígitos)",
+      "icono": "🥈",
+      "badge": "Segundo Lugar",
+      "imagen": "/assets/rifa/premio_2_lote_estrategia.webp",
+      "valor_estimado": "$2,150+ MXN",
+      "color_tema": "#B8860B",
+      "items": [
+        {
+          "categoria": "Dispositivo de Audio",
+          "nombre": "Bocina Portátil Bluetooth Select 4 Go",
+          "detalle": "Audio inalámbrico envolvente de alta fidelidad, diseño ultra compacto con correa."
+        },
+        {
+          "categoria": "Edición de Lujo Pasta Dura",
+          "nombre": "El Arte de la Guerra & El Libro de los Cinco Anillos",
+          "detalle": "Obras cumbres de Sun Tzu y Miyamoto Musashi, ilustrada por Marcos Castro en pasta dura."
+        },
+        {
+          "categoria": "Trilogía de Antologías LVT",
+          "nombre": "3 Libros Oficiales de la Sociedad Literaria LVT",
+          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+        },
+        {
+          "categoria": "Fragancia Fina",
+          "nombre": "Velvet Eau de Parfum con Aceite Natural de Patchouli (100 ml)",
+          "detalle": "Elegante fragancia de 3.4 fl. oz. con notas aromáticas de alta fijación."
+        },
+        {
+          "categoria": "Spa Corporal",
+          "nombre": "Crema Corporal Lavi con Miel y Extractos de Orquídeas (250 ml)",
+          "detalle": "Hidratación profunda con ingredientes naturales para el cuidado de la piel."
+        }
+      ]
     },
     {
-      "lugar": "3° Lugar · Tercer Premio",
-      "titulo": "3° Premio Oficial",
-      "descripcion": "Correspondiente al Tercer Lugar del sorteo de la Lotería Nacional. Los detalles específicos del premio se darán a conocer próximamente.",
-      "icono": "🥉"
+      "id": "premio-3",
+      "lugar": "3° Premio Oficial",
+      "lugar_corto": "3° Lugar",
+      "titulo": "Lote Clásicos, Música & Cuidado Integral",
+      "subtitulo": "Alineado con el Tercer Lugar del Sorteo de la Lotería Nacional (últimos 2 dígitos)",
+      "icono": "🥉",
+      "badge": "Tercer Lugar",
+      "imagen": "/assets/rifa/premio_3_lote_clasicos.webp",
+      "valor_estimado": "$1,900+ MXN",
+      "color_tema": "#8C6D46",
+      "items": [
+        {
+          "categoria": "Dispositivo de Audio",
+          "nombre": "Bocina Portátil Bluetooth Select 4 Go",
+          "detalle": "Bocina inalámbrica ligera para disfrutar de lecturas sonoras y música en cualquier lugar."
+        },
+        {
+          "categoria": "Edición de Lujo Pasta Dura",
+          "nombre": "El Príncipe de Nicolás Maquiavelo",
+          "detalle": "Edición especial de lujo ilustrada en pasta dura con diseño clásico renacentista."
+        },
+        {
+          "categoria": "Trilogía de Antologías LVT",
+          "nombre": "3 Libros Oficiales de la Sociedad Literaria LVT",
+          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+        },
+        {
+          "categoria": "Cuidado Antiedad",
+          "nombre": "Arabela RECONSTRUCT Tratamiento para Manos Anti-Edad (50 g)",
+          "detalle": "Fórmula avanzada para regenerar y nutrir la piel de las manos."
+        },
+        {
+          "categoria": "Aromaterapia y Bienestar",
+          "nombre": "Ciclo Ideal Spray Abdominal / Aromaterapia (60 ml)",
+          "detalle": "Spray auxiliar aromaterapéutico para confort y relajación corporal."
+        },
+        {
+          "categoria": "Dermocosmética Purificante",
+          "nombre": "Arabela Zero Acné Gel de Ácido Salicílico y Árbol de Té (20 g)",
+          "detalle": "Gel de control de imperfecciones con activos purificantes."
+        }
+      ]
     }
   ],
   "boletos_ocupados": {
