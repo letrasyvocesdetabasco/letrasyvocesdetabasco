@@ -1,11 +1,12 @@
 ---
-// RifaInteractiva.astro - Sistema Integral de Boletos Dobles con Lotería Nacional (3 Lotes de Premios)
+// RifaInteractiva.astro - Sistema Integral de Boletos Dobles (Sorteo Especial Lotería Nacional 16 Oct 2026)
 import boletosData from '../data/boletos_rifa.json';
 
 const precioBoleto = boletosData.precio_boleto || 100;
 const totalBoletosDobles = boletosData.total_boletos_dobles || 50;
 const boletosOcupados = boletosData.boletos_ocupados || {};
 const premios = boletosData.premios || [];
+const fechaSorteo = boletosData.sorteo_fecha || "Viernes 16 de Octubre de 2026 · 20:00 hrs";
 const datosBancarios = boletosData.datos_bancarios || {
   institucion: "Klar",
   beneficiario: "Eva Guadalupe Pineda Cruz",
@@ -13,7 +14,7 @@ const datosBancarios = boletosData.datos_bancarios || {
   whatsapp_contacto: "522205889391"
 };
 
-// Generación de los 50 Boletos Dobles (cada uno con 2 números del 00 al 99)
+// 50 Boletos Dobles (100 números del 00 al 99)
 export interface BoletoDoble {
   id: number;
   idStr: string;
@@ -59,7 +60,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
     <div class="text-center max-w-4xl mx-auto space-y-5">
       <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EF7B38]/10 border border-[#EF7B38]/25 text-[#EF7B38] text-xs font-title font-bold uppercase tracking-widest shadow-xs">
         <span class="w-2 h-2 rounded-full bg-[#EF7B38] animate-ping"></span>
-        <span>Iniciativa Pro-Fondos Editoriales · Lotería Nacional</span>
+        <span>Iniciativa Pro-Fondos Editoriales · Sociedad Literaria LVT</span>
       </div>
 
       <h2 class="text-3xl sm:text-5xl lg:text-6xl font-title font-black text-[#222222] tracking-tight leading-tight">
@@ -67,11 +68,21 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </h2>
 
       <p class="font-serif italic text-base sm:text-xl text-[#555555] leading-relaxed max-w-3xl mx-auto">
-        «50 boletos dobles (100 números). Cada boleto otorga <strong>dos números oficiales</strong> con triple oportunidad de ganar uno de nuestros <strong>tres grandes lotes de premios (+$4,500 MXN en premios)</strong>».
+        «50 boletos dobles (100 números). Cada boleto ampara <strong>dos números del 00 al 99</strong> con triple oportunidad de ganar una de nuestras <strong>tres colecciones literarias y de bienestar</strong>».
       </p>
 
+      <!-- Fechas y Dinámica del Sorteo Especial -->
+      <div class="bg-amber-50/80 border border-amber-200/80 rounded-2xl p-3.5 max-w-2xl mx-auto text-xs text-amber-950 font-sans shadow-xs space-y-1">
+        <p class="font-bold flex items-center justify-center gap-2">
+          <span>🎯 Sorteo Especial No. 317 de la Lotería Nacional</span>
+        </p>
+        <p class="text-amber-900/80">
+          <strong>Viernes 16 de Octubre de 2026 a las 20:00 hrs.</strong> Los ganadores se definirán con los dos últimos dígitos del 1°, 2° y 3° lugar de la Lotería Nacional (transmisión pública en vivo por YouTube).
+        </p>
+      </div>
+
       <!-- Insignias de resumen rápido -->
-      <div class="flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-xs font-title font-bold text-[#444444] pt-2">
+      <div class="flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-xs font-title font-bold text-[#444444] pt-1">
         <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5">
           🎟️ <strong>50 Boletos Dobles</strong>
         </span>
@@ -79,31 +90,31 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           🔢 <strong>100 Números (00 al 99)</strong>
         </span>
         <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5 text-[#EF7B38]">
-          💵 <strong>$100 MXN / Boleto</strong>
+          💵 <strong>$100 MXN por boleto</strong>
         </span>
         <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5 text-amber-700">
-          🏆 <strong>3 Lotes de Premios ($4,565 MXN)</strong>
+          🏆 <strong>3 Premios Especiales</strong>
         </span>
       </div>
     </div>
 
-    <!-- 2. BANNER PRINCIPAL: CANASTA MAGNA COMPLETA Y QR -->
+    <!-- 2. BANNER PRINCIPAL: CANASTA COMPLETA Y QR -->
     <div class="bg-gradient-to-br from-white via-[#FDFBF7] to-[#F5EFE6] border-2 border-[#EF7B38]/30 rounded-3xl p-6 sm:p-10 shadow-elevated relative overflow-hidden">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         <div class="lg:col-span-7 space-y-4 text-left">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 text-amber-800 text-xs font-title font-bold uppercase tracking-wider border border-amber-500/20">
-            🌟 Lote Completo de Premios · Obras de Lujo en Pasta Dura
+            🌟 Tres Colecciones en Juego
           </div>
           <h3 class="text-2xl sm:text-3xl lg:text-4xl font-title font-black text-[#222222]">
-            Ediciones en Pasta Dura, Audio Bluetooth, Alta Perfumería & Antologías LVT
+            Obras en Pasta Dura, Audio Bluetooth, Perfumería Fina & Antologías
           </h3>
           <p class="text-sm sm:text-base text-[#555555] font-sans leading-relaxed">
-            Destacamos obras maestras universales ilustradas en <strong>Pasta Dura de Lujo</strong> (<em>La Divina Comedia</em>, <em>Poesía Prehispánica Flor y Canto</em>, <em>El Arte de la Guerra</em> y <em>El Príncipe</em>), acompañadas de la <strong>Trilogía Oficial de Antologías LVT</strong>, bocina Bluetooth y perfumería fina.
+            Libros clásicos en <strong>Pasta Dura</strong> (<em>La Divina Comedia</em>, <em>Poesía Prehispánica: Flor y Canto</em>, <em>El Arte de la Guerra</em> y <em>El Príncipe</em>), acompañados de la <strong>Trilogía de Antologías LVT</strong>, bocina Bluetooth y cosmética.
           </p>
           <div class="pt-2 flex flex-wrap items-center gap-4">
             <a href="#selector-boletos" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#EF7B38] hover:bg-[#D96827] text-white font-title font-bold text-sm transition-all shadow-md hover:shadow-lg">
-              <span>🎟️ Elegir Mis Números Disponibles</span>
+              <span>🎟️ Elegir Mis Boletos Disponibles</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </a>
             
@@ -121,12 +132,12 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           <div class="relative w-full max-w-md rounded-2xl overflow-hidden shadow-subtle border border-[#E6DCCE] bg-white p-2 group">
             <img
               src="/assets/rifa/canasta_magna_completa_rifa.webp"
-              alt="Gran Canasta de Premios Rifa Cultural LVT 2026"
+              alt="Premios de la Rifa Cultural LVT 2026"
               class="w-full h-auto object-contain rounded-xl group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
             <div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-xs text-white text-[10px] font-title font-bold px-3 py-1 rounded-full border border-white/20">
-              Gran Total: $4,565 MXN en Premios
+              Valor Total: $4,565 MXN en Premios
             </div>
           </div>
         </div>
@@ -134,14 +145,14 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </div>
     </div>
 
-    <!-- 3. PABELLÓN DETALLADO DE LOS 3 GRANDES PREMIOS -->
+    <!-- 3. PABELLÓN DE LOS 3 PREMIOS -->
     <div class="space-y-6">
       <div class="text-center space-y-2">
         <span class="text-xs font-title font-bold uppercase tracking-wider text-[#EF7B38] bg-[#EF7B38]/10 px-3.5 py-1.5 rounded-full">
-          🎁 Desglose Oficial de los 3 Lotes Ganadores
+          🎁 Conoce los 3 Premios
         </span>
         <h3 class="text-2xl sm:text-3xl font-title font-black text-[#222222]">
-          Un Gran Lote de Premio para Cada Posición
+          Tres Paquetes Diseñados para los Amantes de las Letras
         </h3>
       </div>
 
@@ -149,13 +160,13 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         {premios.map((premio, idx) => (
           <div class={`bg-white rounded-3xl p-6 border ${idx === 0 ? 'border-[#EF7B38] shadow-elevated ring-2 ring-[#EF7B38]/15' : 'border-[#E6DCCE] shadow-subtle'} hover:border-[#EF7B38] transition-all flex flex-col justify-between relative group`}>
             
-            {/* Badge de Posición */}
+            {/* Badge de Premio */}
             <div class="flex items-center justify-between gap-2 pb-4 border-b border-[#F5EFE6]">
               <div class="flex items-center gap-2">
                 <span class="text-3xl">{premio.icono}</span>
                 <div>
                   <span class="text-[10px] font-title font-black uppercase tracking-wider text-[#EF7B38] block">
-                    {premio.lugar_corto}
+                    {premio.badge}
                   </span>
                   <h4 class="font-title font-bold text-sm sm:text-base text-[#222222] leading-tight">
                     {premio.lugar}
@@ -179,7 +190,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               </div>
             </div>
 
-            {/* Título y Descripción del Lote */}
+            {/* Título y Descripción */}
             <div class="space-y-3 flex-1">
               <h4 class="font-title font-bold text-base text-[#222222] leading-snug">
                 {premio.titulo}
@@ -191,7 +202,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               {/* Lista de Artículos Incluidos */}
               <div class="space-y-2 pt-2">
                 <span class="text-[11px] font-title font-bold text-[#222222] block uppercase tracking-wider">
-                  Artículos Incluidos en este Lote:
+                  Contenido de este premio:
                 </span>
                 <ul class="space-y-2 text-xs text-[#444444]">
                   {premio.items.map((item: any) => (
@@ -209,8 +220,8 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
 
             {/* Footer de Tarjeta */}
             <div class="pt-4 mt-6 border-t border-[#F5EFE6] text-[11px] text-gray-500 font-sans flex items-center justify-between">
-              <span>Sorteo Lotería Nacional</span>
-              <span class="font-bold text-[#222222]">Últimos 2 dígitos</span>
+              <span>Sorteo Especial Lotería Nacional</span>
+              <span class="font-bold text-[#222222]">16 Oct 2026</span>
             </div>
 
           </div>
@@ -309,14 +320,14 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pb-4 border-b border-[#F5EFE6]">
           <div>
             <h3 class="font-title font-bold text-base sm:text-lg text-[#222222]">
-              Catálogo Interactivo de 50 Boletos Dobles
+              Catálogo de 50 Boletos Dobles
             </h3>
             <p class="text-xs text-gray-500 font-sans">
-              Haz clic sobre los boletos que deseas apartar. Cada boleto te otorga automáticamente sus 2 números correspondientes.
+              Haz clic sobre los boletos que deseas apartar. Cada boleto te asigna sus 2 números correspondientes.
             </p>
           </div>
           <span class="text-xs font-title font-bold text-[#EF7B38] bg-[#EF7B38]/10 px-3.5 py-1.5 rounded-xl">
-            $100 MXN / boleto doble
+            $100 MXN / boleto
           </span>
         </div>
 
@@ -446,7 +457,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           <div class="flex items-center gap-2">
             <span class="text-lg">🏦</span>
             <div>
-              <span class="text-[10px] uppercase font-bold text-[#EF7B38] tracking-wider block">Método de Aportación Directa</span>
+              <span class="text-[10px] uppercase font-bold text-[#EF7B38] tracking-wider block">Aportación Directa</span>
               <h5 class="text-sm font-title font-bold text-white">Transferencia Interbancaria SPEI / Depósito</h5>
             </div>
           </div>
@@ -457,7 +468,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div class="bg-black/30 p-3 rounded-xl border border-white/5">
-            <span class="text-gray-400 block text-[10px]">Beneficiaria Oficial:</span>
+            <span class="text-gray-400 block text-[10px]">Beneficiaria:</span>
             <span class="font-bold text-white">{datosBancarios.beneficiario}</span>
           </div>
           <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex items-center justify-between">
@@ -529,7 +540,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </div>
 
       <div class="text-[11px] text-gray-400 text-center leading-relaxed">
-        🔒 <em>Tras enviar tu mensaje con el comprobante de transferencia a nuestro WhatsApp oficial, el sistema registrará tus números como <strong>Apartados</strong> o <strong>Pagados</strong> y recibirás tu pase de participación definitivo.</em>
+        🔒 <em>Tras enviar tu mensaje con el comprobante de transferencia a nuestro WhatsApp, tus números quedarán registrados en el sistema y recibirás tu pase de participación.</em>
       </div>
 
     </div>
@@ -574,6 +585,10 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
             <span class="text-gray-500">Números Asignados:</span>
             <strong id="modal-numeros" class="font-mono text-base text-[#222222]">-</strong>
           </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500">Sorteo:</span>
+            <strong class="text-gray-800">16 de Octubre de 2026 (Lotería Nacional)</strong>
+          </div>
           <div class="flex justify-between border-t border-[#F5EFE6] pt-2 text-sm">
             <span class="font-bold text-gray-700">Monto Total:</span>
             <strong id="modal-total" class="font-title font-black text-[#EF7B38] text-base">$0 MXN</strong>
@@ -610,9 +625,9 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
 </section>
 
 <!-- Script de Lógica Interactiva, Búsqueda, Azar y WhatsApp Automatizado -->
-<script is:inline define:vars={{ precioBoleto, datosBancarios }}>
+<script is:inline define:vars={{ precioBoleto, datosBancarios, fechaSorteo }}>
   document.addEventListener('DOMContentLoaded', () => {
-    let boletosSeleccionados = []; // Array de { id, idStr, num1, num2 }
+    let boletosSeleccionados = [];
 
     const contenedorSeleccionados = document.getElementById('contenedor-seleccionados');
     const textoVacio = document.getElementById('texto-vacio');
@@ -683,16 +698,16 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       const listaBoletosTxt = boletosSeleccionados.map(b => `• Boleto #${b.idStr} [Números: ${b.num1} y ${b.num2}]`).join('\n');
       const listaNumerosTxt = boletosSeleccionados.map(b => `${b.num1}, ${b.num2}`).join(', ');
 
-      const mensaje = `🎟️ *RESERVA OFICIAL · GRAN RIFA CULTURAL LVT 2026*\n` +
-        `📋 *Folio de Reserva:* ${folioReserva}\n` +
+      const mensaje = `🎟️ *RESERVA · GRAN RIFA CULTURAL LVT 2026*\n` +
+        `📋 *Folio:* ${folioReserva}\n` +
         `👤 *Participante:* ${nombreComprador}\n` +
-        `📱 *Contacto:* ${telComprador}\n\n` +
-        `🎫 *Boletos Dobles Seleccionados:*\n${listaBoletosTxt}\n\n` +
+        `📱 *Teléfono:* ${telComprador}\n\n` +
+        `🎫 *Boletos Seleccionados:*\n${listaBoletosTxt}\n\n` +
         `🔢 *Números en Juego:* ${listaNumerosTxt}\n` +
-        `💵 *Total de Aportación:* $${totalDinero} MXN ($100 c/u)\n\n` +
-        `🏦 *Cuenta de Depósito:* Klar · Eva Guadalupe Pineda Cruz · CLABE: ${datosBancarios.clabe}\n` +
-        `📌 *Estado:* En espera de comprobante de pago\n\n` +
-        `Adjunto a este mensaje mi comprobante de transferencia para confirmar el registro oficial de mis números. ¡Muchas gracias!`;
+        `💵 *Total de Aportación:* $${totalDinero} MXN\n` +
+        `🎯 *Sorteo:* Viernes 16 de Octubre de 2026 (Lotería Nacional)\n\n` +
+        `🏦 *Cuenta Klar:* Eva Guadalupe Pineda Cruz · CLABE: ${datosBancarios.clabe}\n\n` +
+        `Adjunto mi comprobante de transferencia para el registro. ¡Muchas gracias!`;
 
       const numWA = datosBancarios.whatsapp_contacto || '522205889391';
       btnWhatsApp.href = `https://wa.me/${numWA}?text=${encodeURIComponent(mensaje)}`;
