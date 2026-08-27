@@ -68,7 +68,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </h2>
 
       <p class="font-serif italic text-base sm:text-xl text-[#555555] leading-relaxed max-w-3xl mx-auto">
-        «50 boletos dobles (100 números). Cada boleto otorga <strong>dos números oficiales</strong> con triple oportunidad de ganar uno de nuestros <strong>tres grandes lotes literarios y de gala</strong>».
+        «50 boletos dobles (100 números). Cada boleto otorga <strong>dos números oficiales</strong> con triple oportunidad de ganar uno de nuestros <strong>tres grandes lotes literarios y de gala (+ $5,400 MXN en premios)</strong>».
       </p>
 
       <!-- Insignias de resumen rápido -->
@@ -83,31 +83,38 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           💵 <strong>$100 MXN / Boleto</strong>
         </span>
         <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5 text-amber-700">
-          🏆 <strong>3 Lotes de Premios</strong>
+          🏆 <strong>3 Lotes de Premios (+$5,400 MXN)</strong>
         </span>
       </div>
     </div>
 
-    <!-- 2. BANNER PRINCIPAL: CANASTA MAGNA COMPLETA -->
+    <!-- 2. BANNER PRINCIPAL: CANASTA MAGNA COMPLETA Y QR -->
     <div class="bg-gradient-to-br from-white via-[#FDFBF7] to-[#F5EFE6] border-2 border-[#EF7B38]/30 rounded-3xl p-6 sm:p-10 shadow-elevated relative overflow-hidden">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         <div class="lg:col-span-7 space-y-4 text-left">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 text-amber-800 text-xs font-title font-bold uppercase tracking-wider border border-amber-500/20">
-            🌟 Lote Completo de Premios
+            🌟 Lote Completo de Premios · Obras de Lujo en Pasta Dura
           </div>
           <h3 class="text-2xl sm:text-3xl lg:text-4xl font-title font-black text-[#222222]">
-            Ediciones de Lujo, Antologías LVT, Alta Perfumería & Audio
+            Ediciones en Pasta Dura, Bocinas Bluetooth, Alta Perfumería & Antologías LVT
           </h3>
           <p class="text-sm sm:text-base text-[#555555] font-sans leading-relaxed">
-            Todos los premios incluyen la <strong>Trilogía Oficial de Antologías LVT</strong> (<em>«A corazón abierto»</em>, <em>«Tardes tabasqueñas de ópalos y topacios»</em> y <em>«Leyendas de nuestra región»</em>), sumados a obras ilustradas en pasta dura, bocinas Bluetooth y cosmética fina donada.
+            Destacamos obras maestras universales ilustradas en <strong>Pasta Dura de Lujo</strong> (<em>La Divina Comedia</em>, <em>Poesía Prehispánica Flor y Canto</em>, <em>El Arte de la Guerra</em> y <em>El Príncipe</em>), acompañadas de la <strong>Trilogía Oficial de Antologías LVT</strong>, audio Bluetooth y perfumería fina.
           </p>
-          <div class="pt-2 flex flex-wrap items-center gap-3">
-            <a href="#selector-boletos" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#EF7B38] hover:bg-[#D96827] text-white font-title font-bold text-sm transition-all shadow-md hover:shadow-lg">
-              <span>🎟️ Elegir Mis Números de la Suerte</span>
+          <div class="pt-2 flex flex-wrap items-center gap-4">
+            <a href="#selector-boletos" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#EF7B38] hover:bg-[#D96827] text-white font-title font-bold text-sm transition-all shadow-md hover:shadow-lg">
+              <span>🎟️ Elegir Mis Números Disponibles</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </a>
-            <span class="text-xs text-gray-500 font-serif italic">Resultados con el Sorteo Mayor de la Lotería Nacional</span>
+            
+            <div class="flex items-center gap-3 bg-white px-3.5 py-2 rounded-xl border border-[#E6DCCE] shadow-xs">
+              <img src="/assets/rifa/qr_rifa_lvt.png" alt="Código QR Rifa LVT" class="w-10 h-10 object-contain rounded-md" />
+              <div class="text-[11px] font-sans">
+                <span class="font-title font-bold text-[#222222] block">Escanea en tu celular</span>
+                <span class="text-gray-500">letrasyvocesdetabasco.org/#rifa</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -119,8 +126,8 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               class="w-full h-auto object-contain rounded-xl group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-xs text-white text-[10px] font-title font-bold px-2.5 py-1 rounded-full border border-white/20">
-              Valor Lote Total: +$6,700 MXN
+            <div class="absolute bottom-3 right-3 bg-black/80 backdrop-blur-xs text-white text-[10px] font-title font-bold px-3 py-1 rounded-full border border-white/20">
+              Gran Total: $5,415 MXN en Premios
             </div>
           </div>
         </div>
@@ -135,7 +142,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           🎁 Desglose Oficial de los 3 Lotes Ganadores
         </span>
         <h3 class="text-2xl sm:text-3xl font-title font-black text-[#222222]">
-          Un Gran Premio para Cada Posición Oficial
+          Un Gran Lote de Premio para Cada Posición
         </h3>
       </div>
 
@@ -185,15 +192,15 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               {/* Lista de Artículos Incluidos */}
               <div class="space-y-2 pt-2">
                 <span class="text-[11px] font-title font-bold text-[#222222] block uppercase tracking-wider">
-                  Artículos Incluidos:
+                  Artículos Incluidos en este Lote:
                 </span>
-                <ul class="space-y-1.5 text-xs text-[#444444]">
+                <ul class="space-y-2 text-xs text-[#444444]">
                   {premio.items.map((item: any) => (
                     <li class="flex items-start gap-2">
                       <span class="text-[#EF7B38] font-bold mt-0.5">•</span>
                       <span>
-                        <strong class="text-[#222222]">{item.nombre}</strong>
-                        {item.categoria && <span class="text-[10px] text-gray-500 block">{item.detalle}</span>}
+                        <strong class="text-[#222222] block">{item.nombre}</strong>
+                        {item.detalle && <span class="text-[10px] text-gray-500 block leading-tight">{item.detalle}</span>}
                       </span>
                     </li>
                   ))}
@@ -221,7 +228,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         </span>
         <span class="flex items-center gap-2">
           <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 shadow-xs"></span>
-          <span>{totalOcupados} {totalOcupados === 1 ? 'Boleto Vendido' : 'Boletos Vendidos'}</span>
+          <span>{totalOcupados} {totalOcupados === 1 ? 'Boleto Apartado' : 'Boletos Apartados'}</span>
         </span>
         <span class="text-[#EF7B38] font-black text-sm">{porcentajeProgreso}% Colocado</span>
       </div>
@@ -286,7 +293,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           <span class="px-2 py-1 rounded-lg bg-gradient-to-r from-orange-500 to-amber-600 border border-orange-600 font-title font-bold text-xs text-white shadow-xs">
             #50 <span class="text-amber-100">[49 · 99]</span>
           </span>
-          <span class="font-medium text-gray-700">Ya Vendido</span>
+          <span class="font-medium text-gray-700">Vendido</span>
         </div>
 
         <div class="flex items-center gap-2">
@@ -306,7 +313,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
               Catálogo Interactivo de 50 Boletos Dobles
             </h3>
             <p class="text-xs text-gray-500 font-sans">
-              Haz clic sobre los boletos que deseas apartar. Cada boleto te da automáticamente sus 2 números correspondientes.
+              Haz clic sobre los boletos que deseas apartar. Cada boleto te otorga automáticamente sus 2 números correspondientes.
             </p>
           </div>
           <span class="text-xs font-title font-bold text-[#EF7B38] bg-[#EF7B38]/10 px-3.5 py-1.5 rounded-xl">
@@ -323,7 +330,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
                   disabled
                   id={`btn-boleto-${boleto.id}`}
                   class="w-full py-2 px-1 rounded-xl bg-gradient-to-br from-orange-500 via-[#EF7B38] to-amber-600 border-2 border-orange-600/70 text-white font-title flex flex-col items-center justify-center cursor-not-allowed select-none shadow-sm relative group overflow-hidden opacity-90"
-                  title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - YA VENDIDO`}
+                  title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - VENDIDO`}
                   data-num1={boleto.num1}
                   data-num2={boleto.num2}
                 >
@@ -523,7 +530,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </div>
 
       <div class="text-[11px] text-gray-400 text-center leading-relaxed">
-        🔒 <em>Tras enviar tu mensaje con el comprobante de transferencia a nuestro WhatsApp oficial, el sistema registrará tus números como <strong>Pagados</strong> y recibirás tu pase de participación definitivo.</em>
+        🔒 <em>Tras enviar tu mensaje con el comprobante de transferencia a nuestro WhatsApp oficial, el sistema registrará tus números como <strong>Apartados</strong> o <strong>Pagados</strong> y recibirás tu pase de participación definitivo.</em>
       </div>
 
     </div>
@@ -574,15 +581,16 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           </div>
         </div>
 
-        <div class="bg-[#F5EFE6] p-4 rounded-2xl border border-[#E6DCCE] space-y-1.5">
-          <span class="font-title font-bold text-[11px] text-[#222222] block uppercase tracking-wider">
-            Datos de Transferencia:
-          </span>
-          <div class="text-gray-600 space-y-0.5">
+        <div class="bg-[#F5EFE6] p-4 rounded-2xl border border-[#E6DCCE] flex items-center justify-between gap-3">
+          <div class="text-gray-600 space-y-0.5 flex-1">
+            <span class="font-title font-bold text-[11px] text-[#222222] block uppercase tracking-wider">
+              Datos de Transferencia:
+            </span>
             <p><strong>Banco:</strong> {datosBancarios.institucion}</p>
             <p><strong>Beneficiaria:</strong> {datosBancarios.beneficiario}</p>
             <p><strong>CLABE:</strong> <span class="font-mono font-bold text-[#222222] select-all">{datosBancarios.clabe}</span></p>
           </div>
+          <img src="/assets/rifa/qr_rifa_lvt.png" alt="QR Transferencia" class="w-16 h-16 object-contain rounded-lg border border-[#E6DCCE] bg-white p-1" />
         </div>
       </div>
 
@@ -591,7 +599,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           type="button"
           id="btn-imprimir-capturar"
           onclick="window.print()"
-          class="w-full py-3 rounded-xl bg-[#222222] hover:bg-black text-white font-title font-bold text-xs transition-colors shadow-md"
+          class="w-full py-3 rounded-xl bg-[#222222] hover:bg-black text-white font-title font-bold text-xs transition-colors shadow-md cursor-pointer"
         >
           🖨️ Imprimir o Guardar Ficha
         </button>
@@ -750,8 +758,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         if (valor.length === 2 && !isNaN(parseInt(valor, 10))) {
           const numInt = parseInt(valor, 10);
           if (numInt >= 0 && numInt <= 99) {
-            // Encontrar qué boleto contiene este número
-            // Boleto 1: 00 y 50, etc.
             const boletoId = (numInt % 50) + 1;
             const btn = document.getElementById(`btn-boleto-${boletoId}`);
             if (btn) {
@@ -797,7 +803,6 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
             btnCopiarClabe.classList.replace('bg-emerald-600', 'bg-[#EF7B38]');
           }, 3000);
         } catch (err) {
-          // Fallback para navegadores antiguos
           const inputTemp = document.createElement('input');
           inputTemp.value = clabe;
           document.body.appendChild(inputTemp);

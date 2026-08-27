@@ -3,7 +3,7 @@
   "total_boletos_dobles": 50,
   "total_numeros": 100,
   "sorteo_institucion": "Lotería Nacional de México (Con base en los últimos 2 dígitos de los premios mayores oficiales)",
-  "sorteo_fecha_estimada": "Próximo sorteo oficial de la Lotería Nacional tras concluir la colocación de boletos",
+  "sorteo_fecha_estimada": "Próximo sorteo oficial de la Lotería Nacional tras completar la colocación de boletos",
   "datos_bancarios": {
     "institucion": "Klar",
     "beneficiario": "Eva Guadalupe Pineda Cruz",
@@ -21,33 +21,33 @@
       "icono": "🥇",
       "badge": "Premio Mayor",
       "imagen": "/assets/rifa/premio_1_lote_magno.webp",
-      "valor_estimado": "$2,650+ MXN",
+      "valor_estimado": "$2,170 MXN",
       "color_tema": "#EF7B38",
       "items": [
         {
-          "categoria": "Edición de Lujo Pasta Dura",
-          "nombre": "La Divina Comedia (Dante Alighieri)",
-          "detalle": "Edición íntegra con las magistrales ilustraciones clásicas de Gustave Doré en pasta dura."
+          "categoria": "Edición de Lujo · Pasta Dura",
+          "nombre": "La Divina Comedia (Dante Alighieri) — Pasta Dura Ilustrada",
+          "detalle": "Edición íntegra con las magistrales ilustraciones clásicas de Gustave Doré en pasta dura de lujo (Valor $400)."
         },
         {
-          "categoria": "Edición de Lujo Pasta Dura",
-          "nombre": "Poesía Prehispánica: Flor y Canto",
-          "detalle": "Edición bilingüe (Español-Náhuatl) en pasta dura, Col. Arte y Letras Fractales."
+          "categoria": "Edición de Lujo · Pasta Dura",
+          "nombre": "Poesía Prehispánica: Flor y Canto — Pasta Dura Bilingüe",
+          "detalle": "Edición especial bilingüe (Español-Náhuatl) en pasta dura, Col. Arte y Letras Fractales (Valor $200)."
         },
         {
           "categoria": "Trilogía de Antologías LVT",
-          "nombre": "3 Libros Oficiales de la Sociedad Literaria LVT",
-          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+          "nombre": "Trilogía de Antologías Oficiales de la Sociedad Literaria LVT (3 Libros)",
+          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región» ($130 c/u, Total $390)."
         },
         {
           "categoria": "Alta Perfumería de Lujo",
-          "nombre": "Perfume L'Bel BLEU femme Parfum (50 ml)",
-          "detalle": "Fragancia femenina de alta gama en caja sellada con finos acordes florales franceses."
+          "nombre": "Perfume L'Bel BLEU femme Parfum (50 ml Sellado)",
+          "detalle": "Alta perfumería francesa femenina en caja sellada con finos acordes florales (Valor $890)."
         },
         {
           "categoria": "Cuidado e Hidratación",
           "nombre": "Loción Hidratante Perfumada L'Bel BLEU femme (130 ml)",
-          "detalle": "Tratamiento hidratante perfumado de absorción sedosa para todo el cuerpo."
+          "detalle": "Tratamiento hidratante perfumado de absorción sedosa para todo el cuerpo (Valor $290)."
         }
       ]
     },
@@ -60,33 +60,33 @@
       "icono": "🥈",
       "badge": "Segundo Lugar",
       "imagen": "/assets/rifa/premio_2_lote_estrategia.webp",
-      "valor_estimado": "$2,150+ MXN",
+      "valor_estimado": "$1,656 MXN",
       "color_tema": "#B8860B",
       "items": [
         {
           "categoria": "Dispositivo de Audio",
           "nombre": "Bocina Portátil Bluetooth Select 4 Go",
-          "detalle": "Audio inalámbrico envolvente de alta fidelidad, diseño ultra compacto con correa."
+          "detalle": "Audio inalámbrico envolvente de alta fidelidad, diseño ultra compacto con correa (Valor $500)."
         },
         {
-          "categoria": "Edición de Lujo Pasta Dura",
-          "nombre": "El Arte de la Guerra & El Libro de los Cinco Anillos",
-          "detalle": "Obras cumbres de Sun Tzu y Miyamoto Musashi, ilustrada por Marcos Castro en pasta dura."
+          "categoria": "Edición de Lujo · Pasta Dura",
+          "nombre": "El Arte de la Guerra & El Libro de los Cinco Anillos — Pasta Dura Ilustrada",
+          "detalle": "Obras cumbres de Sun Tzu y Miyamoto Musashi, ilustrada por Marcos Castro en pasta dura (Valor $196)."
         },
         {
           "categoria": "Trilogía de Antologías LVT",
-          "nombre": "3 Libros Oficiales de la Sociedad Literaria LVT",
-          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+          "nombre": "Trilogía de Antologías Oficiales de la Sociedad Literaria LVT (3 Libros)",
+          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región» ($130 c/u, Total $390)."
         },
         {
           "categoria": "Fragancia Fina",
           "nombre": "Velvet Eau de Parfum con Aceite Natural de Patchouli (100 ml)",
-          "detalle": "Elegante fragancia de 3.4 fl. oz. con notas aromáticas de alta fijación."
+          "detalle": "Elegante fragancia de 3.4 fl. oz. con notas aromáticas de alta fijación (Valor $380)."
         },
         {
           "categoria": "Spa Corporal",
           "nombre": "Crema Corporal Lavi con Miel y Extractos de Orquídeas (250 ml)",
-          "detalle": "Hidratación profunda con ingredientes naturales para el cuidado de la piel."
+          "detalle": "Hidratación profunda con ingredientes naturales para el cuidado de la piel (Valor $190)."
         }
       ]
     },
@@ -99,51 +99,41 @@
       "icono": "🥉",
       "badge": "Tercer Lugar",
       "imagen": "/assets/rifa/premio_3_lote_clasicos.webp",
-      "valor_estimado": "$1,900+ MXN",
+      "valor_estimado": "$1,589 MXN",
       "color_tema": "#8C6D46",
       "items": [
         {
           "categoria": "Dispositivo de Audio",
           "nombre": "Bocina Portátil Bluetooth Select 4 Go",
-          "detalle": "Bocina inalámbrica ligera para disfrutar de lecturas sonoras y música en cualquier lugar."
+          "detalle": "Bocina inalámbrica ligera para disfrutar de lecturas sonoras y música en cualquier lugar (Valor $500)."
         },
         {
-          "categoria": "Edición de Lujo Pasta Dura",
-          "nombre": "El Príncipe de Nicolás Maquiavelo",
-          "detalle": "Edición especial de lujo ilustrada en pasta dura con diseño clásico renacentista."
+          "categoria": "Edición de Lujo · Pasta Dura",
+          "nombre": "El Príncipe de Nicolás Maquiavelo — Pasta Dura Ilustrada",
+          "detalle": "Edición especial de lujo ilustrada en pasta dura con diseño clásico renacentista (Valor $299)."
         },
         {
           "categoria": "Trilogía de Antologías LVT",
-          "nombre": "3 Libros Oficiales de la Sociedad Literaria LVT",
-          "detalle": "«A corazón abierto» de María de los Ángeles Cervantes, «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+          "nombre": "Trilogía de Antologías Oficiales de la Sociedad Literaria LVT (3 Libros)",
+          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región» ($130 c/u, Total $390)."
         },
         {
           "categoria": "Cuidado Antiedad",
           "nombre": "Arabela RECONSTRUCT Tratamiento para Manos Anti-Edad (50 g)",
-          "detalle": "Fórmula avanzada para regenerar y nutrir la piel de las manos."
+          "detalle": "Fórmula avanzada para regenerar y nutrir la piel de las manos (Valor $140)."
         },
         {
           "categoria": "Aromaterapia y Bienestar",
           "nombre": "Ciclo Ideal Spray Abdominal / Aromaterapia (60 ml)",
-          "detalle": "Spray auxiliar aromaterapéutico para confort y relajación corporal."
+          "detalle": "Spray auxiliar aromaterapéutico para confort y relajación corporal (Valor $160)."
         },
         {
           "categoria": "Dermocosmética Purificante",
           "nombre": "Arabela Zero Acné Gel de Ácido Salicílico y Árbol de Té (20 g)",
-          "detalle": "Gel de control de imperfecciones con activos purificantes."
+          "detalle": "Gel de control de imperfecciones con activos purificantes (Valor $100)."
         }
       ]
     }
   ],
-  "boletos_ocupados": {
-    "50": {
-      "estado": "Pagado",
-      "numeros": [
-        "49",
-        "99"
-      ],
-      "participante": "Boleto Vendido",
-      "fecha": "2026-08-24"
-    }
-  }
+  "boletos_ocupados": {}
 }
