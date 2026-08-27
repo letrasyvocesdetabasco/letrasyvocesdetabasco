@@ -17,14 +17,19 @@
       "id": "premio-1",
       "lugar": "Primer Premio",
       "lugar_corto": "1° Premio",
-      "titulo": "Colección Gala y Letras",
+      "titulo": "Colección Gala y Audio",
       "subtitulo": "Se obtiene con los 2 últimos dígitos del Premio Mayor de la Lotería Nacional",
       "icono": "🥇",
       "badge": "1° Premio",
       "imagen": "/assets/rifa/premio_1_lote_magno.webp",
-      "valor_estimado": "$1,690 MXN",
+      "valor_estimado": "$2,190 MXN",
       "color_tema": "#EF7B38",
       "items": [
+        {
+          "categoria": "Audio Inalámbrico",
+          "nombre": "Bocina Portátil Bluetooth Select 4 Go",
+          "detalle": "Sonido inalámbrico con batería recargable y correa de mano."
+        },
         {
           "categoria": "Libro en Pasta Dura",
           "nombre": "La Divina Comedia (Dante Alighieri)",
@@ -51,19 +56,14 @@
       "id": "premio-2",
       "lugar": "Segundo Premio",
       "lugar_corto": "2° Premio",
-      "titulo": "Colección Sabiduría y Sonido",
+      "titulo": "Colección Sabiduría y Aroma",
       "subtitulo": "Se obtiene con los 2 últimos dígitos del Segundo Premio de la Lotería Nacional",
       "icono": "🥈",
       "badge": "2° Premio",
       "imagen": "/assets/rifa/premio_2_lote_estrategia.webp",
-      "valor_estimado": "$1,786 MXN",
+      "valor_estimado": "$1,286 MXN",
       "color_tema": "#B8860B",
       "items": [
-        {
-          "categoria": "Audio Inalámbrico",
-          "nombre": "Bocina Portátil Bluetooth Select 4 Go",
-          "detalle": "Sonido inalámbrico con batería recargable y correa de mano."
-        },
         {
           "categoria": "Libro en Pasta Dura",
           "nombre": "El Arte de la Guerra & El Libro de los Cinco Anillos",
