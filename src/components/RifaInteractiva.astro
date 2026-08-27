@@ -1,11 +1,17 @@
 ---
-// RifaInteractiva.astro - Sistema Interactivo de Boletos Dobles con Lotería Nacional (3 Premios)
+// RifaInteractiva.astro - Sistema Integral de Boletos Dobles con Lotería Nacional (3 Lotes de Premios)
 import boletosData from '../data/boletos_rifa.json';
 
 const precioBoleto = boletosData.precio_boleto || 100;
 const totalBoletosDobles = boletosData.total_boletos_dobles || 50;
 const boletosOcupados = boletosData.boletos_ocupados || {};
 const premios = boletosData.premios || [];
+const datosBancarios = boletosData.datos_bancarios || {
+  institucion: "Klar",
+  beneficiario: "Eva Guadalupe Pineda Cruz",
+  clabe: "661180001685065113",
+  whatsapp_contacto: "522205889391"
+};
 
 // Generación de los 50 Boletos Dobles (cada uno con 2 números del 00 al 99)
 // Boleto 1: 00 y 50, Boleto 2: 01 y 51, ..., Boleto 50: 49 y 99
@@ -23,7 +29,7 @@ const listaBoletosDobles: BoletoDoble[] = Array.from({ length: totalBoletosDoble
   const boletoId = i + 1;
   const num1 = i.toString().padStart(2, '0');
   const num2 = (i + 50).toString().padStart(2, '0');
-  const ocupadoInfo = boletosOcupados[boletoId.toString()];
+  const ocupadoInfo = (boletosOcupados as Record<string, any>)[boletoId.toString()];
   const estaOcupado = !!ocupadoInfo;
   const estado = estaOcupado ? ocupadoInfo.estado : 'Disponible';
 
@@ -43,283 +49,596 @@ const totalDisponibles = totalBoletosDobles - totalOcupados;
 const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100);
 ---
 
-<section id="rifa" class="py-16 sm:py-20 bg-[#FDFBF7] text-[#222222] border-t border-[#E6DCCE] relative overflow-hidden">
+<section id="rifa" class="py-16 sm:py-24 bg-[#FDFBF7] text-[#222222] border-t border-[#E6DCCE] relative overflow-hidden">
   
-  <!-- Fondo decorativo sutil -->
+  <!-- Fondo con trama geométrica sutil -->
   <div class="absolute inset-0 bg-[radial-gradient(#EF7B38_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none"></div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
     
-    <!-- Encabezado de Sección -->
-    <div class="text-center max-w-3xl mx-auto space-y-4">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EF7B38]/10 border border-[#EF7B38]/20 text-[#EF7B38] text-[10px] sm:text-xs font-title font-bold uppercase tracking-widest">
+    <!-- 1. ENCABEZADO Y HERO DE LA RIFA -->
+    <div class="text-center max-w-4xl mx-auto space-y-5">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EF7B38]/10 border border-[#EF7B38]/25 text-[#EF7B38] text-xs font-title font-bold uppercase tracking-widest shadow-xs">
         <span class="w-2 h-2 rounded-full bg-[#EF7B38] animate-ping"></span>
         <span>Iniciativa Pro-Fondos Editoriales · Lotería Nacional</span>
       </div>
 
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-title font-black text-[#222222] tracking-tight">
+      <h2 class="text-3xl sm:text-5xl lg:text-6xl font-title font-black text-[#222222] tracking-tight leading-tight">
         Gran Rifa Cultural <span class="text-[#EF7B38]">LVT 2026</span>
       </h2>
 
-      <p class="font-serif italic text-base sm:text-lg text-[#555555] leading-relaxed max-w-2xl mx-auto">
-        «50 boletos dobles (100 números). Cada boleto incluye <strong>dos números de la suerte</strong> con derecho a participar por los <strong>tres premios</strong> en combinación con el sorteo oficial de la Lotería Nacional».
+      <p class="font-serif italic text-base sm:text-xl text-[#555555] leading-relaxed max-w-3xl mx-auto">
+        «50 boletos dobles (100 números). Cada boleto otorga <strong>dos números oficiales</strong> con triple oportunidad de ganar uno de nuestros <strong>tres grandes lotes literarios y de gala</strong>».
       </p>
 
-      <!-- Resumen Rápido de Reglas -->
-      <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-xs font-title font-bold text-[#444444] pt-2">
-        <span class="px-3 py-1 bg-white rounded-xl border border-[#E6DCCE] shadow-xs">🎟️ 50 Boletos Dobles</span>
-        <span class="px-3 py-1 bg-white rounded-xl border border-[#E6DCCE] shadow-xs">🔢 100 Números (00 al 99)</span>
-        <span class="px-3 py-1 bg-white rounded-xl border border-[#E6DCCE] shadow-xs">💵 $100 MXN por Boleto (2 números)</span>
-        <span class="px-3 py-1 bg-white rounded-xl border border-[#E6DCCE] shadow-xs">🏆 3 Grandes Premios</span>
+      <!-- Insignias de resumen rápido -->
+      <div class="flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-xs font-title font-bold text-[#444444] pt-2">
+        <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5">
+          🎟️ <strong>50 Boletos Dobles</strong>
+        </span>
+        <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5">
+          🔢 <strong>100 Números (00 al 99)</strong>
+        </span>
+        <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5 text-[#EF7B38]">
+          💵 <strong>$100 MXN / Boleto</strong>
+        </span>
+        <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs flex items-center gap-1.5 text-amber-700">
+          🏆 <strong>3 Lotes de Premios</strong>
+        </span>
       </div>
     </div>
 
-    <!-- Bloque de los 3 Premios Oficiales (En Definición por la Directiva) -->
-    <div class="space-y-4">
-      <div class="text-center">
-        <span class="text-xs font-title font-semibold uppercase tracking-wider text-[#EF7B38] bg-[#EF7B38]/10 px-3 py-1 rounded-full">
-          🎁 3 Premios Oficiales · Sorteo con Lotería Nacional
+    <!-- 2. BANNER PRINCIPAL: CANASTA MAGNA COMPLETA -->
+    <div class="bg-gradient-to-br from-white via-[#FDFBF7] to-[#F5EFE6] border-2 border-[#EF7B38]/30 rounded-3xl p-6 sm:p-10 shadow-elevated relative overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <div class="lg:col-span-7 space-y-4 text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 text-amber-800 text-xs font-title font-bold uppercase tracking-wider border border-amber-500/20">
+            🌟 Lote Completo de Premios
+          </div>
+          <h3 class="text-2xl sm:text-3xl lg:text-4xl font-title font-black text-[#222222]">
+            Ediciones de Lujo, Antologías LVT, Alta Perfumería & Audio
+          </h3>
+          <p class="text-sm sm:text-base text-[#555555] font-sans leading-relaxed">
+            Todos los premios incluyen la <strong>Trilogía Oficial de Antologías LVT</strong> (<em>«A corazón abierto»</em>, <em>«Tardes tabasqueñas de ópalos y topacios»</em> y <em>«Leyendas de nuestra región»</em>), sumados a obras ilustradas en pasta dura, bocinas Bluetooth y cosmética fina donada.
+          </p>
+          <div class="pt-2 flex flex-wrap items-center gap-3">
+            <a href="#selector-boletos" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#EF7B38] hover:bg-[#D96827] text-white font-title font-bold text-sm transition-all shadow-md hover:shadow-lg">
+              <span>🎟️ Elegir Mis Números de la Suerte</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <span class="text-xs text-gray-500 font-serif italic">Resultados con el Sorteo Mayor de la Lotería Nacional</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex justify-center items-center">
+          <div class="relative w-full max-w-md rounded-2xl overflow-hidden shadow-subtle border border-[#E6DCCE] bg-white p-2 group">
+            <img
+              src="/assets/rifa/canasta_magna_completa_rifa.webp"
+              alt="Gran Canasta de Premios Rifa Cultural LVT 2026"
+              class="w-full h-auto object-contain rounded-xl group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div class="absolute bottom-3 right-3 bg-black/75 backdrop-blur-xs text-white text-[10px] font-title font-bold px-2.5 py-1 rounded-full border border-white/20">
+              Valor Lote Total: +$6,700 MXN
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. PABELLÓN DETALLADO DE LOS 3 GRANDES PREMIOS -->
+    <div class="space-y-6">
+      <div class="text-center space-y-2">
+        <span class="text-xs font-title font-bold uppercase tracking-wider text-[#EF7B38] bg-[#EF7B38]/10 px-3.5 py-1.5 rounded-full">
+          🎁 Desglose Oficial de los 3 Lotes Ganadores
         </span>
+        <h3 class="text-2xl sm:text-3xl font-title font-black text-[#222222]">
+          Un Gran Premio para Cada Posición Oficial
+        </h3>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {premios.map((premio, idx) => (
-          <div class={`bg-white rounded-3xl p-6 sm:p-7 border ${idx === 0 ? 'border-[#EF7B38] shadow-elevated ring-2 ring-[#EF7B38]/10' : 'border-[#E6DCCE] shadow-subtle'} hover:border-[#EF7B38] transition-all flex flex-col justify-between relative`}>
-            {idx === 0 && (
-              <div class="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-[#EF7B38] text-white text-[10px] font-title font-bold uppercase tracking-wider shadow-sm">
-                Premio Mayor
-              </div>
-            )}
-            <div class="space-y-3">
-              <div class="flex items-center justify-between">
+          <div class={`bg-white rounded-3xl p-6 border ${idx === 0 ? 'border-[#EF7B38] shadow-elevated ring-2 ring-[#EF7B38]/15' : 'border-[#E6DCCE] shadow-subtle'} hover:border-[#EF7B38] transition-all flex flex-col justify-between relative group`}>
+            
+            <!-- Badge de Posición -->
+            <div class="flex items-center justify-between gap-2 pb-4 border-b border-[#F5EFE6]">
+              <div class="flex items-center gap-2">
                 <span class="text-3xl">{premio.icono}</span>
-                <span class="text-[11px] font-title font-bold uppercase tracking-wider text-[#B8860B] bg-[#B8860B]/10 px-2.5 py-1 rounded-lg">
-                  {premio.lugar}
-                </span>
+                <div>
+                  <span class="text-[10px] font-title font-black uppercase tracking-wider text-[#EF7B38] block">
+                    {premio.lugar_corto}
+                  </span>
+                  <h4 class="font-title font-bold text-sm sm:text-base text-[#222222] leading-tight">
+                    {premio.lugar}
+                  </h4>
+                </div>
               </div>
-
-              <h3 class="font-title font-bold text-base sm:text-lg text-[#222222] leading-snug">
-                {premio.titulo}
-              </h3>
-
-              <p class="text-xs text-[#555555] font-sans leading-relaxed">
-                {premio.descripcion}
-              </p>
+              <span class="text-[11px] font-title font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg">
+                Valor {premio.valor_estimado}
+              </span>
             </div>
 
-            <div class="pt-4 mt-4 border-t border-[#F5EFE6] text-[11px] text-gray-400 font-sans flex items-center justify-between">
+            <!-- Imagen del Lote / Canasta de Premios -->
+            <div class="py-4 flex justify-center items-center">
+              <div class="relative w-full rounded-2xl overflow-hidden bg-[#FDFBF7] border border-[#E6DCCE] p-2 flex items-center justify-center min-h-[220px]">
+                <img
+                  src={premio.imagen}
+                  alt={premio.titulo}
+                  class="max-h-[200px] w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <!-- Título y Descripción del Lote -->
+            <div class="space-y-3 flex-1">
+              <h4 class="font-title font-bold text-base text-[#222222] leading-snug">
+                {premio.titulo}
+              </h4>
+              <p class="text-xs text-[#666666] font-sans leading-relaxed">
+                {premio.subtitulo}
+              </p>
+
+              <!-- Lista de Artículos Incluidos -->
+              <div class="space-y-2 pt-2">
+                <span class="text-[11px] font-title font-bold text-[#222222] block uppercase tracking-wider">
+                  Artículos Incluidos:
+                </span>
+                <ul class="space-y-1.5 text-xs text-[#444444]">
+                  {premio.items.map((item: any) => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-[#EF7B38] font-bold mt-0.5">•</span>
+                      <span>
+                        <strong class="text-[#222222]">{item.nombre}</strong>
+                        {item.categoria && <span class="text-[10px] text-gray-500 block">{item.detalle}</span>}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <!-- Footer de Tarjeta -->
+            <div class="pt-4 mt-6 border-t border-[#F5EFE6] text-[11px] text-gray-500 font-sans flex items-center justify-between">
               <span>Sorteo Lotería Nacional</span>
               <span class="font-bold text-[#222222]">Últimos 2 dígitos</span>
             </div>
+
           </div>
         ))}
       </div>
-
-      <div class="text-center">
-        <p class="text-xs font-serif italic text-gray-500 max-w-xl mx-auto">
-          * Los detalles y especificaciones completas de los tres premios serán dados a conocer formalmente a través de nuestros canales oficiales antes de la fecha del sorteo.
-        </p>
-      </div>
     </div>
 
-    <!-- Barra de Progreso y Estadísticas -->
-    <div class="bg-white border border-[#E6DCCE] rounded-2xl p-5 shadow-sm max-w-3xl mx-auto space-y-3">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs font-title font-bold text-gray-700">
+    <!-- 4. BARRA DE PROGRESO Y ESTADÍSTICAS EN VIVO -->
+    <div class="bg-white border border-[#E6DCCE] rounded-3xl p-6 sm:p-7 shadow-sm max-w-4xl mx-auto space-y-4">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs font-title font-bold text-gray-700">
         <span class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+          <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 shadow-xs"></span>
           <span>{totalDisponibles} Boletos Disponibles ({totalDisponibles * 2} números)</span>
         </span>
         <span class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-gradient-to-r from-orange-500 to-amber-500"></span>
+          <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 shadow-xs"></span>
           <span>{totalOcupados} {totalOcupados === 1 ? 'Boleto Vendido' : 'Boletos Vendidos'}</span>
         </span>
-        <span class="text-[#EF7B38]">{porcentajeProgreso}% Recaudado</span>
+        <span class="text-[#EF7B38] font-black text-sm">{porcentajeProgreso}% Colocado</span>
       </div>
 
-      <div class="w-full bg-[#F5EFE6] rounded-full h-3 overflow-hidden p-0.5 border border-[#E6DCCE]">
-        <div class="bg-gradient-to-r from-[#EF7B38] to-[#B8860B] h-full rounded-full transition-all duration-500" style={`width: ${porcentajeProgreso}%`}></div>
-      </div>
-    </div>
-
-    <!-- Leyenda de Estados y Explicación del Boleto Doble -->
-    <div class="bg-[#F5EFE6]/80 rounded-2xl p-4 border border-[#E6DCCE] max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-4 sm:gap-8 text-xs text-[#444444] select-none">
-      <div class="flex items-center gap-2">
-        <span class="px-2 py-1 rounded-lg bg-white border border-[#E6DCCE] font-title font-bold text-xs text-[#222222]">
-          #01 <span class="text-[#EF7B38]">[00 · 50]</span>
-        </span>
-        <span>Boleto Disponible ($100)</span>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <span class="px-2 py-1 rounded-lg bg-amber-100 border border-amber-300 font-title font-bold text-xs text-amber-800">
-          #05 <span class="text-amber-700">[04 · 54]</span>
-        </span>
-        <span>Apartado</span>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <span class="px-2 py-1 rounded-lg bg-gradient-to-r from-orange-500 to-amber-600 border border-orange-600 font-title font-bold text-xs text-white shadow-xs">
-          #50 <span class="text-amber-100">[49 · 99]</span>
-        </span>
-        <span class="font-medium text-gray-700">Ya Vendido</span>
-      </div>
-
-      <div class="flex items-center gap-2">
-        <span class="px-2 py-1 rounded-lg bg-[#1C1814] text-white border border-[#EF7B38] font-title font-bold text-xs shadow-sm">
-          #02 <span class="text-[#EF7B38]">[01 · 51]</span>
-        </span>
-        <span>Tu Selección</span>
+      <div class="w-full bg-[#F5EFE6] rounded-full h-3.5 overflow-hidden p-0.5 border border-[#E6DCCE]">
+        <div class="bg-gradient-to-r from-[#EF7B38] to-[#B8860B] h-full rounded-full transition-all duration-700" style={`width: ${porcentajeProgreso}%`}></div>
       </div>
     </div>
 
-    <!-- Cuadrícula Interactiva de los 50 Boletos Dobles -->
-    <div class="bg-white border border-[#E6DCCE] rounded-3xl p-4 sm:p-8 shadow-elevated max-w-5xl mx-auto space-y-4">
+    <!-- 5. SELECTOR INTERACTIVO DE BOLETOS DOBLES -->
+    <div id="selector-boletos" class="space-y-6">
       
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pb-4 border-b border-[#F5EFE6]">
-        <div>
-          <h3 class="font-title font-bold text-base sm:text-lg text-[#222222]">
-            Catálogo de 50 Boletos Dobles
-          </h3>
-          <p class="text-xs text-gray-500 font-sans">
-            Cada boleto contiene exactamente 2 números. Al seleccionar un boleto adquieres ambos números automáticamente.
-          </p>
+      <!-- Controles de Búsqueda y Selección Rápida -->
+      <div class="bg-white border border-[#E6DCCE] rounded-3xl p-5 sm:p-6 shadow-subtle max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        
+        <div class="w-full md:w-auto flex-1 space-y-1">
+          <label for="buscar-numero-input" class="text-xs font-title font-bold text-[#222222] flex items-center gap-1.5">
+            🔍 <span>Buscar Número Favorito (00 al 99):</span>
+          </label>
+          <div class="relative">
+            <input
+              type="text"
+              id="buscar-numero-input"
+              maxlength="2"
+              placeholder="Ej. 07, 24, 77..."
+              class="w-full sm:w-64 px-4 py-2 rounded-xl border-2 border-[#E6DCCE] focus:border-[#EF7B38] focus:outline-hidden text-sm font-mono font-bold text-[#222222] bg-[#FDFBF7]"
+            />
+            <span id="resultado-busqueda" class="text-xs font-title font-semibold ml-2 text-gray-500 hidden"></span>
+          </div>
         </div>
-        <span class="text-xs font-title font-bold text-[#EF7B38] bg-[#EF7B38]/10 px-3 py-1 rounded-xl">
-          $100 MXN / boleto
-        </span>
+
+        <!-- Botón de Suerte al Azar -->
+        <div class="w-full md:w-auto flex items-center gap-3 justify-end">
+          <button
+            type="button"
+            id="btn-boleto-azar"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#F5EFE6] hover:bg-[#EF7B38] text-[#222222] hover:text-white font-title font-bold text-xs transition-all border border-[#E6DCCE] shadow-xs cursor-pointer active:scale-95"
+          >
+            🎲 <span>Elegir 1 Boleto al Azar</span>
+          </button>
+        </div>
+
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-2 sm:gap-2.5" id="grid-boletos-dobles">
-        {listaBoletosDobles.map((boleto) => {
-          if (boleto.estado === 'Pagado') {
-            return (
-              <button
-                type="button"
-                disabled
-                class="w-full py-2 px-1 rounded-xl bg-gradient-to-br from-orange-500 via-[#EF7B38] to-amber-600 border-2 border-orange-600/70 text-white font-title flex flex-col items-center justify-center cursor-not-allowed select-none shadow-sm relative group overflow-hidden"
-                title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - YA VENDIDO`}
-              >
-                <span class="text-[10px] font-bold text-amber-100">#{boleto.idStr}</span>
-                <span class="text-xs font-mono font-black text-white">{boleto.num1} · {boleto.num2}</span>
-                <span class="text-[8px] uppercase tracking-wider font-bold bg-black/25 px-1.5 py-0.5 rounded-full text-white mt-0.5">Vendido</span>
-              </button>
-            );
-          } else if (boleto.estado === 'Apartado') {
-            return (
-              <button
-                type="button"
-                disabled
-                class="w-full py-2 px-1 rounded-xl bg-amber-50 border-2 border-amber-300 text-amber-900 font-title flex flex-col items-center justify-center cursor-not-allowed select-none opacity-80 shadow-inner"
-                title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - APARTADO`}
-              >
-                <span class="text-[10px] font-bold text-amber-700">#{boleto.idStr}</span>
-                <span class="text-xs font-mono font-bold text-amber-900">{boleto.num1} · {boleto.num2}</span>
-                <span class="text-[8px] uppercase tracking-tight text-amber-700">Apartado</span>
-              </button>
-            );
-          } else {
-            return (
-              <button
-                type="button"
-                class="boleto-btn w-full py-2 px-1 rounded-xl bg-[#FDFBF7] border-2 border-[#E6DCCE] hover:border-[#EF7B38] hover:bg-[#F5EFE6] text-[#222222] font-title flex flex-col items-center justify-center cursor-pointer select-none transition-all duration-200 shadow-xs hover:scale-105"
-                data-id={boleto.id}
-                data-id-str={boleto.idStr}
-                data-num1={boleto.num1}
-                data-num2={boleto.num2}
-                aria-label={`Seleccionar boleto doble número ${boleto.id} con números ${boleto.num1} y ${boleto.num2}`}
-              >
-                <span class="text-[10px] font-bold text-gray-500">Boleto #{boleto.idStr}</span>
-                <span class="text-xs font-mono font-bold text-[#EF7B38]">{boleto.num1} · {boleto.num2}</span>
-                <span class="text-[9px] font-sans font-semibold text-gray-600">$100 MXN</span>
-              </button>
-            );
-          }
-        })}
+      <!-- Leyenda de Estados -->
+      <div class="bg-[#F5EFE6]/80 rounded-2xl p-4 border border-[#E6DCCE] max-w-5xl mx-auto flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-xs text-[#444444] select-none">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-1 rounded-lg bg-white border border-[#E6DCCE] font-title font-bold text-xs text-[#222222]">
+            #01 <span class="text-[#EF7B38]">[00 · 50]</span>
+          </span>
+          <span>Disponible ($100)</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-1 rounded-lg bg-amber-100 border border-amber-300 font-title font-bold text-xs text-amber-800">
+            #05 <span class="text-amber-700">[04 · 54]</span>
+          </span>
+          <span>Apartado</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-1 rounded-lg bg-gradient-to-r from-orange-500 to-amber-600 border border-orange-600 font-title font-bold text-xs text-white shadow-xs">
+            #50 <span class="text-amber-100">[49 · 99]</span>
+          </span>
+          <span class="font-medium text-gray-700">Ya Vendido</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-1 rounded-lg bg-[#1C1814] text-white border border-[#EF7B38] font-title font-bold text-xs shadow-sm">
+            #02 <span class="text-[#EF7B38]">[01 · 51]</span>
+          </span>
+          <span>Tu Selección</span>
+        </div>
       </div>
 
+      <!-- Cuadrícula de 50 Boletos Dobles -->
+      <div class="bg-white border border-[#E6DCCE] rounded-3xl p-4 sm:p-8 shadow-elevated max-w-5xl mx-auto space-y-4">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pb-4 border-b border-[#F5EFE6]">
+          <div>
+            <h3 class="font-title font-bold text-base sm:text-lg text-[#222222]">
+              Catálogo Interactivo de 50 Boletos Dobles
+            </h3>
+            <p class="text-xs text-gray-500 font-sans">
+              Haz clic sobre los boletos que deseas apartar. Cada boleto te da automáticamente sus 2 números correspondientes.
+            </p>
+          </div>
+          <span class="text-xs font-title font-bold text-[#EF7B38] bg-[#EF7B38]/10 px-3.5 py-1.5 rounded-xl">
+            $100 MXN / boleto doble
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-10 gap-2 sm:gap-2.5" id="grid-boletos-dobles">
+          {listaBoletosDobles.map((boleto) => {
+            if (boleto.estado === 'Pagado') {
+              return (
+                <button
+                  type="button"
+                  disabled
+                  id={`btn-boleto-${boleto.id}`}
+                  class="w-full py-2 px-1 rounded-xl bg-gradient-to-br from-orange-500 via-[#EF7B38] to-amber-600 border-2 border-orange-600/70 text-white font-title flex flex-col items-center justify-center cursor-not-allowed select-none shadow-sm relative group overflow-hidden opacity-90"
+                  title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - YA VENDIDO`}
+                  data-num1={boleto.num1}
+                  data-num2={boleto.num2}
+                >
+                  <span class="text-[10px] font-bold text-amber-100">#{boleto.idStr}</span>
+                  <span class="text-xs font-mono font-black text-white">{boleto.num1} · {boleto.num2}</span>
+                  <span class="text-[8px] uppercase tracking-wider font-bold bg-black/25 px-1.5 py-0.5 rounded-full text-white mt-0.5">Vendido</span>
+                </button>
+              );
+            } else if (boleto.estado === 'Apartado') {
+              return (
+                <button
+                  type="button"
+                  disabled
+                  id={`btn-boleto-${boleto.id}`}
+                  class="w-full py-2 px-1 rounded-xl bg-amber-50 border-2 border-amber-300 text-amber-900 font-title flex flex-col items-center justify-center cursor-not-allowed select-none opacity-80 shadow-inner"
+                  title={`Boleto #${boleto.id} (${boleto.num1} y ${boleto.num2}) - APARTADO`}
+                  data-num1={boleto.num1}
+                  data-num2={boleto.num2}
+                >
+                  <span class="text-[10px] font-bold text-amber-700">#{boleto.idStr}</span>
+                  <span class="text-xs font-mono font-bold text-amber-900">{boleto.num1} · {boleto.num2}</span>
+                  <span class="text-[8px] uppercase tracking-tight text-amber-700">Apartado</span>
+                </button>
+              );
+            } else {
+              return (
+                <button
+                  type="button"
+                  id={`btn-boleto-${boleto.id}`}
+                  class="boleto-btn w-full py-2 px-1 rounded-xl bg-[#FDFBF7] border-2 border-[#E6DCCE] hover:border-[#EF7B38] hover:bg-[#F5EFE6] text-[#222222] font-title flex flex-col items-center justify-center cursor-pointer select-none transition-all duration-200 shadow-xs hover:scale-105"
+                  data-id={boleto.id}
+                  data-id-str={boleto.idStr}
+                  data-num1={boleto.num1}
+                  data-num2={boleto.num2}
+                  aria-label={`Seleccionar boleto doble número ${boleto.id} con números ${boleto.num1} y ${boleto.num2}`}
+                >
+                  <span class="text-[10px] font-bold text-gray-500">#{boleto.idStr}</span>
+                  <span class="text-xs font-mono font-bold text-[#EF7B38]">{boleto.num1} · {boleto.num2}</span>
+                  <span class="text-[9px] font-sans font-semibold text-gray-600">$100 MXN</span>
+                </button>
+              );
+            }
+          })}
+        </div>
+
+      </div>
     </div>
 
-    <!-- Panel de Confirmación, Resumen de Boletos y Apartado por WhatsApp -->
-    <div class="max-w-2xl mx-auto bg-[#1C1814] text-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-white/10 space-y-6">
+    <!-- 6. PANEL DE CONFIRMACIÓN, DATOS BANCARIOS Y APARTADO -->
+    <div class="max-w-3xl mx-auto bg-[#1C1814] text-white rounded-3xl p-6 sm:p-9 shadow-2xl border border-white/10 space-y-8">
       
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-5 border-b border-white/15">
+      <!-- Encabezado de Pago -->
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-white/15">
         <div>
           <span class="text-xs text-[#EF7B38] font-title font-bold uppercase tracking-wider block mb-1">
-            Resumen de Tu Selección
+            Paso 2 · Confirmación y Pago
           </span>
-          <h4 class="text-xl font-title font-bold text-white">
-            Boletos Dobles Seleccionados
+          <h4 class="text-xl sm:text-2xl font-title font-black text-white">
+            Tus Boletos Seleccionados
           </h4>
         </div>
-        <div class="text-left sm:text-right">
+        <div class="text-left sm:text-right bg-white/5 px-4 py-2 rounded-2xl border border-white/10">
           <span class="text-xs text-gray-400 block">Total a Aportar</span>
-          <span class="text-2xl font-title font-bold text-[#EF7B38]" id="total-aportacion">
+          <span class="text-2xl sm:text-3xl font-title font-black text-[#EF7B38]" id="total-aportacion">
             $0 MXN
           </span>
         </div>
       </div>
 
-      <div class="space-y-2">
+      <!-- Resumen de Boletos Seleccionados -->
+      <div class="space-y-3">
         <div class="flex justify-between items-center text-xs text-gray-300">
           <span>Boletos y Números Asignados:</span>
           <span id="contador-boletos-texto" class="font-bold text-[#F5DEB3]">0 boletos (0 números)</span>
         </div>
 
-        <div id="contenedor-seleccionados" class="flex flex-wrap gap-2 min-h-[3rem] items-center p-3 rounded-2xl bg-black/40 border border-white/10">
+        <div id="contenedor-seleccionados" class="flex flex-wrap gap-2 min-h-[3.5rem] items-center p-3.5 rounded-2xl bg-black/50 border border-white/10">
           <span class="text-xs text-gray-500 italic" id="texto-vacio">
             Haz clic en los boletos disponibles arriba para seleccionarlos ($100 MXN por boleto doble)...
           </span>
         </div>
       </div>
 
-      <!-- Acciones de Apartado -->
+      <!-- Formulario de Identificación del Comprador -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
+        <div>
+          <label for="comprador-nombre" class="block text-xs font-title font-bold text-gray-300 mb-1">
+            Nombre Completo del Participante *
+          </label>
+          <input
+            type="text"
+            id="comprador-nombre"
+            placeholder="Ej. María Pérez López"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/20 text-white placeholder-gray-500 text-sm focus:border-[#EF7B38] focus:outline-hidden font-sans"
+          />
+        </div>
+        <div>
+          <label for="comprador-tel" class="block text-xs font-title font-bold text-gray-300 mb-1">
+            Teléfono o WhatsApp de Contacto
+          </label>
+          <input
+            type="tel"
+            id="comprador-tel"
+            placeholder="Ej. 9931234567"
+            class="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/20 text-white placeholder-gray-500 text-sm focus:border-[#EF7B38] focus:outline-hidden font-sans"
+          />
+        </div>
+      </div>
+
+      <!-- DATOS DE TRANSFERENCIA BANCARIA OFICIAL (KLAR) -->
+      <div class="bg-gradient-to-br from-[#2A241E] to-[#1F1914] rounded-2xl p-5 border border-[#EF7B38]/30 space-y-4">
+        
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">🏦</span>
+            <div>
+              <span class="text-[10px] uppercase font-bold text-[#EF7B38] tracking-wider block">Método de Aportación Directa</span>
+              <h5 class="text-sm font-title font-bold text-white">Transferencia Interbancaria SPEI / Depósito</h5>
+            </div>
+          </div>
+          <span class="text-xs font-mono font-bold bg-[#EF7B38]/20 text-[#EF7B38] px-2.5 py-1 rounded-lg border border-[#EF7B38]/30">
+            {datosBancarios.institucion}
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="bg-black/30 p-3 rounded-xl border border-white/5">
+            <span class="text-gray-400 block text-[10px]">Beneficiaria Oficial:</span>
+            <span class="font-bold text-white">{datosBancarios.beneficiario}</span>
+          </div>
+          <div class="bg-black/30 p-3 rounded-xl border border-white/5 flex items-center justify-between">
+            <div>
+              <span class="text-gray-400 block text-[10px]">Institución Financiera:</span>
+              <span class="font-bold text-white">{datosBancarios.institucion}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLABE Interbancaria con Botón Copiar -->
+        <div class="bg-black/60 p-3.5 rounded-xl border border-[#EF7B38]/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-[10px] font-title font-bold text-gray-400 block uppercase tracking-wider">
+              CLABE Interbancaria (18 dígitos):
+            </span>
+            <span id="clabe-valor" class="text-base sm:text-lg font-mono font-bold text-[#EF7B38] tracking-wider select-all">
+              {datosBancarios.clabe}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            id="btn-copiar-clabe"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#EF7B38] hover:bg-[#D96827] text-white text-xs font-title font-bold transition-all shadow-sm cursor-pointer active:scale-95 whitespace-nowrap"
+          >
+            <svg id="icono-copiar" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+            </svg>
+            <span id="texto-copiar-clabe">Copiar CLABE</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Botones de Acción: WhatsApp & Ficha Digital -->
       <div class="pt-2 flex flex-col sm:flex-row gap-3">
+        
         <a
           id="btn-apartar-whatsapp"
           href="#"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-[#25D366] hover:bg-[#128C7E] text-white font-title font-bold text-sm transition-all shadow-md opacity-50 pointer-events-none cursor-not-allowed"
+          class="flex-1 inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-[#25D366] hover:bg-[#128C7E] text-white font-title font-black text-sm transition-all shadow-lg hover:shadow-xl opacity-50 pointer-events-none cursor-not-allowed text-center"
         >
-          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.53 1.961.815 2.796.815 3.183 0 5.769-2.586 5.77-5.766.001-3.182-2.585-5.768-5.77-5.768zm0 10.455c-.779 0-1.695-.258-2.382-.665l-.171-.101-1.77.464.472-1.726-.112-.178c-.464-.737-.709-1.532-.708-2.483.001-2.585 2.103-4.688 4.671-4.688 2.569 0 4.671 2.103 4.671 4.688 0 2.586-2.102 4.689-4.671 4.689z"/>
           </svg>
-          <span>Apartar Boletos por WhatsApp</span>
+          <span>Apartar y Enviar Comprobante (WhatsApp)</span>
         </a>
 
         <button
           type="button"
-          id="btn-limpiar-seleccion"
-          class="px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-title font-bold transition-colors cursor-pointer"
+          id="btn-ver-ficha"
+          class="px-5 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-title font-bold transition-all cursor-pointer opacity-50 pointer-events-none"
         >
-          Limpiar
+          📄 Ver Ficha Digital
         </button>
+
+        <button
+          type="button"
+          id="btn-limpiar-seleccion"
+          class="px-4 py-4 rounded-2xl bg-red-950/40 hover:bg-red-900/60 text-red-300 text-xs font-title font-bold transition-colors cursor-pointer border border-red-800/30"
+          title="Limpiar todos los boletos seleccionados"
+        >
+          ✕ Limpiar
+        </button>
+
       </div>
 
       <div class="text-[11px] text-gray-400 text-center leading-relaxed">
-        🔒 <em>Cada boleto queda registrado con sus dos números oficiales. Tras enviar tu solicitud vía WhatsApp, recibirás la confirmación y tu comprobante digital de participación.</em>
+        🔒 <em>Tras enviar tu mensaje con el comprobante de transferencia a nuestro WhatsApp oficial, el sistema registrará tus números como <strong>Pagados</strong> y recibirás tu pase de participación definitivo.</em>
       </div>
 
     </div>
 
   </div>
+
+  <!-- MODAL DE FICHA DIGITAL DE RESERVA -->
+  <div id="modal-ficha-reserva" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-[#FDFBF7] text-[#222222] rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border-2 border-[#EF7B38] space-y-6 relative max-h-[90vh] overflow-y-auto">
+      
+      <button
+        type="button"
+        id="btn-cerrar-modal"
+        class="absolute top-4 right-4 text-gray-400 hover:text-[#222222] p-2 rounded-full hover:bg-gray-100 transition-colors"
+      >
+        ✕
+      </button>
+
+      <div class="text-center space-y-2 border-b border-[#E6DCCE] pb-4">
+        <span class="text-[10px] font-title font-bold uppercase tracking-widest text-[#EF7B38]">
+          Sociedad de Escritores «Letras y Voces de Tabasco», A.C.
+        </span>
+        <h4 class="text-xl sm:text-2xl font-title font-black text-[#222222]">
+          Ficha Digital de Reserva
+        </h4>
+        <span id="modal-folio" class="inline-block text-xs font-mono font-bold bg-[#EF7B38]/10 text-[#EF7B38] px-3 py-1 rounded-full border border-[#EF7B38]/20">
+          Folio: LVT-2026-PENDING
+        </span>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <div class="bg-white p-4 rounded-2xl border border-[#E6DCCE] space-y-2">
+          <div class="flex justify-between">
+            <span class="text-gray-500">Participante:</span>
+            <strong id="modal-nombre" class="text-[#222222]">-</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500">Boletos Dobles:</span>
+            <strong id="modal-boletos" class="text-[#EF7B38]">-</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-500">Números Asignados:</span>
+            <strong id="modal-numeros" class="font-mono text-base text-[#222222]">-</strong>
+          </div>
+          <div class="flex justify-between border-t border-[#F5EFE6] pt-2 text-sm">
+            <span class="font-bold text-gray-700">Monto Total:</span>
+            <strong id="modal-total" class="font-title font-black text-[#EF7B38] text-base">$0 MXN</strong>
+          </div>
+        </div>
+
+        <div class="bg-[#F5EFE6] p-4 rounded-2xl border border-[#E6DCCE] space-y-1.5">
+          <span class="font-title font-bold text-[11px] text-[#222222] block uppercase tracking-wider">
+            Datos de Transferencia:
+          </span>
+          <div class="text-gray-600 space-y-0.5">
+            <p><strong>Banco:</strong> {datosBancarios.institucion}</p>
+            <p><strong>Beneficiaria:</strong> {datosBancarios.beneficiario}</p>
+            <p><strong>CLABE:</strong> <span class="font-mono font-bold text-[#222222] select-all">{datosBancarios.clabe}</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center pt-2">
+        <button
+          type="button"
+          id="btn-imprimir-capturar"
+          onclick="window.print()"
+          class="w-full py-3 rounded-xl bg-[#222222] hover:bg-black text-white font-title font-bold text-xs transition-colors shadow-md"
+        >
+          🖨️ Imprimir o Guardar Ficha
+        </button>
+      </div>
+
+    </div>
+  </div>
+
 </section>
 
-<!-- Script de Lógica de Boletos Dobles -->
-<script is:inline define:vars={{ precioBoleto }}>
+<!-- Script de Lógica Interactiva, Búsqueda, Azar y WhatsApp Automatizado -->
+<script is:inline define:vars={{ precioBoleto, datosBancarios }}>
   document.addEventListener('DOMContentLoaded', () => {
-    let boletosSeleccionados = []; // Array de objetos { id, idStr, num1, num2 }
+    let boletosSeleccionados = []; // Array de { id, idStr, num1, num2 }
 
     const contenedorSeleccionados = document.getElementById('contenedor-seleccionados');
     const textoVacio = document.getElementById('texto-vacio');
     const totalAportacionEl = document.getElementById('total-aportacion');
     const contadorBoletosTexto = document.getElementById('contador-boletos-texto');
     const btnWhatsApp = document.getElementById('btn-apartar-whatsapp');
+    const btnVerFicha = document.getElementById('btn-ver-ficha');
     const btnLimpiar = document.getElementById('btn-limpiar-seleccion');
+    const inputNombre = document.getElementById('comprador-nombre');
+    const inputTel = document.getElementById('comprador-tel');
     const botonesBoletos = document.querySelectorAll('.boleto-btn');
 
+    const inputBuscar = document.getElementById('buscar-numero-input');
+    const resultadoBusqueda = document.getElementById('resultado-busqueda');
+    const btnAzar = document.getElementById('btn-boleto-azar');
+
+    const btnCopiarClabe = document.getElementById('btn-copiar-clabe');
+    const textoCopiarClabe = document.getElementById('texto-copiar-clabe');
+
+    const modalFicha = document.getElementById('modal-ficha-reserva');
+    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+    const modalFolio = document.getElementById('modal-folio');
+    const modalNombre = document.getElementById('modal-nombre');
+    const modalBoletos = document.getElementById('modal-boletos');
+    const modalNumeros = document.getElementById('modal-numeros');
+    const modalTotal = document.getElementById('modal-total');
+
+    function generarFolio() {
+      const randHex = Math.random().toString(36).substring(2, 6).toUpperCase();
+      return `LVT-2026-B${boletosSeleccionados.map(b => b.idStr).join('')}-${randHex}`;
+    }
+
     function actualizarInterfaz() {
-      // Limpiar contenedor
       contenedorSeleccionados.innerHTML = '';
 
       if (boletosSeleccionados.length === 0) {
@@ -327,22 +646,20 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         totalAportacionEl.textContent = '$0 MXN';
         if (contadorBoletosTexto) contadorBoletosTexto.textContent = '0 boletos (0 números)';
         btnWhatsApp.classList.add('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
+        btnVerFicha.classList.add('opacity-50', 'pointer-events-none');
         btnWhatsApp.href = '#';
         return;
       }
 
-      // Ordenar por ID de boleto
       boletosSeleccionados.sort((a, b) => a.id - b.id);
 
-      // Renderizar badges seleccionados
       boletosSeleccionados.forEach(b => {
         const badge = document.createElement('span');
         badge.className = 'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#EF7B38] text-white font-title font-bold text-xs shadow-sm';
-        badge.innerHTML = `Boleto #${b.idStr} (${b.num1} · ${b.num2}) <button type="button" data-quitar-id="${b.id}" class="ml-1 text-white/80 hover:text-white font-normal cursor-pointer" title="Quitar boleto">✕</button>`;
+        badge.innerHTML = `Boleto #${b.idStr} (${b.num1} · ${b.num2}) <button type="button" data-quitar-id="${b.id}" class="ml-1 text-white/80 hover:text-white font-normal cursor-pointer" title="Quitar">✕</button>`;
         contenedorSeleccionados.appendChild(badge);
       });
 
-      // Calcular totales
       const cantidadBoletos = boletosSeleccionados.length;
       const cantidadNumeros = cantidadBoletos * 2;
       const totalDinero = cantidadBoletos * precioBoleto;
@@ -352,16 +669,32 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         contadorBoletosTexto.textContent = `${cantidadBoletos} ${cantidadBoletos === 1 ? 'boleto doble' : 'boletos dobles'} (${cantidadNumeros} números)`;
       }
 
-      // Generar mensaje para WhatsApp
-      const detalleBoletos = boletosSeleccionados.map(b => `Boleto #${b.idStr} [Números: ${b.num1} y ${b.num2}]`).join(', ');
-      const mensaje = `Hola Sociedad de Escritores LVT, A.C. Deseo apartar ${cantidadBoletos} boleto(s) doble(s) para la Gran Rifa Cultural 2026 (Lotería Nacional):\n\n🎟️ ${detalleBoletos}\n\n💵 Total de aportación: $${totalDinero} MXN.\nQuedo a la espera de los datos para la confirmación.`;
-      
-      const urlWA = `https://wa.me/522205889391?text=${encodeURIComponent(mensaje)}`;
-      btnWhatsApp.href = urlWA;
+      // Preparar mensaje para WhatsApp con estructura lista para n8n/Hermes
+      const nombreComprador = (inputNombre && inputNombre.value.trim()) || 'Participante LVT';
+      const telComprador = (inputTel && inputTel.value.trim()) || 'No especificado';
+      const folioReserva = generarFolio();
+
+      const listaBoletosTxt = boletosSeleccionados.map(b => `• Boleto #${b.idStr} [Números: ${b.num1} y ${b.num2}]`).join('\n');
+      const listaNumerosTxt = boletosSeleccionados.map(b => `${b.num1}, ${b.num2}`).join(', ');
+
+      const mensaje = `🎟️ *RESERVA OFICIAL · GRAN RIFA CULTURAL LVT 2026*\n` +
+        `📋 *Folio de Reserva:* ${folioReserva}\n` +
+        `👤 *Participante:* ${nombreComprador}\n` +
+        `📱 *Contacto:* ${telComprador}\n\n` +
+        `🎫 *Boletos Dobles Seleccionados:*\n${listaBoletosTxt}\n\n` +
+        `🔢 *Números en Juego:* ${listaNumerosTxt}\n` +
+        `💵 *Total de Aportación:* $${totalDinero} MXN ($100 c/u)\n\n` +
+        `🏦 *Cuenta de Depósito:* Klar · Eva Guadalupe Pineda Cruz · CLABE: ${datosBancarios.clabe}\n` +
+        `📌 *Estado:* En espera de comprobante de pago\n\n` +
+        `Adjunto a este mensaje mi comprobante de transferencia para confirmar el registro oficial de mis números. ¡Muchas gracias!`;
+
+      const numWA = datosBancarios.whatsapp_contacto || '522205889391';
+      btnWhatsApp.href = `https://wa.me/${numWA}?text=${encodeURIComponent(mensaje)}`;
       btnWhatsApp.classList.remove('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
+      btnVerFicha.classList.remove('opacity-50', 'pointer-events-none');
     }
 
-    // Eventos en botones de boletos
+    // Toggle de boletos
     botonesBoletos.forEach(btn => {
       btn.addEventListener('click', () => {
         const id = parseInt(btn.getAttribute('data-id') || '0', 10);
@@ -383,7 +716,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       });
     });
 
-    // Evento quitar desde badge
+    // Quitar desde badge
     contenedorSeleccionados.addEventListener('click', (e) => {
       const target = e.target;
       if (target && target.getAttribute('data-quitar-id')) {
@@ -395,12 +728,117 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       }
     });
 
-    // Evento Limpiar
+    // Actualizar datos al tipear nombre o teléfono
+    if (inputNombre) inputNombre.addEventListener('input', actualizarInterfaz);
+    if (inputTel) inputTel.addEventListener('input', actualizarInterfaz);
+
+    // Limpiar
     if (btnLimpiar) {
       btnLimpiar.addEventListener('click', () => {
         boletosSeleccionados = [];
         document.querySelectorAll('.boleto-btn.selected-boleto').forEach(btn => btn.classList.remove('selected-boleto'));
+        if (inputNombre) inputNombre.value = '';
+        if (inputTel) inputTel.value = '';
         actualizarInterfaz();
+      });
+    }
+
+    // Buscador de Números
+    if (inputBuscar) {
+      inputBuscar.addEventListener('input', (e) => {
+        const valor = e.target.value.trim().padStart(2, '0');
+        if (valor.length === 2 && !isNaN(parseInt(valor, 10))) {
+          const numInt = parseInt(valor, 10);
+          if (numInt >= 0 && numInt <= 99) {
+            // Encontrar qué boleto contiene este número
+            // Boleto 1: 00 y 50, etc.
+            const boletoId = (numInt % 50) + 1;
+            const btn = document.getElementById(`btn-boleto-${boletoId}`);
+            if (btn) {
+              btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              btn.classList.add('ring-4', 'ring-[#EF7B38]', 'scale-110');
+              setTimeout(() => {
+                btn.classList.remove('ring-4', 'ring-[#EF7B38]', 'scale-110');
+              }, 2500);
+              if (resultadoBusqueda) {
+                resultadoBusqueda.textContent = `Número ${valor} pertenece al Boleto #${boletoId.toString().padStart(2, '0')}`;
+                resultadoBusqueda.classList.remove('hidden');
+              }
+            }
+          }
+        } else {
+          if (resultadoBusqueda) resultadoBusqueda.classList.add('hidden');
+        }
+      });
+    }
+
+    // Selección al Azar
+    if (btnAzar) {
+      btnAzar.addEventListener('click', () => {
+        const disponibles = Array.from(document.querySelectorAll('.boleto-btn:not(.selected-boleto)'));
+        if (disponibles.length > 0) {
+          const randomBtn = disponibles[Math.floor(Math.random() * disponibles.length)];
+          randomBtn.click();
+          randomBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    // Copiar CLABE al Portapapeles
+    if (btnCopiarClabe) {
+      btnCopiarClabe.addEventListener('click', async () => {
+        const clabe = datosBancarios.clabe;
+        try {
+          await navigator.clipboard.writeText(clabe);
+          textoCopiarClabe.textContent = '¡CLABE Copiada!';
+          btnCopiarClabe.classList.replace('bg-[#EF7B38]', 'bg-emerald-600');
+          setTimeout(() => {
+            textoCopiarClabe.textContent = 'Copiar CLABE';
+            btnCopiarClabe.classList.replace('bg-emerald-600', 'bg-[#EF7B38]');
+          }, 3000);
+        } catch (err) {
+          // Fallback para navegadores antiguos
+          const inputTemp = document.createElement('input');
+          inputTemp.value = clabe;
+          document.body.appendChild(inputTemp);
+          inputTemp.select();
+          document.execCommand('copy');
+          document.body.removeChild(inputTemp);
+          textoCopiarClabe.textContent = '¡CLABE Copiada!';
+          setTimeout(() => {
+            textoCopiarClabe.textContent = 'Copiar CLABE';
+          }, 3000);
+        }
+      });
+    }
+
+    // Modal de Ficha Digital
+    if (btnVerFicha && modalFicha) {
+      btnVerFicha.addEventListener('click', () => {
+        if (boletosSeleccionados.length === 0) return;
+        const nombre = (inputNombre && inputNombre.value.trim()) || 'Participante LVT';
+        const folio = generarFolio();
+        const boletosTxt = boletosSeleccionados.map(b => `#${b.idStr}`).join(', ');
+        const numsTxt = boletosSeleccionados.map(b => `${b.num1}, ${b.num2}`).join(' · ');
+        const total = boletosSeleccionados.length * precioBoleto;
+
+        modalFolio.textContent = `Folio: ${folio}`;
+        modalNombre.textContent = nombre;
+        modalBoletos.textContent = `${boletosSeleccionados.length} boleto(s) [${boletosTxt}]`;
+        modalNumeros.textContent = numsTxt;
+        modalTotal.textContent = `$${total} MXN`;
+
+        modalFicha.classList.remove('hidden');
+      });
+
+      if (btnCerrarModal) {
+        btnCerrarModal.addEventListener('click', () => {
+          modalFicha.classList.add('hidden');
+        });
+      }
+
+      modalFicha.addEventListener('click', (e) => {
+        if (e.target === modalFicha) modalFicha.classList.add('hidden');
       });
     }
   });
