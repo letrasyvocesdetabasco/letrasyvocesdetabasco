@@ -1,0 +1,91 @@
+{
+  "name": "LVT - Automatización Rifa WhatsApp & Gestión de Boletos",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-lvt-rifa",
+        "options": {}
+      },
+      "name": "Webhook WhatsApp Meta Cloud",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "whatsapp-lvt-rifa"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.entry[0].changes[0].value.messages[0].text.body }}",
+              "operation": "contains",
+              "value2": "RIFA"
+            }
+          ]
+        }
+      },
+      "name": "Es Mensaje de Rifa LVT?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8088/webhook",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"action\": \"procesar_whatsapp\",\n  \"texto\": \"{{ $json.body.entry[0].changes[0].value.messages[0].text.body }}\"\n}"
+      },
+      "name": "Actualizar Boletos Local",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [680, 240]
+    },
+    {
+      "parameters": {
+        "command": "cd \"/home/divadios/Escritorio/pagina web/letrasyvocesdetabasco\" && git add src/data/boletos_rifa.json && git commit -m \"feat(rifa): actualización automática de boletos vía n8n WhatsApp\" && git push origin main"
+      },
+      "name": "Git Push Deploy GitHub Pages",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [900, 240]
+    }
+  ],
+  "connections": {
+    "Webhook WhatsApp Meta Cloud": {
+      "main": [
+        [
+          {
+            "node": "Es Mensaje de Rifa LVT?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Es Mensaje de Rifa LVT?": {
+      "main": [
+        [
+          {
+            "node": "Actualizar Boletos Local",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Actualizar Boletos Local": {
+      "main": [
+        [
+          {
+            "node": "Git Push Deploy GitHub Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
