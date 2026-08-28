@@ -112,22 +112,16 @@
     }
   ],
   "boletos_ocupados": {
-    "8": {
-      "estado": "Apartado",
-      "participante": "Carlos A.",
-      "whatsapp": "5219932127196",
-      "fecha": "2026-08-28 09:15:12",
-      "num1": "07",
-      "num2": "57"
-    },
-    "10": {
+    "3": {
       "estado": "Pagado",
-      "participante": "J. David Cabrera",
-      "whatsapp": "5219931090153",
-      "fecha": "2026-08-28 13:48:04",
-      "fecha_pago": "2026-08-28 13:48:04",
-      "num1": "09",
-      "num2": "59"
+      "participante": "pedro paramo",
+      "whatsapp": "1234432112",
+      "fecha": "2026-08-28 14:18:14",
+      "fecha_pago": "2026-08-28 14:18:14",
+      "canal": "panel",
+      "notas": "hola",
+      "num1": "02",
+      "num2": "52"
     }
   }
 }
