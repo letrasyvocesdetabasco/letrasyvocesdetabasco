@@ -122,6 +122,17 @@
       "notas": "hola",
       "num1": "02",
       "num2": "52"
+    },
+    "7": {
+      "estado": "Apartado",
+      "participante": "carlos arellano",
+      "whatsapp": "",
+      "fecha": "2026-08-28 14:19:03",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "amigo de fisica",
+      "num1": "06",
+      "num2": "56"
     }
   }
 }
