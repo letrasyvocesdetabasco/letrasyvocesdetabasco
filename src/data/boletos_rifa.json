@@ -130,11 +130,11 @@
       "num2": "59"
     },
     "33": {
-      "estado": "Apartado",
+      "estado": "Pagado",
       "participante": "Test Challenger",
       "whatsapp": "9935551234",
       "fecha": "2026-08-28 14:10:00",
-      "fecha_pago": "",
+      "fecha_pago": "2026-08-28 14:10:00",
       "canal": "panel",
       "notas": "",
       "num1": "32",
