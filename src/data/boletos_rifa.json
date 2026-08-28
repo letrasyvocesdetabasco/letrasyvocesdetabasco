@@ -119,6 +119,15 @@
       "fecha": "2026-08-28 09:15:12",
       "num1": "07",
       "num2": "57"
+    },
+    "10": {
+      "estado": "Pagado",
+      "participante": "J. David Cabrera",
+      "whatsapp": "5219931090153",
+      "fecha": "2026-08-28 13:48:04",
+      "fecha_pago": "2026-08-28 13:48:04",
+      "num1": "09",
+      "num2": "59"
     }
   }
 }
