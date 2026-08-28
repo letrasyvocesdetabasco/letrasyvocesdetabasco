@@ -111,5 +111,14 @@
       ]
     }
   ],
-  "boletos_ocupados": {}
+  "boletos_ocupados": {
+    "8": {
+      "estado": "Apartado",
+      "participante": "Carlos A.",
+      "whatsapp": "5219932127196",
+      "fecha": "2026-08-28 09:15:12",
+      "num1": "07",
+      "num2": "57"
+    }
+  }
 }
