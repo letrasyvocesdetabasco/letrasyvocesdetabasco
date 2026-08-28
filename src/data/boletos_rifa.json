@@ -111,14 +111,5 @@
       ]
     }
   ],
-  "boletos_ocupados": {
-    "1": {
-      "estado": "Apartado",
-      "participante": "J. David Cabrera",
-      "whatsapp": "5219931090153",
-      "fecha": "2026-08-28 08:54:23",
-      "num1": "00",
-      "num2": "50"
-    }
-  }
+  "boletos_ocupados": {}
 }
