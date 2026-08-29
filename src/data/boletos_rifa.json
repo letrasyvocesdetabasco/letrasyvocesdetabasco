@@ -122,6 +122,17 @@
       "notas": "amigo de fisica",
       "num1": "06",
       "num2": "56"
+    },
+    "50": {
+      "estado": "Apartado",
+      "participante": "J. David Cabrera",
+      "whatsapp": "5219931090153",
+      "fecha": "2026-08-28 22:01:58",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "49",
+      "num2": "99"
     }
   }
 }
