@@ -111,5 +111,17 @@
       ]
     }
   ],
-  "boletos_ocupados": {}
+  "boletos_ocupados": {
+    "1": {
+      "estado": "Apartado",
+      "participante": "Luis Enrique",
+      "whatsapp": "5219931164202",
+      "fecha": "2026-08-29 13:04:35",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "00",
+      "num2": "50"
+    }
+  }
 }
