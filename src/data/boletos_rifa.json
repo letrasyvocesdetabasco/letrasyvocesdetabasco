@@ -112,17 +112,6 @@
     }
   ],
   "boletos_ocupados": {
-    "3": {
-      "estado": "Pagado",
-      "participante": "pedro paramo",
-      "whatsapp": "1234432112",
-      "fecha": "2026-08-28 14:18:14",
-      "fecha_pago": "2026-08-28 14:18:14",
-      "canal": "panel",
-      "notas": "hola",
-      "num1": "02",
-      "num2": "52"
-    },
     "7": {
       "estado": "Apartado",
       "participante": "carlos arellano",
