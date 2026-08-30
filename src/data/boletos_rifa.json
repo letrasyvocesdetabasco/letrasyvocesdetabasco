@@ -113,11 +113,11 @@
   ],
   "boletos_ocupados": {
     "6": {
-      "estado": "Apartado",
+      "estado": "Pagado",
       "participante": "Luis Enrique",
       "whatsapp": "5219931164202",
       "fecha": "2026-08-29 19:31:32",
-      "fecha_pago": "",
+      "fecha_pago": "2026-08-30 09:41:19",
       "canal": "panel",
       "notas": "",
       "num1": "05",
