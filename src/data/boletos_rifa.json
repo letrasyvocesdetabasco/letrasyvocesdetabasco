@@ -111,5 +111,17 @@
       ]
     }
   ],
-  "boletos_ocupados": {}
+  "boletos_ocupados": {
+    "5": {
+      "estado": "Apartado",
+      "participante": "J. David Cabrera",
+      "whatsapp": "5219931090153",
+      "fecha": "2026-08-30 12:47:26",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "04",
+      "num2": "54"
+    }
+  }
 }
