@@ -122,6 +122,17 @@
       "notas": "",
       "num1": "00",
       "num2": "50"
+    },
+    "6": {
+      "estado": "Apartado",
+      "participante": "Luis Enrique",
+      "whatsapp": "5219931164202",
+      "fecha": "2026-08-29 19:31:32",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "05",
+      "num2": "55"
     }
   }
 }
