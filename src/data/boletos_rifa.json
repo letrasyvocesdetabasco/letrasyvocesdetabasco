@@ -113,11 +113,11 @@
   ],
   "boletos_ocupados": {
     "5": {
-      "estado": "Apartado",
+      "estado": "Pagado",
       "participante": "J. David Cabrera",
       "whatsapp": "5219931090153",
       "fecha": "2026-08-30 12:47:26",
-      "fecha_pago": "",
+      "fecha_pago": "2026-08-31 15:02:08",
       "canal": "panel",
       "notas": "",
       "num1": "04",
