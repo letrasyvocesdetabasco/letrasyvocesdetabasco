@@ -124,13 +124,11 @@
       "num2": "54"
     },
     "10": {
-      "estado": "Pagado",
+      "estado": "Apartado",
       "participante": "Instagram 2059114184964070",
-      "whatsapp": "5219933839520",
+      "whatsapp": "Instagram Direct",
       "fecha": "2026-09-01 16:54:31",
-      "fecha_pago": "2026-09-02 17:29:28",
-      "canal": "panel",
-      "notas": "",
+      "canal": "instagram",
       "num1": "09",
       "num2": "59"
     },
@@ -144,6 +142,17 @@
       "notas": "",
       "num1": "03",
       "num2": "53"
+    },
+    "7": {
+      "estado": "Apartado",
+      "participante": "Rosa María Morales",
+      "whatsapp": "5219931234567",
+      "fecha": "2026-09-02 17:31:27",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "06",
+      "num2": "56"
     }
   }
 }
