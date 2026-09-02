@@ -20,6 +20,97 @@ const basePath = "";
       </p>
     </div>
 
+    <!-- PABELLÓN INSIGNIA: TALLER LITERARIO SABATINO UJAT (ACTIVIDAD SEMANAL GRATUITA) -->
+    <div class="pabellon-card bg-gradient-to-br from-paper-card via-paper-warm/70 to-paper-card rounded-3xl p-6 sm:p-9 border-2 border-cacao/40 shadow-elevated hover:border-cacao hover:shadow-2xl transition-all duration-300 relative overflow-hidden group">
+      <!-- Glow ambiental decorativo -->
+      <div class="absolute -right-24 -top-24 w-80 h-80 bg-cacao/15 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition duration-500"></div>
+      <div class="absolute -left-24 -bottom-24 w-80 h-80 bg-oro/15 rounded-full blur-3xl pointer-events-none group-hover:scale-110 transition duration-500"></div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+        
+        <!-- Columna de Contenido Principal -->
+        <div class="lg:col-span-8 space-y-4">
+          
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="px-3.5 py-1 rounded-full bg-cacao text-white text-[10px] sm:text-xs font-swiss font-extrabold uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+              <span>Pabellón Insignia Presencial</span>
+            </span>
+            <span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 text-[10px] sm:text-xs font-swiss font-extrabold uppercase tracking-wider">
+              Entrada 100% Libre y Gratuita
+            </span>
+            <span class="text-xs font-mono text-ink-faint">Convenio UJAT · Librería Universitaria</span>
+          </div>
+
+          <div>
+            <h3 class="text-2xl sm:text-3xl lg:text-4xl font-monograph font-bold text-ink-deep leading-tight group-hover:text-cacao transition">
+              Taller Literario LVT-UJAT (Gratis)
+            </h3>
+            <p class="text-xs sm:text-sm font-serif italic text-oro-dark mt-1">
+              Coordinado por Letras y Voces de Tabasco en el espacio facilitado por la Librería Universitaria UJAT
+            </p>
+          </div>
+
+          <p class="text-xs sm:text-sm text-ink-muted font-sans leading-relaxed max-w-3xl">
+            Todos los sábados de 11:00 a 13:00 hrs. Un laboratorio formativo de 24 semanas estructurado en 4 módulos progresivos (Narrativa, Poesía, Ensayo y Crónica/Edición). Con lecturas de autores representativos, ejercicios de escritura in situ y publicación en la antología colectiva impresa con aval institucional.
+          </p>
+
+          <!-- Badges de Métricas y Características -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1 text-[11px] font-swiss">
+            <div class="p-3 rounded-2xl bg-paper-card border border-paper-border text-ink shadow-xs">
+              <span class="font-bold block text-cacao">24 Semanas</span>
+              <span class="text-[10px] text-ink-faint">48 Horas en Aula</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-paper-card border border-paper-border text-ink shadow-xs">
+              <span class="font-bold block text-ink">Asistencia Libre</span>
+              <span class="text-[10px] text-ink-faint">Sesiones Independientes</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-paper-card border border-paper-border text-ink shadow-xs">
+              <span class="font-bold block text-oro-dark">Clínica de Textos</span>
+              <span class="text-[10px] text-ink-faint">Retroalimentación Grupal</span>
+            </div>
+            <div class="p-3 rounded-2xl bg-paper-card border border-paper-border text-ink shadow-xs">
+              <span class="font-bold block text-emerald-700">Libro Impreso</span>
+              <span class="text-[10px] text-ink-faint">Antología Colectiva</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Lateral: Ficha del Colegiado Docente y Acción -->
+        <div class="lg:col-span-4 flex flex-col justify-between space-y-5 lg:border-l lg:border-paper-border lg:pl-8">
+          
+          <div class="space-y-1.5 bg-paper-card/70 p-4 rounded-2xl border border-paper-border">
+            <span class="text-[10px] font-swiss font-extrabold text-cacao uppercase tracking-wider block">Coordinación Docente</span>
+            <strong class="font-monograph text-base sm:text-lg text-ink-deep block leading-tight">
+              Colegiado de Letras y Voces de Tabasco, A.C.
+            </strong>
+            <span class="text-xs text-ink-faint font-serif italic block">
+              Con la participación de autores y talleristas invitados
+            </span>
+            <span class="text-[11px] text-ink-muted block pt-1 border-t border-paper-border/60">
+              Sede: Librería Universitaria UJAT · Entrada Libre
+            </span>
+          </div>
+
+          <div class="space-y-2">
+            <a 
+              href={`${basePath}/taller-literario`} 
+              class="touch-target-48 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-cacao hover:bg-cacao-dark text-white font-swiss text-xs font-bold uppercase tracking-wider shadow-elevated hover:scale-102 active:scale-95 transition cursor-pointer"
+            >
+              <span>Ver Programa de 24 Sesiones</span>
+              <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            
+            <span class="text-[11px] text-center block text-ink-faint font-serif italic">
+              Sábados 11:00 a 13:00 hrs · Sin costo ni inscripción previa
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
     <!-- GRILLA PRINCIPAL DE PABELLONES INTERACTIVOS -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       

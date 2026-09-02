@@ -1,0 +1,912 @@
+---
+// src/pages/taller-literario.astro - Portal Oficial del Taller Literario LVT-UJAT (Gratis)
+// Sociedad de Escritores Letras y Voces de Tabasco, A.C. & Librería Universitaria UJAT
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { 
+  DATOS_GENERALES_TALLER, 
+  PILARES_PEDAGOGICOS, 
+  MODULOS_TALLER 
+} from '../data/taller';
+import '../styles/global.css';
+
+const basePath = "";
+---
+
+<BaseLayout 
+  title="TALLER LITERARIO LVT-UJAT (GRATIS) · Librería Universitaria UJAT & LVT, A.C."
+  description="Programa formativo oficial del Taller Literario Sabatino: 24 semanas, 4 módulos (Narrativa, Poesía, Ensayo, Crónica y Edición) en la Librería Universitaria UJAT. Entrada libre y gratuita para todo público."
+>
+  <!-- DATOS ESTRUCTURADOS SCHEMA.ORG (CURSO / EVENTO FORMATIVO) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "Taller Literario LVT-UJAT (Gratis)",
+    "description": "Programa formativo sabatino de 24 semanas y 4 módulos (Narrativa, Poesía, Ensayo, Crónica y Edición de Antología Impresa) en la Librería Universitaria UJAT. Entrada 100% libre y gratuita.",
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "Sociedad de Escritores Letras y Voces de Tabasco, A.C. en colaboración con Librería Universitaria UJAT",
+      "url": "https://letrasyvocesdetabasco.org"
+    },
+    "isAccessibleForFree": true,
+    "inLanguage": "es",
+    "location": {
+      "@type": "Place",
+      "name": "Librería Universitaria UJAT",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. 27 de Febrero No. 626, Col. Centro",
+        "addressLocality": "Villahermosa",
+        "addressRegion": "Tabasco",
+        "addressCountry": "MX"
+      }
+    },
+    "courseSchedule": {
+      "@type": "Schedule",
+      "repeatFrequency": "Weekly",
+      "byDay": "Saturday",
+      "startTime": "11:00:00-06:00",
+      "endTime": "13:00:00-06:00"
+    }
+  })} />
+
+  <Navbar />
+
+  <main class="pt-16 sm:pt-20 bg-paper min-h-screen text-ink selection:bg-cacao selection:text-white">
+    
+    <!-- 0. MIGAS DE PAN & BARRA DE ACCESOS DIRECTOS -->
+    <div class="bg-paper-warm border-b border-paper-border py-2.5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-swiss text-ink-muted">
+        <div class="flex items-center gap-2">
+          <a href={`${basePath}/`} class="hover:text-cacao transition">Inicio</a>
+          <span>/</span>
+          <a href={`${basePath}/EEJG`} class="hover:text-cacao transition">Escuela & Formación</a>
+          <span>/</span>
+          <span class="text-cacao font-bold">Taller Literario LVT-UJAT (Gratis)</span>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-ink-muted">
+          <a href="#coordinacion" class="hover:text-cacao transition">Coordinación</a>
+          <span class="text-paper-border">·</span>
+          <a href="#pilares" class="hover:text-cacao transition">Pilares</a>
+          <span class="text-paper-border">·</span>
+          <a href="#metodologia" class="hover:text-cacao transition">Modalidad</a>
+          <span class="text-paper-border">·</span>
+          <a href="#triada" class="hover:text-cacao transition">Dinámica</a>
+          <span class="text-paper-border">·</span>
+          <a href="#reglas-oro" class="hover:text-cacao transition">Clínica</a>
+          <span class="text-paper-border">·</span>
+          <a href="#programa-curricular" class="text-cacao hover:underline transition">24 Sesiones</a>
+          <span class="text-paper-border">·</span>
+          <a href="#acreditacion" class="hover:text-cacao transition">Constancia</a>
+          <span class="text-paper-border">·</span>
+          <a href="#sede" class="hover:text-cacao transition">Sede</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- 1. HERO INSTITUCIONAL -->
+    <section class="relative py-16 sm:py-24 overflow-hidden border-b border-paper-border bg-gradient-to-b from-paper-warm/70 via-paper to-paper">
+      <!-- Acentos de fondo -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-cacao/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-oro/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+          
+          <!-- Sellos de Alianza Institucional -->
+          <div class="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 py-2 rounded-full bg-paper-card border border-paper-border shadow-subtle text-xs sm:text-sm font-swiss font-bold tracking-wider uppercase text-ink-muted">
+            <span class="flex items-center gap-1.5 text-cacao">
+              <span class="w-2 h-2 rounded-full bg-cacao animate-pulse"></span>
+              Librería Universitaria UJAT
+            </span>
+            <span class="text-paper-border">|</span>
+            <span class="text-ink-deep font-bold">Letras y Voces de Tabasco, A.C.</span>
+            <span class="text-paper-border">|</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 text-xs font-bold uppercase">Entrada Libre y Gratuita</span>
+          </div>
+
+          <!-- Título Principal con Jerarquía Editorial -->
+          <div class="space-y-3">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-monograph font-bold text-ink-deep tracking-tight leading-[1.15]">
+              Taller Literario <br class="hidden sm:inline" />
+              <span class="italic text-cacao font-serif">LVT - UJAT (Gratis)</span>
+            </h1>
+            <p class="text-base sm:text-xl font-serif italic text-ink-muted max-w-2xl mx-auto leading-relaxed">
+              Lectura crítica, práctica creativa y clínica de textos en comunidad
+            </p>
+          </div>
+
+          <!-- Píldoras Informativas Clave Accesibles -->
+          <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 pt-2">
+            <span class="px-4 py-2 rounded-xl bg-paper-card border border-paper-border text-ink text-xs sm:text-sm font-swiss font-bold flex items-center gap-2 shadow-subtle">
+              <svg class="w-4 h-4 text-cacao shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>Todos los Sábados · 11:00 a 13:00 hrs</span>
+            </span>
+
+            <span class="px-4 py-2 rounded-xl bg-paper-card border border-paper-border text-ink text-xs sm:text-sm font-swiss font-bold flex items-center gap-2 shadow-subtle">
+              <svg class="w-4 h-4 text-oro shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span>Librería Universitaria UJAT (Centro Histórico)</span>
+            </span>
+
+            <span class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 text-xs sm:text-sm font-swiss font-extrabold tracking-wide uppercase flex items-center gap-1.5 shadow-subtle">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>100% Libre y Gratuito</span>
+            </span>
+          </div>
+
+          <!-- Lema Pedagógico Destacado -->
+          <div class="pt-4 max-w-xl mx-auto">
+            <blockquote class="p-4 rounded-2xl bg-paper-card/90 border-l-4 border-cacao shadow-subtle text-sm sm:text-base font-serif italic text-ink-muted">
+              «Escribir se aprende leyendo con atención y reescribiendo con paciencia. El taller es un espacio abierto para descubrir y afinar la propia voz.»
+            </blockquote>
+          </div>
+
+          <!-- Botones de Acción Inmediata -->
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <a 
+              href="#programa-curricular" 
+              class="touch-target-48 inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-cacao hover:bg-cacao-dark text-white font-swiss text-xs sm:text-sm font-bold uppercase tracking-wider shadow-elevated hover:scale-102 active:scale-95 transition"
+            >
+              <span>Explorar las 24 Sesiones</span>
+              <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+
+            <a 
+              href={`https://wa.me/${DATOS_GENERALES_TALLER.logistica.contacto.telefonoClean}?text=${encodeURIComponent(DATOS_GENERALES_TALLER.logistica.contacto.mensajePredefinido)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="touch-target-48 inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-paper-card hover:bg-paper-warm text-ink font-swiss text-xs sm:text-sm font-bold uppercase tracking-wider border border-paper-border shadow-subtle hover:scale-102 active:scale-95 transition"
+            >
+              <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.53 1.961.815 2.796.815 3.183 0 5.769-2.586 5.77-5.766.001-3.182-2.585-5.768-5.77-5.768zm0 10.369c-.759 0-1.503-.205-2.155-.595l-.154-.092-1.6.42.427-1.56-.1-.16c-.43-.685-.658-1.482-.657-2.31 0-2.536 2.063-4.6 4.601-4.6 2.536 0 4.6 2.064 4.6 4.6 0 2.537-2.064 4.601-4.602 4.601z"/></svg>
+              <span>Preguntar por WhatsApp</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 2. COORDINACIÓN DOCENTE & COLECTIVO LITERARIO -->
+    <section id="coordinacion" class="py-14 sm:py-18 bg-paper border-b border-paper-border scroll-mt-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="bg-paper-card rounded-3xl p-6 sm:p-10 border border-paper-border shadow-elevated grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Sello Institucional -->
+          <div class="lg:col-span-4 flex flex-col items-center text-center space-y-4">
+            <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-gradient-to-br from-[#2D241E] to-[#191614] p-1 shadow-2xl border border-paper-border flex items-center justify-center group">
+              <div class="w-full h-full rounded-[22px] bg-[#231B15] flex flex-col items-center justify-center text-white space-y-2 relative overflow-hidden">
+                <div class="absolute inset-0 bg-cacao/10 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+                <svg class="w-14 h-14 text-oro-bright" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                <span class="text-xs font-swiss font-bold tracking-widest uppercase text-oro">Coordinación</span>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <span class="inline-block px-3.5 py-1 rounded-full bg-cacao/15 text-cacao text-xs font-swiss font-extrabold uppercase tracking-wider border border-cacao/30">
+                Letras y Voces de Tabasco, A.C.
+              </span>
+              <h3 class="text-xl sm:text-2xl font-monograph font-bold text-ink-deep">
+                {DATOS_GENERALES_TALLER.coordinacionDocente.colectivo}
+              </h3>
+              <p class="text-xs sm:text-sm font-swiss text-ink-muted">
+                Espacio cultural en Librería Universitaria UJAT
+              </p>
+            </div>
+          </div>
+
+          <!-- Presentación Institucional -->
+          <div class="lg:col-span-8 space-y-4">
+            
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 text-xs font-swiss font-bold text-cacao uppercase tracking-wider">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Propósito y Ambiente del Taller</span>
+              </div>
+              <h4 class="text-2xl font-monograph font-bold text-ink-deep leading-snug">
+                Un Espacio Abierto para Leer, Escribir y Crecer Juntos
+              </h4>
+            </div>
+
+            <p class="text-sm sm:text-base text-ink-muted leading-relaxed font-sans">
+              El taller está a cargo del colegiado de autores y promotores culturales de la <strong class="text-ink">Sociedad «Letras y Voces de Tabasco, A.C.»</strong>, con la participación regular de mediadores y talleristas invitados. Nuestro enfoque es colaborativo e intergeneracional: jóvenes, adultos y personas mayores encuentran aquí un entorno propicio para explorar su vocación literaria.
+            </p>
+
+            <p class="text-sm sm:text-base text-ink-muted leading-relaxed font-sans">
+              {DATOS_GENERALES_TALLER.coordinacionDocente.enfoque} Cada sesión combina el análisis de lecturas fundamentales con ejercicios de redacción en la mesa y una clínica de textos respetuosa, donde aprendemos a mirar el propio borrador con ojos críticos y constructivos.
+            </p>
+
+            <div class="p-4 rounded-2xl bg-paper-warm border border-paper-border space-y-1">
+              <span class="text-xs font-swiss font-bold text-cacao uppercase tracking-widest block">Principio del Taller</span>
+              <p class="text-xs sm:text-sm font-serif italic text-ink leading-relaxed">
+                {DATOS_GENERALES_TALLER.coordinacionDocente.cita}
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. PILARES DEL OFICIO Y MODELO DE DOBLE VÍA -->
+    <section id="pilares" class="py-14 sm:py-20 bg-paper-warm/40 border-b border-paper-border scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <span class="px-3 py-1 rounded-full bg-paper-card border border-paper-border text-cacao text-[11px] font-swiss font-bold uppercase tracking-widest shadow-subtle">
+            Sustento Teórico y Metodológico
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-monograph font-bold text-ink-deep tracking-tight">
+            Los Cuatro Pilares del <span class="italic text-cacao font-serif">Oficio Literario</span>
+          </h2>
+          <p class="text-sm sm:text-base font-serif italic text-ink-muted">
+            «Un marco pedagógico concebido para transformar el impulso creativo en una práctica formal reflexiva y profesional.»
+          </p>
+        </div>
+
+        <!-- Grilla de los 4 Pilares -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {PILARES_PEDAGOGICOS.map((pilar) => (
+            <div class="bg-paper-card rounded-2xl p-6 border border-paper-border shadow-subtle hover:border-cacao hover:shadow-elevated transition duration-300 flex flex-col justify-between space-y-4 group">
+              <div class="space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-cacao/10 text-cacao border border-cacao/20 flex items-center justify-center font-bold text-sm group-hover:bg-cacao group-hover:text-white transition duration-300">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <h3 class="text-base font-monograph font-bold text-ink-deep leading-snug">
+                  {pilar.titulo}
+                </h3>
+                <p class="text-xs text-ink-muted font-sans leading-relaxed">
+                  {pilar.descripcion}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Tarjetas del Modelo de Doble Vía (Walk-In vs Ruta Completa) -->
+        <div id="metodologia" class="mt-8 pt-8 border-t border-paper-border scroll-mt-20">
+          <div class="text-center max-w-2xl mx-auto space-y-2 mb-8">
+            <span class="text-[11px] font-swiss font-bold text-oro uppercase tracking-widest">Estrategia de Mediación</span>
+            <h3 class="text-2xl font-monograph font-bold text-ink-deep">
+              El Modelo de Doble Vía: Entrada Libre y Rigor Curricular
+            </h3>
+            <p class="text-xs text-ink-muted">
+              Diseñado para conciliar el acceso público sin barreras socioeconómicas con la excelencia en formación de autores.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Vía Horizontal -->
+            <div class="bg-paper-card rounded-3xl p-6 sm:p-8 border border-paper-border shadow-subtle flex flex-col justify-between space-y-4">
+              <div class="space-y-3">
+                <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-800 text-[10px] font-swiss font-bold uppercase tracking-wider border border-amber-500/20">
+                  Para Asistentes Ocasionales o Nuevos
+                </span>
+                <h4 class="text-xl font-monograph font-bold text-ink-deep">
+                  {DATOS_GENERALES_TALLER.dobleVia.horizontal.titulo}
+                </h4>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                  {DATOS_GENERALES_TALLER.dobleVia.horizontal.descripcion}
+                </p>
+              </div>
+              <ul class="text-xs text-ink-muted space-y-2 pt-2 border-t border-paper-border">
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cacao"></span>
+                  <span>Sin necesidad de haber asistido a sábados anteriores.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-cacao"></span>
+                  <span>Entrega de fichas de trabajo físicas (One-Page Handouts).</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Vía Vertical -->
+            <div class="bg-paper-card rounded-3xl p-6 sm:p-8 border border-cacao/30 shadow-elevated flex flex-col justify-between space-y-4 bg-gradient-to-br from-paper-card to-paper-warm/50">
+              <div class="space-y-3">
+                <span class="px-3 py-1 rounded-full bg-cacao/15 text-cacao text-[10px] font-swiss font-bold uppercase tracking-wider border border-cacao/30">
+                  Para Talleristas Regulares
+                </span>
+                <h4 class="text-xl font-monograph font-bold text-ink-deep">
+                  {DATOS_GENERALES_TALLER.dobleVia.vertical.titulo}
+                </h4>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                  {DATOS_GENERALES_TALLER.dobleVia.vertical.descripcion}
+                </p>
+              </div>
+              <ul class="text-xs text-ink-muted space-y-2 pt-2 border-t border-paper-border">
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-oro"></span>
+                  <span>Construcción del Dossier Individual para becas y concursos.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-oro"></span>
+                  <span>Publicación autoral formal en la Antología Impresa del Taller.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. ESTRUCTURA TRÍADICA Y REGLAS DE ORO DE LA CLÍNICA -->
+    <section id="triada" class="py-14 sm:py-20 bg-paper border-b border-paper-border scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <!-- Dinámica de las 2 Horas Sabatinas -->
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <span class="px-3 py-1 rounded-full bg-paper-warm border border-paper-border text-ink text-[11px] font-swiss font-bold uppercase tracking-widest">
+            Cronometría Sabatina (11:00 a 13:00 hrs)
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-monograph font-bold text-ink-deep">
+            La Estructura Tríadica de <span class="italic text-cacao font-serif">Cada Sesión</span>
+          </h2>
+          <p class="text-sm font-serif italic text-ink-muted">
+            «120 minutos diseñados para equilibrar teoría provocadora, creación inmediata y crítica rigurosa.»
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {DATOS_GENERALES_TALLER.estructuraTriadica.map((bloque, idx) => (
+            <div class="bg-paper-card rounded-2xl p-6 border border-paper-border shadow-subtle flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-mono font-bold text-cacao uppercase">Fase {idx + 1}</span>
+                  <span class="px-2.5 py-0.5 rounded-full bg-paper-warm text-ink text-[10px] font-mono font-bold">
+                    ⏱️ {bloque.duracion}
+                  </span>
+                </div>
+                <h3 class="text-lg font-monograph font-bold text-ink-deep">
+                  {bloque.bloque}
+                </h3>
+                <p class="text-xs text-ink-muted leading-relaxed font-sans">
+                  {bloque.metodologia}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Las 3 Reglas de Oro de la Clínica -->
+        <div id="reglas-oro" class="mt-12 bg-gradient-to-br from-[#1C1814] to-[#25201B] rounded-3xl p-6 sm:p-10 border border-[#3A2E26] shadow-2xl text-white space-y-6 scroll-mt-20">
+          <div class="text-center max-w-2xl mx-auto space-y-2">
+            <span class="px-3 py-1 rounded-full bg-oro/20 text-oro-bright text-[10px] font-swiss font-bold uppercase tracking-wider border border-oro/30">
+              Escuela de Abelardo Castillo y Liliana Heker
+            </span>
+            <h3 class="text-2xl sm:text-3xl font-monograph font-bold text-white">
+              Las Tres Reglas de Oro de la Clínica de Textos
+            </h3>
+            <p class="text-xs sm:text-sm text-gray-300 font-serif italic">
+              «Erradicando la subjetividad impresionista para sustituirla por el diagnóstico técnico objetivo.»
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+            {DATOS_GENERALES_TALLER.reglasClinica.map((regla) => (
+              <div class="p-5 rounded-2xl bg-black/40 border border-white/10 space-y-2 flex flex-col justify-between">
+                <div class="space-y-2">
+                  <div class="w-8 h-8 rounded-lg bg-oro/20 text-oro-bright font-monograph font-bold flex items-center justify-center text-sm border border-oro/30">
+                    {regla.numero}
+                  </div>
+                  <h4 class="text-base font-monograph font-bold text-white">
+                    {regla.nombre}
+                  </h4>
+                  <p class="text-[11px] font-serif italic text-oro-bright">
+                    «{regla.principio}»
+                  </p>
+                  <p class="text-xs text-gray-300 leading-relaxed font-sans">
+                    {regla.descripcion}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. PROGRAMACIÓN CURRICULAR CLASE A CLASE (4 MÓDULOS / 24 SEMANAS) -->
+    <section id="programa-curricular" class="py-16 sm:py-24 bg-paper-warm/30 border-b border-paper-border scroll-mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <div class="text-center max-w-3xl mx-auto space-y-3">
+          <span class="px-3.5 py-1 rounded-full bg-paper-card border border-paper-border text-cacao text-[11px] font-swiss font-bold uppercase tracking-widest shadow-subtle">
+            Malla Curricular Semestral
+          </span>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-monograph font-bold text-ink-deep tracking-tight">
+            Programa Académico <span class="italic text-cacao font-serif">Clase a Clase</span>
+          </h2>
+          <p class="text-sm sm:text-base font-serif italic text-ink-muted">
+            «24 semanas estructuradas en 4 módulos progresivos. Selecciona un módulo para explorar las sesiones, autores canónicos, ejercicios y dinámicas.»
+          </p>
+        </div>
+
+        <!-- BARRA DE HERRAMIENTAS: BÚSQUEDA INTERACTIVA & IMPRESIÓN PDF -->
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 p-3 bg-paper-card rounded-2xl border border-paper-border shadow-subtle">
+          <div class="relative w-full sm:flex-1">
+            <input 
+              type="text" 
+              id="taller-search-input" 
+              placeholder="Buscar en las 24 sesiones (ej. Borges, Elipsis, Diálogo, Poesía...)" 
+              class="w-full bg-paper-warm border border-paper-border rounded-xl px-4 py-2.5 text-xs text-ink placeholder-ink-muted focus:outline-none focus:border-cacao transition font-sans pr-8"
+              oninput="filterTallerSessions(this.value)"
+            />
+            <button 
+              type="button" 
+              id="clear-search-btn" 
+              onclick="clearTallerSearch()" 
+              class="absolute right-2.5 top-2.5 text-ink-faint hover:text-cacao text-xs hidden cursor-pointer"
+              title="Limpiar búsqueda"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+            <span id="search-results-count" class="text-[11px] font-mono text-cacao font-bold hidden">0 encontradas</span>
+            
+            <button 
+              type="button" 
+              onclick="window.print()" 
+              class="touch-target-48 px-4 py-2 rounded-xl bg-paper-warm hover:bg-paper-border text-ink font-swiss text-xs font-bold uppercase tracking-wider border border-paper-border shadow-subtle hover:scale-102 active:scale-95 transition flex items-center gap-1.5 cursor-pointer"
+              title="Imprimir programa o guardar como PDF"
+            >
+              <svg class="w-4 h-4 text-ink-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+              <span>Imprimir / PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SELECTOR INTERACTIVO DE PESTAÑAS DE MÓDULOS EN CUADRÍCULA ADAPTABLE (SIN DESBORDAMIENTO) -->
+        <div id="module-tabs-bar" class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 p-1.5 bg-paper-card/80 rounded-2xl border border-paper-border shadow-subtle max-w-4xl mx-auto">
+          {MODULOS_TALLER.map((modulo, index) => (
+            <button
+              type="button"
+              id={`tab-mod-${modulo.id}`}
+              onclick={`showModule('${modulo.id}')`}
+              class={`mod-tab-btn w-full px-3 py-3 rounded-xl font-swiss text-xs sm:text-sm font-bold tracking-tight transition-all duration-200 flex items-center justify-center sm:justify-start gap-2.5 cursor-pointer border text-left ${
+                index === 0 
+                  ? 'bg-cacao text-white border-cacao shadow-md' 
+                  : 'bg-white/80 text-ink hover:bg-paper-warm border-paper-border/80'
+              }`}
+            >
+              <span class="w-6 h-6 shrink-0 rounded-lg bg-black/15 flex items-center justify-center text-xs font-mono font-bold">
+                {modulo.numeroRomano}
+              </span>
+              <span class="truncate">{modulo.nombre.split(':')[0]}</span>
+            </button>
+          ))}
+        </div>
+
+        <!-- CONTENEDOR DE PANELES DE MÓDULOS -->
+        <div id="modules-container" class="space-y-8">
+          {MODULOS_TALLER.map((modulo, modIndex) => (
+            <div 
+              id={`panel-${modulo.id}`} 
+              class={`module-panel space-y-8 ${modIndex !== 0 ? 'hidden' : ''}`}
+            >
+              
+              <!-- ENCABEZADO DEL MÓDULO SELECCIONADO -->
+              <div class="bg-paper-card rounded-3xl p-6 sm:p-8 border border-paper-border shadow-elevated space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-paper-border pb-4">
+                  <div class="flex items-center gap-3">
+                    <span class="w-10 h-10 rounded-2xl bg-cacao text-white flex items-center justify-center font-monograph font-bold text-lg shadow-sm">
+                      {modulo.numeroRomano}
+                    </span>
+                    <div>
+                      <span class="text-[11px] font-swiss font-bold text-oro uppercase tracking-wider block">
+                        {modulo.semanas} · {modulo.horas} Horas Directas
+                      </span>
+                      <h3 class="text-2xl sm:text-3xl font-monograph font-bold text-ink-deep">
+                        {modulo.nombre}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div class="px-4 py-2 rounded-xl bg-paper-warm border border-paper-border text-xs font-swiss text-ink">
+                    <strong class="text-cacao block text-[10px] uppercase">Producto Entregable:</strong>
+                    <span>{modulo.productoEntregable}</span>
+                  </div>
+                </div>
+
+                <p class="text-sm sm:text-base text-ink-muted font-sans leading-relaxed">
+                  {modulo.descripcion}
+                </p>
+              </div>
+
+              <!-- GRILLA DE LAS 6 SESIONES DEL MÓDULO -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {modulo.sesiones.map((sesion) => (
+                  <div 
+                    class="session-card bg-paper-card rounded-3xl p-6 border border-paper-border shadow-subtle hover:border-cacao hover:shadow-elevated transition duration-300 flex flex-col justify-between space-y-4 group"
+                    data-search={`${sesion.titulo} ${sesion.ejeTeorico} ${sesion.conceptosClave.join(' ')} ${sesion.lecturasReferencia.map(l => l.autor + ' ' + l.obra).join(' ')} ${sesion.ejercicioAula.titulo} ${modulo.nombre}`.toLowerCase()}
+                    data-semana={sesion.semana}
+                  >
+                    
+                    <!-- Header Sesión -->
+                    <div class="space-y-3">
+                      <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-lg bg-cacao/10 text-cacao text-xs font-mono font-bold tracking-wider uppercase border border-cacao/20">
+                          Semana {sesion.semana} · Sesión {sesion.numero}
+                        </span>
+                        <div class="flex items-center gap-2">
+                          <span class="text-xs font-mono font-semibold text-ink-muted">120 min</span>
+                          <button 
+                            type="button" 
+                            onclick={`copySessionCard(${sesion.semana}, '${sesion.titulo.replace(/'/g, "\\'")}', '${sesion.ejeTeorico.replace(/'/g, "\\'")}', '${sesion.lecturasReferencia.map(l => l.autor + ' - ' + l.obra).join(', ').replace(/'/g, "\\'")}', '${sesion.ejercicioAula.titulo.replace(/'/g, "\\'")}')`}
+                            class="touch-target-48 p-2 rounded-lg bg-paper-warm hover:bg-cacao/15 text-ink-muted hover:text-cacao border border-paper-border transition cursor-pointer" 
+                            title="Copiar temario de esta sesión para WhatsApp"
+                          >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                          </button>
+                        </div>
+                      </div>
+
+                      <h4 class="text-lg sm:text-xl font-monograph font-bold text-ink-deep group-hover:text-cacao transition leading-snug">
+                        {sesion.titulo}
+                      </h4>
+
+                      <!-- Conceptos Clave Badges -->
+                      <div class="flex flex-wrap gap-1.5 pt-0.5">
+                        {sesion.conceptosClave.map((concepto) => (
+                          <span class="px-2.5 py-1 rounded-lg bg-paper-warm text-xs font-swiss font-medium text-ink-deep border border-paper-border">
+                            {concepto}
+                          </span>
+                        ))}
+                      </div>
+
+                      <!-- Eje Teórico -->
+                      <p class="text-xs sm:text-sm text-ink-deep font-sans leading-relaxed pt-1">
+                        {sesion.ejeTeorico}
+                      </p>
+                    </div>
+
+                    <!-- Lecturas Canónicas Comentadas -->
+                    <div class="p-4 rounded-2xl bg-paper-warm/80 border border-paper-border space-y-2">
+                      <span class="text-xs font-swiss font-bold uppercase tracking-wider text-cacao-dark flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-oro" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                        <span>Lecturas de Referencia Comentadas:</span>
+                      </span>
+                      <ul class="text-xs sm:text-sm text-ink space-y-1.5 font-serif">
+                        {sesion.lecturasReferencia.map((lectura) => (
+                          <li class="leading-relaxed">
+                            <strong class="text-ink-deep">{lectura.autor}:</strong> <em>«{lectura.obra}»</em> 
+                            <span class="text-xs text-ink-muted font-sans block sm:inline">({lectura.enfoque})</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <!-- Ejercicio en Aula & Clínica -->
+                    <div class="pt-2 border-t border-paper-border space-y-2.5">
+                      
+                      <!-- Ejercicio Práctico -->
+                      <div class="bg-paper-warm/50 p-3.5 rounded-xl border border-paper-border space-y-1">
+                        <div class="flex flex-wrap justify-between items-center gap-1 text-xs font-swiss font-bold text-cacao uppercase">
+                          <span>✍️ Gimnasio Creativo ({sesion.ejercicioAula.duracion})</span>
+                          <span>{sesion.ejercicioAula.titulo}</span>
+                        </div>
+                        <p class="text-ink-deep text-xs sm:text-sm leading-relaxed">
+                          {sesion.ejercicioAula.instruccion}
+                        </p>
+                        {sesion.ejercicioAula.restricciones && (
+                          <span class="text-xs text-cacao-dark font-mono block italic font-medium">
+                            ⚠️ Restricción: {sesion.ejercicioAula.restricciones}
+                          </span>
+                        )}
+                      </div>
+
+                      <!-- Dinámica de Clínica -->
+                      <div class="bg-paper-warm/50 p-3.5 rounded-xl border border-paper-border space-y-1">
+                        <span class="text-xs font-swiss font-bold text-ink-deep uppercase block">
+                          🔍 Clínica de Textos ({sesion.clinicaTextos.duracion})
+                        </span>
+                        <p class="text-ink text-xs sm:text-sm leading-relaxed">
+                          {sesion.clinicaTextos.dinamica}
+                        </p>
+                        <span class="text-xs text-ink-muted font-sans block pt-1 border-t border-paper-border/60">
+                          <strong>Criterio:</strong> {sesion.clinicaTextos.criterioEvaluacion}
+                        </span>
+                      </div>
+
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. PRODUCTOS TANGIBLES Y SISTEMA DE EVALUACIÓN FORMATIVA -->
+    <section id="acreditacion" class="py-14 sm:py-20 bg-paper border-b border-paper-border scroll-mt-20">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <span class="px-3.5 py-1 rounded-full bg-paper-warm border border-paper-border text-oro-dark text-xs font-swiss font-bold uppercase tracking-wider">
+            Reconocimiento y Publicación
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-monograph font-bold text-ink-deep">
+            Productos Tangibles y <span class="italic text-cacao font-serif">Acreditación</span>
+          </h2>
+          <p class="text-sm sm:text-base font-serif italic text-ink-muted">
+            «Al concluir el ciclo, cada tallerista cuenta con obra formalmente editada y lista para su difusión.»
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- Dinámica Formativa -->
+          <div class="bg-paper-card rounded-3xl p-6 sm:p-8 border border-paper-border shadow-subtle space-y-6">
+            <h3 class="text-xl font-monograph font-bold text-ink-deep flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-cacao"></span>
+              <span>Dinámica Formativa en el Aula</span>
+            </h3>
+
+            <div class="space-y-4">
+              {DATOS_GENERALES_TALLER.dinamicaFormativa.map((item) => (
+                <div class="p-4 rounded-2xl bg-paper-warm border border-paper-border space-y-1.5">
+                  <h4 class="text-sm sm:text-base font-monograph font-bold text-ink-deep">
+                    {item.aspecto}
+                  </h4>
+                  <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                    {item.descripcion}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Logros y Constancia Oficial -->
+          <div class="bg-paper-card rounded-3xl p-6 sm:p-8 border border-paper-border shadow-subtle space-y-6">
+            <h3 class="text-xl font-monograph font-bold text-ink-deep flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-oro"></span>
+              <span>Resultados Tangibles y Aval Oficial</span>
+            </h3>
+
+            <div class="space-y-4">
+              {DATOS_GENERALES_TALLER.productosTangibles.map((prod, idx) => (
+                <div class="p-4 rounded-2xl bg-paper-warm border border-paper-border space-y-1.5">
+                  <span class="text-xs font-mono font-bold text-cacao">Logro #{idx + 1}</span>
+                  <h4 class="text-sm sm:text-base font-monograph font-bold text-ink-deep">
+                    {prod.nombre}
+                  </h4>
+                  <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                    {prod.descripcion}
+                  </p>
+                </div>
+              ))}
+
+              <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-900 space-y-1.5 text-xs sm:text-sm">
+                <strong class="block font-bold">✓ Constancia de Participación Oficial</strong>
+                <p class="text-xs sm:text-sm leading-relaxed">
+                  Al mantener una asistencia regular durante el ciclo sabatino, cada participante recibe una constancia con validez oficial emitida conjuntamente por la Sociedad de Escritores Letras y Voces de Tabasco, A.C. y la Universidad Juárez Autónoma de Tabasco (UJAT).
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. SEDE PRESENCIAL, LOGÍSTICA Y CONTACTO -->
+    <section id="sede" class="py-16 sm:py-24 bg-paper-warm/50 scroll-mt-20">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="bg-paper-card rounded-3xl p-8 sm:p-12 border border-paper-border shadow-elevated space-y-8 text-center">
+          
+          <div class="space-y-3 max-w-2xl mx-auto">
+            <span class="px-3 py-1 rounded-full bg-paper-warm border border-paper-border text-cacao text-[11px] font-swiss font-bold uppercase tracking-widest">
+              Sede Abierta al Público
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-monograph font-bold text-ink-deep">
+              ¿Cómo Asistir al Taller Literario?
+            </h2>
+            <p class="text-sm font-serif italic text-ink-muted">
+              «No requieres inscripción previa ni pago alguno. Basta con presentarte cualquier sábado con tu libreta de notas y disposición de aprender.»
+            </p>
+          </div>
+
+          <!-- Ficha de Datos Logísticos -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+            
+            <div class="p-5 rounded-2xl bg-paper-warm border border-paper-border space-y-1">
+              <span class="text-[10px] font-swiss font-bold text-cacao uppercase tracking-wider block">📍 Dónde</span>
+              <h4 class="text-sm font-swiss font-bold text-ink-deep">{DATOS_GENERALES_TALLER.logistica.sede}</h4>
+              <p class="text-xs text-ink-muted">{DATOS_GENERALES_TALLER.logistica.direccion}</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-paper-warm border border-paper-border space-y-1">
+              <span class="text-[10px] font-swiss font-bold text-cacao uppercase tracking-wider block">🗓️ Cuándo</span>
+              <h4 class="text-sm font-swiss font-bold text-ink-deep">{DATOS_GENERALES_TALLER.logistica.horario}</h4>
+              <p class="text-xs text-ink-muted">Todos los sábados del ciclo 2026. Entrada libre.</p>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-paper-warm border border-paper-border space-y-1">
+              <span class="text-[10px] font-swiss font-bold text-cacao uppercase tracking-wider block">✍️ Qué llevar</span>
+              <h4 class="text-sm font-swiss font-bold text-ink-deep">Libreta y Pluma</h4>
+              <p class="text-xs text-ink-muted">Libreta exclusiva para el taller y pasión por la palabra escrita.</p>
+            </div>
+
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <a 
+              href={`https://wa.me/${DATOS_GENERALES_TALLER.logistica.contacto.telefonoClean}?text=${encodeURIComponent(DATOS_GENERALES_TALLER.logistica.contacto.mensajePredefinido)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="touch-target-48 inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white font-swiss text-xs font-bold uppercase tracking-wider shadow-elevated hover:scale-102 active:scale-95 transition"
+            >
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.53 1.961.815 2.796.815 3.183 0 5.769-2.586 5.77-5.766.001-3.182-2.585-5.768-5.77-5.768zm0 10.369c-.759 0-1.503-.205-2.155-.595l-.154-.092-1.6.42.427-1.56-.1-.16c-.43-.685-.658-1.482-.657-2.31 0-2.536 2.063-4.6 4.601-4.6 2.536 0 4.6 2.064 4.6 4.6 0 2.537-2.064 4.601-4.602 4.601z"/></svg>
+              <span>Escribir al WhatsApp Oficial</span>
+            </a>
+
+            <a 
+              href={`mailto:${DATOS_GENERALES_TALLER.logistica.contacto.email}`}
+              class="touch-target-48 inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-paper-warm hover:bg-paper-border text-ink font-swiss text-xs font-bold uppercase tracking-wider border border-paper-border shadow-subtle hover:scale-102 active:scale-95 transition"
+            >
+              <svg class="w-4 h-4 text-ink-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>Enviar Correo Institucional</span>
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+
+  <!-- NOTIFICACIÓN TOAST FLOTANTE -->
+  <div id="taller-toast" class="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl bg-[#1C1814] text-white border border-paper-border shadow-2xl flex items-center gap-2.5 text-xs font-swiss font-medium transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+    <span id="toast-message">✅ Información copiada al portapapeles</span>
+  </div>
+
+  <style>
+    @media print {
+      nav, .mod-tab-btn, #module-tabs-bar, #taller-search-input, #clear-search-btn, #search-results-count, .touch-target-48, footer, #taller-toast {
+        display: none !important;
+      }
+      .module-panel {
+        display: block !important;
+        page-break-after: always;
+      }
+      .session-card {
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+      }
+    }
+  </style>
+
+  <!-- SCRIPT CLIENT-SIDE PARA BÚSQUEDA EN TIEMPO REAL Y CONMUTADOR FLUIDO -->
+  <script is:inline>
+    let currentActiveModule = 'narrativa';
+
+    function showModule(moduleId) {
+      currentActiveModule = moduleId;
+      document.querySelectorAll('.module-panel').forEach(panel => {
+        panel.classList.add('hidden');
+      });
+
+      const activePanel = document.getElementById(`panel-${moduleId}`);
+      if (activePanel) {
+        activePanel.classList.remove('hidden');
+      }
+
+      document.querySelectorAll('.mod-tab-btn').forEach(btn => {
+        btn.classList.remove('bg-cacao', 'text-white', 'border-cacao', 'shadow-elevated', 'scale-102');
+        btn.classList.add('bg-paper-card', 'text-ink-muted', 'border-paper-border');
+      });
+
+      const activeBtn = document.getElementById(`tab-mod-${moduleId}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-paper-card', 'text-ink-muted', 'border-paper-border');
+        activeBtn.classList.add('bg-cacao', 'text-white', 'border-cacao', 'shadow-elevated', 'scale-102');
+      }
+    }
+
+    function filterTallerSessions(query) {
+      const q = (query || '').trim().toLowerCase();
+      const clearBtn = document.getElementById('clear-search-btn');
+      const countEl = document.getElementById('search-results-count');
+      const tabsBar = document.getElementById('module-tabs-bar');
+      const panels = document.querySelectorAll('.module-panel');
+      const cards = document.querySelectorAll('.session-card');
+
+      if (!q) {
+        clearTallerSearch();
+        return;
+      }
+
+      if (clearBtn) clearBtn.classList.remove('hidden');
+      if (tabsBar) tabsBar.classList.add('opacity-40', 'pointer-events-none');
+
+      let matches = 0;
+      panels.forEach(p => p.classList.remove('hidden'));
+
+      cards.forEach(card => {
+        const text = card.getAttribute('data-search') || '';
+        if (text.includes(q)) {
+          card.classList.remove('hidden');
+          card.classList.add('ring-2', 'ring-cacao/40');
+          matches++;
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('ring-2', 'ring-cacao/40');
+        }
+      });
+
+      if (countEl) {
+        countEl.classList.remove('hidden');
+        countEl.textContent = `${matches} sesión${matches === 1 ? '' : 'es'} encontrada${matches === 1 ? '' : 's'}`;
+      }
+    }
+
+    function clearTallerSearch() {
+      const input = document.getElementById('taller-search-input');
+      if (input) input.value = '';
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      const countEl = document.getElementById('search-results-count');
+      if (countEl) countEl.classList.add('hidden');
+      const tabsBar = document.getElementById('module-tabs-bar');
+      if (tabsBar) tabsBar.classList.remove('opacity-40', 'pointer-events-none');
+
+      document.querySelectorAll('.session-card').forEach(card => {
+        card.classList.remove('hidden', 'ring-2', 'ring-cacao/40');
+      });
+
+      showModule(currentActiveModule);
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('taller-toast');
+      const textEl = document.getElementById('toast-message');
+      if (!toast || !textEl) return;
+      textEl.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3200);
+    }
+
+    function copySessionCard(semana, titulo, teoria, lecturas, ejercicio) {
+      const text = `📖 *TALLER LITERARIO LVT-UJAT (GRATIS) · SEMANA ${semana}*\n` +
+        `🏛️ *Sesión:* ${titulo}\n\n` +
+        `💡 *Eje Teórico:* ${teoria}\n\n` +
+        `📚 *Lecturas Canónicas:* ${lecturas}\n\n` +
+        `✍️ *Gimnasio Creativo:* ${ejercicio}\n\n` +
+        `📍 *Sábados 11:00 a 13:00 hrs* · Librería Universitaria UJAT (Entrada libre y gratuita)\n` +
+        `🌐 *Más detalles:* https://letrasyvocesdetabasco.org/taller-literario`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`✅ Temario de Semana ${semana} copiado al portapapeles`);
+      }).catch(() => {
+        showToast("⚠️ No se pudo copiar al portapapeles");
+      });
+    }
+  </script>
+</BaseLayout>

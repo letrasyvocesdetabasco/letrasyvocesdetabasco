@@ -62,13 +62,13 @@ const basePath = "";
 
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center flex flex-col items-center">
     
-    <!-- Neo-Badge de Cristal Editorial -->
-    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/15 bg-white/[0.05] text-paper text-xs sm:text-[13px] font-swiss font-medium tracking-wide mb-5 shadow-lg backdrop-blur-xl">
-      <span class="w-2 h-2 rounded-full bg-cacao animate-pulse"></span>
-      <span id="hero-live-announcement" class="transition-opacity duration-300 text-gray-200">
-        XXXIX Aniversario (1987 – 2026) · Sociedad de Escritores LVT, A.C.
-      </span>
-    </div>
+    <!-- Neo-Badge de Cristal Editorial con Enlace a Taller LVT-UJAT -->
+    <a href={`${basePath}/taller-literario`} class="group inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-emerald-500/40 bg-emerald-950/50 text-emerald-200 text-xs sm:text-[13px] font-swiss font-medium tracking-wide mb-5 shadow-lg backdrop-blur-xl hover:border-emerald-400 hover:bg-emerald-900/60 transition duration-200">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="text-white font-bold">Taller Literario LVT-UJAT:</span>
+      <span class="text-emerald-300">Sábados 11:00 hrs en Librería Universitaria UJAT · Entrada Libre y Gratuita</span>
+      <span class="text-xs text-white group-hover:translate-x-0.5 transition-transform">&rarr;</span>
+    </a>
 
     <!-- Título Monumental en Newsreader / EB Garamond -->
     <div class="min-h-[85px] sm:min-h-[110px] md:min-h-[135px] flex items-center justify-center">
@@ -93,6 +93,13 @@ const basePath = "";
       >
         <span>Catálogo Editorial</span>
         <svg class="w-4 h-4 fill-none stroke-current" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      </a>
+
+      <a 
+        href={`${basePath}/taller-literario`} 
+        class="touch-target-48 inline-flex items-center px-6 py-3 rounded-2xl border border-emerald-500/40 bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 font-swiss text-xs sm:text-sm font-bold uppercase tracking-wider backdrop-blur-md shadow-subtle hover:scale-102 active:scale-95 transition duration-200 gap-2 cursor-pointer"
+      >
+        <span>📖 Taller LVT-UJAT (Gratis)</span>
       </a>
 
       <a 

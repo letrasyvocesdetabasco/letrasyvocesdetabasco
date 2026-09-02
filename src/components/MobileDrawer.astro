@@ -63,6 +63,23 @@ const basePath = "";
       <span class="text-[10px] text-gray-400 font-mono">01</span>
     </a>
 
+    <!-- TALLER LITERARIO LVT-UJAT (GRATIS) -->
+    <a 
+      href={`${basePath}/taller-literario`} 
+      class="drawer-nav-item flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-cacao/30 via-oro/15 to-white/[0.04] border border-cacao/40 text-white active:scale-98 transition shadow-subtle"
+    >
+      <div class="flex items-center gap-2.5">
+        <span class="w-7 h-7 rounded-lg bg-cacao text-white flex items-center justify-center text-xs font-bold shadow-sm">
+          📖
+        </span>
+        <div>
+          <span class="font-bold tracking-wide block text-white text-xs">Taller Literario LVT-UJAT</span>
+          <span class="text-[10px] text-oro-bright font-serif italic normal-case block">Sábados 11:00 hrs · Entrada Libre</span>
+        </div>
+      </div>
+      <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-[9px] font-bold uppercase border border-emerald-500/30">Gratis</span>
+    </a>
+
     <!-- 2. ESCUELA DE ESCRITORES -->
     <div class="rounded-2xl bg-white/[0.04] border border-white/10 overflow-hidden">
       <div class="flex items-center justify-between p-3.5 bg-gradient-to-r from-cacao/20 to-transparent text-white">
@@ -76,6 +93,13 @@ const basePath = "";
       </div>
       
       <div id="sub-escuela" class="p-3 bg-[#0B0A09]/60 border-t border-white/10 space-y-1.5 text-[11px] normal-case hidden">
+        <a href={`${basePath}/taller-literario`} class="drawer-nav-item block p-2.5 rounded-xl bg-cacao/15 hover:bg-cacao/25 text-white border border-cacao/30 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-cacao-light flex items-center justify-between">
+            <span>📖 Taller Sabatino LVT-UJAT</span>
+            <span class="text-[9px] text-emerald-400 font-bold">100% Libre</span>
+          </strong>
+          <span class="text-[10px] text-gray-300">24 semanas, 4 módulos y antología impresa en Librería UJAT.</span>
+        </a>
         <a href={`${basePath}/EEJG#diplomados`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
           <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-cacao-light">10 Diplomados Oficiales</strong>
           <span class="text-[10px] text-gray-400">Creación, Redacción, Periodismo, Guion, Oratoria...</span>

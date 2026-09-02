@@ -17,36 +17,57 @@ const basePath = "";
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-16">
     
     <!-- ================================================================= -->
-    <!-- 1. ENCABEZADO INSTITUCIONAL & FILOSOFÍA PEDAGÓGICA                -->
+    <!-- 1. ENCABEZADO INSTITUCIONAL CON LOGOTIPO OFICIAL & FILOSOFÍA PEDAGÓGICA -->
     <!-- ================================================================= -->
-    <div class="text-center max-w-4xl mx-auto space-y-3">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EF7B38]/15 border border-[#EF7B38]/30 text-[#EF7B38] font-title text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-xs">
-        <span class="w-2 h-2 rounded-full bg-[#EF7B38] animate-ping"></span>
-        <span>Única Filial Académica Oficial de LVT, A.C. · Fundada en Septiembre de 2001</span>
+    <!-- 1. ENCABEZADO INSTITUCIONAL CON LOGOTIPO OFICIAL & FILOSOFÍA PEDAGÓGICA -->
+    <!-- ================================================================= -->
+    <div class="max-w-4xl mx-auto space-y-6 text-center">
+      
+      <!-- Sello / Logotipo Oficial Centrado con Aura Editorial -->
+      <div class="flex flex-col items-center justify-center">
+        <div class="relative group">
+          <div class="absolute -inset-1.5 bg-gradient-to-r from-[#C62828]/25 via-[#B8860B]/20 to-[#C62828]/25 rounded-full blur-md opacity-75 group-hover:opacity-100 transition duration-300"></div>
+          <div class="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-white p-2 shadow-2xl border-2 border-[#C62828] overflow-hidden flex items-center justify-center">
+            <img 
+              src={`${basePath}/assets/logo-eejg.jpeg`} 
+              alt="Escuela de Escritores «José Gorostiza» · Logotipo Oficial" 
+              class="w-full h-full object-cover rounded-full group-hover:scale-105 transition duration-300"
+            />
+          </div>
+        </div>
       </div>
 
-      <h2 class="text-2xl sm:text-4xl lg:text-5xl font-title font-black text-[#222222] tracking-tight">
-        Escuela de Escritores <span class="text-[#EF7B38]">«José Gorostiza»</span>
-      </h2>
+      <!-- Identidad y Título Monumental Centrado -->
+      <div class="space-y-3 max-w-3xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#C62828]/10 border border-[#C62828]/25 text-[#C62828] font-title text-xs sm:text-sm font-bold uppercase tracking-wider shadow-xs">
+          <span class="w-2 h-2 rounded-full bg-[#C62828] animate-pulse"></span>
+          <span>Filial Académica Oficial · Sociedad de Escritores Letras y Voces de Tabasco, A.C.</span>
+        </div>
 
-      <p class="font-serif italic text-base sm:text-xl text-[#B8860B] font-semibold">
-        «{IDENTIDAD_ESCUELA.lema}»
-      </p>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-title font-black text-[#1a1a1a] tracking-tight leading-[1.15]">
+          Escuela de Escritores <br class="hidden sm:inline" />
+          <span class="text-[#C62828] inline-block whitespace-nowrap">«José Gorostiza»</span>
+        </h1>
 
-      <p class="font-sans text-sm sm:text-base text-[#444444] max-w-3xl mx-auto leading-relaxed">
-        {IDENTIDAD_ESCUELA.mision}
-      </p>
+        <p class="font-serif italic text-lg sm:text-2xl text-[#8D6E63] font-semibold">
+          «{IDENTIDAD_ESCUELA.lema}»
+        </p>
+
+        <p class="font-sans text-sm sm:text-base text-[#444444] leading-relaxed max-w-2xl mx-auto">
+          {IDENTIDAD_ESCUELA.mision}
+        </p>
+      </div>
       
       <!-- Ficha de Contacto Rápido del Cartel Oficial 2026 -->
-      <div class="flex flex-wrap justify-center items-center gap-3 pt-3 text-xs sm:text-sm font-title">
-        <span class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs text-gray-700">
+      <div class="flex flex-wrap justify-center items-center gap-3 pt-2 text-xs sm:text-sm font-title max-w-3xl mx-auto">
+        <span class="px-4 py-2 bg-white rounded-xl border border-[#E6DCCE] shadow-xs text-gray-700 font-medium">
           📍 Villahermosa, Tabasco (Presencial y En Línea · 50% Teoría / 50% Práctica)
         </span>
         <a 
           href={`https://wa.me/${IDENTIDAD_ESCUELA.contactoDirecto.telefonosClean[0]}?text=Hola%20Dra.%20Liliana%20Chuzeville,%20deseo%20informes%20de%20la%20Escuela%20de%20Escritores.`}
           target="_blank"
           rel="noopener"
-          class="px-3.5 py-1.5 bg-green-50 text-green-800 rounded-xl border border-green-200 shadow-xs hover:bg-green-100 transition flex items-center gap-1.5 font-bold"
+          class="px-4 py-2 bg-green-50 text-green-800 rounded-xl border border-green-200 shadow-xs hover:bg-green-100 transition flex items-center gap-1.5 font-bold"
         >
           <span>📲 WhatsApp Dir. General: {IDENTIDAD_ESCUELA.contactoDirecto.telefonos[0]}</span>
         </a>
@@ -54,19 +75,19 @@ const basePath = "";
           href={`https://wa.me/${IDENTIDAD_ESCUELA.contactoDirecto.telefonosClean[1]}?text=Hola%20Dra.%20Rebeca%20D%C3%ADaz,%20deseo%20información%20académica%20de%20la%20Escuela%20de%20Escritores.`}
           target="_blank"
           rel="noopener"
-          class="px-3.5 py-1.5 bg-green-50 text-green-800 rounded-xl border border-green-200 shadow-xs hover:bg-green-100 transition flex items-center gap-1.5 font-bold"
+          class="px-4 py-2 bg-green-50 text-green-800 rounded-xl border border-green-200 shadow-xs hover:bg-green-100 transition flex items-center gap-1.5 font-bold"
         >
           <span>📲 WhatsApp Dir. Académica: {IDENTIDAD_ESCUELA.contactoDirecto.telefonos[1]}</span>
         </a>
         <a 
           href={`mailto:${IDENTIDAD_ESCUELA.contactoDirecto.email}`}
-          class="px-3.5 py-1.5 bg-white rounded-xl border border-[#E6DCCE] shadow-xs hover:text-[#EF7B38] transition font-bold"
+          class="px-4 py-2 bg-white rounded-xl border border-[#E6DCCE] shadow-xs hover:text-[#C62828] transition font-bold"
         >
           ✉️ {IDENTIDAD_ESCUELA.contactoDirecto.email}
         </a>
       </div>
 
-      <div class="w-20 h-0.5 bg-[#EF7B38] mx-auto mt-4 rounded-full"></div>
+      <div class="w-24 h-1 bg-gradient-to-r from-[#C62828] via-[#B8860B] to-[#C62828] mx-auto mt-6 rounded-full"></div>
     </div>
 
     <!-- ================================================================= -->
@@ -355,6 +376,37 @@ const basePath = "";
           </div>
         ))}
 
+        <!-- Tarjeta Insignia: Taller Literario Sabatino UJAT -->
+        <div class="p-5 rounded-2xl bg-gradient-to-br from-white to-[#F5EFE6] border-2 border-[#EF7B38]/50 shadow-md flex flex-col justify-between space-y-3 relative overflow-hidden sm:col-span-2">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-0.5 rounded-md bg-[#EF7B38] text-white text-[9px] font-title font-bold uppercase">
+                Presencial · Entrada Gratuita
+              </span>
+              <span class="text-[10px] font-mono font-bold text-emerald-700">Sábados 11:00 a 13:00 hrs</span>
+            </div>
+            <h4 class="font-title font-bold text-base text-[#222222]">
+              Taller Literario LVT-UJAT (Gratis)
+            </h4>
+            <p class="text-xs font-serif italic text-gray-500">
+              Coordinación: Colegiado de Letras y Voces de Tabasco, A.C.
+            </p>
+            <p class="text-xs font-sans text-gray-600 leading-relaxed">
+              Programa de 24 semanas y 4 módulos (Narrativa, Poesía, Ensayo y Crónica/Edición) en la Librería Universitaria UJAT. Incluye clínica de textos, diálogo respetuoso y publicación en la antología colectiva impresa con aval institucional.
+            </p>
+          </div>
+          <div class="pt-2 border-t border-[#E6DCCE] flex items-center justify-between">
+            <span class="text-[10px] font-mono text-gray-500">Sin costo ni inscripción previa</span>
+            <a 
+              href={`${basePath}/taller-literario`} 
+              class="text-xs font-title font-bold uppercase text-[#C62828] hover:text-[#B71C1C] flex items-center gap-1 transition"
+            >
+              <span>Ver Programa de 24 Sesiones</span>
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+
         <!-- Tarjeta de Talleres -->
         <div class="p-4 rounded-2xl bg-[#F5EFE6] border border-[#E6DCCE] flex flex-col justify-between space-y-3">
           <div class="space-y-1.5">
@@ -363,7 +415,7 @@ const basePath = "";
             </span>
             <h4 class="font-title font-bold text-sm text-[#222222]">Talleres Libres</h4>
             <p class="text-xs font-sans text-gray-600 leading-relaxed">
-              Minificción, declamación, poesía coral, storytelling y corrección ortotipográfica.
+              Minificción, declamación, poesía coral, narrativa y corrección ortotipográfica.
             </p>
           </div>
           <a 
