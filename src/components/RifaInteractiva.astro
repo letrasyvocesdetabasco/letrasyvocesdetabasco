@@ -248,6 +248,57 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       </div>
     </div>
 
+    <!-- GUÍA VISUAL PASO A PASO (CLARA, INTUITIVA Y CÓMODA PARA MAYORES) -->
+    <div class="bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 border-2 border-[#EF7B38] rounded-3xl p-5 sm:p-7 shadow-md max-w-5xl mx-auto space-y-4">
+      <div class="flex items-center gap-3">
+        <span class="w-10 h-10 rounded-2xl bg-[#EF7B38] text-white flex items-center justify-center text-xl shadow-xs shrink-0">💡</span>
+        <div>
+          <h3 class="font-title font-black text-lg sm:text-xl text-[#222222]">
+            ¿Cómo apartar y comprar tu boleto? (Solo 4 sencillos pasos)
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-600 font-sans">
+            Diseñado para que cualquier persona pueda participar fácilmente en menos de un minuto.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+        
+        <div class="bg-white p-3.5 rounded-2xl border border-amber-200 shadow-xs flex items-start gap-3">
+          <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-900 font-title font-black text-sm flex items-center justify-center shrink-0 border border-amber-300">1</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="font-title text-[#222222] block">Toca tu boleto</strong>
+            <span class="text-gray-600">Haz clic en los boletos blancos de abajo. Cada boleto te da 2 números por $100 MXN.</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-3.5 rounded-2xl border border-amber-200 shadow-xs flex items-start gap-3">
+          <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-900 font-title font-black text-sm flex items-center justify-center shrink-0 border border-amber-300">2</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="font-title text-[#222222] block">Escribe tu nombre</strong>
+            <span class="text-gray-600">Escribe tu nombre completo en la casilla para registrar tus números a tu nombre.</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-3.5 rounded-2xl border border-amber-200 shadow-xs flex items-start gap-3">
+          <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-900 font-title font-black text-sm flex items-center justify-center shrink-0 border border-emerald-300">3</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="font-title text-[#222222] block">Aparta por WhatsApp</strong>
+            <span class="text-gray-600">Toca el botón verde para enviar tu mensaje de pre-apartado con tus números asignados.</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-3.5 rounded-2xl border border-amber-200 shadow-xs flex items-start gap-3">
+          <span class="w-8 h-8 rounded-xl bg-amber-100 text-amber-900 font-title font-black text-sm flex items-center justify-center shrink-0 border border-amber-300">4</span>
+          <div class="text-xs space-y-0.5">
+            <strong class="font-title text-[#222222] block">Manda tu comprobante</strong>
+            <span class="text-gray-600">Transfiere a la cuenta Klar y manda la foto de tu comprobante por el chat o por correo.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- 5. SELECTOR INTERACTIVO DE BOLETOS DOBLES -->
     <div id="selector-boletos" class="space-y-6">
       
@@ -390,16 +441,16 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
     </div>
 
     <!-- 6. PANEL DE CONFIRMACIÓN, DATOS BANCARIOS Y APARTADO -->
-    <div class="max-w-3xl mx-auto bg-[#1C1814] text-white rounded-3xl p-6 sm:p-9 shadow-2xl border border-white/10 space-y-8">
+    <div id="confirmacion-rifa" class="max-w-3xl mx-auto bg-[#1C1814] text-white rounded-3xl p-6 sm:p-9 shadow-2xl border border-white/10 space-y-8 scroll-mt-24">
       
       <!-- Encabezado de Pago -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-white/15">
         <div>
           <span class="text-xs text-[#EF7B38] font-title font-bold uppercase tracking-wider block mb-1">
-            Paso 2 · Confirmación y Pago
+            Paso 2 y 3 · Tu Selección & Apartado por WhatsApp
           </span>
           <h4 class="text-xl sm:text-2xl font-title font-black text-white">
-            Tus Boletos Seleccionados
+            Boletos Seleccionados para Apartar
           </h4>
         </div>
         <div class="text-left sm:text-right bg-white/5 px-4 py-2 rounded-2xl border border-white/10">
@@ -517,7 +568,7 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
           <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.97.53 1.961.815 2.796.815 3.183 0 5.769-2.586 5.77-5.766.001-3.182-2.585-5.768-5.77-5.768zm0 10.455c-.779 0-1.695-.258-2.382-.665l-.171-.101-1.77.464.472-1.726-.112-.178c-.464-.737-.709-1.532-.708-2.483.001-2.585 2.103-4.688 4.671-4.688 2.569 0 4.671 2.103 4.671 4.688 0 2.586-2.102 4.689-4.671 4.689z"/>
           </svg>
-          <span>Apartar y Enviar Comprobante (WhatsApp)</span>
+          <span class="text-xs sm:text-sm font-bold">📲 Paso 3: Toca aquí para Apartar por WhatsApp</span>
         </a>
 
         <button
@@ -539,12 +590,33 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
 
       </div>
 
-      <div class="text-[11px] text-gray-400 text-center leading-relaxed">
-        🔒 <em>Tras enviar tu mensaje con el comprobante de transferencia a nuestro WhatsApp, tus números quedarán registrados en el sistema y recibirás tu pase de participación.</em>
+      <div class="text-xs text-amber-200/90 text-center leading-relaxed bg-black/40 p-3.5 rounded-xl border border-amber-500/20 space-y-1">
+        <p>📸 <strong>Paso 4: Envío de Comprobante</strong></p>
+        <p class="text-gray-300 text-[11px]">
+          Al tocar el botón verde, tus números quedarán <strong>pre-apartados</strong>. Posteriormente realiza tu transferencia bancaria y manda la <strong>fotografía de tu comprobante</strong> por ese mismo chat de WhatsApp o al correo <strong>contacto@letrasyvocesdetabasco.org</strong> para confirmar tu boleto como <strong>PAGADO</strong>.
+        </p>
       </div>
 
     </div>
 
+  </div>
+
+  <!-- BARRA FLOTANTE ASISTIDA PARA COMPRA FÁCIL (STICKY BOTTOM BAR) -->
+  <div id="barra-flotante-rifa" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 bg-[#1C1814] text-white border-2 border-[#EF7B38] rounded-2xl p-3.5 sm:p-4 shadow-2xl transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none">
+    <div class="flex items-center justify-between gap-3">
+      <div class="space-y-0.5">
+        <span class="text-[10px] font-title uppercase tracking-wider text-[#EF7B38] font-bold block">
+          🎟️ ¡Boletos Seleccionados!
+        </span>
+        <span class="text-xs sm:text-sm font-title font-black text-white block" id="flotante-resumen">
+          1 boleto doble · $100 MXN
+        </span>
+      </div>
+      <a id="btn-flotante-apartar" href="#confirmacion-rifa" class="px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebd5d] text-white font-title font-bold text-xs shadow-md flex items-center gap-1.5 whitespace-nowrap active:scale-95 transition">
+        <span>Ir a Apartar</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </a>
+    </div>
   </div>
 
   <!-- MODAL DE FICHA DIGITAL DE RESERVA -->
@@ -662,6 +734,8 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
 
     function actualizarInterfaz() {
       contenedorSeleccionados.innerHTML = '';
+      const barraFlotante = document.getElementById('barra-flotante-rifa');
+      const flotanteResumen = document.getElementById('flotante-resumen');
 
       if (boletosSeleccionados.length === 0) {
         contenedorSeleccionados.appendChild(textoVacio);
@@ -670,6 +744,10 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         btnWhatsApp.classList.add('opacity-50', 'pointer-events-none', 'cursor-not-allowed');
         btnVerFicha.classList.add('opacity-50', 'pointer-events-none');
         btnWhatsApp.href = '#';
+        if (barraFlotante) {
+          barraFlotante.classList.add('translate-y-32', 'opacity-0', 'pointer-events-none');
+          barraFlotante.classList.remove('translate-y-0', 'opacity-100');
+        }
         return;
       }
 
@@ -691,6 +769,12 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         contadorBoletosTexto.textContent = `${cantidadBoletos} ${cantidadBoletos === 1 ? 'boleto doble' : 'boletos dobles'} (${cantidadNumeros} números)`;
       }
 
+      if (barraFlotante && flotanteResumen) {
+        flotanteResumen.textContent = `${cantidadBoletos} ${cantidadBoletos === 1 ? 'boleto doble' : 'boletos dobles'} · $${totalDinero} MXN`;
+        barraFlotante.classList.remove('translate-y-32', 'opacity-0', 'pointer-events-none');
+        barraFlotante.classList.add('translate-y-0', 'opacity-100');
+      }
+
       const nombreComprador = (inputNombre && inputNombre.value.trim()) || 'Participante LVT';
       const telComprador = (inputTel && inputTel.value.trim()) || 'No especificado';
       const folioReserva = generarFolio();
@@ -698,16 +782,16 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
       const listaBoletosTxt = boletosSeleccionados.map(b => `• Boleto #${b.idStr} [Números: ${b.num1} y ${b.num2}]`).join('\n');
       const listaNumerosTxt = boletosSeleccionados.map(b => `${b.num1}, ${b.num2}`).join(', ');
 
-      const mensaje = `🎟️ *RESERVA · GRAN RIFA CULTURAL LVT 2026*\n` +
-        `📋 *Folio:* ${folioReserva}\n` +
+      const mensaje = `🎟️ *SOLICITUD DE APARTADO · GRAN RIFA CULTURAL LVT 2026*\n` +
+        `📋 *Folio de Solicitud:* ${folioReserva}\n` +
         `👤 *Participante:* ${nombreComprador}\n` +
-        `📱 *Teléfono:* ${telComprador}\n\n` +
-        `🎫 *Boletos Seleccionados:*\n${listaBoletosTxt}\n\n` +
-        `🔢 *Números en Juego:* ${listaNumerosTxt}\n` +
-        `💵 *Total de Aportación:* $${totalDinero} MXN\n` +
-        `🎯 *Sorteo:* Viernes 16 de Octubre de 2026 (Lotería Nacional)\n\n` +
+        `📱 *Teléfono / Contacto:* ${telComprador}\n\n` +
+        `🎫 *Boletos a Apartar:*\n${listaBoletosTxt}\n\n` +
+        `🔢 *Números Solicitados:* ${listaNumerosTxt}\n` +
+        `💵 *Monto Total de Aportación:* $${totalDinero} MXN\n` +
+        `🎯 *Sorteo:* Viernes 16 de Octubre de 2026 (Sorteo Especial No. 317 de la Lotería Nacional)\n\n` +
         `🏦 *Cuenta Klar:* Eva Guadalupe Pineda Cruz · CLABE: ${datosBancarios.clabe}\n\n` +
-        `Adjunto mi comprobante de transferencia para el registro. ¡Muchas gracias!`;
+        `Hola Sociedad de Escritores LVT, deseo apartar estos boletos. Quedo a la espera de su confirmación para transferir los $${totalDinero} MXN a la cuenta Klar y enviarles la foto de mi comprobante. ¡Muchas gracias!`;
 
       const numWA = datosBancarios.whatsapp_contacto || '522205889391';
       btnWhatsApp.href = `https://wa.me/${numWA}?text=${encodeURIComponent(mensaje)}`;
