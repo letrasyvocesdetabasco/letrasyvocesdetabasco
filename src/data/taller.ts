@@ -66,7 +66,16 @@ export const DATOS_GENERALES_TALLER = {
       dependencias: "Universidad Juárez Autónoma de Tabasco (Espacio anfitrión y sede del taller)"
     }
   ],
+  titularAcademico: {
+    nombre: "Lic. Juan David Pérez Cabrera",
+    grado: "Licenciado en Física",
+    trayectoria: "Diplomado en Creación Literaria (12 años de trayectoria formativa)",
+    cargo: "Presidente de la Sociedad de Escritores «Letras y Voces de Tabasco», A.C.",
+    rolTaller: "Titular Académico y Mediador del Taller Literario",
+    semblanza: "Licenciado en física y escritor con doce años de trayectoria en la mediación de talleres literarios y análisis del texto creativo. Como presidente de Letras y Voces de Tabasco, A.C., encabeza las sesiones sabatinas en la Librería Universitaria UJAT, integrando el pensamiento crítico, la estructura narrativa y la disciplina del oficio escritural en un ambiente colaborativo e intergeneracional."
+  },
   coordinacionDocente: {
+    colectivo: "Colegiado de Mediadores · Letras y Voces de Tabasco, A.C.",
     nombre: "Colegiado de Letras y Voces de Tabasco, A.C.",
     cargo: "Coordinación y Mediación del Taller Literario",
     enfoque: "El taller está coordinado por el cuerpo docente y mediadores de la Sociedad de Escritores «Letras y Voces de Tabasco, A.C.», con la participación de escritores y talleristas invitados. Nuestro trabajo se orienta al acompañamiento cercano, la técnica de la palabra y el respeto a la voz de cada participante.",
