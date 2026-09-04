@@ -153,17 +153,6 @@
       "notas": "",
       "num1": "39",
       "num2": "89"
-    },
-    "8": {
-      "estado": "Pagado",
-      "participante": "Carlos Manuel López Arellano",
-      "whatsapp": "5219932127196",
-      "fecha": "2026-09-03 22:30:48",
-      "fecha_pago": "2026-09-03 22:35:15",
-      "canal": "whatsapp",
-      "notas": "Pago validado con IA (Nu (Nubank) $100.00 MXN Folio: Cuenta)",
-      "num1": "07",
-      "num2": "57"
     }
   }
 }
