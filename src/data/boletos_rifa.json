@@ -164,17 +164,6 @@
       "notas": "Pago validado con IA (Nu (Nubank) $100.00 MXN Folio: Cuenta)",
       "num1": "07",
       "num2": "57"
-    },
-    "35": {
-      "estado": "Pagado",
-      "participante": "Roberto Morales",
-      "whatsapp": "user_9174",
-      "fecha": "2026-09-03 22:38:55",
-      "fecha_pago": "2026-09-03 22:38:55",
-      "canal": "whatsapp",
-      "notas": "Pago confirmado tras consulta (Santander $100.00 MXN Folio: 1OORAND788058)",
-      "num1": "34",
-      "num2": "84"
     }
   }
 }
