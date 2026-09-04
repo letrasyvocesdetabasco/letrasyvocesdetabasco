@@ -123,15 +123,6 @@
       "num1": "04",
       "num2": "54"
     },
-    "10": {
-      "estado": "Apartado",
-      "participante": "Instagram 2059114184964070",
-      "whatsapp": "Instagram Direct",
-      "fecha": "2026-09-01 16:54:31",
-      "canal": "instagram",
-      "num1": "09",
-      "num2": "59"
-    },
     "4": {
       "estado": "Pagado",
       "participante": "Daly",
@@ -153,6 +144,28 @@
       "notas": "",
       "num1": "39",
       "num2": "89"
+    },
+    "8": {
+      "estado": "Pagado",
+      "participante": "Carlos Manuel López Arellano",
+      "whatsapp": "5219932127196",
+      "fecha": "2026-09-04 00:19:08",
+      "fecha_pago": "2026-09-04 00:20:08",
+      "canal": "whatsapp",
+      "notas": "Pago validado con IA (Nu (Nubank) $100.00 MXN Folio: NU3AJ8TG6S3R8SOABBFEHG58Q4AO)",
+      "num1": "07",
+      "num2": "57"
+    },
+    "10": {
+      "estado": "Apartado",
+      "participante": "Instagram 2059114184964070",
+      "whatsapp": "Instagram Direct",
+      "fecha": "2026-09-04 00:20:58",
+      "fecha_pago": "",
+      "canal": "instagram",
+      "notas": "",
+      "num1": "09",
+      "num2": "59"
     }
   }
 }
