@@ -1,0 +1,180 @@
+{
+  "precio_boleto": 100,
+  "total_boletos_dobles": 50,
+  "total_numeros": 100,
+  "sorteo_institucion": "Sorteo Especial No. 317 de la Lotería Nacional",
+  "sorteo_fecha": "Viernes 16 de Octubre de 2026 · 20:00 hrs (Transmisión en vivo por YouTube de Lotería Nacional)",
+  "sorteo_mecanica": "Los tres ganadores se definirán con los dos últimos dígitos del Primer, Segundo y Tercer premio del Sorteo Especial de la Lotería Nacional.",
+  "datos_bancarios": {
+    "institucion": "Klar",
+    "beneficiario": "Eva Guadalupe Pineda Cruz",
+    "clabe": "661180001685065113",
+    "concepto_sugerido": "RIFA LVT",
+    "whatsapp_contacto": "522205889391"
+  },
+  "premios": [
+    {
+      "id": "premio-1",
+      "lugar": "Primer Premio",
+      "lugar_corto": "1° Premio",
+      "titulo": "Colección Gala y Audio",
+      "subtitulo": "Se obtiene con los 2 últimos dígitos del Premio Mayor de la Lotería Nacional",
+      "icono": "🥇",
+      "badge": "1° Premio",
+      "imagen": "/assets/rifa/premio_1_lote_magno.webp",
+      "valor_estimado": "$2,190 MXN",
+      "color_tema": "#EF7B38",
+      "items": [
+        {
+          "categoria": "Audio Inalámbrico",
+          "nombre": "Bocina Portátil Bluetooth Select 4 Go",
+          "detalle": "Sonido inalámbrico con batería recargable y correa de mano."
+        },
+        {
+          "categoria": "Libro en Pasta Dura",
+          "nombre": "La Divina Comedia (Dante Alighieri)",
+          "detalle": "Edición de lujo en pasta dura con las ilustraciones clásicas de Gustave Doré."
+        },
+        {
+          "categoria": "Libro en Pasta Dura",
+          "nombre": "Poesía Prehispánica: Flor y Canto",
+          "detalle": "Edición de lujo en pasta dura bilingüe (Español - Náhuatl)."
+        },
+        {
+          "categoria": "Antologías LVT",
+          "nombre": "Trilogía de Antologías de la Sociedad Literaria LVT (3 libros)",
+          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+        },
+        {
+          "categoria": "Perfumería Fina",
+          "nombre": "Dúo L'Bel BLEU femme (Perfume 50ml + Loción Hidratante 130ml)",
+          "detalle": "Perfume en caja sellada con notas florales y loción corporal hidratante."
+        }
+      ]
+    },
+    {
+      "id": "premio-2",
+      "lugar": "Segundo Premio",
+      "lugar_corto": "2° Premio",
+      "titulo": "Colección Sabiduría y Aroma",
+      "subtitulo": "Se obtiene con los 2 últimos dígitos del Segundo Premio de la Lotería Nacional",
+      "icono": "🥈",
+      "badge": "2° Premio",
+      "imagen": "/assets/rifa/premio_2_lote_estrategia.webp",
+      "valor_estimado": "$1,286 MXN",
+      "color_tema": "#B8860B",
+      "items": [
+        {
+          "categoria": "Libro en Pasta Dura",
+          "nombre": "El Arte de la Guerra & El Libro de los Cinco Anillos",
+          "detalle": "Obras clásicas de Sun Tzu y Musashi, edición ilustrada en pasta dura."
+        },
+        {
+          "categoria": "Antologías LVT",
+          "nombre": "Trilogía de Antologías de la Sociedad Literaria LVT (3 libros)",
+          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+        },
+        {
+          "categoria": "Cuidado Personal",
+          "nombre": "Set Velvet Parfum (100ml) + Crema Corporal Lavi Orquídeas y Miel (250ml)",
+          "detalle": "Fragancia con aceite natural de patchouli y crema hidratante."
+        }
+      ]
+    },
+    {
+      "id": "premio-3",
+      "lugar": "Tercer Premio",
+      "lugar_corto": "3° Premio",
+      "titulo": "Colección Clásicos y Cuidado",
+      "subtitulo": "Se obtiene con los 2 últimos dígitos del Tercer Premio de la Lotería Nacional",
+      "icono": "🥉",
+      "badge": "3° Premio",
+      "imagen": "/assets/rifa/premio_3_lote_clasicos.webp",
+      "valor_estimado": "$1,089 MXN",
+      "color_tema": "#8C6D46",
+      "items": [
+        {
+          "categoria": "Libro en Pasta Dura",
+          "nombre": "El Príncipe de Nicolás Maquiavelo",
+          "detalle": "Edición especial de lujo ilustrada en pasta dura."
+        },
+        {
+          "categoria": "Antologías LVT",
+          "nombre": "Trilogía de Antologías de la Sociedad Literaria LVT (3 libros)",
+          "detalle": "«A corazón abierto», «Tardes tabasqueñas de ópalos y topacios» y «Leyendas de nuestra región»."
+        },
+        {
+          "categoria": "Cuidado de la Piel",
+          "nombre": "Trío de Tratamientos: Arabela Reconstruct Manos + Spray Ciclo Ideal + Gel Zero Acné",
+          "detalle": "Crema antiedad de manos (50g), spray aromaterapéutico (60ml) y gel purificante (20g)."
+        }
+      ]
+    }
+  ],
+  "boletos_ocupados": {
+    "5": {
+      "estado": "Pagado",
+      "participante": "J. David Cabrera",
+      "whatsapp": "5219931090153",
+      "fecha": "2026-08-30 12:47:26",
+      "fecha_pago": "2026-08-31 15:02:08",
+      "canal": "panel",
+      "notas": "",
+      "num1": "04",
+      "num2": "54"
+    },
+    "10": {
+      "estado": "Apartado",
+      "participante": "Instagram 2059114184964070",
+      "whatsapp": "Instagram Direct",
+      "fecha": "2026-09-01 16:54:31",
+      "canal": "instagram",
+      "num1": "09",
+      "num2": "59"
+    },
+    "4": {
+      "estado": "Pagado",
+      "participante": "Daly",
+      "whatsapp": "5219933839520",
+      "fecha": "2026-09-02 16:08:57",
+      "fecha_pago": "2026-09-02 16:18:03",
+      "canal": "panel",
+      "notas": "",
+      "num1": "03",
+      "num2": "53"
+    },
+    "40": {
+      "estado": "Apartado",
+      "participante": "Luis Mariano Peregrino",
+      "whatsapp": "5219814225182",
+      "fecha": "2026-09-03 14:14:41",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "39",
+      "num2": "89"
+    },
+    "8": {
+      "estado": "Pagado",
+      "participante": "Carlos Manuel López Arellano",
+      "whatsapp": "5219932127196",
+      "fecha": "2026-09-03 22:30:48",
+      "fecha_pago": "2026-09-03 22:35:15",
+      "canal": "whatsapp",
+      "notas": "Pago validado con IA (Nu (Nubank) $100.00 MXN Folio: Cuenta)",
+      "num1": "07",
+      "num2": "57"
+    },
+    "35": {
+      "estado": "Pagado",
+      "participante": "Roberto Morales",
+      "whatsapp": "user_9174",
+      "fecha": "2026-09-03 22:38:55",
+      "fecha_pago": "2026-09-03 22:38:55",
+      "canal": "whatsapp",
+      "notas": "Pago confirmado tras consulta (Santander $100.00 MXN Folio: 1OORAND788058)",
+      "num1": "34",
+      "num2": "84"
+    }
+  }
+}
