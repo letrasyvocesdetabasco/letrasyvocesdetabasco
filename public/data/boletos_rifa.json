@@ -165,16 +165,16 @@
       "num1": "07",
       "num2": "57"
     },
-    "22": {
-      "estado": "Apartado",
-      "participante": "Laura Hernández",
-      "whatsapp": "test_sr_flow_999",
-      "fecha": "2026-09-03 22:38:45",
-      "fecha_pago": "",
-      "canal": "panel",
-      "notas": "",
-      "num1": "21",
-      "num2": "71"
+    "35": {
+      "estado": "Pagado",
+      "participante": "Roberto Morales",
+      "whatsapp": "user_9174",
+      "fecha": "2026-09-03 22:38:55",
+      "fecha_pago": "2026-09-03 22:38:55",
+      "canal": "whatsapp",
+      "notas": "Pago confirmado tras consulta (Santander $100.00 MXN Folio: 1OORAND788058)",
+      "num1": "34",
+      "num2": "84"
     }
   }
 }
