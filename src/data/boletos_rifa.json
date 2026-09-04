@@ -165,16 +165,16 @@
       "num1": "07",
       "num2": "57"
     },
-    "33": {
-      "estado": "Pagado",
-      "participante": "Lector de Prueba",
-      "whatsapp": "test_unit_user_01",
-      "fecha": "2026-09-03 22:38:27",
-      "fecha_pago": "2026-09-03 22:38:27",
-      "canal": "whatsapp",
-      "notas": "Pago confirmado tras consulta (BBVA México $100.00 MXN Folio: 100260903TESTO001)",
-      "num1": "32",
-      "num2": "82"
+    "22": {
+      "estado": "Apartado",
+      "participante": "Laura Hernández",
+      "whatsapp": "test_sr_flow_999",
+      "fecha": "2026-09-03 22:38:45",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "21",
+      "num2": "71"
     }
   }
 }
