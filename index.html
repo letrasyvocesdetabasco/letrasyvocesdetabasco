@@ -624,6 +624,49 @@ const fechaSorteo = "Viernes 16 de Octubre de 2026 · 20:00 hrs (Transmisión en
         if (e.target === modalFicha) modalFicha.classList.add('hidden');
       });
     }
+
+    // Sincronización en vivo con el catálogo oficial
+    async function sincronizarBoletosEnVivo() {
+      try {
+        const paths = ['/data/boletos_rifa.json', 'data/boletos_rifa.json'];
+        let data = null;
+        for (const p of paths) {
+          try {
+            const res = await fetch(`${p}?t=${Date.now()}`);
+            if (res.ok) {
+              data = await res.json();
+              break;
+            }
+          } catch (_) {}
+        }
+        if (!data || !data.boletos_ocupados) return;
+        const ocupados = data.boletos_ocupados;
+        for (let i = 1; i <= 50; i++) {
+          const btn = document.getElementById(`btn-boleto-${i}`);
+          if (!btn) continue;
+          const oc = ocupados[i.toString()];
+          if (oc) {
+            btn.disabled = true;
+            btn.classList.remove('boleto-btn', 'hover:scale-105', 'selected-boleto');
+            btn.style.pointerEvents = 'none';
+            btn.style.cursor = 'not-allowed';
+            const num1 = oc.num1 || (i - 1).toString().padStart(2, '0');
+            const num2 = oc.num2 || (i - 1 + 50).toString().padStart(2, '0');
+            const idStr = i.toString().padStart(2, '0');
+            if (oc.estado === 'Pagado') {
+              btn.className = "w-full py-2 px-1 rounded-xl bg-gradient-to-br from-orange-500 via-[#EF7B38] to-amber-600 border-2 border-orange-600/70 text-white font-title flex flex-col items-center justify-center cursor-not-allowed select-none shadow-sm relative group overflow-hidden opacity-90";
+              btn.innerHTML = `<span class="text-[10px] font-bold text-amber-100">#${idStr}</span><span class="text-xs font-mono font-black text-white">${num1} · ${num2}</span><span class="text-[8px] uppercase tracking-wider font-bold bg-black/25 px-1.5 py-0.5 rounded-full text-white mt-0.5">Vendido</span>`;
+            } else if (oc.estado === 'Apartado') {
+              btn.className = "w-full py-2 px-1 rounded-xl bg-amber-50 border-2 border-amber-300 text-amber-900 font-title flex flex-col items-center justify-center cursor-not-allowed select-none opacity-80 shadow-inner";
+              btn.innerHTML = `<span class="text-[10px] font-bold text-amber-700">#${idStr}</span><span class="text-xs font-mono font-bold text-amber-900">${num1} · ${num2}</span><span class="text-[8px] uppercase tracking-tight text-amber-700">Apartado</span>`;
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Sync boletos:', err);
+      }
+    }
+    sincronizarBoletosEnVivo();
   });
 })();</script>  <!-- 6. Secretaría General, Correspondencia y Buzón Directo --> <section id="contacto" class="py-16 sm:py-20 bg-[#FDFBF7] border-b border-[#E6DCCE]"> <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div class="text-center max-w-3xl mx-auto mb-12"> <span class="text-[11px] font-title font-bold text-[#EF7B38] uppercase tracking-widest block mb-2">Canal Oficial de Correspondencia & Atención</span> <h2 class="font-title text-3xl sm:text-4xl lg:text-5xl font-black text-[#222222]">Secretaría General & Contacto</h2> <p class="text-sm sm:text-base text-gray-600 mt-2 font-serif italic">
 Buzón institucional oficial: <a href="mailto:contacto@letrasyvocesdetabasco.org" class="text-[#EF7B38] font-bold hover:underline">contacto@letrasyvocesdetabasco.org</a> </p> <div class="w-20 h-0.5 bg-[#EF7B38] mx-auto mt-4 rounded-full"></div> </div> <div class="grid lg:grid-cols-2 gap-10 lg:gap-12"> <!-- Formulario Directo --> <div class="bg-white p-7 sm:p-10 rounded-3xl border border-[#E6DCCE] shadow-subtle"> <h3 class="font-title text-2xl font-bold text-[#222222] mb-6">Envío de Mensaje Directo</h3> <form id="contact-form" class="space-y-4"> <div> <label for="nombre" class="block text-[11px] font-title font-bold uppercase tracking-wider text-gray-600 mb-1.5">Nombre Completo *</label> <input type="text" id="nombre" name="nombre" required placeholder="Ej. Mario Cruz Hernández" class="w-full px-4 py-3 rounded-2xl border border-[#E6DCCE] focus:outline-none focus:border-[#EF7B38] focus:ring-1 focus:ring-[#EF7B38] bg-[#FDFBF7] text-sm text-[#222222]"> </div> <div class="grid grid-cols-1 sm:grid-cols-2 gap-4"> <div> <label for="telefono" class="block text-[11px] font-title font-bold uppercase tracking-wider text-gray-600 mb-1.5">Teléfono / WhatsApp *</label> <input type="tel" id="telefono" name="telefono" required placeholder="Ej. 993 123 4567" class="w-full px-4 py-3 rounded-2xl border border-[#E6DCCE] focus:outline-none focus:border-[#EF7B38] focus:ring-1 focus:ring-[#EF7B38] bg-[#FDFBF7] text-sm text-[#222222]"> </div> <div> <label for="correo" class="block text-[11px] font-title font-bold uppercase tracking-wider text-gray-600 mb-1.5">Correo Electrónico *</label> <input type="email" id="correo" name="correo" required placeholder="correo@ejemplo.com" class="w-full px-4 py-3 rounded-2xl border border-[#E6DCCE] focus:outline-none focus:border-[#EF7B38] focus:ring-1 focus:ring-[#EF7B38] bg-[#FDFBF7] text-sm text-[#222222]"> </div> </div> <div> <label for="asunto" class="block text-[11px] font-title font-bold uppercase tracking-wider text-gray-600 mb-1.5">Destino / Asunto de Interés *</label> <select id="asunto" name="asunto" class="w-full px-4 py-3 rounded-2xl border border-[#E6DCCE] focus:outline-none focus:border-[#EF7B38] focus:ring-1 focus:ring-[#EF7B38] bg-[#FDFBF7] text-sm text-[#222222]"> <option value="secretaria@letrasyvocesdetabasco.org">Secretaría General (secretaria@letrasyvocesdetabasco.org)</option> <option value="presidencia@letrasyvocesdetabasco.org">Presidencia (presidencia@letrasyvocesdetabasco.org)</option> <option value="contacto@letrasyvocesdetabasco.org">Informes Generales & Convocatorias (contacto@letrasyvocesdetabasco.org)</option> <option value="contacto@letrasyvocesdetabasco.org">Fondo Editorial & Ejemplares</option> </select> </div> <div> <label for="mensaje" class="block text-[11px] font-title font-bold uppercase tracking-wider text-gray-600 mb-1.5">Mensaje *</label> <textarea id="mensaje" name="mensaje" rows="4" required placeholder="Escriba aquí su mensaje..." class="w-full px-4 py-3 rounded-2xl border border-[#E6DCCE] focus:outline-none focus:border-[#EF7B38] focus:ring-1 focus:ring-[#EF7B38] bg-[#FDFBF7] text-sm text-[#222222]"></textarea> </div> <div class="pt-2 flex flex-col sm:flex-row gap-3"> <button type="submit" id="btn-enviar-email" class="flex-1 py-3.5 px-4 rounded-2xl bg-[#EF7B38] text-white font-title text-xs font-bold uppercase tracking-wider hover:bg-[#D96620] shadow-subtle hover:shadow-elevated active:scale-95 transition duration-200 cursor-pointer text-center">

@@ -935,6 +935,49 @@ const porcentajeProgreso = Math.round((totalOcupados / totalBoletosDobles) * 100
         if (e.target === modalFicha) modalFicha.classList.add('hidden');
       });
     }
+
+    // Sincronización en vivo con el catálogo oficial
+    async function sincronizarBoletosEnVivo() {
+      try {
+        const paths = ['/data/boletos_rifa.json', 'data/boletos_rifa.json'];
+        let data = null;
+        for (const p of paths) {
+          try {
+            const res = await fetch(`${p}?t=${Date.now()}`);
+            if (res.ok) {
+              data = await res.json();
+              break;
+            }
+          } catch (_) {}
+        }
+        if (!data || !data.boletos_ocupados) return;
+        const ocupados = data.boletos_ocupados;
+        for (let i = 1; i <= 50; i++) {
+          const btn = document.getElementById(`btn-boleto-${i}`);
+          if (!btn) continue;
+          const oc = ocupados[i.toString()];
+          if (oc) {
+            btn.disabled = true;
+            btn.classList.remove('boleto-btn', 'hover:scale-105', 'selected-boleto');
+            btn.style.pointerEvents = 'none';
+            btn.style.cursor = 'not-allowed';
+            const num1 = oc.num1 || (i - 1).toString().padStart(2, '0');
+            const num2 = oc.num2 || (i - 1 + 50).toString().padStart(2, '0');
+            const idStr = i.toString().padStart(2, '0');
+            if (oc.estado === 'Pagado') {
+              btn.className = "w-full py-2 px-1 rounded-xl bg-gradient-to-br from-orange-500 via-[#EF7B38] to-amber-600 border-2 border-orange-600/70 text-white font-title flex flex-col items-center justify-center cursor-not-allowed select-none shadow-sm relative group overflow-hidden opacity-90";
+              btn.innerHTML = `<span class="text-[10px] font-bold text-amber-100">#${idStr}</span><span class="text-xs font-mono font-black text-white">${num1} · ${num2}</span><span class="text-[8px] uppercase tracking-wider font-bold bg-black/25 px-1.5 py-0.5 rounded-full text-white mt-0.5">Vendido</span>`;
+            } else if (oc.estado === 'Apartado') {
+              btn.className = "w-full py-2 px-1 rounded-xl bg-amber-50 border-2 border-amber-300 text-amber-900 font-title flex flex-col items-center justify-center cursor-not-allowed select-none opacity-80 shadow-inner";
+              btn.innerHTML = `<span class="text-[10px] font-bold text-amber-700">#${idStr}</span><span class="text-xs font-mono font-bold text-amber-900">${num1} · ${num2}</span><span class="text-[8px] uppercase tracking-tight text-amber-700">Apartado</span>`;
+            }
+          }
+        }
+      } catch (err) {
+        console.warn('Sync boletos:', err);
+      }
+    }
+    sincronizarBoletosEnVivo();
   });
 </script>
 
