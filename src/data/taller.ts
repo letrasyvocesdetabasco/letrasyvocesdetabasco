@@ -84,7 +84,7 @@ export const DATOS_GENERALES_TALLER = {
   logistica: {
     sede: "Librería Universitaria UJAT",
     direccion: "Avenida 27 de Febrero No. 626, Colonia Centro, C.P. 86000, Villahermosa, Tabasco (a unos pasos del Instituto Juárez).",
-    horario: "Sábados de 11:00 a 13:00 hrs",
+    horario: "Sábados de 9:00 a 11:00 hrs",
     acceso: "Entrada libre y gratuita (asistencia abierta, sin costo ni requisitos de admisión previa)",
     cargaHoraria: "Ciclo de 24 semanas · 48 horas de trabajo en aula",
     contacto: {

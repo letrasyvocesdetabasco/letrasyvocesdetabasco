@@ -46,8 +46,8 @@ const basePath = "";
       "@type": "Schedule",
       "repeatFrequency": "Weekly",
       "byDay": "Saturday",
-      "startTime": "11:00:00-06:00",
-      "endTime": "13:00:00-06:00"
+      "startTime": "09:00:00-06:00",
+      "endTime": "11:00:00-06:00"
     }
   })} />
 
@@ -123,7 +123,7 @@ const basePath = "";
           <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 pt-2">
             <span class="px-4 py-2 rounded-xl bg-paper-card border border-paper-border text-ink text-xs sm:text-sm font-swiss font-bold flex items-center gap-2 shadow-subtle">
               <svg class="w-4 h-4 text-cacao shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-              <span>Todos los Sábados · 11:00 a 13:00 hrs</span>
+              <span>Todos los Sábados · 9:00 a 11:00 hrs</span>
             </span>
 
             <span class="px-4 py-2 rounded-xl bg-paper-card border border-paper-border text-ink text-xs sm:text-sm font-swiss font-bold flex items-center gap-2 shadow-subtle">
@@ -349,7 +349,7 @@ const basePath = "";
         <!-- Dinámica de las 2 Horas Sabatinas -->
         <div class="text-center max-w-3xl mx-auto space-y-3">
           <span class="px-3 py-1 rounded-full bg-paper-warm border border-paper-border text-ink text-[11px] font-swiss font-bold uppercase tracking-widest">
-            Cronometría Sabatina (11:00 a 13:00 hrs)
+            Cronometría Sabatina (9:00 a 11:00 hrs)
           </span>
           <h2 class="text-3xl sm:text-4xl font-monograph font-bold text-ink-deep">
             La Estructura Tríadica de <span class="italic text-cacao font-serif">Cada Sesión</span>
@@ -532,11 +532,70 @@ const basePath = "";
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {modulo.sesiones.map((sesion) => (
                   <div 
-                    class="session-card bg-paper-card rounded-3xl p-6 border border-paper-border shadow-subtle hover:border-cacao hover:shadow-elevated transition duration-300 flex flex-col justify-between space-y-4 group"
+                    class={`session-card bg-paper-card rounded-3xl p-6 border ${sesion.numero === 1 ? 'border-cacao shadow-elevated md:col-span-2 ring-1 ring-cacao/30' : 'border-paper-border shadow-subtle'} hover:border-cacao hover:shadow-elevated transition duration-300 flex flex-col justify-between space-y-4 group`}
                     data-search={`${sesion.titulo} ${sesion.ejeTeorico} ${sesion.conceptosClave.join(' ')} ${sesion.lecturasReferencia.map(l => l.autor + ' ' + l.obra).join(' ')} ${sesion.ejercicioAula.titulo} ${modulo.nombre}`.toLowerCase()}
                     data-semana={sesion.semana}
                   >
                     
+                    {/* Afiche Promocional Destacado para Clase 1 */}
+                    {sesion.numero === 1 && (
+                      <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-cacao/15 via-oro/10 to-paper-warm border-2 border-cacao/30 shadow-subtle flex flex-col sm:flex-row items-center gap-5">
+                        <div class="relative group/poster shrink-0 w-full sm:w-48 overflow-hidden rounded-xl border border-paper-border shadow-md">
+                          <img 
+                            src="/images/taller/foto-taller.jpeg" 
+                            alt="Cartel Oficial Clase 1: Taller Literario LVT-UJAT" 
+                            class="w-full h-48 object-cover group-hover/poster:scale-105 transition duration-300"
+                          />
+                          <a 
+                            href="/images/taller/foto-taller.jpeg" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            class="absolute inset-0 bg-black/40 opacity-0 group-hover/poster:opacity-100 flex items-center justify-center text-white text-xs font-swiss font-bold gap-1.5 transition"
+                          >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            <span>Ver Cartel</span>
+                          </a>
+                        </div>
+                        <div class="space-y-2 text-left flex-1">
+                          <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-600 text-white font-mono text-[11px] font-bold uppercase tracking-wider animate-pulse">
+                              ★ ¡Próxima Sesión! Clase 1
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full bg-cacao/15 text-cacao font-swiss text-[11px] font-bold uppercase">
+                              Sábado · 9:00 a 11:00 hrs
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full bg-oro/20 text-oro-dark font-swiss text-[11px] font-bold uppercase">
+                              Librería UJAT Centro
+                            </span>
+                          </div>
+                          <h5 class="text-lg sm:text-xl font-monograph font-bold text-ink-deep leading-tight">
+                            Convocatoria e Inicio de Clases Presenciales
+                          </h5>
+                          <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                            Iniciamos el ciclo continuo con la <strong>Clase 1: «El Umbral de la Escritura y la Voz Narrativa»</strong>. La asistencia es libre y gratuita para todo público, sin necesidad de inscripción previa ni costo alguno. Solo necesitas traer tu libreta, bolígrafo y entusiasmo por escribir.
+                          </p>
+                          <div class="pt-1 flex flex-wrap gap-2.5">
+                            <a 
+                              href="/images/taller/foto-taller.jpeg" 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-cacao text-white text-xs font-swiss font-bold hover:bg-cacao-dark transition shadow-sm"
+                            >
+                              <span>Descargar Afiche Oficial</span>
+                            </a>
+                            <a 
+                              href="https://wa.me/522205889391?text=Hola%2C%20confirmo%20mi%20asistencia%20a%20la%20Clase%201%20del%20Taller%20Literario%20LVT-UJAT%20este%20s%C3%A1bado%20de%209%20a%2011%20AM." 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-swiss font-bold transition shadow-sm"
+                            >
+                              <span>Confirmar Asistencia WhatsApp</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     <!-- Header Sesión -->
                     <div class="space-y-3">
                       <div class="flex items-center justify-between">
@@ -902,7 +961,7 @@ const basePath = "";
         `💡 *Eje Teórico:* ${teoria}\n\n` +
         `📚 *Lecturas Canónicas:* ${lecturas}\n\n` +
         `✍️ *Gimnasio Creativo:* ${ejercicio}\n\n` +
-        `📍 *Sábados 11:00 a 13:00 hrs* · Librería Universitaria UJAT (Entrada libre y gratuita)\n` +
+        `📍 *Sábados 9:00 a 11:00 hrs* · Librería Universitaria UJAT (Entrada libre y gratuita)\n` +
         `🌐 *Más detalles:* https://letrasyvocesdetabasco.org/taller-literario`;
 
       navigator.clipboard.writeText(text).then(() => {
