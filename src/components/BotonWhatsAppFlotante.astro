@@ -7,24 +7,24 @@ interface Props {
 }
 
 const {
-  mensajePredefinido = "Hola, deseo información sobre las publicaciones y actividades de Letras y Voces de Tabasco, A.C."
+  mensajePredefinido = "Hola, deseo información sobre las actividades y publicaciones de Letras y Voces de Tabasco."
 } = Astro.props;
 
 const urlWhatsApp = `https://wa.me/522205889391?text=${encodeURIComponent(mensajePredefinido)}`;
 ---
 
-<div class="fixed bottom-5 right-5 z-30 flex items-center group pointer-events-auto">
+<div class="fixed bottom-6 sm:bottom-8 right-5 sm:right-7 z-40 flex items-center group pointer-events-auto pb-[env(safe-area-inset-bottom,0px)]">
   <!-- Etiqueta flotante en desktop al hacer hover -->
   <span class="hidden md:inline-block mr-2.5 px-3 py-1.5 rounded-xl bg-[#191614]/90 text-white font-sans text-xs font-bold shadow-lg backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none border border-white/10">
     Atención Inmediata LVT
   </span>
 
-  <!-- Botón Circular Táctil (Mínimo 50x50 px) -->
+  <!-- Botón Circular Táctil (Ergonómico 56x56 px) -->
   <a 
     href={urlWhatsApp}
     target="_blank" 
     rel="noopener noreferrer" 
-    class="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-108 active:scale-95 border-2 border-white/80 focus:outline-none focus:ring-4 focus:ring-[#25D366]/40 cursor-pointer"
+    class="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1EBE5D] text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-108 active:scale-95 border-2 border-white/80 focus:outline-none focus:ring-4 focus:ring-[#25D366]/40 cursor-pointer"
     aria-label="Contactar por WhatsApp Oficial a Letras y Voces de Tabasco (+52 220 588 9391)"
     title="Atención oficial por WhatsApp LVT"
   >

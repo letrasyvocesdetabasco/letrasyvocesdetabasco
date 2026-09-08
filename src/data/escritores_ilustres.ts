@@ -31,6 +31,7 @@ export interface EscritorIlustre {
   badge: string;
   foto: string;
   fotoFallback: string;
+  imagen?: string;
   semblanzaSintetica: string;
   biografiaCompleta: string[];
   obrasCapitales: ObraCapital[];
