@@ -86,7 +86,14 @@ const basePath = "";
     </p>
 
     <!-- Botones de Acción Editorial con Feedback Táctil de 48px -->
-    <div class="flex flex-wrap gap-3.5 justify-center w-full max-w-3xl mb-12">
+    <div class="flex flex-wrap gap-3.5 justify-center w-full max-w-4xl mb-12">
+      <a 
+        href={`${basePath}/escritores-ilustres`} 
+        class="touch-target-48 inline-flex items-center px-6 py-3 rounded-2xl bg-gradient-to-r from-[#EF7B38] to-[#B84E20] hover:brightness-110 text-white font-swiss text-xs sm:text-sm font-bold uppercase tracking-wider shadow-elevated hover:scale-102 active:scale-95 transition duration-200 gap-2 cursor-pointer border border-[#EF7B38]/50"
+      >
+        <span>🏛️ Canon 30 Autores</span>
+      </a>
+
       <a 
         href={`${basePath}/publicaciones`} 
         class="touch-target-48 inline-flex items-center px-7 py-3 rounded-2xl bg-cacao hover:bg-cacao-dark text-white font-swiss text-xs sm:text-sm font-bold uppercase tracking-wider shadow-elevated hover:scale-102 active:scale-95 transition duration-200 gap-2 cursor-pointer border border-cacao-light/20"

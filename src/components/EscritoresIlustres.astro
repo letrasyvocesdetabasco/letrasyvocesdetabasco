@@ -59,34 +59,10 @@ const basePath = "";
       </div>
     </div>
 
-    <!-- BANNER MAESTRO DE DESCARGA DEL CANON COMPLETO EN ZIP -->
-    <div class="max-w-4xl mx-auto mb-10 bg-gradient-to-r from-[#191614] via-[#2D2620] to-[#191614] rounded-2xl p-5 sm:p-6 border border-[#C5A059]/40 shadow-xl text-white flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3.5 text-left">
-        <div class="w-12 h-12 rounded-xl bg-[#EF7B38]/20 border border-[#EF7B38]/40 flex items-center justify-center text-2xl shrink-0">
-          📦
-        </div>
-        <div>
-          <h3 class="text-sm sm:text-base font-serif font-black text-[#F6F0E2]">
-            Canon Literario Completo en un Solo Archivo (ZIP)
-          </h3>
-          <p class="text-[11px] sm:text-xs text-gray-300 font-sans mt-0.5">
-            Descargue las 30 monografías críticas íntegras (162,135 palabras), fichas de metadatos y retratos históricos normalizados.
-          </p>
-        </div>
-      </div>
-
-      <a 
-        href="/descargas/LVT_CANON_LITERARIO_30_AUTORES.zip" 
-        download="LVT_CANON_LITERARIO_30_AUTORES.zip"
-        class="shrink-0 px-5 py-2.5 rounded-xl bg-[#EF7B38] hover:bg-[#8F3812] text-white text-xs font-title font-bold tracking-wider uppercase transition shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer active:scale-95"
-      >
-        <span>📥 Descargar ZIP (6.1 MB)</span>
-      </a>
-    </div>
 
     <!-- REPRODUCTOR SONORO AMBIENTAL DE ALTA FIDELIDAD -->
-    <div class="max-w-4xl mx-auto mb-10 bg-white/90 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-[#E3D7C5] shadow-elevated flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300 hover:border-[#C5A059]">
-      <div class="flex items-center gap-4 w-full md:w-auto">
+    <div class="reproductor-card max-w-4xl mx-auto mb-10 bg-white/90 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-[#E3D7C5] shadow-elevated flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300 hover:border-[#C5A059]">
+      <div class="flex items-center gap-4 w-full md:w-auto min-w-0">
         <button 
           type="button" 
           id="btn-reproductor-toggle" 
@@ -101,32 +77,33 @@ const basePath = "";
           </svg>
         </button>
 
-        <div class="text-left">
+        <div class="text-left min-w-0 flex-1">
           <div class="flex items-center gap-2">
-            <span class="text-[10px] font-title font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#C5A059]/15 text-[#7A5B1E]">
+            <span class="text-[10px] font-title font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#C5A059]/15 text-[#7A5B1E] shrink-0">
               Atmósfera Sonora
             </span>
-            <div id="visualizer-bars" class="hidden flex items-end gap-1 h-3.5">
+            <div id="visualizer-bars" class="hidden items-end gap-1 h-3.5">
               <span class="w-0.5 bg-[#EF7B38] h-3 animate-pulse"></span>
               <span class="w-0.5 bg-[#C5A059] h-2 animate-bounce"></span>
               <span class="w-0.5 bg-[#EF7B38] h-3.5 animate-pulse"></span>
               <span class="w-0.5 bg-[#C5A059] h-1.5 animate-bounce"></span>
             </div>
           </div>
-          <p id="player-track-name" class="text-xs sm:text-sm font-serif font-bold text-[#191614] truncate max-w-[240px] sm:max-w-xs">
+          <p id="player-track-name" class="text-xs sm:text-sm font-serif font-bold text-[#191614] truncate">
             Claude Debussy — Claro de Luna
           </p>
-          <p class="text-[11px] text-[#7A7268] font-sans">
+          <p class="text-[11px] text-[#7A7268] font-sans truncate">
             Música clásica y grabaciones patrimoniales en alta fidelidad
           </p>
         </div>
       </div>
 
       <!-- Selector de Pista y Volumen -->
-      <div class="flex items-center justify-end gap-3 w-full md:w-auto">
+      <div class="flex flex-wrap sm:flex-nowrap items-center justify-between sm:justify-end gap-2.5 sm:gap-3 w-full md:w-auto">
         <select 
           id="select-audio-track" 
-          class="text-xs font-title font-bold bg-[#FAF7F0] border border-[#E3D7C5] rounded-xl px-3 py-2 text-[#191614] focus:outline-none focus:border-[#EF7B38] cursor-pointer"
+          class="min-h-[44px] w-full sm:w-auto max-w-full sm:max-w-xs text-xs font-title font-bold bg-[#FAF7F0] border border-[#E3D7C5] rounded-xl px-3 py-2 text-[#191614] focus:outline-none focus:border-[#EF7B38] cursor-pointer truncate"
+          aria-label="Seleccionar pista ambiental para lectura"
         >
           <option value="/assets/audio/debussy_clair_de_lune.mp3">🎹 Claude Debussy — Claro de Luna</option>
           <option value="/assets/audio/chopin_nocturne_op9.mp3">🎹 Frédéric Chopin — Nocturno Op. 9</option>
@@ -140,7 +117,7 @@ const basePath = "";
           <option value="/assets/audio/guitarra_poetica_suave.mp3">🎸 Guitarra Poética de Cuerdas</option>
         </select>
 
-        <div class="flex items-center gap-1.5 text-xs text-[#7A7268]">
+        <div class="flex items-center gap-1.5 text-xs text-[#7A7268] shrink-0">
           <svg class="w-4 h-4 text-[#7A5B1E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
           </svg>
@@ -153,6 +130,7 @@ const basePath = "";
             value="0.35" 
             class="w-16 sm:w-20 accent-[#EF7B38] cursor-pointer" 
             title="Volumen"
+            aria-label="Control de volumen de audio"
           />
         </div>
       </div>
@@ -162,18 +140,18 @@ const basePath = "";
     <!-- CONTROLES: FILTROS POR BLOQUE CANÓNICO Y BUSCADOR REACTIVO -->
     <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
       
-      <!-- Filtros por Bloque Canónico -->
-      <div class="flex flex-wrap justify-center gap-2" id="filter-container">
-        <button type="button" class="category-btn active px-4 py-2 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-[#EF7B38] text-white shadow-sm transition cursor-pointer" data-filter="all">
+      <!-- Filtros por Bloque Canónico con Ergonomía Táctil -->
+      <div class="flex flex-wrap justify-center gap-2 max-w-full overflow-x-auto pb-1" id="filter-container">
+        <button type="button" class="category-btn active min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-[#EF7B38] text-white shadow-sm transition cursor-pointer flex items-center justify-center shrink-0" data-filter="all">
           Todos ({ESCRITORES_ILUSTRES.length})
         </button>
-        <button type="button" class="category-btn px-4 py-2 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle" data-filter="tabasquenos">
+        <button type="button" class="category-btn min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle flex items-center justify-center shrink-0" data-filter="tabasquenos">
           🌴 Tabasqueños (12)
         </button>
-        <button type="button" class="category-btn px-4 py-2 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle" data-filter="mexicanos">
+        <button type="button" class="category-btn min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle flex items-center justify-center shrink-0" data-filter="mexicanos">
           🦅 Grandes de México (10)
         </button>
-        <button type="button" class="category-btn px-4 py-2 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle" data-filter="universales">
+        <button type="button" class="category-btn min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle flex items-center justify-center shrink-0" data-filter="universales">
           🌍 Universales (8)
         </button>
       </div>
@@ -184,30 +162,27 @@ const basePath = "";
           type="text" 
           id="input-buscar-ilustres" 
           placeholder="Buscar autor, obra, verso o región..." 
-          class="w-full pl-10 pr-4 py-2.5 text-xs font-sans rounded-xl bg-white border border-[#E3D7C5] text-[#191614] placeholder-gray-400 focus:outline-none focus:border-[#EF7B38] focus:ring-1 focus:ring-[#EF7B38] shadow-subtle transition"
+          class="w-full min-h-[44px] pl-10 pr-4 py-2.5 text-xs font-sans rounded-xl bg-white border border-[#E3D7C5] text-[#191614] placeholder-gray-400 focus:outline-none focus:border-[#EF7B38] focus:ring-1 focus:ring-[#EF7B38] shadow-subtle transition"
         />
-        <svg class="w-4 h-4 text-[#7A5B1E] absolute left-3.5 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-[#7A5B1E] absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </div>
 
     </div>
 
-    <!-- CUADRÍCULA 3D DE TARJETAS DE ESCRITORES ILUSTRES -->
-    <div id="grid-escritores" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
+    <!-- CUADRÍCULA ESTABLE DE TARJETAS DE ESCRITORES ILUSTRES (SIN DEFORMACIÓN 3D) -->
+    <div id="grid-escritores" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {ESCRITORES_ILUSTRES.map((autor) => {
         const primeraCita = autor.citasMemorables[0] || { cita: 'La palabra viva perdura.', obra: 'Acervo' };
         const bloqueEtiqueta = autor.bloqueCanon === 'tabasquenos' ? '🌴 Tabasco' : autor.bloqueCanon === 'mexicanos' ? '🦅 México' : '🌍 Universal';
         return (
           <article 
-            class="card-3d group relative bg-white rounded-3xl border border-[#E3D7C5] shadow-elevated p-6 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:border-[#EF7B38] hover:shadow-2xl cursor-pointer"
+            class="canon-card group relative bg-white rounded-3xl border border-[#E3D7C5] shadow-elevated p-6 flex flex-col justify-between overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-[#EF7B38]"
             data-category={`${autor.bloqueCanon} ${autor.categoria}`}
             data-search={`${autor.nombre.toLowerCase()} ${autor.tituloHonorifico.toLowerCase()} ${autor.municipioOrigen.toLowerCase()} ${autor.bloqueCanon} ${autor.obrasCapitales.map(o => o.titulo.toLowerCase()).join(' ')} ${primeraCita.cita.toLowerCase()}`}
             data-id={autor.id}
           >
-            <!-- Brillo especular dinámico que sigue el cursor -->
-            <div class="card-shine absolute inset-0 pointer-events-none rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
             <!-- Cabecera de la tarjeta con Retrato y Badge -->
             <div>
               <div class="flex items-center justify-between gap-2 mb-4">
@@ -219,12 +194,12 @@ const basePath = "";
                 </span>
               </div>
 
-              <!-- Retrato con Marco Editorial y Efecto Profundidad 3D -->
-              <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#FAF7F0] border border-[#E3D7C5] mb-5 shadow-subtle group-hover:scale-[1.02] transition-transform duration-500">
+              <!-- Retrato con Marco Editorial y Proporción Canónica Vertical 4:5 -->
+              <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#FAF7F0] border border-[#E3D7C5] mb-5 shadow-subtle">
                 <img 
                   src={`${basePath}${autor.foto}`} 
                   alt={autor.nombre} 
-                  class="w-full h-full object-cover object-center"
+                  class="w-full h-full object-cover object-top"
                   loading="lazy"
                   onerror={`this.onerror=null; this.src='${basePath}${autor.fotoFallback}'`}
                 />
@@ -254,9 +229,10 @@ const basePath = "";
                   <span class="truncate max-w-[170px] font-bold">— {primeraCita.obra}</span>
                   <button 
                     type="button" 
-                    class="btn-copiar-cita text-[#EF7B38] hover:text-[#8F3812] font-bold transition flex items-center gap-1 cursor-pointer"
+                    class="btn-copiar-cita min-h-[36px] px-2.5 py-1.5 rounded-lg hover:bg-[#EF7B38]/10 text-[#EF7B38] hover:text-[#8F3812] font-bold transition flex items-center gap-1 cursor-pointer"
                     data-cita={`«${primeraCita.cita}» — ${autor.nombre}, ${primeraCita.obra}. Compartido desde letrasyvocesdetabasco.org`}
                     title="Copiar cita para compartir"
+                    aria-label={`Copiar cita de ${autor.nombre} al portapapeles`}
                   >
                     <span>Copiar</span>
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -281,11 +257,11 @@ const basePath = "";
               </div>
             </div>
 
-            <!-- Botones de Acción Dual: Semblanza o Lectura de Dossier -->
+            <!-- Botones de Acción Dual: Semblanza o Lectura de Dossier con Ergonomía Táctil -->
             <div class="mt-6 pt-4 border-t border-[#E3D7C5]/70 flex items-center justify-between gap-2">
               <button 
                 type="button" 
-                class="btn-abrir-modal w-1/2 py-2.5 rounded-xl bg-[#FAF7F0] hover:bg-[#F2ECE1] text-[#191614] border border-[#E3D7C5] text-[11px] font-title font-bold uppercase tracking-wider transition flex items-center justify-center gap-1 shadow-xs cursor-pointer active:scale-95"
+                class="btn-abrir-modal min-h-[44px] w-1/2 py-2.5 px-2 rounded-xl bg-[#FAF7F0] hover:bg-[#F2ECE1] text-[#191614] border border-[#E3D7C5] text-[11px] font-title font-bold uppercase tracking-wider transition flex items-center justify-center gap-1 shadow-xs cursor-pointer active:scale-95"
                 data-autor-id={autor.id}
                 data-tab="semblanza"
               >
@@ -294,7 +270,7 @@ const basePath = "";
 
               <button 
                 type="button" 
-                class="btn-abrir-modal w-1/2 py-2.5 rounded-xl bg-[#191614] hover:bg-[#EF7B38] text-white text-[11px] font-title font-bold uppercase tracking-wider transition flex items-center justify-center gap-1 shadow-sm cursor-pointer active:scale-95"
+                class="btn-abrir-modal min-h-[44px] w-1/2 py-2.5 px-2 rounded-xl bg-[#191614] hover:bg-[#EF7B38] text-white text-[11px] font-title font-bold uppercase tracking-wider transition flex items-center justify-center gap-1 shadow-sm cursor-pointer active:scale-95"
                 data-autor-id={autor.id}
                 data-tab="dossier"
               >
@@ -312,41 +288,62 @@ const basePath = "";
   <!-- 2. MODAL BIOGRÁFICO & VISOR INTEGRAL DE DOSSIER CANÓNICO -->
   <dialog 
     id="dialog-biografia-ilustre" 
+    closedby="any"
+    aria-label="Expediente canónico y semblanza biográfica"
     class="backdrop:bg-black/75 backdrop:backdrop-blur-md bg-transparent p-2 sm:p-4 max-w-5xl w-full mx-auto my-auto rounded-3xl border-0 overflow-visible focus:outline-none"
   >
     <div class="relative bg-[#FAF7F0] rounded-3xl border-2 border-[#C5A059] shadow-2xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto custom-scrollbar text-[#191614] flex flex-col">
       
-      <!-- Barra Superior de Control del Modal -->
-      <div class="flex items-center justify-between border-b border-[#E3D7C5] pb-4 mb-6">
-        <!-- Pestañas de Navegación del Modal -->
-        <div class="flex items-center gap-2">
+      <!-- Barra Superior de Control del Modal (Ergonomía Táctil y Móvil) -->
+      <div class="border-b border-[#E3D7C5] pb-4 mb-6">
+        <!-- Fila de Cabecera Móvil con Título y Botón Cerrar (en móvil <sm) -->
+        <div class="flex sm:hidden items-center justify-between mb-3.5 gap-2">
+          <span class="text-[11px] font-title font-extrabold uppercase tracking-wider text-[#EF7B38] flex items-center gap-1.5 truncate">
+            <span>🏛️</span>
+            <span>Canon Literario LVT</span>
+          </span>
           <button 
             type="button" 
-            id="tab-btn-semblanza" 
-            class="px-3.5 py-1.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-[#EF7B38] text-white shadow-xs transition cursor-pointer"
+            class="btn-cerrar-modal-mobile min-w-[44px] min-h-[44px] rounded-full bg-[#191614] hover:bg-[#EF7B38] text-white flex items-center justify-center transition-colors shadow-md cursor-pointer shrink-0"
+            aria-label="Cerrar ventana"
           >
-            📜 Semblanza & Obras
-          </button>
-          <button 
-            type="button" 
-            id="tab-btn-dossier" 
-            class="px-3.5 py-1.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer"
-          >
-            📖 Dossier Canónico Completo
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+            </svg>
           </button>
         </div>
 
-        <!-- Botón de Cerrar Modal -->
-        <button 
-          type="button" 
-          id="btn-cerrar-modal" 
-          class="w-9 h-9 rounded-full bg-[#191614] hover:bg-[#EF7B38] text-white flex items-center justify-center transition-colors shadow-md cursor-pointer shrink-0 ml-3"
-          aria-label="Cerrar ventana"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <div class="flex items-center justify-between gap-3">
+          <!-- Pestañas de Navegación del Modal (2 columnas simétricas en móvil, inline en desktop) -->
+          <div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
+            <button 
+              type="button" 
+              id="tab-btn-semblanza" 
+              class="min-h-[44px] px-3 sm:px-4 py-2 rounded-xl text-[11px] sm:text-xs font-title font-bold uppercase tracking-wider bg-[#EF7B38] text-white shadow-xs transition cursor-pointer flex items-center justify-center text-center"
+            >
+              📜 Semblanza & Obras
+            </button>
+            <button 
+              type="button" 
+              id="tab-btn-dossier" 
+              class="min-h-[44px] px-3 sm:px-4 py-2 rounded-xl text-[11px] sm:text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer flex items-center justify-center text-center"
+            >
+              📖 Dossier Canónico
+            </button>
+          </div>
+
+          <!-- Botón de Cerrar Modal (Desktop sm en adelante) -->
+          <button 
+            type="button" 
+            id="btn-cerrar-modal" 
+            class="hidden sm:flex min-w-[44px] min-h-[44px] rounded-full bg-[#191614] hover:bg-[#EF7B38] text-white items-center justify-center transition-colors shadow-md cursor-pointer shrink-0 ml-auto sm:ml-3"
+            aria-label="Cerrar ventana"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <!-- Vista 1: Semblanza Biográfica y Obras -->
@@ -365,26 +362,21 @@ const basePath = "";
             <span class="text-[11px] font-title font-bold uppercase tracking-wider text-[#7A5B1E]">
               Tamaño de Fuente:
             </span>
-            <button type="button" id="dossier-font-dec" class="w-7 h-7 rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition">A-</button>
-            <button type="button" id="dossier-font-inc" class="w-7 h-7 rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition">A+</button>
+            <button type="button" id="dossier-font-dec" class="min-w-[44px] min-h-[44px] rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition flex items-center justify-center" aria-label="Reducir fuente">A-</button>
+            <button type="button" id="dossier-font-inc" class="min-w-[44px] min-h-[44px] rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition flex items-center justify-center" aria-label="Aumentar fuente">A+</button>
           </div>
 
           <div class="flex items-center gap-2">
-            <a 
-              id="btn-descargar-dossier-md" 
-              href="#" 
-              download 
-              class="px-3 py-1.5 rounded-lg bg-[#FAF7F0] hover:bg-[#EF7B38] hover:text-white text-[#191614] border border-[#E3D7C5] text-xs font-title font-bold transition flex items-center gap-1.5"
-            >
-              <span>📥 Descargar Archivo (.md)</span>
-            </a>
+            <span class="text-[11px] font-mono text-[#7A5B1E] bg-[#FAF7F0] px-3 py-2 rounded-xl border border-[#E3D7C5]">
+              📜 Lectura Canónica en Línea
+            </span>
           </div>
         </div>
 
         <!-- Contenedor del texto del Dossier -->
         <div 
           id="dossier-reading-box" 
-          class="p-6 sm:p-10 bg-white rounded-2xl border border-[#E3D7C5] shadow-xs max-h-[65vh] overflow-y-auto custom-scrollbar font-serif text-base leading-relaxed text-[#191614]"
+          class="p-4 sm:p-8 md:p-10 bg-white rounded-2xl border border-[#E3D7C5] shadow-xs max-h-[65vh] overflow-y-auto overflow-x-hidden custom-scrollbar font-serif text-base leading-relaxed text-[#191614] break-words"
         >
           <div id="dossier-rendered-content" class="space-y-4 max-w-3xl mx-auto">
             <p class="italic text-center py-8 text-gray-500">Cargando texto canónico integral...</p>
@@ -399,7 +391,7 @@ const basePath = "";
   <!-- TOAST DE CONFIRMACIÓN AL COPIAR CITA -->
   <div 
     id="toast-copia" 
-    class="fixed bottom-6 right-6 z-50 bg-[#191614] text-white text-xs font-title font-bold px-4 py-3 rounded-xl shadow-2xl border border-[#EF7B38] flex items-center gap-2.5 transition-all duration-300 translate-y-20 opacity-0 pointer-events-none"
+    class="fixed bottom-6 right-4 left-4 sm:left-auto sm:right-6 max-w-sm z-50 bg-[#191614] text-white text-xs font-title font-bold px-4 py-3 rounded-xl shadow-2xl border border-[#EF7B38] flex items-center justify-center sm:justify-start gap-2.5 transition-all duration-300 translate-y-20 opacity-0 pointer-events-none"
   >
     <span class="text-[#EF7B38]">✓</span>
     <span>¡Cita copiada al portapapeles para compartir en redes!</span>
@@ -411,24 +403,31 @@ const basePath = "";
 <script id="datos-ilustres-json" type="application/json" set:html={JSON.stringify(ESCRITORES_ILUSTRES)}></script>
 
 <style>
-  /* PERSPECTIVA TRIDIMENSIONAL Y FÍSICAS DE GIRO SUAVE */
-  .perspective-1000 {
-    perspective: 1000px;
+  /* TARJETAS CANÓNICAS ERGONÓMICAS Y ESTABLES (SIN ROTACIÓN 3D) */
+  .canon-card {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
   }
 
-  .card-3d {
-    transform-style: preserve-3d;
-    transition: transform 0.15s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
-    will-change: transform;
+  /* Elevación discreta (3-4px) y sombra suave exclusivamente en desktop con cursor fino */
+  @media (hover: hover) and (pointer: fine) {
+    .canon-card:hover {
+      transform: translateY(-3.5px);
+      box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.09), 0 4px 10px -2px rgba(239, 123, 56, 0.08);
+      border-color: #EF7B38;
+    }
   }
 
-  /* Brillo especular dinámico que sigue el cursor */
-  .card-shine {
-    background: radial-gradient(
-      600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(239, 123, 56, 0.12),
-      transparent 60%
-    );
+  /* En pantallas táctiles y móviles, tarjetas 100% planas y estables */
+  @media (hover: none), (pointer: coarse) {
+    .canon-card {
+      transform: none !important;
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    }
+    .canon-card:hover,
+    .canon-card:active,
+    .canon-card:focus {
+      transform: none !important;
+    }
   }
 
   /* ANIMACIONES DE ENTRADA Y SALIDA PARA <dialog> */
@@ -465,8 +464,9 @@ const basePath = "";
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .card-3d {
+    .canon-card {
       transform: none !important;
+      transition: none !important;
     }
     dialog {
       transform: none !important;
@@ -492,17 +492,49 @@ const basePath = "";
     background-color: #141210 !important;
     border-color: #2D2721 !important;
   }
-  :global(html.modo-lectura) .card-3d {
+  :global(html.modo-lectura) .reproductor-card {
     background-color: #1C1916 !important;
     border-color: #383129 !important;
   }
-  :global(html.modo-lectura) .card-3d h3,
-  :global(html.modo-lectura) .card-3d blockquote,
-  :global(html.modo-lectura) .card-3d .text-ink {
+  :global(html.modo-lectura) #select-audio-track,
+  :global(html.modo-lectura) #input-buscar-ilustres {
+    background-color: #221E1A !important;
+    color: #EAE4D9 !important;
+    border-color: #383129 !important;
+  }
+  :global(html.modo-lectura) #player-track-name {
+    color: #FAF7F0 !important;
+  }
+  :global(html.modo-lectura) .canon-card {
+    background-color: #1C1916 !important;
+    border-color: #383129 !important;
+  }
+  :global(html.modo-lectura) .canon-card h3,
+  :global(html.modo-lectura) .canon-card strong,
+  :global(html.modo-lectura) .canon-card blockquote,
+  :global(html.modo-lectura) .canon-card .text-ink {
     color: #EAE4D9 !important;
   }
-  :global(html.modo-lectura) .card-3d .bg-white {
+  :global(html.modo-lectura) .canon-card .text-\[\#7A5B1E\] {
+    color: #D6A85B !important;
+  }
+  :global(html.modo-lectura) .canon-card .btn-abrir-modal:first-child {
     background-color: #24201C !important;
+    color: #EAE4D9 !important;
+    border-color: #383129 !important;
+  }
+  :global(html.modo-lectura) .canon-card .bg-white {
+    background-color: #24201C !important;
+  }
+  :global(html.modo-lectura) .canon-card .bg-\[\#FAF7F0\],
+  :global(html.modo-lectura) #dialog-biografia-ilustre .bg-\[\#FAF7F0\] {
+    background-color: #24201C !important;
+    border-color: #383129 !important;
+  }
+  :global(html.modo-lectura) .canon-card p,
+  :global(html.modo-lectura) .canon-card .text-\[\#222222\],
+  :global(html.modo-lectura) .canon-card .text-\[\#4A443E\] {
+    color: #D1C7B7 !important;
   }
   :global(html.modo-lectura) #dialog-biografia-ilustre > div {
     background-color: #181512 !important;
@@ -511,11 +543,34 @@ const basePath = "";
   }
   :global(html.modo-lectura) #dialog-biografia-ilustre .bg-white {
     background-color: #221E1A !important;
+    border-color: #383129 !important;
   }
+  :global(html.modo-lectura) #dialog-biografia-ilustre h1,
   :global(html.modo-lectura) #dialog-biografia-ilustre h2,
   :global(html.modo-lectura) #dialog-biografia-ilustre h3,
+  :global(html.modo-lectura) #dialog-biografia-ilustre h4,
   :global(html.modo-lectura) #dialog-biografia-ilustre strong {
     color: #FAF7F0 !important;
+  }
+  :global(html.modo-lectura) #dialog-biografia-ilustre blockquote {
+    background-color: #24201C !important;
+    color: #E8E2D5 !important;
+    border-color: #EF7B38 !important;
+  }
+  :global(html.modo-lectura) #dialog-biografia-ilustre hr {
+    border-color: #383129 !important;
+  }
+  :global(html.modo-lectura) #dialog-biografia-ilustre #tab-btn-semblanza:not(.bg-\[\#EF7B38\]),
+  :global(html.modo-lectura) #dialog-biografia-ilustre #tab-btn-dossier:not(.bg-\[\#EF7B38\]) {
+    background-color: #24201C !important;
+    color: #D6CEBE !important;
+    border-color: #383129 !important;
+  }
+  :global(html.modo-lectura) #dialog-biografia-ilustre #dossier-font-dec,
+  :global(html.modo-lectura) #dialog-biografia-ilustre #dossier-font-inc {
+    background-color: #24201C !important;
+    color: #EAE4D9 !important;
+    border-color: #383129 !important;
   }
   :global(html.modo-lectura) #dialog-biografia-ilustre p,
   :global(html.modo-lectura) #dialog-biografia-ilustre li {
@@ -524,6 +579,7 @@ const basePath = "";
   :global(html.modo-lectura) #dossier-reading-box {
     background-color: #161412 !important;
     color: #E8E2D5 !important;
+    border-color: #383129 !important;
   }
   :global(html.modo-lectura) .category-btn:not(.active) {
     background-color: #221E1A !important;
@@ -539,39 +595,8 @@ const basePath = "";
     if (!datosScript) return;
     const autores = JSON.parse(datosScript.textContent || '[]');
 
-    // 2. FÍSICAS 3D Y EFECTO BRILLO ESPECULAR
-    const cards = document.querySelectorAll('.card-3d');
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!prefersReducedMotion) {
-      cards.forEach(card => {
-        const cardEl = card as HTMLElement;
-        const shine = cardEl.querySelector('.card-shine') as HTMLElement;
-
-        cardEl.addEventListener('mousemove', (e) => {
-          const rect = cardEl.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          
-          const rotateX = ((y - centerY) / centerY) * -5;
-          const rotateY = ((x - centerX) / centerX) * 5;
-
-          cardEl.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
-          
-          if (shine) {
-            shine.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
-            shine.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-          }
-        });
-
-        cardEl.addEventListener('mouseleave', () => {
-          cardEl.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        });
-      });
-    }
+    // 2. REFERENCIAS ESTABLES DE TARJETAS CANÓNICAS
+    const cards = document.querySelectorAll('.canon-card');
 
     // 3. CANVAS DE PARTÍCULAS SUTILES
     const canvas = document.getElementById('canvas-atmosfera-lvt') as HTMLCanvasElement;
@@ -645,20 +670,39 @@ const basePath = "";
       audioPlayer.src = selectTrack.value;
       audioPlayer.volume = parseFloat(volumeSlider?.value || "0.35");
 
+      // Sincronización visual unificada con los eventos nativos de audio
+      audioPlayer.addEventListener('play', () => {
+        iconPlay?.classList.add('hidden');
+        iconPause?.classList.remove('hidden');
+        visualizer?.classList.remove('hidden');
+        visualizer?.classList.add('flex');
+
+        const currentModalBtn = document.querySelector('.btn-escuchar-autor') as HTMLButtonElement | null;
+        if (currentModalBtn) {
+          const btnTrack = currentModalBtn.getAttribute('data-audio');
+          if (btnTrack && audioPlayer.src.endsWith(btnTrack)) {
+            currentModalBtn.innerHTML = '<span>⏸ Pausar reproducción</span>';
+          }
+        }
+      });
+
+      audioPlayer.addEventListener('pause', () => {
+        iconPlay?.classList.remove('hidden');
+        iconPause?.classList.add('hidden');
+        visualizer?.classList.add('hidden');
+        visualizer?.classList.remove('flex');
+
+        const currentModalBtn = document.querySelector('.btn-escuchar-autor') as HTMLButtonElement | null;
+        if (currentModalBtn) {
+          currentModalBtn.innerHTML = '<span>▶ Reproducir esta obra</span>';
+        }
+      });
+
       btnPlayToggle.addEventListener('click', () => {
         if (audioPlayer.paused) {
-          audioPlayer.play().then(() => {
-            iconPlay?.classList.add('hidden');
-            iconPause?.classList.remove('hidden');
-            visualizer?.classList.remove('hidden');
-            visualizer?.classList.add('flex');
-          }).catch(err => console.log("Audio play error:", err));
+          audioPlayer.play().catch(err => console.log("Audio play error:", err));
         } else {
           audioPlayer.pause();
-          iconPlay?.classList.remove('hidden');
-          iconPause?.classList.add('hidden');
-          visualizer?.classList.add('hidden');
-          visualizer?.classList.remove('flex');
         }
       });
 
@@ -669,7 +713,7 @@ const basePath = "";
           trackNameEl.textContent = selectTrack.options[selectTrack.selectedIndex].text;
         }
         if (isPlaying) {
-          audioPlayer.play();
+          audioPlayer.play().catch(err => console.log("Audio play error:", err));
         }
       });
 
@@ -680,8 +724,11 @@ const basePath = "";
       audioPlayer.addEventListener('ended', () => {
         const nextIndex = (selectTrack.selectedIndex + 1) % selectTrack.options.length;
         selectTrack.selectedIndex = nextIndex;
-        selectTrack.dispatchEvent(new Event('change'));
-        audioPlayer.play();
+        audioPlayer.src = selectTrack.value;
+        if (trackNameEl) {
+          trackNameEl.textContent = selectTrack.options[nextIndex].text;
+        }
+        audioPlayer.play().catch(err => console.log("Autoplay next track error:", err));
       });
     }
 
@@ -736,58 +783,244 @@ const basePath = "";
     const viewSemblanza = document.getElementById('view-semblanza');
     const viewDossier = document.getElementById('view-dossier');
     const dossierRendered = document.getElementById('dossier-rendered-content');
-    const btnDescargarDossier = document.getElementById('btn-descargar-dossier-md') as HTMLAnchorElement;
     const readingBox = document.getElementById('dossier-reading-box');
     const fontDec = document.getElementById('dossier-font-dec');
     const fontInc = document.getElementById('dossier-font-inc');
 
     let currentAutor: any = null;
     let dossierFontSize = 16;
+    const btnCerrarMobile = document.querySelector('.btn-cerrar-modal-mobile');
 
-    // Función liviana para convertir Markdown a HTML limpio y legible
+    // Cache en memoria para dossiers cargados (ahorro de red y cambio instantáneo)
+    const dossierCache: Record<string, string> = {};
+
+    // Función liviana para convertir Markdown y textos canónicos a HTML limpio y legible
     function renderMarkdownToHtml(md: string): string {
       if (!md) return '';
-      let html = md
+
+      // Eliminar BOM UTF-8 si estuviera presente
+      const cleanMd = md.replace(/^\uFEFF/, '');
+
+      const escaped = cleanMd
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
-      // Headings
-      html = html.replace(/^# (.*$)/gim, '<h1 class="text-2xl sm:text-3xl font-serif font-black text-[#191614] mt-6 mb-4 pb-2 border-b-2 border-[#C5A059]">$1</h1>');
-      html = html.replace(/^## (.*$)/gim, '<h2 class="text-xl sm:text-2xl font-serif font-black text-[#EF7B38] mt-6 mb-3">$1</h2>');
-      html = html.replace(/^### (.*$)/gim, '<h3 class="text-lg font-serif font-bold text-[#7A5B1E] mt-5 mb-2">$1</h3>');
-      html = html.replace(/^#### (.*$)/gim, '<h4 class="text-base font-serif font-bold text-[#191614] mt-4 mb-1">$1</h4>');
+      const lines = escaped.split(/\r?\n/);
+      const out: string[] = [];
 
-      // Blockquotes
-      html = html.replace(/^\> (.*$)/gim, '<blockquote class="p-3 my-3 bg-[#FAF7F0] border-l-4 border-[#EF7B38] italic font-serif text-sm text-[#191614] rounded-r-lg">$1</blockquote>');
+      let currentP: string[] = [];
+      let currentList: 'ul' | 'ol' | null = null;
+      let currentQuote: string[] = [];
 
-      // Separadores
-      html = html.replace(/^---$/gim, '<hr class="my-6 border-[#E3D7C5]"/>');
+      function flushP() {
+        if (currentP.length > 0) {
+          const text = currentP.join('<br/>');
+          out.push(`<p class="my-3 leading-relaxed font-serif text-[#2D2926]">${text}</p>`);
+          currentP = [];
+        }
+      }
 
-      // Bold & Italic
-      html = html.replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold text-[#191614]">$1</strong>');
-      html = html.replace(/\*(.*?)\*/gim, '<em class="italic">$1</em>');
+      function flushQuote() {
+        if (currentQuote.length > 0) {
+          const text = currentQuote.join('<br/>');
+          out.push(`<blockquote class="p-3 my-3 bg-[#FAF7F0] border-l-4 border-[#EF7B38] italic font-serif text-sm text-[#191614] rounded-r-lg">${text}</blockquote>`);
+          currentQuote = [];
+        }
+      }
 
-      // Listas
-      html = html.replace(/^\* (.*$)/gim, '<li class="ml-4 list-disc">$1</li>');
-      html = html.replace(/^- (.*$)/gim, '<li class="ml-4 list-disc">$1</li>');
+      let inCodeBlock = false;
+      let codeBlockContent: string[] = [];
 
-      // Párrafos
-      html = html
-        .split('\n\n')
-        .map(p => {
-          p = p.trim();
-          if (!p) return '';
-          if (p.startsWith('<h') || p.startsWith('<blockquote') || p.startsWith('<hr') || p.startsWith('<li')) return p;
-          return `<p class="my-3 leading-relaxed font-serif text-[#2D2926]">${p.replace(/\n/g, '<br/>')}</p>`;
-        })
-        .join('');
+      function flushList() {
+        if (currentList) {
+          out.push(currentList === 'ul' ? '</ul>' : '</ol>');
+          currentList = null;
+        }
+      }
 
-      return html;
+      function flushCodeBlock() {
+        if (inCodeBlock) {
+          out.push(`<pre class="p-3 my-3 bg-[#1C1814] text-[#FAF7F0] rounded-xl overflow-x-auto text-xs font-mono border border-[#383129] leading-relaxed"><code>${codeBlockContent.join('\n')}</code></pre>`);
+          codeBlockContent = [];
+          inCodeBlock = false;
+        }
+      }
+
+      function formatInlines(str: string): string {
+        return str
+          // Enlaces Markdown [texto](url)
+          .replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#EF7B38] underline hover:text-[#8F3812] font-semibold">$1</a>')
+          // Negritas
+          .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#191614]">$1</strong>')
+          // Cursivas
+          .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
+          // Código en línea `código`
+          .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-[#FAF7F0] border border-[#E3D7C5] font-mono text-xs text-[#EF7B38]">$1</code>');
+      }
+
+      for (let i = 0; i < lines.length; i++) {
+        const rawLine = lines[i];
+        const line = rawLine.trim();
+
+        // Manejo de bloques de código delimitados (``` o ```json)
+        if (line.startsWith('```')) {
+          if (inCodeBlock) {
+            flushCodeBlock();
+          } else {
+            flushP();
+            flushQuote();
+            flushList();
+            inCodeBlock = true;
+            codeBlockContent = [];
+          }
+          continue;
+        }
+
+        if (inCodeBlock) {
+          codeBlockContent.push(rawLine);
+          continue;
+        }
+
+        if (!line) {
+          flushP();
+          flushQuote();
+          flushList();
+          continue;
+        }
+
+        // Reglas horizontales (---, ___, ***)
+        if (/^(_{3,}|-{3,}|\*{3,})$/.test(line)) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push('<hr class="my-6 border-[#E3D7C5]"/>');
+          continue;
+        }
+
+        // Título institucional inicial sin '#' (e.g. DOSSIER DOCUMENTAL Y CRÍTICO CANÓNICO)
+        if (/^DOSSIER\s+(DOCUMENTAL|CANÓNICO)/i.test(line)) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<div class="text-xs font-title font-bold uppercase tracking-widest text-[#C5A059] mb-1">${formatInlines(line)}</div>`);
+          continue;
+        }
+        if (/^AUTOR\s+N[°ºo]?\s+[0-9]+:.*$/i.test(line)) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<h1 class="text-2xl sm:text-3xl font-serif font-black text-[#191614] mt-2 mb-3 pb-2 border-b-2 border-[#C5A059]">${formatInlines(line)}</h1>`);
+          continue;
+        }
+
+        // Encabezado de Sección Formal (SECCIÓN 1: ...)
+        if (/^(SECCIÓN\s+[0-9]+:.*$)/i.test(line)) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<h2 class="text-xl sm:text-2xl font-serif font-black text-[#EF7B38] mt-8 mb-3 pb-1 border-b border-[#EF7B38]/30">${formatInlines(line)}</h2>`);
+          continue;
+        }
+
+        // Subtítulos con numeración romana (I. Entorno y Génesis...)
+        if (/^([IVXLCDM]+\.\s+.*$)/.test(line)) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<h3 class="text-lg sm:text-xl font-serif font-bold text-[#7A5B1E] mt-6 mb-2">${formatInlines(line)}</h3>`);
+          continue;
+        }
+
+        // Encabezados Markdown (#, ##, ###, ####)
+        if (line.startsWith('# ')) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<h1 class="text-2xl sm:text-3xl font-serif font-black text-[#191614] mt-6 mb-4 pb-2 border-b-2 border-[#C5A059]">${formatInlines(line.slice(2))}</h1>`);
+          continue;
+        }
+        if (line.startsWith('## ')) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<h2 class="text-xl sm:text-2xl font-serif font-black text-[#EF7B38] mt-6 mb-3">${formatInlines(line.slice(3))}</h2>`);
+          continue;
+        }
+        if (line.startsWith('### ')) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<h3 class="text-lg font-serif font-bold text-[#7A5B1E] mt-5 mb-2">${formatInlines(line.slice(4))}</h3>`);
+          continue;
+        }
+        if (line.startsWith('#### ')) {
+          flushP();
+          flushQuote();
+          flushList();
+          out.push(`<h4 class="text-base font-serif font-bold text-[#191614] mt-4 mb-1">${formatInlines(line.slice(5))}</h4>`);
+          continue;
+        }
+
+        // Citas en bloque (> ...)
+        if (line.startsWith('&gt; ') || line.startsWith('> ')) {
+          flushP();
+          flushList();
+          const quoteText = line.startsWith('&gt; ') ? line.slice(5) : line.slice(2);
+          currentQuote.push(formatInlines(quoteText));
+          continue;
+        } else {
+          flushQuote();
+        }
+
+        // Listas no ordenadas (* o -)
+        const ulMatch = line.match(/^[\*\-]\s+(.*)$/);
+        if (ulMatch) {
+          flushP();
+          flushQuote();
+          if (currentList !== 'ul') {
+            flushList();
+            out.push('<ul class="my-3 space-y-1 list-disc pl-5">');
+            currentList = 'ul';
+          }
+          out.push(`<li class="text-sm font-serif text-[#2D2926] my-1">${formatInlines(ulMatch[1])}</li>`);
+          continue;
+        }
+
+        // Listas ordenadas (1. 2. etc.)
+        const olMatch = line.match(/^([0-9]+)\.\s+(.*)$/);
+        if (olMatch) {
+          flushP();
+          flushQuote();
+          if (currentList !== 'ol') {
+            flushList();
+            out.push('<ol class="my-3 space-y-1 list-decimal pl-5">');
+            currentList = 'ol';
+          }
+          out.push(`<li class="text-sm font-serif text-[#2D2926] my-1">${formatInlines(olMatch[2])}</li>`);
+          continue;
+        }
+
+        // Texto de párrafo regular
+        flushList();
+        currentP.push(formatInlines(line));
+      }
+
+      flushP();
+      flushQuote();
+      flushList();
+      flushCodeBlock();
+
+      return out.join('\n');
     }
 
     function cargarDossier(slug: string) {
       if (!dossierRendered) return;
+      if (dossierCache[slug]) {
+        dossierRendered.innerHTML = dossierCache[slug];
+        return;
+      }
+
       dossierRendered.innerHTML = '<p class="italic text-center py-8 text-gray-500">Cargando texto canónico integral...</p>';
       
       const dossierUrl = `/dossiers/${slug}.md`;
@@ -797,15 +1030,23 @@ const basePath = "";
           return res.text();
         })
         .then(text => {
-          dossierRendered.innerHTML = renderMarkdownToHtml(text);
+          const html = renderMarkdownToHtml(text);
+          dossierCache[slug] = html;
+          const currentSlug = currentAutor ? (currentAutor.dossierSlug || currentAutor.id) : '';
+          if (currentSlug === slug) {
+            dossierRendered.innerHTML = html;
+          }
         })
         .catch(err => {
-          dossierRendered.innerHTML = `
-            <div class="p-6 bg-red-50 text-red-800 rounded-xl border border-red-200 text-center">
-              <p class="font-bold">Aviso del Consejo Editorial:</p>
-              <p class="text-xs mt-1">El texto canónico está resguardado en el archivo maestro. Puede descargarlo directamente en el botón superior.</p>
-            </div>
-          `;
+          const currentSlug = currentAutor ? (currentAutor.dossierSlug || currentAutor.id) : '';
+          if (currentSlug === slug) {
+            dossierRendered.innerHTML = `
+              <div class="p-6 bg-amber-50 text-amber-900 rounded-xl border border-amber-200 text-center">
+                <p class="font-bold">Aviso del Consejo Editorial:</p>
+                <p class="text-xs mt-1">El texto canónico está en proceso de consulta o actualización.</p>
+              </div>
+            `;
+          }
         });
     }
 
@@ -845,178 +1086,236 @@ const basePath = "";
       if (readingBox) readingBox.style.fontSize = `${dossierFontSize}px`;
     });
 
+    // Función universal para abrir modal biográfico
+    function abrirModalAutor(id: string, initialTab: 'semblanza' | 'dossier' = 'semblanza') {
+      const autor = autores.find((a: any) => a.id === id);
+      if (!autor || !modalTarget || !dialog) return;
+
+      currentAutor = autor;
+      const bloqueEtiqueta = autor.bloqueCanon === 'tabasquenos' ? '🌴 Tabasco' : autor.bloqueCanon === 'mexicanos' ? '🦅 México' : '🌍 Universal';
+
+      modalTarget.innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Columna Izquierda: Placa / Retrato y Datos Clave -->
+          <div class="lg:col-span-4 space-y-4">
+            <div class="rounded-2xl overflow-hidden border-2 border-[#C5A059] bg-[#FAF7F0] shadow-md aspect-[4/5]">
+              <img 
+                src="${autor.foto}" 
+                alt="${autor.nombre}" 
+                class="w-full h-full object-cover object-top"
+                onerror="this.onerror=null; this.src='${autor.fotoFallback || autor.foto}';"
+              />
+            </div>
+            
+            <div class="bg-white p-4 rounded-xl border border-[#E3D7C5] shadow-xs text-xs space-y-2">
+              <p><strong>Nacimiento:</strong> ${autor.nacimiento}</p>
+              <p><strong>Fallecimiento:</strong> ${autor.fallecimiento}</p>
+              <p><strong>Origen:</strong> ${autor.municipioOrigen}</p>
+              <p><strong>Movimiento:</strong> ${autor.movimiento}</p>
+              <p><strong>Canon:</strong> ${bloqueEtiqueta} (⏱️ ${autor.tiempoLecturaMinutos || 30} min lectura)</p>
+            </div>
+
+            <!-- Pista recomendada de este autor -->
+            <div class="bg-[#FAF7F0] p-4 rounded-xl border border-[#C5A059]/50 text-xs">
+              <p class="font-title font-bold text-[#7A5B1E] uppercase tracking-wider text-[10px] mb-1">
+                Música recomendada para su lectura:
+              </p>
+              <p class="font-serif font-bold text-[#191614]">${autor.audioSugerido.titulo}</p>
+              <p class="text-[11px] text-[#7A7268]">${autor.audioSugerido.compositor}</p>
+              <button 
+                type="button" 
+                class="btn-escuchar-autor min-h-[44px] mt-2.5 w-full py-2 px-3 rounded-xl bg-[#EF7B38] hover:bg-[#8F3812] text-white text-xs font-title font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
+                data-audio="${autor.audioSugerido.archivo}"
+                data-name="${autor.audioSugerido.titulo}"
+              >
+                <span>▶ Reproducir esta obra</span>
+              </button>
+            </div>
+
+            <!-- Botón rápido al dossier -->
+            <button 
+              type="button" 
+              class="btn-ir-a-dossier min-h-[44px] w-full py-2.5 px-4 rounded-xl bg-[#191614] hover:bg-[#EF7B38] text-white text-xs font-title font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+            >
+              <span>📖 Leer Dossier Completo</span>
+            </button>
+          </div>
+
+          <!-- Columna Derecha: Biografía Extensa, Obras y Citas -->
+          <div class="lg:col-span-8 space-y-6">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-title font-bold uppercase tracking-wider bg-[#EF7B38]/10 text-[#EF7B38] mb-2 border border-[#EF7B38]/20">
+                ${bloqueEtiqueta} · ${autor.badge}
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#191614]">${autor.nombre}</h2>
+              <p class="text-sm font-serif italic text-[#7A5B1E] font-semibold mt-1">«${autor.tituloHonorifico}»</p>
+            </div>
+
+            <!-- Párrafos de Biografía Extensa -->
+            <div class="prose prose-sm font-serif text-[#2D2926] leading-relaxed space-y-3.5 border-t border-[#E3D7C5] pt-4">
+              ${autor.biografiaCompleta.map((p: string) => `<p>${p}</p>`).join('')}
+            </div>
+
+            <!-- Legado Patrimonial -->
+            <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs">
+              <p class="font-title font-bold text-amber-900 uppercase tracking-widest text-[10px] mb-1">🏛️ Legado para Tabasco y las Letras Universales</p>
+              <p class="font-serif italic text-[#2D2926] leading-relaxed">${autor.legadoPatrimonial}</p>
+            </div>
+
+            <!-- Obras Capitales Detalladas -->
+            <div class="space-y-3">
+              <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">📚 Obras Capitales & Bibliografía</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                ${autor.obrasCapitales.map((obra: any) => `
+                  <div class="p-3 bg-white rounded-xl border border-[#E3D7C5] shadow-xs">
+                    <div class="flex items-center justify-between gap-1 mb-1">
+                      <span class="font-serif font-bold text-xs text-[#191614]">${obra.titulo}</span>
+                      <span class="text-[10px] font-mono font-bold text-[#EF7B38]">${obra.anio}</span>
+                    </div>
+                    <p class="text-[10px] font-title text-[#7A5B1E] font-semibold uppercase">${obra.genero}</p>
+                    <p class="text-[11px] font-sans text-[#4A443E] mt-1 line-clamp-2">${obra.descripcion}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Citas Célebres -->
+            <div class="space-y-3">
+              <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">💬 Citas Textuales Célebres</h3>
+              <div class="space-y-2">
+                ${autor.citasMemorables.map((c: any) => `
+                  <div class="p-3.5 bg-white rounded-xl border-l-2 border-[#EF7B38] border-r border-t border-b border-[#E3D7C5] shadow-xs">
+                    <p class="font-serif italic text-xs text-[#191614]">«${c.cita}»</p>
+                    <p class="text-[10px] text-[#7A7268] font-title font-bold mt-1 text-right">— ${c.obra}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Datos Curiosos -->
+            <div class="space-y-2">
+              <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">💡 Datos Biográficos Curiosos</h3>
+              <ul class="list-disc pl-5 space-y-1 text-xs font-sans text-[#4A443E]">
+                ${autor.datosCuriosos.map((d: string) => `<li>${d}</li>`).join('')}
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+      // Evento al botón de audio dentro del modal (con alternancia Play/Pausa)
+      const btnEscuchar = modalTarget.querySelector('.btn-escuchar-autor') as HTMLButtonElement;
+      if (btnEscuchar && audioPlayer && !audioPlayer.paused) {
+        const initialTrack = btnEscuchar.getAttribute('data-audio');
+        if (initialTrack && audioPlayer.src.endsWith(initialTrack)) {
+          btnEscuchar.innerHTML = '<span>⏸ Pausar reproducción</span>';
+        }
+      }
+
+      btnEscuchar?.addEventListener('click', () => {
+        const trackUrl = btnEscuchar.getAttribute('data-audio');
+        const trackTitle = btnEscuchar.getAttribute('data-name');
+        if (audioPlayer && trackUrl) {
+          if (audioPlayer.src.endsWith(trackUrl) && !audioPlayer.paused) {
+            audioPlayer.pause();
+          } else {
+            audioPlayer.src = trackUrl;
+            if (trackNameEl) trackNameEl.textContent = trackTitle || 'Pista de Autor';
+            for (let i = 0; i < selectTrack.options.length; i++) {
+              if (selectTrack.options[i].value === trackUrl) {
+                selectTrack.selectedIndex = i;
+                break;
+              }
+            }
+            audioPlayer.play().catch(e => console.log(e));
+          }
+        }
+      });
+
+      // Evento botón ir a dossier
+      const btnIrDossier = modalTarget.querySelector('.btn-ir-a-dossier');
+      btnIrDossier?.addEventListener('click', () => {
+        switchTab('dossier');
+      });
+
+      switchTab(initialTab === 'dossier' ? 'dossier' : 'semblanza');
+
+      // Resetear desplazamiento para iniciar lectura siempre desde el inicio
+      const modalBox = dialog.querySelector('.custom-scrollbar');
+      if (modalBox) modalBox.scrollTop = 0;
+      if (readingBox) readingBox.scrollTop = 0;
+
+      // Preservar elemento previo para restaurar foco al cerrar (Accesibilidad WCAG)
+      lastFocusedElement = document.activeElement as HTMLElement;
+
+      // Bloquear scroll de la página de fondo durante la lectura inmersiva
+      document.body.style.overflow = 'hidden';
+      dialog.showModal();
+    }
+
+    let lastFocusedElement: HTMLElement | null = null;
+
+    // Apertura por botones explícitos de Semblanza / Dossier
     botonesModal.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-autor-id');
-        const initialTab = btn.getAttribute('data-tab') || 'semblanza';
-        const autor = autores.find((a: any) => a.id === id);
-        if (!autor || !modalTarget || !dialog) return;
-
-        currentAutor = autor;
-
-        if (btnDescargarDossier) {
-          btnDescargarDossier.href = `/dossiers/${autor.dossierSlug || autor.id}.md`;
-          btnDescargarDossier.download = `${autor.dossierSlug || autor.id}_dossier_canonico.md`;
-        }
-
-        const bloqueEtiqueta = autor.bloqueCanon === 'tabasquenos' ? '🌴 Tabasco' : autor.bloqueCanon === 'mexicanos' ? '🦅 México' : '🌍 Universal';
-
-        modalTarget.innerHTML = `
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- Columna Izquierda: Placa / Retrato y Datos Clave -->
-            <div class="lg:col-span-4 space-y-4">
-              <div class="rounded-2xl overflow-hidden border-2 border-[#C5A059] bg-[#FAF7F0] shadow-md">
-                <img 
-                  src="${autor.foto}" 
-                  alt="${autor.nombre}" 
-                  class="w-full h-auto object-cover"
-                />
-              </div>
-              
-              <div class="bg-white p-4 rounded-xl border border-[#E3D7C5] shadow-xs text-xs space-y-2">
-                <p><strong>Nacimiento:</strong> ${autor.nacimiento}</p>
-                <p><strong>Fallecimiento:</strong> ${autor.fallecimiento}</p>
-                <p><strong>Origen:</strong> ${autor.municipioOrigen}</p>
-                <p><strong>Movimiento:</strong> ${autor.movimiento}</p>
-                <p><strong>Canon:</strong> ${bloqueEtiqueta} (⏱️ ${autor.tiempoLecturaMinutos || 30} min lectura)</p>
-              </div>
-
-              <!-- Pista recomendada de este autor -->
-              <div class="bg-[#FAF7F0] p-4 rounded-xl border border-[#C5A059]/50 text-xs">
-                <p class="font-title font-bold text-[#7A5B1E] uppercase tracking-wider text-[10px] mb-1">
-                  Música recomendada para su lectura:
-                </p>
-                <p class="font-serif font-bold text-[#191614]">${autor.audioSugerido.titulo}</p>
-                <p class="text-[11px] text-[#7A7268]">${autor.audioSugerido.compositor}</p>
-                <button 
-                  type="button" 
-                  class="btn-escuchar-autor mt-2.5 w-full py-1.5 px-3 rounded-lg bg-[#EF7B38] hover:bg-[#8F3812] text-white text-[11px] font-title font-bold transition flex items-center justify-center gap-1.5 cursor-pointer"
-                  data-audio="${autor.audioSugerido.archivo}"
-                  data-name="${autor.audioSugerido.titulo}"
-                >
-                  <span>▶ Reproducir esta obra</span>
-                </button>
-              </div>
-
-              <!-- Botón rápido al dossier -->
-              <button 
-                type="button" 
-                class="btn-ir-a-dossier w-full py-2.5 px-4 rounded-xl bg-[#191614] hover:bg-[#EF7B38] text-white text-xs font-title font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-              >
-                <span>📖 Leer Dossier Completo</span>
-              </button>
-            </div>
-
-            <!-- Columna Derecha: Biografía Extensa, Obras y Citas -->
-            <div class="lg:col-span-8 space-y-6">
-              <div>
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-title font-bold uppercase tracking-wider bg-[#EF7B38]/10 text-[#EF7B38] mb-2 border border-[#EF7B38]/20">
-                  ${bloqueEtiqueta} · ${autor.badge}
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-serif font-black text-[#191614]">${autor.nombre}</h2>
-                <p class="text-sm font-serif italic text-[#7A5B1E] font-semibold mt-1">«${autor.tituloHonorifico}»</p>
-              </div>
-
-              <!-- Párrafos de Biografía Extensa -->
-              <div class="prose prose-sm font-serif text-[#2D2926] leading-relaxed space-y-3.5 border-t border-[#E3D7C5] pt-4">
-                ${autor.biografiaCompleta.map((p: string) => `<p>${p}</p>`).join('')}
-              </div>
-
-              <!-- Legado Patrimonial -->
-              <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs">
-                <p class="font-title font-bold text-amber-900 uppercase tracking-widest text-[10px] mb-1">🏛️ Legado para Tabasco y las Letras Universales</p>
-                <p class="font-serif italic text-[#2D2926] leading-relaxed">${autor.legadoPatrimonial}</p>
-              </div>
-
-              <!-- Obras Capitales Detalladas -->
-              <div class="space-y-3">
-                <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">📚 Obras Capitales & Bibliografía</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  ${autor.obrasCapitales.map((obra: any) => `
-                    <div class="p-3 bg-white rounded-xl border border-[#E3D7C5] shadow-xs">
-                      <div class="flex items-center justify-between gap-1 mb-1">
-                        <span class="font-serif font-bold text-xs text-[#191614]">${obra.titulo}</span>
-                        <span class="text-[10px] font-mono font-bold text-[#EF7B38]">${obra.anio}</span>
-                      </div>
-                      <p class="text-[10px] font-title text-[#7A5B1E] font-semibold uppercase">${obra.genero}</p>
-                      <p class="text-[11px] font-sans text-[#4A443E] mt-1 line-clamp-2">${obra.descripcion}</p>
-                    </div>
-                  `).join('')}
-                </div>
-              </div>
-
-              <!-- Citas Célebres -->
-              <div class="space-y-3">
-                <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">💬 Citas Textuales Célebres</h3>
-                <div class="space-y-2">
-                  ${autor.citasMemorables.map((c: any) => `
-                    <div class="p-3.5 bg-white rounded-xl border-l-2 border-[#EF7B38] border-r border-t border-b border-[#E3D7C5] shadow-xs">
-                      <p class="font-serif italic text-xs text-[#191614]">«${c.cita}»</p>
-                      <p class="text-[10px] text-[#7A7268] font-title font-bold mt-1 text-right">— ${c.obra}</p>
-                    </div>
-                  `).join('')}
-                </div>
-              </div>
-
-              <!-- Datos Curiosos -->
-              <div class="space-y-2">
-                <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">💡 Datos Biográficos Curiosos</h3>
-                <ul class="list-disc pl-5 space-y-1 text-xs font-sans text-[#4A443E]">
-                  ${autor.datosCuriosos.map((d: string) => `<li>${d}</li>`).join('')}
-                </ul>
-              </div>
-
-            </div>
-
-          </div>
-        `;
-
-        // Evento al botón de audio dentro del modal
-        const btnEscuchar = modalTarget.querySelector('.btn-escuchar-autor');
-        btnEscuchar?.addEventListener('click', () => {
-          const trackUrl = btnEscuchar.getAttribute('data-audio');
-          const trackTitle = btnEscuchar.getAttribute('data-name');
-          if (audioPlayer && trackUrl) {
-            audioPlayer.src = trackUrl;
-            if (trackNameEl) trackNameEl.textContent = trackTitle || 'Pista de Autor';
-            audioPlayer.play().then(() => {
-              iconPlay?.classList.add('hidden');
-              iconPause?.classList.remove('hidden');
-              visualizer?.classList.remove('hidden');
-              visualizer?.classList.add('flex');
-            }).catch(e => console.log(e));
-          }
-        });
-
-        // Evento botón ir a dossier
-        const btnIrDossier = modalTarget.querySelector('.btn-ir-a-dossier');
-        btnIrDossier?.addEventListener('click', () => {
-          switchTab('dossier');
-        });
-
-        switchTab(initialTab === 'dossier' ? 'dossier' : 'semblanza');
-
-        dialog.showModal();
+        const initialTab = (btn.getAttribute('data-tab') || 'semblanza') as 'semblanza' | 'dossier';
+        if (id) abrirModalAutor(id, initialTab);
       });
     });
 
-    // Cerrar modal al hacer clic en botón de cerrar o fuera del cuadro
-    btnCerrar?.addEventListener('click', () => dialog?.close());
-    dialog?.addEventListener('click', (e) => {
-      const rect = dialog.getBoundingClientRect();
-      if (
-        e.clientX < rect.left ||
-        e.clientX > rect.right ||
-        e.clientY < rect.top ||
-        e.clientY > rect.bottom
-      ) {
+    // Apertura por toque / clic en cualquier área de la tarjeta canónica
+    cards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('button') || target.closest('a')) return;
+        const id = card.getAttribute('data-id');
+        if (id) abrirModalAutor(id, 'semblanza');
+      });
+    });
+
+    // Control unificado de cierre del modal (Desktop y Móvil)
+    function cerrarModal() {
+      if (dialog && dialog.open) {
         dialog.close();
+      }
+    }
+
+    btnCerrar?.addEventListener('click', cerrarModal);
+    btnCerrarMobile?.addEventListener('click', cerrarModal);
+
+    // Restaurar scroll de fondo y devolver foco al cerrar por cualquier vía (botón, clic afuera o tecla ESC)
+    dialog?.addEventListener('close', () => {
+      document.body.style.overflow = '';
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
       }
     });
 
-    // 7. BOTÓN COPIAR CITA CON FEEDBACK VISUAL
+    // Cerrar al pulsar el backdrop (Light-dismiss con fallback según Modern Web Guidance)
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      dialog?.addEventListener('click', (event) => {
+        if (event.target !== dialog) return;
+        const innerContainer = dialog.firstElementChild as HTMLElement;
+        const rect = (innerContainer || dialog).getBoundingClientRect();
+        const isContent = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.bottom &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.right
+        );
+        if (!isContent) {
+          cerrarModal();
+        }
+      });
+    }
+
+    // 7. BOTÓN COPIAR CITA CON FEEDBACK VISUAL Y COMPATIBILIDAD ROBUSTA
     const toast = document.getElementById('toast-copia');
     const botonesCopiar = document.querySelectorAll('.btn-copiar-cita');
 
@@ -1024,17 +1323,47 @@ const basePath = "";
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const cita = btn.getAttribute('data-cita');
-        if (cita) {
-          navigator.clipboard.writeText(cita).then(() => {
-            if (toast) {
-              toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-              toast.classList.add('translate-y-0', 'opacity-100');
-              setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-                toast.classList.remove('translate-y-0', 'opacity-100');
-              }, 2500);
-            }
-          });
+        if (!cita) return;
+
+        function mostrarToast() {
+          if (toast) {
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+              toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+              toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 2500);
+          }
+        }
+
+        if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          navigator.clipboard.writeText(cita)
+            .then(mostrarToast)
+            .catch(() => {
+              try {
+                const ta = document.createElement('textarea');
+                ta.value = cita;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                mostrarToast();
+              } catch (err) {}
+            });
+        } else {
+          try {
+            const ta = document.createElement('textarea');
+            ta.value = cita;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            mostrarToast();
+          } catch (err) {}
         }
       });
     });

@@ -52,8 +52,51 @@ const basePath = "";
   </div>
 
   <!-- 2. Cuerpo Desplazable con Todas las Secciones -->
-  <div class="p-4 overflow-y-auto flex-1 space-y-2.5 font-swiss text-xs font-semibold uppercase tracking-wider">
+  <div class="p-4 overflow-y-auto flex-1 space-y-3 font-swiss text-xs font-semibold uppercase tracking-wider">
     
+    <!-- TARJETA DESTACADA SUPERIOR: CANON DE 30 AUTORES & MODO LECTURA -->
+    <div class="rounded-2xl p-4 bg-gradient-to-br from-[#EF7B38]/25 via-[#C5A059]/15 to-[#191614] border-2 border-[#EF7B38]/50 shadow-xl space-y-3">
+      <div class="flex items-center justify-between">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EF7B38] text-white text-[10px] font-swiss font-extrabold uppercase tracking-wider shadow-xs">
+          🏛️ Colección Patrimonial
+        </span>
+        <span class="text-[10px] font-mono font-bold text-[#C5A059]">30 Autores</span>
+      </div>
+      
+      <a 
+        href={`${basePath}/escritores-ilustres`} 
+        class="drawer-nav-item block group"
+      >
+        <strong class="font-serif font-black text-sm tracking-wide block text-white group-hover:text-[#EF7B38] transition leading-snug">
+          Panteón Canónico de Escritores Ilustres
+        </strong>
+        <span class="text-[11px] text-gray-300 font-sans normal-case block mt-0.5 leading-relaxed">
+          30 monografías exhaustivas, obras capitales y retratos sin cortes.
+        </span>
+      </a>
+
+      <div class="pt-2.5 border-t border-white/10 flex items-center justify-between gap-2">
+        <a 
+          href={`${basePath}/escritores-ilustres`}
+          class="drawer-nav-item flex-1 min-h-[44px] py-2.5 px-3 rounded-xl bg-[#EF7B38] hover:bg-[#8F3812] text-white text-center text-xs font-swiss font-bold uppercase tracking-wider active:scale-95 transition shadow-sm flex items-center justify-center gap-1.5"
+        >
+          <span>Acceder al Canon</span>
+          <span>→</span>
+        </a>
+        
+        <!-- Conmutador Accesible de Modo Lectura en Menú Móvil -->
+        <button 
+          type="button" 
+          id="drawer-modo-lectura-btn" 
+          class="min-h-[44px] px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-swiss font-bold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shrink-0"
+          aria-label="Alternar Modo Lectura en Menú Móvil"
+        >
+          <span id="drawer-icono-modo" class="text-sm">📖</span>
+          <span id="drawer-texto-modo" class="text-[10px] font-mono uppercase">Modo Lectura</span>
+        </button>
+      </div>
+    </div>
+
     <!-- 1. INICIO -->
     <a 
       href={`${basePath}/`} 
@@ -325,6 +368,44 @@ const basePath = "";
           }
         });
       });
+
+      // Sincronización del Modo Lectura en el Drawer
+      var drawerModoBtn = document.getElementById('drawer-modo-lectura-btn');
+      var drawerIcono = document.getElementById('drawer-icono-modo');
+      var drawerTexto = document.getElementById('drawer-texto-modo');
+
+      function actualizarDrawerModo() {
+        var esLectura = document.documentElement.classList.contains('modo-lectura');
+        if (drawerTexto) drawerTexto.textContent = esLectura ? 'Modo Nosotros' : 'Modo Lectura';
+        if (drawerIcono) drawerIcono.textContent = esLectura ? '☀️' : '📖';
+        if (drawerModoBtn) {
+          if (esLectura) {
+            drawerModoBtn.classList.add('bg-[#EF7B38]/30', 'border-[#EF7B38]');
+            drawerModoBtn.classList.remove('bg-white/10', 'border-white/15');
+          } else {
+            drawerModoBtn.classList.remove('bg-[#EF7B38]/30', 'border-[#EF7B38]');
+            drawerModoBtn.classList.add('bg-white/10', 'border-white/15');
+          }
+        }
+      }
+
+      if (drawerModoBtn) {
+        actualizarDrawerModo();
+        drawerModoBtn.addEventListener('click', function() {
+          var actual = document.documentElement.classList.toggle('modo-lectura');
+          try {
+            localStorage.setItem('lvt-theme', actual ? 'lectura' : 'nosotros');
+          } catch(e) {}
+          actualizarDrawerModo();
+          window.dispatchEvent(new CustomEvent('lvt-theme-changed', { detail: { esLectura: actual } }));
+        });
+      }
+
+      window.addEventListener('lvt-theme-changed', function() {
+        actualizarDrawerModo();
+      });
+
+      actualizarDrawerModo();
     }
 
     if (document.readyState === 'loading') {

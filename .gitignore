@@ -17,3 +17,7 @@ pnpm-debug.log*
 # OS Generated Files
 .DS_Store
 Thumbs.db
+
+# Agent Workspaces and Temporary Logs
+.agents/
+ORIGINAL_REQUEST.md

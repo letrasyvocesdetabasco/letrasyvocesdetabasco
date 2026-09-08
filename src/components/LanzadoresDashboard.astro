@@ -114,6 +114,59 @@ const basePath = "";
     <!-- GRILLA PRINCIPAL DE PABELLONES INTERACTIVOS -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       
+      <!-- PABELLÓN CANÓNICO: PANTEÓN DE ESCRITORES ILUSTRES (BENTO CARD DEDICADO) -->
+      <div class="pabellon-card bg-gradient-to-br from-[#191614] via-[#241F1B] to-[#191614] rounded-3xl p-6 sm:p-7 border-2 border-[#EF7B38]/50 shadow-elevated hover:border-[#EF7B38] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between text-white group">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="px-3 py-1 rounded-full bg-[#EF7B38]/20 text-[#EF7B38] text-[10px] sm:text-xs font-swiss font-extrabold uppercase tracking-wider border border-[#EF7B38]/30 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#EF7B38] animate-pulse"></span>
+              <span>Canon Patrimonial LVT</span>
+            </span>
+            <span class="text-xs font-mono font-bold text-[#C5A059]">30 Autores</span>
+          </div>
+
+          <div>
+            <h3 class="text-xl sm:text-2xl font-monograph font-bold text-white group-hover:text-[#EF7B38] transition leading-snug">
+              Panteón Canónico de Escritores Ilustres
+            </h3>
+            <p class="text-xs sm:text-sm font-serif italic text-[#C5A059] mt-1">
+              Tabasco, México y la Literatura Universal
+            </p>
+          </div>
+
+          <p class="text-xs sm:text-sm text-gray-300 font-sans leading-relaxed">
+            Treinta monografías biográficas críticas, retratos históricos normalizados sin cortes, catálogo de obras capitales y dossiers textuales exhaustivos.
+          </p>
+
+          <!-- Badges de Bloques Canónicos -->
+          <div class="grid grid-cols-3 gap-2 pt-1 text-center text-[10px] font-swiss">
+            <div class="p-2.5 rounded-2xl bg-white/5 border border-white/10 text-gray-200">
+              <span class="font-bold block text-[#EF7B38]">12</span>
+              <span class="text-[9px] text-gray-400">Tabasqueños</span>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-white/5 border border-white/10 text-gray-200">
+              <span class="font-bold block text-[#C5A059]">10</span>
+              <span class="text-[9px] text-gray-400">Nacionales</span>
+            </div>
+            <div class="p-2.5 rounded-2xl bg-white/5 border border-white/10 text-gray-200">
+              <span class="font-bold block text-emerald-400">8</span>
+              <span class="text-[9px] text-gray-400">Universales</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-5 mt-4 border-t border-white/10 flex items-center justify-between">
+          <span class="text-xs text-gray-400 font-serif italic">162,135 palabras de acervo</span>
+          <a 
+            href={`${basePath}/escritores-ilustres`} 
+            class="touch-target-48 inline-flex items-center gap-1.5 px-5 py-2.5 rounded-2xl bg-[#EF7B38] hover:bg-[#8F3812] text-white font-swiss text-xs font-bold uppercase tracking-wider shadow-md hover:scale-102 active:scale-95 transition cursor-pointer"
+          >
+            <span>Explorar Canon</span>
+            <svg class="w-3.5 h-3.5 fill-none stroke-current" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      </div>
+
       <!-- PABELLÓN 1: ESCUELA DE ESCRITORES «JOSÉ GOROSTIZA» (EEJG) -->
       <div class="pabellon-card bg-paper-card rounded-3xl p-6 sm:p-7 border border-paper-border shadow-subtle hover:border-cacao hover:shadow-elevated hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
         <div class="space-y-4">

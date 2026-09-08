@@ -8,7 +8,7 @@ const basePath = "";
     <div class="flex justify-between items-center h-16 sm:h-18">
       
       <!-- Logotipo Oficial Vectorial -->
-      <a href={`${basePath}/`} class="flex items-center space-x-2.5 group py-1" aria-label="Ir al inicio de Letras y Voces de Tabasco">
+      <a href={`${basePath}/`} class="flex items-center space-x-2.5 group py-1 min-w-0 shrink" aria-label="Ir al inicio de Letras y Voces de Tabasco">
         <img 
           src={`${basePath}/assets/logos/LVT Logo Hor 1 Original.svg`} 
           alt="Sociedad de Escritores Letras y Voces de Tabasco, A.C." 
@@ -82,6 +82,11 @@ const basePath = "";
         <a href={`${basePath}/taller-literario`} class="px-2.5 py-1.5 rounded-lg text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors flex items-center gap-1.5 font-title text-[12px] font-bold">
           <span>Taller LVT-UJAT</span>
           <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 font-mono font-extrabold uppercase">Gratis</span>
+        </a>
+
+        <!-- Canon Literario: 30 Autores Directo en Primer Nivel -->
+        <a href={`${basePath}/escritores-ilustres`} class="px-2.5 py-1.5 rounded-lg text-[#EF7B38] hover:text-[#8F3812] hover:bg-[#FAF7F0] transition-colors flex items-center gap-1.5 font-title text-[12px] font-bold border border-[#EF7B38]/30 bg-[#EF7B38]/5 shadow-2xs whitespace-nowrap">
+          <span>🏛️ 30 Autores</span>
         </a>
 
         <!-- 3. Menú Desplegable: Acervo & Creación -->
@@ -188,12 +193,33 @@ const basePath = "";
         </a>
       </div>
 
-      <!-- Botón Menú Móvil Táctil de 48px -->
-      <div class="lg:hidden flex items-center">
+      <!-- Acciones de Cabecera Móvil (Acceso 30 Autores, Modo Lectura y Menú) -->
+      <div class="lg:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <!-- Acceso directo destacado 30 Autores -->
+        <a 
+          href={`${basePath}/escritores-ilustres`} 
+          class="min-h-[44px] px-2.5 sm:px-3 py-2 rounded-xl bg-gradient-to-r from-[#EF7B38]/15 via-[#C5A059]/15 to-[#EF7B38]/10 border border-[#EF7B38]/35 text-[#EF7B38] hover:bg-[#EF7B38] hover:text-white font-title text-[11px] sm:text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 sm:gap-1.5 shadow-xs active:scale-95 transition shrink-0 whitespace-nowrap"
+          aria-label="Ir al Canon de 30 Autores"
+        >
+          <span>🏛️ 30 Autores</span>
+        </a>
+
+        <!-- Conmutador Móvil de Modo Lectura -->
+        <button 
+          type="button" 
+          id="btn-modo-lectura-mobile" 
+          class="min-w-[44px] min-h-[44px] p-2 rounded-xl border border-[#C5A059]/40 bg-[#FAF7F0] hover:bg-[#F2ECE1] text-[#191614] flex items-center justify-center transition shadow-xs active:scale-95 cursor-pointer shrink-0"
+          title="Alternar Modo Lectura"
+          aria-label="Alternar Modo Lectura"
+        >
+          <span id="icono-modo-lectura-mobile" class="text-base">📖</span>
+        </button>
+
+        <!-- Botón Menú Móvil Táctil de 48px -->
         <button 
           id="navbar-mobile-toggle-btn" 
           type="button" 
-          class="inline-flex items-center justify-center p-3 rounded-2xl bg-[#F5EFE6] border border-[#E6DCCE] text-[#222222] hover:text-[#EF7B38] hover:bg-white active:scale-95 transition shadow-xs cursor-pointer" 
+          class="min-w-[44px] min-h-[44px] inline-flex items-center justify-center p-2.5 sm:p-3 rounded-2xl bg-[#F5EFE6] border border-[#E6DCCE] text-[#222222] hover:text-[#EF7B38] hover:bg-white active:scale-95 transition shadow-xs cursor-pointer shrink-0" 
           aria-label="Abrir menú de navegación móvil"
         >
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,15 +250,18 @@ const basePath = "";
         }, { passive: false });
       }
 
-      // Controlador del Modo Lectura / Modo Nosotros
+      // Controlador del Modo Lectura / Modo Nosotros (Sincronizado Desktop + Móvil)
       var btnModo = document.getElementById('btn-modo-lectura');
       var textoModo = document.getElementById('texto-modo-lectura');
       var iconoModo = document.getElementById('icono-modo-lectura');
+      var btnModoMobile = document.getElementById('btn-modo-lectura-mobile');
+      var iconoModoMobile = document.getElementById('icono-modo-lectura-mobile');
 
       function actualizarBotonModo() {
         var esLectura = document.documentElement.classList.contains('modo-lectura');
         if (textoModo) textoModo.textContent = esLectura ? 'Modo Nosotros' : 'Modo Lectura';
         if (iconoModo) iconoModo.textContent = esLectura ? '☀️' : '📖';
+        if (iconoModoMobile) iconoModoMobile.textContent = esLectura ? '☀️' : '📖';
         if (btnModo) {
           if (esLectura) {
             btnModo.classList.add('bg-[#1E1B18]', 'text-[#EAE4D9]', 'border-[#C5A059]');
@@ -242,18 +271,38 @@ const basePath = "";
             btnModo.classList.add('bg-[#FAF7F0]', 'text-[#191614]');
           }
         }
+        if (btnModoMobile) {
+          if (esLectura) {
+            btnModoMobile.classList.add('bg-[#1E1B18]', 'text-[#EAE4D9]', 'border-[#C5A059]');
+            btnModoMobile.classList.remove('bg-[#FAF7F0]', 'text-[#191614]');
+          } else {
+            btnModoMobile.classList.remove('bg-[#1E1B18]', 'text-[#EAE4D9]', 'border-[#C5A059]');
+            btnModoMobile.classList.add('bg-[#FAF7F0]', 'text-[#191614]');
+          }
+        }
+      }
+
+      function toggleModoLectura() {
+        var actual = document.documentElement.classList.toggle('modo-lectura');
+        try {
+          localStorage.setItem('lvt-theme', actual ? 'lectura' : 'nosotros');
+        } catch(e) {}
+        actualizarBotonModo();
+        window.dispatchEvent(new CustomEvent('lvt-theme-changed', { detail: { esLectura: actual } }));
       }
 
       if (btnModo) {
-        actualizarBotonModo();
-        btnModo.addEventListener('click', function() {
-          var actual = document.documentElement.classList.toggle('modo-lectura');
-          try {
-            localStorage.setItem('lvt-theme', actual ? 'lectura' : 'nosotros');
-          } catch(e) {}
-          actualizarBotonModo();
-        });
+        btnModo.addEventListener('click', toggleModoLectura);
       }
+      if (btnModoMobile) {
+        btnModoMobile.addEventListener('click', toggleModoLectura);
+      }
+
+      window.addEventListener('lvt-theme-changed', function() {
+        actualizarBotonModo();
+      });
+
+      actualizarBotonModo();
     }
 
     if (document.readyState === 'loading') {
