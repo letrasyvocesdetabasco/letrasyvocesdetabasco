@@ -1,5 +1,5 @@
 ---
-// Navbar.astro - Barra de Navegación Institucional con Menús Desplegables de Escritorio y Lanzador Táctil Móvil
+// Navbar.astro - Barra de Navegación Institucional Homogénea LVT (Desktop & Móvil)
 const basePath = "";
 ---
 
@@ -7,7 +7,7 @@ const basePath = "";
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16 sm:h-18">
       
-      <!-- Logotipo Oficial Vectorial -->
+      <!-- Logotipo Oficial Vectorial Institucional -->
       <a href={`${basePath}/`} class="flex items-center space-x-2.5 group py-1 min-w-0 shrink" aria-label="Ir al inicio de Letras y Voces de Tabasco">
         <img 
           src={`${basePath}/assets/logos/LVT Logo Hor 1 Original.svg`} 
@@ -17,18 +17,18 @@ const basePath = "";
         />
       </a>
 
-      <!-- Navegación de Escritorio con Menús Desplegables -->
+      <!-- Navegación de Escritorio Consolidada -->
       <nav class="hidden lg:flex items-center space-x-1.5 xl:space-x-3 font-title text-[12px] font-bold tracking-normal text-[#222222]">
         
         <!-- Inicio -->
-        <a href={`${basePath}/`} class="px-2.5 py-1.5 rounded-lg hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
+        <a href={`${basePath}/`} class="px-2.5 py-1.5 rounded-xl hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
           Inicio
         </a>
 
-        <!-- 1. Menú Desplegable: Institución -->
+        <!-- 1. Identidad Institucional: Quiénes Somos -->
         <div class="relative group">
-          <a href={`${basePath}/historia`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
-            <span>Institución</span>
+          <a href={`${basePath}/historia`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
+            <span>Quiénes Somos</span>
             <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-[#EF7B38] group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -36,7 +36,7 @@ const basePath = "";
           <div class="absolute left-0 top-full pt-1.5 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <div class="bg-white rounded-2xl p-2 border border-[#E6DCCE] shadow-2xl text-left normal-case space-y-1">
               <a href={`${basePath}/historia`} class="block px-3 py-2 rounded-xl bg-[#F5EFE6] text-[#EF7B38] text-xs font-title font-bold tracking-wider transition">
-                📜 Historia & Fundadores 1987-2026
+                📜 Historia & Fundadores 1987–2026
               </a>
               <a href={`${basePath}/historia#directiva`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
                 👥 Mesa Directiva (2026–2029)
@@ -48,10 +48,39 @@ const basePath = "";
           </div>
         </div>
 
-        <!-- 2. Menú Desplegable: Escuela de Escritores -->
+        <!-- 2. Consolidación Mayor: Sala de Lectura (Antologías, Ensayos, Audios y Autores) -->
         <div class="relative group">
-          <a href={`${basePath}/EEJG`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
-            <span>Escuela de Escritores</span>
+          <a href={`${basePath}/publicaciones`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
+            <span>Sala de Lectura</span>
+            <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-[#EF7B38] group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <div class="absolute left-0 top-full pt-1.5 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="bg-white rounded-2xl p-2.5 border border-[#E6DCCE] shadow-2xl text-left normal-case space-y-1">
+              <a href={`${basePath}/publicaciones`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition flex items-center justify-between">
+                <span>📚 Fondo Editorial & Antologías</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-[#EF7B38]/10 text-[#EF7B38] font-mono font-bold">Oficial</span>
+              </a>
+              <a href={`${basePath}/escritores-ilustres`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition flex items-center justify-between">
+                <span>🏛️ Escritores Ilustres</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-[#C5A059]/15 text-[#7A5B1E] font-mono font-bold">Patrimonio</span>
+              </a>
+              <a href={`${basePath}/audioteca`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#B8860B] text-xs font-title font-bold tracking-wider text-[#B8860B] transition flex items-center justify-between">
+                <span>🎙️ Audioteca Lírica en Audio MP3</span>
+                <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 font-mono font-bold">Sonoro</span>
+              </a>
+              <a href={`${basePath}/autores`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
+                ✍️ Padrón de Miembros & Creadores
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Formación: Escuela de Escritores & Taller -->
+        <div class="relative group">
+          <a href={`${basePath}/EEJG`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
+            <span>Formación</span>
             <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-[#EF7B38] group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -59,66 +88,30 @@ const basePath = "";
           <div class="absolute left-0 top-full pt-1.5 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
             <div class="bg-white rounded-2xl p-2 border border-[#E6DCCE] shadow-2xl text-left normal-case space-y-1">
               <a href={`${basePath}/EEJG`} class="block px-3 py-2 rounded-xl bg-[#F5EFE6] text-[#EF7B38] text-xs font-title font-bold tracking-wider transition">
-                🎓 Portal Académico
-              </a>
-              <a href={`${basePath}/EEJG#diplomados`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
-                📋 10 Diplomados Oficiales
-              </a>
-              <a href={`${basePath}/EEJG#cursos`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
-                ✍️ 7 Cursos Continuos & Talleres
+                🎓 Escuela «José Gorostiza»
               </a>
               <a href={`${basePath}/taller-literario`} class="block px-3 py-2 rounded-xl bg-cacao/10 text-cacao hover:bg-cacao hover:text-white text-xs font-title font-bold tracking-wider transition flex items-center justify-between">
-                <span>📖 Taller Literario LVT-UJAT</span>
+                <span>📖 Taller Sabatino LVT-UJAT</span>
                 <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-700 font-mono uppercase font-bold">Gratis</span>
               </a>
-              <a href={`${basePath}/EEJG#pioneros`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
-                🧑‍🏫 Claustro & Dirección
+              <a href={`${basePath}/EEJG#diplomados`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
+                📋 Diplomados con Aval
+              </a>
+              <a href={`${basePath}/EEJG#cursos`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
+                ✍️ Cursos Continuos
               </a>
             </div>
           </div>
         </div>
 
-        <!-- Taller Literario LVT-UJAT Directo -->
-        <a href={`${basePath}/taller-literario`} class="px-2.5 py-1.5 rounded-lg text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors flex items-center gap-1.5 font-title text-[12px] font-bold">
-          <span>Taller LVT-UJAT</span>
-          <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 font-mono font-extrabold uppercase">Gratis</span>
+        <!-- Acceso directo destacado a Escritores Ilustres (Sin números) -->
+        <a href={`${basePath}/escritores-ilustres`} class="px-2.5 py-1.5 rounded-xl text-[#EF7B38] hover:text-[#8F3812] hover:bg-[#FAF7F0] transition-colors flex items-center gap-1.5 font-title text-[12px] font-bold border border-[#EF7B38]/30 bg-[#EF7B38]/5 shadow-2xs whitespace-nowrap">
+          <span>🏛️ Escritores Ilustres</span>
         </a>
 
-        <!-- Canon Literario: 30 Autores Directo en Primer Nivel -->
-        <a href={`${basePath}/escritores-ilustres`} class="px-2.5 py-1.5 rounded-lg text-[#EF7B38] hover:text-[#8F3812] hover:bg-[#FAF7F0] transition-colors flex items-center gap-1.5 font-title text-[12px] font-bold border border-[#EF7B38]/30 bg-[#EF7B38]/5 shadow-2xs whitespace-nowrap">
-          <span>🏛️ 30 Autores</span>
-        </a>
-
-        <!-- 3. Menú Desplegable: Acervo & Creación -->
+        <!-- 4. Comunidad y Convocatorias -->
         <div class="relative group">
-          <a href={`${basePath}/publicaciones`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
-            <span>Acervo & Autores</span>
-            <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-[#EF7B38] group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
-          <div class="absolute left-0 top-full pt-1.5 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-            <div class="bg-white rounded-2xl p-2 border border-[#E6DCCE] shadow-2xl text-left normal-case space-y-1">
-              <a href={`${basePath}/escritores-ilustres`} class="block px-3 py-2 rounded-xl bg-[#FAF7F0] text-[#EF7B38] text-xs font-title font-bold tracking-wider transition flex items-center justify-between border border-[#EF7B38]/20">
-                <span>🏛️ Escritores Ilustres</span>
-                <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-[#EF7B38]/15 text-[#EF7B38] font-mono font-bold">30 Autores</span>
-              </a>
-              <a href={`${basePath}/publicaciones`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
-                📚 Catálogo de Antologías Oficiales
-              </a>
-              <a href={`${basePath}/audioteca`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#B8860B] text-xs font-title font-bold tracking-wider text-[#B8860B] transition flex items-center justify-between">
-                <span>🎙️ Audioteca Lírica MP3</span>
-              </a>
-              <a href={`${basePath}/autores`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
-                ✍️ Padrón Oficial de Escritores
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. Menú Desplegable: Convocatorias & Descargas -->
-        <div class="relative group">
-          <a href={`${basePath}/descargas`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
+          <a href={`${basePath}/descargas`} class="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-[#222222] hover:text-[#EF7B38] hover:bg-[#F5EFE6] transition-colors">
             <span>Comunidad</span>
             <svg class="w-3.5 h-3.5 text-gray-400 group-hover:text-[#EF7B38] group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -130,7 +123,7 @@ const basePath = "";
                 📢 Convocatorias & Concursos
               </a>
               <a href={`${basePath}/descargas`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#222222] transition">
-                📥 Centro de Descargas
+                📥 Centro de Descargas Oficiales
               </a>
               <a href={`${basePath}/#rifa`} class="block px-3 py-2 rounded-xl hover:bg-[#FDFBF7] hover:text-[#EF7B38] text-xs font-title font-bold tracking-wider text-[#EF7B38] transition">
                 🎟️ Gran Rifa Cultural ($100 MXN)
@@ -141,13 +134,13 @@ const basePath = "";
 
       </nav>
 
-      <!-- Acciones Rápidas y Redes Sociales de Escritorio -->
+      <!-- Acciones Rápidas de Escritorio y Conmutador Modo Diurno / Modo Nocturno -->
       <div class="hidden sm:flex items-center space-x-2">
         <a 
           href="https://www.facebook.com/letrayvoces.tabasco" 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="p-2 rounded-full bg-[#F5EFE6] border border-[#E6DCCE] text-[#1877F2] hover:bg-blue-50 hover:border-blue-300 transition shadow-xs hover:scale-105" 
+          class="p-2 rounded-xl bg-[#F5EFE6] border border-[#E6DCCE] text-[#1877F2] hover:bg-blue-50 hover:border-blue-300 transition shadow-xs hover:scale-105" 
           title="Página Oficial de Facebook LVT"
           aria-label="Página Oficial de Facebook LVT"
         >
@@ -157,65 +150,66 @@ const basePath = "";
           href="https://www.instagram.com/letrasyvocestabasco" 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="p-2 rounded-full bg-[#F5EFE6] border border-[#E6DCCE] text-[#E4405F] hover:bg-pink-50 hover:border-pink-300 transition shadow-xs hover:scale-105" 
+          class="p-2 rounded-xl bg-[#F5EFE6] border border-[#E6DCCE] text-[#E4405F] hover:bg-pink-50 hover:border-pink-300 transition shadow-xs hover:scale-105" 
           title="Instagram Oficial LVT (@letrasyvocestabasco)"
           aria-label="Instagram Oficial LVT"
         >
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
         <a 
-          href="https://wa.me/522205889391?text=Hola%20Sociedad%20de%20Escritores%20LVT,%20deseo%20información%20institucional." 
+          href="https://wa.me/522205889391?text=Hola%20Sociedad%20de%20Escritores%20LVT%2C%20deseo%20informaci%C3%B3n%20institucional." 
           target="_blank" 
           rel="noopener noreferrer" 
-          class="p-2 rounded-full bg-[#F5EFE6] border border-[#E6DCCE] text-green-700 hover:bg-green-50 hover:border-green-300 transition shadow-xs hover:scale-105" 
-          title="Atención Directa por WhatsApp Oficial LVT (2205889391)"
+          class="p-2 rounded-xl bg-[#F5EFE6] border border-[#E6DCCE] text-green-700 hover:bg-green-50 hover:border-green-300 transition shadow-xs hover:scale-105" 
+          title="Atención Directa por WhatsApp Oficial LVT"
           aria-label="Atención Directa por WhatsApp Oficial LVT"
         >
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         </a>
-        <!-- Botón de Alternancia Modo Lectura / Modo Nosotros -->
+
+        <!-- Conmutador Oficial de Tema: Modo Diurno / Modo Nocturno -->
         <button 
           type="button" 
-          id="btn-modo-lectura" 
-          class="px-3 py-1.5 rounded-xl border border-[#C5A059]/40 bg-[#FAF7F0] hover:bg-[#F2ECE1] text-[#191614] text-xs font-title font-bold tracking-wider flex items-center gap-1.5 transition shadow-xs hover:border-[#EF7B38] cursor-pointer"
-          title="Alternar entre Modo Nosotros (diurno institucional) y Modo Lectura (nocturno descansado)"
-          aria-label="Alternar Modo Lectura"
+          id="btn-tema-toggle" 
+          class="min-h-[44px] px-3 py-1.5 rounded-xl border border-[#C5A059]/40 bg-[#FAF7F0] hover:bg-[#F2ECE1] text-[#191614] text-xs font-title font-bold tracking-wider flex items-center gap-1.5 transition shadow-xs hover:border-[#EF7B38] cursor-pointer"
+          title="Alternar entre Modo Diurno y Modo Nocturno"
+          aria-label="Alternar tema de lectura"
         >
-          <span id="icono-modo-lectura" class="text-sm">📖</span>
-          <span id="texto-modo-lectura" class="hidden md:inline text-[11px] font-mono">Modo Lectura</span>
+          <span id="icono-tema" class="text-sm">🌙</span>
+          <span id="texto-tema" class="hidden md:inline text-[11px] font-sans font-bold">Modo Nocturno</span>
         </button>
 
         <a 
           href={`${basePath}/#contacto`} 
-          class="px-4 py-2 rounded-xl bg-[#EF7B38] text-white font-title text-[12px] font-bold tracking-normal hover:bg-[#D96620] shadow-xs hover:scale-102 transition"
+          class="min-h-[44px] px-4 py-2 rounded-xl bg-[#EF7B38] text-white font-title text-[12px] font-bold tracking-normal hover:bg-[#D96620] shadow-xs hover:scale-102 transition flex items-center justify-center"
         >
           Contacto
         </a>
       </div>
 
-      <!-- Acciones de Cabecera Móvil (Acceso 30 Autores, Modo Lectura y Menú) -->
+      <!-- Acciones de Cabecera Móvil (Acceso a Escritores Ilustres, Modo Nocturno y Menú) -->
       <div class="lg:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <!-- Acceso directo destacado 30 Autores -->
+        <!-- Acceso directo destacado a Escritores Ilustres -->
         <a 
           href={`${basePath}/escritores-ilustres`} 
           class="min-h-[44px] px-2.5 sm:px-3 py-2 rounded-xl bg-gradient-to-r from-[#EF7B38]/15 via-[#C5A059]/15 to-[#EF7B38]/10 border border-[#EF7B38]/35 text-[#EF7B38] hover:bg-[#EF7B38] hover:text-white font-title text-[11px] sm:text-xs font-extrabold uppercase tracking-wider flex items-center gap-1 sm:gap-1.5 shadow-xs active:scale-95 transition shrink-0 whitespace-nowrap"
-          aria-label="Ir al Canon de 30 Autores"
+          aria-label="Ir a Escritores Ilustres"
         >
-          <span>🏛️ 30 Autores</span>
+          <span>🏛️ Autores</span>
         </a>
 
-        <!-- Conmutador Móvil de Modo Lectura -->
+        <!-- Conmutador Móvil de Modo Nocturno / Diurno -->
         <button 
           type="button" 
-          id="btn-modo-lectura-mobile" 
+          id="btn-tema-toggle-mobile" 
           class="min-w-[44px] min-h-[44px] p-2 rounded-xl border border-[#C5A059]/40 bg-[#FAF7F0] hover:bg-[#F2ECE1] text-[#191614] flex items-center justify-center transition shadow-xs active:scale-95 cursor-pointer shrink-0"
-          title="Alternar Modo Lectura"
-          aria-label="Alternar Modo Lectura"
+          title="Alternar entre Modo Diurno y Modo Nocturno"
+          aria-label="Alternar tema móvil"
         >
-          <span id="icono-modo-lectura-mobile" class="text-base">📖</span>
+          <span id="icono-tema-mobile" class="text-base">🌙</span>
         </button>
 
-        <!-- Botón Menú Móvil Táctil de 48px -->
+        <!-- Botón Menú Móvil Táctil -->
         <button 
           id="navbar-mobile-toggle-btn" 
           type="button" 
@@ -232,77 +226,82 @@ const basePath = "";
 </header>
 
 <script is:inline>
-  (function initNavbarToggle() {
+  (function initNavbarThemeAndToggle() {
     function setup() {
-      var btn = document.getElementById('navbar-mobile-toggle-btn');
-      if (btn) {
-        btn.addEventListener('click', function(e) {
+      // 1. Conexión del Botón Hamburguesa Móvil
+      var btnHamburguesa = document.getElementById('navbar-mobile-toggle-btn');
+      if (btnHamburguesa) {
+        btnHamburguesa.addEventListener('click', function(e) {
           e.preventDefault();
           if (typeof window.openGlobalMobileNav === 'function') {
             window.openGlobalMobileNav();
           }
         });
-        btn.addEventListener('touchstart', function(e) {
-          e.preventDefault();
-          if (typeof window.openGlobalMobileNav === 'function') {
-            window.openGlobalMobileNav();
-          }
-        }, { passive: false });
       }
 
-      // Controlador del Modo Lectura / Modo Nosotros (Sincronizado Desktop + Móvil)
-      var btnModo = document.getElementById('btn-modo-lectura');
-      var textoModo = document.getElementById('texto-modo-lectura');
-      var iconoModo = document.getElementById('icono-modo-lectura');
-      var btnModoMobile = document.getElementById('btn-modo-lectura-mobile');
-      var iconoModoMobile = document.getElementById('icono-modo-lectura-mobile');
+      // 2. Controlador Centralizado Modo Diurno / Modo Nocturno
+      var btnTemaDesktop = document.getElementById('btn-tema-toggle');
+      var textoTema = document.getElementById('texto-tema');
+      var iconoTema = document.getElementById('icono-tema');
+      var btnTemaMobile = document.getElementById('btn-tema-toggle-mobile');
+      var iconoTemaMobile = document.getElementById('icono-tema-mobile');
 
-      function actualizarBotonModo() {
-        var esLectura = document.documentElement.classList.contains('modo-lectura');
-        if (textoModo) textoModo.textContent = esLectura ? 'Modo Nosotros' : 'Modo Lectura';
-        if (iconoModo) iconoModo.textContent = esLectura ? '☀️' : '📖';
-        if (iconoModoMobile) iconoModoMobile.textContent = esLectura ? '☀️' : '📖';
-        if (btnModo) {
-          if (esLectura) {
-            btnModo.classList.add('bg-[#1E1B18]', 'text-[#EAE4D9]', 'border-[#C5A059]');
-            btnModo.classList.remove('bg-[#FAF7F0]', 'text-[#191614]');
+      function actualizarEstadoVisualTema() {
+        var esNocturno = document.documentElement.classList.contains('modo-nocturno');
+        
+        if (textoTema) textoTema.textContent = esNocturno ? 'Modo Diurno' : 'Modo Nocturno';
+        if (iconoTema) iconoTema.textContent = esNocturno ? '☀️' : '🌙';
+        if (iconoTemaMobile) iconoTemaMobile.textContent = esNocturno ? '☀️' : '🌙';
+
+        if (btnTemaDesktop) {
+          if (esNocturno) {
+            btnTemaDesktop.classList.add('bg-[#1E293B]', 'text-[#F8FAFC]', 'border-[#334155]');
+            btnTemaDesktop.classList.remove('bg-[#FAF7F0]', 'text-[#191614]', 'border-[#C5A059]/40');
           } else {
-            btnModo.classList.remove('bg-[#1E1B18]', 'text-[#EAE4D9]', 'border-[#C5A059]');
-            btnModo.classList.add('bg-[#FAF7F0]', 'text-[#191614]');
+            btnTemaDesktop.classList.remove('bg-[#1E293B]', 'text-[#F8FAFC]', 'border-[#334155]');
+            btnTemaDesktop.classList.add('bg-[#FAF7F0]', 'text-[#191614]', 'border-[#C5A059]/40');
           }
         }
-        if (btnModoMobile) {
-          if (esLectura) {
-            btnModoMobile.classList.add('bg-[#1E1B18]', 'text-[#EAE4D9]', 'border-[#C5A059]');
-            btnModoMobile.classList.remove('bg-[#FAF7F0]', 'text-[#191614]');
+
+        if (btnTemaMobile) {
+          if (esNocturno) {
+            btnTemaMobile.classList.add('bg-[#1E293B]', 'text-[#F8FAFC]', 'border-[#334155]');
+            btnTemaMobile.classList.remove('bg-[#FAF7F0]', 'text-[#191614]', 'border-[#C5A059]/40');
           } else {
-            btnModoMobile.classList.remove('bg-[#1E1B18]', 'text-[#EAE4D9]', 'border-[#C5A059]');
-            btnModoMobile.classList.add('bg-[#FAF7F0]', 'text-[#191614]');
+            btnTemaMobile.classList.remove('bg-[#1E293B]', 'text-[#F8FAFC]', 'border-[#334155]');
+            btnTemaMobile.classList.add('bg-[#FAF7F0]', 'text-[#191614]', 'border-[#C5A059]/40');
           }
         }
       }
 
-      function toggleModoLectura() {
-        var actual = document.documentElement.classList.toggle('modo-lectura');
+      function alternarTema() {
+        var esNocturnoActual = document.documentElement.classList.contains('modo-nocturno');
+        var nuevoEstado = !esNocturnoActual;
+
+        if (nuevoEstado) {
+          document.documentElement.classList.add('modo-nocturno');
+          document.documentElement.classList.add('modo-lectura');
+        } else {
+          document.documentElement.classList.remove('modo-nocturno');
+          document.documentElement.classList.remove('modo-lectura');
+        }
+
         try {
-          localStorage.setItem('lvt-theme', actual ? 'lectura' : 'nosotros');
+          localStorage.setItem('lvt-theme', nuevoEstado ? 'nocturno' : 'diurno');
         } catch(e) {}
-        actualizarBotonModo();
-        window.dispatchEvent(new CustomEvent('lvt-theme-changed', { detail: { esLectura: actual } }));
+
+        actualizarEstadoVisualTema();
+        window.dispatchEvent(new CustomEvent('lvt-theme-changed', { detail: { esNocturno: nuevoEstado } }));
       }
 
-      if (btnModo) {
-        btnModo.addEventListener('click', toggleModoLectura);
-      }
-      if (btnModoMobile) {
-        btnModoMobile.addEventListener('click', toggleModoLectura);
-      }
+      if (btnTemaDesktop) btnTemaDesktop.addEventListener('click', alternarTema);
+      if (btnTemaMobile) btnTemaMobile.addEventListener('click', alternarTema);
 
       window.addEventListener('lvt-theme-changed', function() {
-        actualizarBotonModo();
+        actualizarEstadoVisualTema();
       });
 
-      actualizarBotonModo();
+      actualizarEstadoVisualTema();
     }
 
     if (document.readyState === 'loading') {

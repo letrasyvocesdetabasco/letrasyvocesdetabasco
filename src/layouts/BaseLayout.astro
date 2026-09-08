@@ -1,5 +1,7 @@
 ---
 import MobileDrawer from '../components/MobileDrawer.astro';
+import BotonWhatsAppFlotante from '../components/BotonWhatsAppFlotante.astro';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -8,7 +10,7 @@ interface Props {
 }
 
 const {
-  title = "Sociedad de Escritores Letras y Voces de Tabasco, A.C.",
+  title = "Sociedad de Escritores Letras y Voces de Tabasco, A.C. · Portal Oficial",
   description = "Portal oficial de la Sociedad de Escritores Letras y Voces de Tabasco, A.C. Difusión literaria, fondo editorial, fonoteca de poesía, Escuela de Escritores «José Gorostiza» (EEJG), convocatorias y gobernanza cultural en el sureste mexicano.",
   image = "/assets/galeria/evento_cacao_01.jpg",
 } = Astro.props;
@@ -39,7 +41,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://letrasyv
     <meta name="author" content="Sociedad de Escritores Letras y Voces de Tabasco, A.C." />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Tarjetas Open Graph / Facebook -->
+    <!-- Tarjetas Open Graph / Redes Sociales -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
@@ -93,72 +95,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://letrasyv
 
     <slot name="head" />
 
-    <!-- Script anti-parpadeo para Modo Lectura / Modo Nosotros -->
+    <!-- Script anti-parpadeo inmediato para Modo Diurno / Modo Nocturno -->
     <script is:inline>
       (function() {
         try {
-          const saved = localStorage.getItem('lvt-theme');
-          if (saved === 'lectura') {
+          var temaGuardado = localStorage.getItem('lvt-theme');
+          // Migración transparente de claves antiguas
+          if (temaGuardado === 'lectura' || temaGuardado === 'nocturno') {
+            document.documentElement.classList.add('modo-nocturno');
             document.documentElement.classList.add('modo-lectura');
           } else {
+            document.documentElement.classList.remove('modo-nocturno');
             document.documentElement.classList.remove('modo-lectura');
           }
         } catch(e) {}
       })();
     </script>
-
-    <!-- Estilos de transición y paleta para Modo Lectura -->
-    <style is:global>
-      :root {
-        --color-bg-paper: #FAF7F0;
-        --color-text-ink: #191614;
-        --color-card-bg: #FFFFFF;
-        --color-border-card: #E3D7C5;
-      }
-      
-      html.modo-lectura {
-        --color-bg-paper: #141210;
-        --color-text-ink: #EAE4D9;
-        --color-card-bg: #1C1916;
-        --color-border-card: #383129;
-        background-color: #141210 !important;
-        color: #EAE4D9 !important;
-      }
-
-      html.modo-lectura body {
-        background-color: #141210 !important;
-        color: #EAE4D9 !important;
-      }
-
-      html.modo-lectura .bg-paper {
-        background-color: #141210 !important;
-      }
-
-      html.modo-lectura .bg-paper-warm {
-        background-color: #1A1714 !important;
-      }
-
-      html.modo-lectura .text-ink {
-        color: #EAE4D9 !important;
-      }
-
-      html.modo-lectura .text-ink-muted {
-        color: #B8B0A2 !important;
-      }
-
-      html.modo-lectura .text-ink-faint {
-        color: #8C8477 !important;
-      }
-
-      html.modo-lectura .border-paper-border {
-        border-color: #383129 !important;
-      }
-
-      /* Transición suave global entre modos */
-      body, header, nav, section, article, div {
-        transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease;
-      }
-    </style>
   </head>
   <body class="bg-paper text-ink font-serif antialiased selection:bg-cacao selection:text-white min-h-screen flex flex-col justify-between">
     <div class="relative flex-1 flex flex-col">
@@ -167,5 +119,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://letrasyv
 
     <!-- Menú Desplegable Táctil Móvil Centralizado -->
     <MobileDrawer />
+
+    <!-- Botón Oficial Flotante de WhatsApp LVT -->
+    <BotonWhatsAppFlotante />
   </body>
 </html>

@@ -3,6 +3,11 @@ node_modules/
 .astro/
 dist/
 
+# Evitar subida de compilaciones residuales en raíz
+_astro/
+index.html
+404.html
+
 # Logs
 npm-debug.log*
 yarn-debug.log*

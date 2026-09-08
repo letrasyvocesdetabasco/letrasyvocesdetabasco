@@ -1,6 +1,6 @@
 ---
 // src/components/EscritoresIlustres.astro
-// Canon Literario de 30 Autores & Galería Tridimensional
+// Catálogo Dinámico de Escritores Ilustres & Archivo Patrimonial LVT (Escalable sin numeración fija)
 // Sociedad de Escritores «Letras y Voces de Tabasco, A.C.»
 import { ESCRITORES_ILUSTRES } from '../data/escritores_ilustres';
 
@@ -13,7 +13,7 @@ interface Props {
 const {
   mostrarPabellonCompleto = true,
   tituloSeccion = "Panteón Canónico de Escritores Ilustres",
-  subtituloSeccion = "Los grandes arquitectos de la palabra que definieron la identidad lírica, narrativa y el pensamiento universal. Treinta monografías exhaustivas con textos íntegros y archivo patrimonial."
+  subtituloSeccion = "Los grandes arquitectos de la palabra que definieron la identidad lírica, narrativa y el pensamiento universal. Monografías críticas con textos íntegros y archivo patrimonial."
 } = Astro.props;
 
 const basePath = "";
@@ -30,11 +30,11 @@ const basePath = "";
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
     
-    <!-- CABECERA PRINCIPAL -->
+    <!-- CABECERA PRINCIPAL SIN NUMERACIONES RÍGIDAS -->
     <div class="text-center max-w-4xl mx-auto mb-12">
       <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#EF7B38]/10 text-[#EF7B38] text-[11px] sm:text-xs font-title font-extrabold uppercase tracking-widest border border-[#EF7B38]/20 shadow-xs mb-4">
         <span class="w-2 h-2 rounded-full bg-[#EF7B38] animate-pulse"></span>
-        <span>Canon Literario de 30 Autores · Colección Patrimonial LVT</span>
+        <span>Patrimonio Literario · Colección Oficial LVT</span>
       </div>
       
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#191614] tracking-tight leading-tight">
@@ -54,20 +54,19 @@ const basePath = "";
       <!-- Divisor simétrico estilo libro clásico -->
       <div class="flex items-center justify-center gap-3 mt-6">
         <div class="w-16 h-px bg-[#C5A059]"></div>
-        <span class="text-[#C5A059] text-xs font-title font-bold tracking-widest">🏛️ · 30 AUTORES · 📜</span>
+        <span class="text-[#C5A059] text-xs font-title font-bold tracking-widest uppercase">🏛️ · Patrimonio Literario · 📜</span>
         <div class="w-16 h-px bg-[#C5A059]"></div>
       </div>
     </div>
 
-
-    <!-- REPRODUCTOR SONORO AMBIENTAL DE ALTA FIDELIDAD -->
+    <!-- REPRODUCTOR SONORO AMBIENTAL DE LECTURA -->
     <div class="reproductor-card max-w-4xl mx-auto mb-10 bg-white/90 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-[#E3D7C5] shadow-elevated flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300 hover:border-[#C5A059]">
       <div class="flex items-center gap-4 w-full md:w-auto min-w-0">
         <button 
           type="button" 
           id="btn-reproductor-toggle" 
           class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#EF7B38] to-[#8F3812] hover:brightness-110 text-white flex items-center justify-center shrink-0 shadow-md transition-transform duration-200 active:scale-95 cursor-pointer"
-          aria-label="Reproducir música ambiental"
+          aria-label="Reproducir música ambiental de lectura"
         >
           <svg id="icon-play" class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M8 5v14l11-7z"/>
@@ -98,7 +97,7 @@ const basePath = "";
         </div>
       </div>
 
-      <!-- Selector de Pista y Volumen -->
+      <!-- Selector de Pista y Control de Volumen -->
       <div class="flex flex-wrap sm:flex-nowrap items-center justify-between sm:justify-end gap-2.5 sm:gap-3 w-full md:w-auto">
         <select 
           id="select-audio-track" 
@@ -137,26 +136,26 @@ const basePath = "";
       <audio id="audio-player-global" preload="none"></audio>
     </div>
 
-    <!-- CONTROLES: FILTROS POR BLOQUE CANÓNICO Y BUSCADOR REACTIVO -->
+    <!-- CONTROLES: FILTROS DINÁMICOS POR CATEGORÍA (SIN NUMERACIÓN) Y BUSCADOR REACTIVO -->
     <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
       
-      <!-- Filtros por Bloque Canónico con Ergonomía Táctil -->
+      <!-- Categorías Dinámicas LVT: Voces de Tabasco / Letras de México / Horizonte Internacional -->
       <div class="flex flex-wrap justify-center gap-2 max-w-full overflow-x-auto pb-1" id="filter-container">
         <button type="button" class="category-btn active min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-[#EF7B38] text-white shadow-sm transition cursor-pointer flex items-center justify-center shrink-0" data-filter="all">
-          Todos ({ESCRITORES_ILUSTRES.length})
+          Todos los Autores
         </button>
         <button type="button" class="category-btn min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle flex items-center justify-center shrink-0" data-filter="tabasquenos">
-          🌴 Tabasqueños (12)
+          🌴 Voces de Tabasco
         </button>
         <button type="button" class="category-btn min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle flex items-center justify-center shrink-0" data-filter="mexicanos">
-          🦅 Grandes de México (10)
+          🦅 Letras de México
         </button>
         <button type="button" class="category-btn min-h-[44px] px-4 py-2.5 rounded-xl text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer shadow-subtle flex items-center justify-center shrink-0" data-filter="universales">
-          🌍 Universales (8)
+          🌍 Horizonte Internacional
         </button>
       </div>
 
-      <!-- Buscador dinámico -->
+      <!-- Buscador dinámico por nombre, verso o región -->
       <div class="relative w-full md:w-80">
         <input 
           type="text" 
@@ -171,34 +170,38 @@ const basePath = "";
 
     </div>
 
-    <!-- CUADRÍCULA ESTABLE DE TARJETAS DE ESCRITORES ILUSTRES (SIN DEFORMACIÓN 3D) -->
+    <!-- CUADRÍCULA DINÁMICA DE AUTORES (PROPORCIÓN 4:5 Y MICROINTERACCIÓN 3D SUAVE) -->
     <div id="grid-escritores" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {ESCRITORES_ILUSTRES.map((autor) => {
-        const primeraCita = autor.citasMemorables[0] || { cita: 'La palabra viva perdura.', obra: 'Acervo' };
-        const bloqueEtiqueta = autor.bloqueCanon === 'tabasquenos' ? '🌴 Tabasco' : autor.bloqueCanon === 'mexicanos' ? '🦅 México' : '🌍 Universal';
+        const primeraCita = autor.citasMemorables[0] || { cita: 'La palabra viva perdura a través del tiempo.', obra: 'Acervo LVT' };
+        const bloqueEtiqueta = autor.bloqueCanon === 'tabasquenos' 
+          ? '🌴 Voces de Tabasco' 
+          : autor.bloqueCanon === 'mexicanos' 
+            ? '🦅 Letras de México' 
+            : '🌍 Horizonte Internacional';
         return (
           <article 
-            class="canon-card group relative bg-white rounded-3xl border border-[#E3D7C5] shadow-elevated p-6 flex flex-col justify-between overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-[#EF7B38]"
+            class="canon-card card-3d-subtle group relative bg-white rounded-3xl border border-[#E3D7C5] shadow-elevated p-6 flex flex-col justify-between overflow-hidden cursor-pointer focus-within:ring-2 focus-within:ring-[#EF7B38]"
             data-category={`${autor.bloqueCanon} ${autor.categoria}`}
             data-search={`${autor.nombre.toLowerCase()} ${autor.tituloHonorifico.toLowerCase()} ${autor.municipioOrigen.toLowerCase()} ${autor.bloqueCanon} ${autor.obrasCapitales.map(o => o.titulo.toLowerCase()).join(' ')} ${primeraCita.cita.toLowerCase()}`}
             data-id={autor.id}
           >
-            <!-- Cabecera de la tarjeta con Retrato y Badge -->
+            <!-- Cabecera de la tarjeta con Retrato e Insignia -->
             <div>
               <div class="flex items-center justify-between gap-2 mb-4">
                 <span class="px-3 py-1 rounded-full text-[10px] font-title font-extrabold uppercase tracking-wider bg-[#FAF7F0] text-[#7A5B1E] border border-[#E3D7C5]">
                   {bloqueEtiqueta} · {autor.badge}
                 </span>
                 <span class="text-[11px] font-mono font-bold text-[#7A7268]">
-                  ⏱️ {autor.tiempoLecturaMinutos || 30}m · {autor.anios}
+                  {autor.anios}
                 </span>
               </div>
 
-              <!-- Retrato con Marco Editorial y Proporción Canónica Vertical 4:5 -->
+              <!-- Retrato con Proporción Canónica Vertical 4:5 y Anclaje Superior para Rostros Completos -->
               <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#FAF7F0] border border-[#E3D7C5] mb-5 shadow-subtle">
                 <img 
                   src={`${basePath}${autor.foto}`} 
-                  alt={autor.nombre} 
+                  alt={`Retrato oficial de ${autor.nombre}`} 
                   class="w-full h-full object-cover object-top"
                   loading="lazy"
                   onerror={`this.onerror=null; this.src='${basePath}${autor.fotoFallback}'`}
@@ -211,7 +214,7 @@ const basePath = "";
                 </div>
               </div>
 
-              <!-- Título y Nombre -->
+              <!-- Título y Nombre del Autor -->
               <h3 class="text-xl sm:text-2xl font-serif font-black text-[#191614] group-hover:text-[#EF7B38] transition-colors line-clamp-1">
                 {autor.nombre}
               </h3>
@@ -220,7 +223,7 @@ const basePath = "";
                 «{autor.tituloHonorifico}»
               </p>
 
-              <!-- Cita emblemática resaltada -->
+              <!-- Cita representativa -->
               <div class="mt-4 p-3.5 rounded-xl bg-[#FAF7F0] border-l-2 border-[#EF7B38] border-r border-t border-b border-[#E3D7C5]/50">
                 <p class="text-xs font-serif italic text-[#222222] line-clamp-3 leading-relaxed">
                   «{primeraCita.cita}»
@@ -242,7 +245,7 @@ const basePath = "";
                 </div>
               </div>
 
-              <!-- Lista condensada de obras capitales -->
+              <!-- Obras representativas -->
               <div class="mt-4 space-y-1.5">
                 <p class="text-[10px] font-title font-bold uppercase tracking-widest text-[#7A7268]">
                   Obras Representativas:
@@ -257,7 +260,7 @@ const basePath = "";
               </div>
             </div>
 
-            <!-- Botones de Acción Dual: Semblanza o Lectura de Dossier con Ergonomía Táctil -->
+            <!-- Botones de Acción Ergonómicos: Semblanza y Compendio Canónico -->
             <div class="mt-6 pt-4 border-t border-[#E3D7C5]/70 flex items-center justify-between gap-2">
               <button 
                 type="button" 
@@ -272,9 +275,9 @@ const basePath = "";
                 type="button" 
                 class="btn-abrir-modal min-h-[44px] w-1/2 py-2.5 px-2 rounded-xl bg-[#191614] hover:bg-[#EF7B38] text-white text-[11px] font-title font-bold uppercase tracking-wider transition flex items-center justify-center gap-1 shadow-sm cursor-pointer active:scale-95"
                 data-autor-id={autor.id}
-                data-tab="dossier"
+                data-tab="compendio"
               >
-                <span>📖 Leer Dossier</span>
+                <span>📖 Compendio</span>
               </button>
             </div>
 
@@ -285,22 +288,21 @@ const basePath = "";
 
   </div>
 
-  <!-- 2. MODAL BIOGRÁFICO & VISOR INTEGRAL DE DOSSIER CANÓNICO -->
+  <!-- 2. VENTANA MODAL BIOGRÁFICA Y VISOR DE COMPENDIO CANÓNICO -->
   <dialog 
     id="dialog-biografia-ilustre" 
     closedby="any"
-    aria-label="Expediente canónico y semblanza biográfica"
+    aria-label="Semblanza biográfica y compendio canónico"
     class="backdrop:bg-black/75 backdrop:backdrop-blur-md bg-transparent p-2 sm:p-4 max-w-5xl w-full mx-auto my-auto rounded-3xl border-0 overflow-visible focus:outline-none"
   >
     <div class="relative bg-[#FAF7F0] rounded-3xl border-2 border-[#C5A059] shadow-2xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto custom-scrollbar text-[#191614] flex flex-col">
       
-      <!-- Barra Superior de Control del Modal (Ergonomía Táctil y Móvil) -->
+      <!-- Barra Superior de Control del Modal -->
       <div class="border-b border-[#E3D7C5] pb-4 mb-6">
-        <!-- Fila de Cabecera Móvil con Título y Botón Cerrar (en móvil <sm) -->
         <div class="flex sm:hidden items-center justify-between mb-3.5 gap-2">
           <span class="text-[11px] font-title font-extrabold uppercase tracking-wider text-[#EF7B38] flex items-center gap-1.5 truncate">
             <span>🏛️</span>
-            <span>Canon Literario LVT</span>
+            <span>Patrimonio Literario LVT</span>
           </span>
           <button 
             type="button" 
@@ -314,7 +316,7 @@ const basePath = "";
         </div>
 
         <div class="flex items-center justify-between gap-3">
-          <!-- Pestañas de Navegación del Modal (2 columnas simétricas en móvil, inline en desktop) -->
+          <!-- Pestañas de Navegación del Modal -->
           <div class="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
             <button 
               type="button" 
@@ -325,14 +327,14 @@ const basePath = "";
             </button>
             <button 
               type="button" 
-              id="tab-btn-dossier" 
+              id="tab-btn-compendio" 
               class="min-h-[44px] px-3 sm:px-4 py-2 rounded-xl text-[11px] sm:text-xs font-title font-bold uppercase tracking-wider bg-white text-[#191614] border border-[#E3D7C5] hover:border-[#EF7B38] hover:text-[#EF7B38] transition cursor-pointer flex items-center justify-center text-center"
             >
-              📖 Dossier Canónico
+              📖 Compendio Canónico
             </button>
           </div>
 
-          <!-- Botón de Cerrar Modal (Desktop sm en adelante) -->
+          <!-- Botón de Cerrar Modal (Desktop) -->
           <button 
             type="button" 
             id="btn-cerrar-modal" 
@@ -349,21 +351,21 @@ const basePath = "";
       <!-- Vista 1: Semblanza Biográfica y Obras -->
       <div id="view-semblanza" class="space-y-6">
         <div id="modal-content-target">
-          <!-- Rellenado por JavaScript con los datos de ESCRITORES_ILUSTRES -->
+          <!-- Rellenado dinámicamente -->
         </div>
       </div>
 
-      <!-- Vista 2: Lector Inmersivo de Dossier Canónico Completo -->
-      <div id="view-dossier" class="hidden flex-col space-y-4">
+      <!-- Vista 2: Lector Inmersivo de Compendio Canónico Completo -->
+      <div id="view-compendio" class="hidden flex-col space-y-4">
         
-        <!-- Barra de herramientas del lector de texto -->
+        <!-- Barra de herramientas del lector -->
         <div class="flex flex-wrap items-center justify-between gap-3 p-3 bg-white rounded-xl border border-[#E3D7C5]">
           <div class="flex items-center gap-2">
             <span class="text-[11px] font-title font-bold uppercase tracking-wider text-[#7A5B1E]">
               Tamaño de Fuente:
             </span>
-            <button type="button" id="dossier-font-dec" class="min-w-[44px] min-h-[44px] rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition flex items-center justify-center" aria-label="Reducir fuente">A-</button>
-            <button type="button" id="dossier-font-inc" class="min-w-[44px] min-h-[44px] rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition flex items-center justify-center" aria-label="Aumentar fuente">A+</button>
+            <button type="button" id="compendio-font-dec" class="min-w-[44px] min-h-[44px] rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition flex items-center justify-center" aria-label="Reducir fuente">A-</button>
+            <button type="button" id="compendio-font-inc" class="min-w-[44px] min-h-[44px] rounded-lg bg-[#FAF7F0] border border-[#E3D7C5] font-bold text-xs hover:bg-[#EF7B38] hover:text-white transition flex items-center justify-center" aria-label="Aumentar fuente">A+</button>
           </div>
 
           <div class="flex items-center gap-2">
@@ -373,13 +375,13 @@ const basePath = "";
           </div>
         </div>
 
-        <!-- Contenedor del texto del Dossier -->
+        <!-- Contenedor del texto del Compendio -->
         <div 
-          id="dossier-reading-box" 
+          id="compendio-reading-box" 
           class="p-4 sm:p-8 md:p-10 bg-white rounded-2xl border border-[#E3D7C5] shadow-xs max-h-[65vh] overflow-y-auto overflow-x-hidden custom-scrollbar font-serif text-base leading-relaxed text-[#191614] break-words"
         >
-          <div id="dossier-rendered-content" class="space-y-4 max-w-3xl mx-auto">
-            <p class="italic text-center py-8 text-gray-500">Cargando texto canónico integral...</p>
+          <div id="compendio-rendered-content" class="space-y-4 max-w-3xl mx-auto">
+            <p class="italic text-center py-8 text-gray-500">Cargando compendio canónico integral...</p>
           </div>
         </div>
 
@@ -403,34 +405,27 @@ const basePath = "";
 <script id="datos-ilustres-json" type="application/json" set:html={JSON.stringify(ESCRITORES_ILUSTRES)}></script>
 
 <style>
-  /* TARJETAS CANÓNICAS ERGONÓMICAS Y ESTABLES (SIN ROTACIÓN 3D) */
+  /* TARJETAS CANÓNICAS ERGONÓMICAS */
   .canon-card {
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
   }
 
-  /* Elevación discreta (3-4px) y sombra suave exclusivamente en desktop con cursor fino */
   @media (hover: hover) and (pointer: fine) {
     .canon-card:hover {
-      transform: translateY(-3.5px);
-      box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.09), 0 4px 10px -2px rgba(239, 123, 56, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.10), 0 4px 12px -2px rgba(239, 123, 56, 0.08);
       border-color: #EF7B38;
     }
   }
 
-  /* En pantallas táctiles y móviles, tarjetas 100% planas y estables */
   @media (hover: none), (pointer: coarse) {
     .canon-card {
       transform: none !important;
       box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
     }
-    .canon-card:hover,
-    .canon-card:active,
-    .canon-card:focus {
-      transform: none !important;
-    }
   }
 
-  /* ANIMACIONES DE ENTRADA Y SALIDA PARA <dialog> */
+  /* Animaciones dialog */
   dialog[open] {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -463,18 +458,6 @@ const basePath = "";
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .canon-card {
-      transform: none !important;
-      transition: none !important;
-    }
-    dialog {
-      transform: none !important;
-      transition-duration: 0.1s;
-    }
-  }
-
-  /* Barra de desplazamiento estética para el modal */
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
   }
@@ -487,104 +470,137 @@ const basePath = "";
     border-radius: 9999px;
   }
 
-  /* REGLAS DEL MODO LECTURA PARA ESCRITORES ILUSTRES */
+  /* REGLAS PARA MODO NOCTURNO */
+  :global(html.modo-nocturno) #escritores-ilustres,
   :global(html.modo-lectura) #escritores-ilustres {
-    background-color: #141210 !important;
-    border-color: #2D2721 !important;
+    background-color: #0F172A !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) .reproductor-card,
   :global(html.modo-lectura) .reproductor-card {
-    background-color: #1C1916 !important;
-    border-color: #383129 !important;
+    background-color: #1E293B !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) #select-audio-track,
+  :global(html.modo-nocturno) #input-buscar-ilustres,
   :global(html.modo-lectura) #select-audio-track,
   :global(html.modo-lectura) #input-buscar-ilustres {
-    background-color: #221E1A !important;
-    color: #EAE4D9 !important;
-    border-color: #383129 !important;
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) #player-track-name,
   :global(html.modo-lectura) #player-track-name {
-    color: #FAF7F0 !important;
+    color: #F8FAFC !important;
   }
+  :global(html.modo-nocturno) .canon-card,
   :global(html.modo-lectura) .canon-card {
-    background-color: #1C1916 !important;
-    border-color: #383129 !important;
+    background-color: #1E293B !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) .canon-card h3,
+  :global(html.modo-nocturno) .canon-card strong,
+  :global(html.modo-nocturno) .canon-card blockquote,
+  :global(html.modo-nocturno) .canon-card .text-ink,
   :global(html.modo-lectura) .canon-card h3,
   :global(html.modo-lectura) .canon-card strong,
-  :global(html.modo-lectura) .canon-card blockquote,
   :global(html.modo-lectura) .canon-card .text-ink {
-    color: #EAE4D9 !important;
+    color: #F8FAFC !important;
   }
+  :global(html.modo-nocturno) .canon-card .text-\[\#7A5B1E\],
   :global(html.modo-lectura) .canon-card .text-\[\#7A5B1E\] {
-    color: #D6A85B !important;
+    color: #D4A832 !important;
   }
+  :global(html.modo-nocturno) .canon-card .btn-abrir-modal:first-child,
   :global(html.modo-lectura) .canon-card .btn-abrir-modal:first-child {
-    background-color: #24201C !important;
-    color: #EAE4D9 !important;
-    border-color: #383129 !important;
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) .canon-card .bg-white,
   :global(html.modo-lectura) .canon-card .bg-white {
-    background-color: #24201C !important;
+    background-color: #0F172A !important;
   }
+  :global(html.modo-nocturno) .canon-card .bg-\[\#FAF7F0\],
+  :global(html.modo-nocturno) #dialog-biografia-ilustre .bg-\[\#FAF7F0\],
   :global(html.modo-lectura) .canon-card .bg-\[\#FAF7F0\],
   :global(html.modo-lectura) #dialog-biografia-ilustre .bg-\[\#FAF7F0\] {
-    background-color: #24201C !important;
-    border-color: #383129 !important;
+    background-color: #0F172A !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) .canon-card p,
+  :global(html.modo-nocturno) .canon-card .text-\[\#222222\],
+  :global(html.modo-nocturno) .canon-card .text-\[\#4A443E\],
   :global(html.modo-lectura) .canon-card p,
   :global(html.modo-lectura) .canon-card .text-\[\#222222\],
   :global(html.modo-lectura) .canon-card .text-\[\#4A443E\] {
-    color: #D1C7B7 !important;
+    color: #CBD5E1 !important;
   }
+  :global(html.modo-nocturno) #dialog-biografia-ilustre > div,
   :global(html.modo-lectura) #dialog-biografia-ilustre > div {
-    background-color: #181512 !important;
-    color: #EAE4D9 !important;
-    border-color: #4A4035 !important;
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+    border-color: #C59B27 !important;
   }
+  :global(html.modo-nocturno) #dialog-biografia-ilustre .bg-white,
   :global(html.modo-lectura) #dialog-biografia-ilustre .bg-white {
-    background-color: #221E1A !important;
-    border-color: #383129 !important;
+    background-color: #0F172A !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) #dialog-biografia-ilustre h1,
+  :global(html.modo-nocturno) #dialog-biografia-ilustre h2,
+  :global(html.modo-nocturno) #dialog-biografia-ilustre h3,
+  :global(html.modo-nocturno) #dialog-biografia-ilustre h4,
+  :global(html.modo-nocturno) #dialog-biografia-ilustre strong,
   :global(html.modo-lectura) #dialog-biografia-ilustre h1,
   :global(html.modo-lectura) #dialog-biografia-ilustre h2,
   :global(html.modo-lectura) #dialog-biografia-ilustre h3,
-  :global(html.modo-lectura) #dialog-biografia-ilustre h4,
   :global(html.modo-lectura) #dialog-biografia-ilustre strong {
-    color: #FAF7F0 !important;
+    color: #F8FAFC !important;
   }
+  :global(html.modo-nocturno) #dialog-biografia-ilustre blockquote,
   :global(html.modo-lectura) #dialog-biografia-ilustre blockquote {
-    background-color: #24201C !important;
-    color: #E8E2D5 !important;
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
     border-color: #EF7B38 !important;
   }
+  :global(html.modo-nocturno) #dialog-biografia-ilustre hr,
   :global(html.modo-lectura) #dialog-biografia-ilustre hr {
-    border-color: #383129 !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) #dialog-biografia-ilustre #tab-btn-semblanza:not(.bg-\[\#EF7B38\]),
+  :global(html.modo-nocturno) #dialog-biografia-ilustre #tab-btn-compendio:not(.bg-\[\#EF7B38\]),
   :global(html.modo-lectura) #dialog-biografia-ilustre #tab-btn-semblanza:not(.bg-\[\#EF7B38\]),
-  :global(html.modo-lectura) #dialog-biografia-ilustre #tab-btn-dossier:not(.bg-\[\#EF7B38\]) {
-    background-color: #24201C !important;
-    color: #D6CEBE !important;
-    border-color: #383129 !important;
+  :global(html.modo-lectura) #dialog-biografia-ilustre #tab-btn-compendio:not(.bg-\[\#EF7B38\]) {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
   }
-  :global(html.modo-lectura) #dialog-biografia-ilustre #dossier-font-dec,
-  :global(html.modo-lectura) #dialog-biografia-ilustre #dossier-font-inc {
-    background-color: #24201C !important;
-    color: #EAE4D9 !important;
-    border-color: #383129 !important;
+  :global(html.modo-nocturno) #dialog-biografia-ilustre #compendio-font-dec,
+  :global(html.modo-nocturno) #dialog-biografia-ilustre #compendio-font-inc,
+  :global(html.modo-lectura) #dialog-biografia-ilustre #compendio-font-dec,
+  :global(html.modo-lectura) #dialog-biografia-ilustre #compendio-font-inc {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) #dialog-biografia-ilustre p,
+  :global(html.modo-nocturno) #dialog-biografia-ilustre li,
   :global(html.modo-lectura) #dialog-biografia-ilustre p,
   :global(html.modo-lectura) #dialog-biografia-ilustre li {
-    color: #C8BFB0 !important;
+    color: #CBD5E1 !important;
   }
-  :global(html.modo-lectura) #dossier-reading-box {
-    background-color: #161412 !important;
-    color: #E8E2D5 !important;
-    border-color: #383129 !important;
+  :global(html.modo-nocturno) #compendio-reading-box,
+  :global(html.modo-lectura) #compendio-reading-box {
+    background-color: #0F172A !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
   }
+  :global(html.modo-nocturno) .category-btn:not(.active),
   :global(html.modo-lectura) .category-btn:not(.active) {
-    background-color: #221E1A !important;
-    color: #D6CEBE !important;
-    border-color: #383129 !important;
+    background-color: #1E293B !important;
+    color: #F8FAFC !important;
+    border-color: #334155 !important;
   }
 </style>
 
@@ -595,7 +611,7 @@ const basePath = "";
     if (!datosScript) return;
     const autores = JSON.parse(datosScript.textContent || '[]');
 
-    // 2. REFERENCIAS ESTABLES DE TARJETAS CANÓNICAS
+    // 2. REFERENCIAS DE TARJETAS
     const cards = document.querySelectorAll('.canon-card');
 
     // 3. CANVAS DE PARTÍCULAS SUTILES
@@ -670,7 +686,6 @@ const basePath = "";
       audioPlayer.src = selectTrack.value;
       audioPlayer.volume = parseFloat(volumeSlider?.value || "0.35");
 
-      // Sincronización visual unificada con los eventos nativos de audio
       audioPlayer.addEventListener('play', () => {
         iconPlay?.classList.add('hidden');
         iconPause?.classList.remove('hidden');
@@ -728,11 +743,11 @@ const basePath = "";
         if (trackNameEl) {
           trackNameEl.textContent = selectTrack.options[nextIndex].text;
         }
-        audioPlayer.play().catch(err => console.log("Autoplay next track error:", err));
+        audioPlayer.play().catch(err => console.log("Autoplay error:", err));
       });
     }
 
-    // 5. FILTROS POR CATEGORÍA / BLOQUE CANÓNICO Y BÚSQUEDA
+    // 5. FILTROS DINÁMICOS POR CATEGORÍA Y BÚSQUEDA REACTIVA
     const filterButtons = document.querySelectorAll('.category-btn');
     const searchInput = document.getElementById('input-buscar-ilustres') as HTMLInputElement;
     let activeFilter = 'all';
@@ -772,35 +787,32 @@ const basePath = "";
 
     searchInput?.addEventListener('input', applyFilters);
 
-    // 6. MODAL BIOGRÁFICO EXTENSO & VISOR DE DOSSIER
+    // 6. MODAL BIOGRÁFICO EXTENSO & VISOR DE COMPENDIO CANÓNICO
     const dialog = document.getElementById('dialog-biografia-ilustre') as HTMLDialogElement;
     const btnCerrar = document.getElementById('btn-cerrar-modal');
     const modalTarget = document.getElementById('modal-content-target');
     const botonesModal = document.querySelectorAll('.btn-abrir-modal');
 
     const tabBtnSemblanza = document.getElementById('tab-btn-semblanza');
-    const tabBtnDossier = document.getElementById('tab-btn-dossier');
+    const tabBtnCompendio = document.getElementById('tab-btn-compendio');
     const viewSemblanza = document.getElementById('view-semblanza');
-    const viewDossier = document.getElementById('view-dossier');
-    const dossierRendered = document.getElementById('dossier-rendered-content');
-    const readingBox = document.getElementById('dossier-reading-box');
-    const fontDec = document.getElementById('dossier-font-dec');
-    const fontInc = document.getElementById('dossier-font-inc');
+    const viewCompendio = document.getElementById('view-compendio');
+    const compendioRendered = document.getElementById('compendio-rendered-content');
+    const readingBox = document.getElementById('compendio-reading-box');
+    const fontDec = document.getElementById('compendio-font-dec');
+    const fontInc = document.getElementById('compendio-font-inc');
 
     let currentAutor: any = null;
-    let dossierFontSize = 16;
+    let compendioFontSize = 16;
     const btnCerrarMobile = document.querySelector('.btn-cerrar-modal-mobile');
 
-    // Cache en memoria para dossiers cargados (ahorro de red y cambio instantáneo)
-    const dossierCache: Record<string, string> = {};
+    // Cache en memoria para compendios cargados
+    const compendioCache: Record<string, string> = {};
 
-    // Función liviana para convertir Markdown y textos canónicos a HTML limpio y legible
     function renderMarkdownToHtml(md: string): string {
       if (!md) return '';
 
-      // Eliminar BOM UTF-8 si estuviera presente
       const cleanMd = md.replace(/^\uFEFF/, '');
-
       const escaped = cleanMd
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
@@ -849,13 +861,9 @@ const basePath = "";
 
       function formatInlines(str: string): string {
         return str
-          // Enlaces Markdown [texto](url)
           .replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#EF7B38] underline hover:text-[#8F3812] font-semibold">$1</a>')
-          // Negritas
           .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#191614]">$1</strong>')
-          // Cursivas
           .replace(/\*(.*?)\*/g, '<em class="italic">$1</em>')
-          // Código en línea `código`
           .replace(/`([^`]+)`/g, '<code class="px-1.5 py-0.5 rounded bg-[#FAF7F0] border border-[#E3D7C5] font-mono text-xs text-[#EF7B38]">$1</code>');
       }
 
@@ -863,7 +871,6 @@ const basePath = "";
         const rawLine = lines[i];
         const line = rawLine.trim();
 
-        // Manejo de bloques de código delimitados (``` o ```json)
         if (line.startsWith('```')) {
           if (inCodeBlock) {
             flushCodeBlock();
@@ -889,7 +896,6 @@ const basePath = "";
           continue;
         }
 
-        // Reglas horizontales (---, ___, ***)
         if (/^(_{3,}|-{3,}|\*{3,})$/.test(line)) {
           flushP();
           flushQuote();
@@ -898,23 +904,23 @@ const basePath = "";
           continue;
         }
 
-        // Título institucional inicial sin '#' (e.g. DOSSIER DOCUMENTAL Y CRÍTICO CANÓNICO)
-        if (/^DOSSIER\s+(DOCUMENTAL|CANÓNICO)/i.test(line)) {
+        // Títulos de compendios depurados sin anglicismos
+        if (/^(DOSSIER|COMPENDIO)\s+(DOCUMENTAL|CANÓNICO)/i.test(line)) {
           flushP();
           flushQuote();
           flushList();
-          out.push(`<div class="text-xs font-title font-bold uppercase tracking-widest text-[#C5A059] mb-1">${formatInlines(line)}</div>`);
+          out.push(`<div class="text-xs font-title font-bold uppercase tracking-widest text-[#C5A059] mb-1">COMPENDIO CANÓNICO PATRIMONIAL</div>`);
           continue;
         }
         if (/^AUTOR\s+N[°ºo]?\s+[0-9]+:.*$/i.test(line)) {
           flushP();
           flushQuote();
           flushList();
-          out.push(`<h1 class="text-2xl sm:text-3xl font-serif font-black text-[#191614] mt-2 mb-3 pb-2 border-b-2 border-[#C5A059]">${formatInlines(line)}</h1>`);
+          const cleanTitle = line.replace(/^AUTOR\s+N[°ºo]?\s+[0-9]+:\s*/i, '');
+          out.push(`<h1 class="text-2xl sm:text-3xl font-serif font-black text-[#191614] mt-2 mb-3 pb-2 border-b-2 border-[#C5A059]">${formatInlines(cleanTitle)}</h1>`);
           continue;
         }
 
-        // Encabezado de Sección Formal (SECCIÓN 1: ...)
         if (/^(SECCIÓN\s+[0-9]+:.*$)/i.test(line)) {
           flushP();
           flushQuote();
@@ -923,7 +929,6 @@ const basePath = "";
           continue;
         }
 
-        // Subtítulos con numeración romana (I. Entorno y Génesis...)
         if (/^([IVXLCDM]+\.\s+.*$)/.test(line)) {
           flushP();
           flushQuote();
@@ -932,7 +937,6 @@ const basePath = "";
           continue;
         }
 
-        // Encabezados Markdown (#, ##, ###, ####)
         if (line.startsWith('# ')) {
           flushP();
           flushQuote();
@@ -962,7 +966,6 @@ const basePath = "";
           continue;
         }
 
-        // Citas en bloque (> ...)
         if (line.startsWith('&gt; ') || line.startsWith('> ')) {
           flushP();
           flushList();
@@ -973,7 +976,6 @@ const basePath = "";
           flushQuote();
         }
 
-        // Listas no ordenadas (* o -)
         const ulMatch = line.match(/^[\*\-]\s+(.*)$/);
         if (ulMatch) {
           flushP();
@@ -987,7 +989,6 @@ const basePath = "";
           continue;
         }
 
-        // Listas ordenadas (1. 2. etc.)
         const olMatch = line.match(/^([0-9]+)\.\s+(.*)$/);
         if (olMatch) {
           flushP();
@@ -1001,7 +1002,6 @@ const basePath = "";
           continue;
         }
 
-        // Texto de párrafo regular
         flushList();
         currentP.push(formatInlines(line));
       }
@@ -1014,90 +1014,93 @@ const basePath = "";
       return out.join('\n');
     }
 
-    function cargarDossier(slug: string) {
-      if (!dossierRendered) return;
-      if (dossierCache[slug]) {
-        dossierRendered.innerHTML = dossierCache[slug];
+    function cargarCompendio(slug: string) {
+      if (!compendioRendered) return;
+      if (compendioCache[slug]) {
+        compendioRendered.innerHTML = compendioCache[slug];
         return;
       }
 
-      dossierRendered.innerHTML = '<p class="italic text-center py-8 text-gray-500">Cargando texto canónico integral...</p>';
+      compendioRendered.innerHTML = '<p class="italic text-center py-8 text-gray-500">Cargando compendio canónico integral...</p>';
       
-      const dossierUrl = `/dossiers/${slug}.md`;
-      fetch(dossierUrl)
+      const compendioUrl = `/dossiers/${slug}.md`;
+      fetch(compendioUrl)
         .then(res => {
-          if (!res.ok) throw new Error('No se pudo cargar el dossier');
+          if (!res.ok) throw new Error('No se pudo cargar el compendio');
           return res.text();
         })
         .then(text => {
           const html = renderMarkdownToHtml(text);
-          dossierCache[slug] = html;
+          compendioCache[slug] = html;
           const currentSlug = currentAutor ? (currentAutor.dossierSlug || currentAutor.id) : '';
           if (currentSlug === slug) {
-            dossierRendered.innerHTML = html;
+            compendioRendered.innerHTML = html;
           }
         })
-        .catch(err => {
+        .catch(() => {
           const currentSlug = currentAutor ? (currentAutor.dossierSlug || currentAutor.id) : '';
           if (currentSlug === slug) {
-            dossierRendered.innerHTML = `
+            compendioRendered.innerHTML = `
               <div class="p-6 bg-amber-50 text-amber-900 rounded-xl border border-amber-200 text-center">
                 <p class="font-bold">Aviso del Consejo Editorial:</p>
-                <p class="text-xs mt-1">El texto canónico está en proceso de consulta o actualización.</p>
+                <p class="text-xs mt-1">El texto de este compendio está en proceso de digitalización o actualización patrimonial.</p>
               </div>
             `;
           }
         });
     }
 
-    function switchTab(tab: 'semblanza' | 'dossier') {
+    function switchTab(tab: 'semblanza' | 'compendio') {
       if (tab === 'semblanza') {
         tabBtnSemblanza?.classList.add('bg-[#EF7B38]', 'text-white');
         tabBtnSemblanza?.classList.remove('bg-white', 'text-[#191614]');
-        tabBtnDossier?.classList.remove('bg-[#EF7B38]', 'text-white');
-        tabBtnDossier?.classList.add('bg-white', 'text-[#191614]');
+        tabBtnCompendio?.classList.remove('bg-[#EF7B38]', 'text-white');
+        tabBtnCompendio?.classList.add('bg-white', 'text-[#191614]');
         viewSemblanza?.classList.remove('hidden');
-        viewDossier?.classList.add('hidden');
-        viewDossier?.classList.remove('flex');
+        viewCompendio?.classList.add('hidden');
+        viewCompendio?.classList.remove('flex');
       } else {
-        tabBtnDossier?.classList.add('bg-[#EF7B38]', 'text-white');
-        tabBtnDossier?.classList.remove('bg-white', 'text-[#191614]');
+        tabBtnCompendio?.classList.add('bg-[#EF7B38]', 'text-white');
+        tabBtnCompendio?.classList.remove('bg-white', 'text-[#191614]');
         tabBtnSemblanza?.classList.remove('bg-[#EF7B38]', 'text-white');
         tabBtnSemblanza?.classList.add('bg-white', 'text-[#191614]');
         viewSemblanza?.classList.add('hidden');
-        viewDossier?.classList.remove('hidden');
-        viewDossier?.classList.add('flex');
+        viewCompendio?.classList.remove('hidden');
+        viewCompendio?.classList.add('flex');
         if (currentAutor) {
-          cargarDossier(currentAutor.dossierSlug || currentAutor.id);
+          cargarCompendio(currentAutor.dossierSlug || currentAutor.id);
         }
       }
     }
 
     tabBtnSemblanza?.addEventListener('click', () => switchTab('semblanza'));
-    tabBtnDossier?.addEventListener('click', () => switchTab('dossier'));
+    tabBtnCompendio?.addEventListener('click', () => switchTab('compendio'));
 
     fontDec?.addEventListener('click', () => {
-      dossierFontSize = Math.max(14, dossierFontSize - 1);
-      if (readingBox) readingBox.style.fontSize = `${dossierFontSize}px`;
+      compendioFontSize = Math.max(14, compendioFontSize - 1);
+      if (readingBox) readingBox.style.fontSize = `${compendioFontSize}px`;
     });
 
     fontInc?.addEventListener('click', () => {
-      dossierFontSize = Math.min(24, dossierFontSize + 1);
-      if (readingBox) readingBox.style.fontSize = `${dossierFontSize}px`;
+      compendioFontSize = Math.min(24, compendioFontSize + 1);
+      if (readingBox) readingBox.style.fontSize = `${compendioFontSize}px`;
     });
 
-    // Función universal para abrir modal biográfico
-    function abrirModalAutor(id: string, initialTab: 'semblanza' | 'dossier' = 'semblanza') {
+    function abrirModalAutor(id: string, initialTab: 'semblanza' | 'compendio' = 'semblanza') {
       const autor = autores.find((a: any) => a.id === id);
       if (!autor || !modalTarget || !dialog) return;
 
       currentAutor = autor;
-      const bloqueEtiqueta = autor.bloqueCanon === 'tabasquenos' ? '🌴 Tabasco' : autor.bloqueCanon === 'mexicanos' ? '🦅 México' : '🌍 Universal';
+      const bloqueEtiqueta = autor.bloqueCanon === 'tabasquenos' 
+        ? '🌴 Voces de Tabasco' 
+        : autor.bloqueCanon === 'mexicanos' 
+          ? '🦅 Letras de México' 
+          : '🌍 Horizonte Internacional';
 
       modalTarget.innerHTML = `
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          <!-- Columna Izquierda: Placa / Retrato y Datos Clave -->
+          <!-- Columna Izquierda: Retrato y Ficha Técnica -->
           <div class="lg:col-span-4 space-y-4">
             <div class="rounded-2xl overflow-hidden border-2 border-[#C5A059] bg-[#FAF7F0] shadow-md aspect-[4/5]">
               <img 
@@ -1113,7 +1116,7 @@ const basePath = "";
               <p><strong>Fallecimiento:</strong> ${autor.fallecimiento}</p>
               <p><strong>Origen:</strong> ${autor.municipioOrigen}</p>
               <p><strong>Movimiento:</strong> ${autor.movimiento}</p>
-              <p><strong>Canon:</strong> ${bloqueEtiqueta} (⏱️ ${autor.tiempoLecturaMinutos || 30} min lectura)</p>
+              <p><strong>Ámbito:</strong> ${bloqueEtiqueta}</p>
             </div>
 
             <!-- Pista recomendada de este autor -->
@@ -1133,12 +1136,12 @@ const basePath = "";
               </button>
             </div>
 
-            <!-- Botón rápido al dossier -->
+            <!-- Botón rápido al compendio -->
             <button 
               type="button" 
-              class="btn-ir-a-dossier min-h-[44px] w-full py-2.5 px-4 rounded-xl bg-[#191614] hover:bg-[#EF7B38] text-white text-xs font-title font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+              class="btn-ir-a-compendio min-h-[44px] w-full py-2.5 px-4 rounded-xl bg-[#191614] hover:bg-[#EF7B38] text-white text-xs font-title font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
             >
-              <span>📖 Leer Dossier Completo</span>
+              <span>📖 Leer Compendio Canónico</span>
             </button>
           </div>
 
@@ -1193,9 +1196,9 @@ const basePath = "";
               </div>
             </div>
 
-            <!-- Datos Curiosos -->
+            <!-- Datos Biográficos Curiosos -->
             <div class="space-y-2">
-              <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">💡 Datos Biográficos Curiosos</h3>
+              <h3 class="font-title font-bold text-xs uppercase tracking-widest text-[#191614]">💡 Datos Biográficos Relevantes</h3>
               <ul class="list-disc pl-5 space-y-1 text-xs font-sans text-[#4A443E]">
                 ${autor.datosCuriosos.map((d: string) => `<li>${d}</li>`).join('')}
               </ul>
@@ -1206,7 +1209,6 @@ const basePath = "";
         </div>
       `;
 
-      // Evento al botón de audio dentro del modal (con alternancia Play/Pausa)
       const btnEscuchar = modalTarget.querySelector('.btn-escuchar-autor') as HTMLButtonElement;
       if (btnEscuchar && audioPlayer && !audioPlayer.paused) {
         const initialTrack = btnEscuchar.getAttribute('data-audio');
@@ -1235,40 +1237,33 @@ const basePath = "";
         }
       });
 
-      // Evento botón ir a dossier
-      const btnIrDossier = modalTarget.querySelector('.btn-ir-a-dossier');
-      btnIrDossier?.addEventListener('click', () => {
-        switchTab('dossier');
+      const btnIrCompendio = modalTarget.querySelector('.btn-ir-a-compendio');
+      btnIrCompendio?.addEventListener('click', () => {
+        switchTab('compendio');
       });
 
-      switchTab(initialTab === 'dossier' ? 'dossier' : 'semblanza');
+      switchTab(initialTab === 'compendio' ? 'compendio' : 'semblanza');
 
-      // Resetear desplazamiento para iniciar lectura siempre desde el inicio
       const modalBox = dialog.querySelector('.custom-scrollbar');
       if (modalBox) modalBox.scrollTop = 0;
       if (readingBox) readingBox.scrollTop = 0;
 
-      // Preservar elemento previo para restaurar foco al cerrar (Accesibilidad WCAG)
       lastFocusedElement = document.activeElement as HTMLElement;
-
-      // Bloquear scroll de la página de fondo durante la lectura inmersiva
       document.body.style.overflow = 'hidden';
       dialog.showModal();
     }
 
     let lastFocusedElement: HTMLElement | null = null;
 
-    // Apertura por botones explícitos de Semblanza / Dossier
     botonesModal.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const id = btn.getAttribute('data-autor-id');
-        const initialTab = (btn.getAttribute('data-tab') || 'semblanza') as 'semblanza' | 'dossier';
+        const initialTab = (btn.getAttribute('data-tab') || 'semblanza') as 'semblanza' | 'compendio';
         if (id) abrirModalAutor(id, initialTab);
       });
     });
 
-    // Apertura por toque / clic en cualquier área de la tarjeta canónica
     cards.forEach(card => {
       card.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
@@ -1278,7 +1273,6 @@ const basePath = "";
       });
     });
 
-    // Control unificado de cierre del modal (Desktop y Móvil)
     function cerrarModal() {
       if (dialog && dialog.open) {
         dialog.close();
@@ -1288,7 +1282,6 @@ const basePath = "";
     btnCerrar?.addEventListener('click', cerrarModal);
     btnCerrarMobile?.addEventListener('click', cerrarModal);
 
-    // Restaurar scroll de fondo y devolver foco al cerrar por cualquier vía (botón, clic afuera o tecla ESC)
     dialog?.addEventListener('close', () => {
       document.body.style.overflow = '';
       if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
@@ -1297,7 +1290,6 @@ const basePath = "";
       }
     });
 
-    // Cerrar al pulsar el backdrop (Light-dismiss con fallback según Modern Web Guidance)
     if (!('closedBy' in HTMLDialogElement.prototype)) {
       dialog?.addEventListener('click', (event) => {
         if (event.target !== dialog) return;
@@ -1315,7 +1307,7 @@ const basePath = "";
       });
     }
 
-    // 7. BOTÓN COPIAR CITA CON FEEDBACK VISUAL Y COMPATIBILIDAD ROBUSTA
+    // 7. BOTÓN COPIAR CITA
     const toast = document.getElementById('toast-copia');
     const botonesCopiar = document.querySelectorAll('.btn-copiar-cita');
 

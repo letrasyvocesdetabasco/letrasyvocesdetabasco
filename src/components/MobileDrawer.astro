@@ -1,5 +1,5 @@
 ---
-// MobileDrawer.astro - Command Center Táctil Móvil en Liquid Glassmorphism Oscuro (48px Touch Targets)
+// MobileDrawer.astro - Panel Lateral Táctil Móvil Institucional LVT (100dvh & 48px Touch Targets)
 const basePath = "";
 ---
 
@@ -33,7 +33,7 @@ const basePath = "";
           Letras y Voces
         </span>
         <span class="text-[10px] font-serif italic text-oro-bright block">
-          Sociedad de Escritores A.C.
+          Sociedad de Escritores, A.C.
         </span>
       </div>
     </div>
@@ -51,27 +51,27 @@ const basePath = "";
     </button>
   </div>
 
-  <!-- 2. Cuerpo Desplazable con Todas las Secciones -->
+  <!-- 2. Cuerpo Desplazable con Secciones Reestructuradas -->
   <div class="p-4 overflow-y-auto flex-1 space-y-3 font-swiss text-xs font-semibold uppercase tracking-wider">
     
-    <!-- TARJETA DESTACADA SUPERIOR: CANON DE 30 AUTORES & MODO LECTURA -->
+    <!-- TARJETA DESTACADA: ESCRITORES ILUSTRES Y ALTERNADOR DE MODO NOCTURNO -->
     <div class="rounded-2xl p-4 bg-gradient-to-br from-[#EF7B38]/25 via-[#C5A059]/15 to-[#191614] border-2 border-[#EF7B38]/50 shadow-xl space-y-3">
       <div class="flex items-center justify-between">
         <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EF7B38] text-white text-[10px] font-swiss font-extrabold uppercase tracking-wider shadow-xs">
-          🏛️ Colección Patrimonial
+          🏛️ Patrimonio Literario
         </span>
-        <span class="text-[10px] font-mono font-bold text-[#C5A059]">30 Autores</span>
+        <span class="text-[10px] font-mono font-bold text-[#C5A059]">Archivo Histórico</span>
       </div>
       
       <a 
         href={`${basePath}/escritores-ilustres`} 
         class="drawer-nav-item block group"
       >
-        <strong class="font-serif font-black text-sm tracking-wide block text-white group-hover:text-[#EF7B38] transition leading-snug">
+        <strong class="font-serif font-black text-sm tracking-wide block text-white group-hover:text-[#EF7B38] transition leading-snug normal-case">
           Panteón Canónico de Escritores Ilustres
         </strong>
         <span class="text-[11px] text-gray-300 font-sans normal-case block mt-0.5 leading-relaxed">
-          30 monografías exhaustivas, obras capitales y retratos sin cortes.
+          Monografías críticas, obras representativas y retratos de Tabasco, México y el mundo.
         </span>
       </a>
 
@@ -80,19 +80,19 @@ const basePath = "";
           href={`${basePath}/escritores-ilustres`}
           class="drawer-nav-item flex-1 min-h-[44px] py-2.5 px-3 rounded-xl bg-[#EF7B38] hover:bg-[#8F3812] text-white text-center text-xs font-swiss font-bold uppercase tracking-wider active:scale-95 transition shadow-sm flex items-center justify-center gap-1.5"
         >
-          <span>Acceder al Canon</span>
+          <span>Consultar Autores</span>
           <span>→</span>
         </a>
         
-        <!-- Conmutador Accesible de Modo Lectura en Menú Móvil -->
+        <!-- Alternador Oficial de Modo Nocturno / Diurno -->
         <button 
           type="button" 
-          id="drawer-modo-lectura-btn" 
+          id="drawer-tema-toggle-btn" 
           class="min-h-[44px] px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-swiss font-bold flex items-center gap-1.5 transition active:scale-95 cursor-pointer shrink-0"
-          aria-label="Alternar Modo Lectura en Menú Móvil"
+          aria-label="Alternar tema en menú móvil"
         >
-          <span id="drawer-icono-modo" class="text-sm">📖</span>
-          <span id="drawer-texto-modo" class="text-[10px] font-mono uppercase">Modo Lectura</span>
+          <span id="drawer-icono-tema" class="text-sm">🌙</span>
+          <span id="drawer-texto-tema" class="text-[10px] font-mono uppercase">Modo Nocturno</span>
         </button>
       </div>
     </div>
@@ -106,31 +106,83 @@ const basePath = "";
       <span class="text-[10px] text-gray-400 font-mono">01</span>
     </a>
 
-    <!-- TALLER LITERARIO LVT-UJAT (GRATIS) -->
-    <a 
-      href={`${basePath}/taller-literario`} 
-      class="drawer-nav-item flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-cacao/30 via-oro/15 to-white/[0.04] border border-cacao/40 text-white active:scale-98 transition shadow-subtle"
-    >
-      <div class="flex items-center gap-2.5">
-        <span class="w-7 h-7 rounded-lg bg-cacao text-white flex items-center justify-center text-xs font-bold shadow-sm">
-          📖
-        </span>
-        <div>
-          <span class="font-bold tracking-wide block text-white text-xs">Taller Literario LVT-UJAT</span>
-          <span class="text-[10px] text-oro-bright font-serif italic normal-case block">Sábados 11:00 a 13:00 hrs · Entrada Libre</span>
-        </div>
+    <!-- 2. QUIÉNES SOMOS (LVT INSTITUCIONAL) -->
+    <div class="rounded-2xl bg-white/[0.04] border border-white/10 overflow-hidden">
+      <div class="flex items-center justify-between p-3.5 text-white">
+        <a href={`${basePath}/historia`} class="drawer-nav-item flex-1">
+          <span class="font-bold text-sm tracking-wide block">Quiénes Somos</span>
+          <span class="text-[10px] text-gray-400 font-serif italic normal-case block">Identidad & Gobernanza LVT</span>
+        </a>
+        <button type="button" class="drawer-toggle-sub touch-target-48 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-gray-200 transition cursor-pointer" data-target="sub-quienes-somos" aria-label="Desplegar submenú Quiénes Somos">
+          <svg class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
       </div>
-      <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-mono text-[9px] font-bold uppercase border border-emerald-500/30">Gratis</span>
-    </a>
 
-    <!-- 2. ESCUELA DE ESCRITORES -->
+      <div id="sub-quienes-somos" class="p-3 bg-[#0B0A09]/60 border-t border-white/10 space-y-1.5 text-[11px] normal-case hidden">
+        <a href={`${basePath}/historia`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider">Historia & Fundadores 1987–2026</strong>
+          <span class="text-[10px] text-gray-400">39 años de trayectoria en el sureste mexicano.</span>
+        </a>
+        <a href={`${basePath}/historia#directiva`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider">Mesa Directiva (2026–2029)</strong>
+          <span class="text-[10px] text-gray-400">Presidencia de Juan David Pérez Cabrera y colegiado.</span>
+        </a>
+        <a href={`${basePath}/historia#solvencia`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider">Solvencia Jurídica & Estatutos</strong>
+          <span class="text-[10px] text-gray-400">Registro notarial, ética gremial y facultades.</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. SALA DE LECTURA (CONSOLIDADA) -->
+    <div class="rounded-2xl bg-white/[0.04] border border-white/10 overflow-hidden">
+      <div class="flex items-center justify-between p-3.5 text-white">
+        <a href={`${basePath}/publicaciones`} class="drawer-nav-item flex-1">
+          <span class="font-bold text-sm tracking-wide block text-oro-bright">Sala de Lectura</span>
+          <span class="text-[10px] text-gray-400 font-serif italic normal-case block">Antologías, Compendios & Fonoteca</span>
+        </a>
+        <button type="button" class="drawer-toggle-sub touch-target-48 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-gray-200 transition cursor-pointer" data-target="sub-sala-lectura" aria-label="Desplegar submenú Sala de Lectura">
+          <svg class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+      </div>
+
+      <div id="sub-sala-lectura" class="p-3 bg-[#0B0A09]/60 border-t border-white/10 space-y-1.5 text-[11px] normal-case hidden">
+        <a href={`${basePath}/publicaciones`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider flex items-center justify-between">
+            <span>📚 Fondo Editorial & Antologías</span>
+            <span class="text-[9px] text-[#EF7B38]">Oficial</span>
+          </strong>
+          <span class="text-[10px] text-gray-400">Obras colectivas impresas con registro INDAUTOR e ISBN.</span>
+        </a>
+        <a href={`${basePath}/escritores-ilustres`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-cacao-light">
+            🏛️ Escritores Ilustres
+          </strong>
+          <span class="text-[10px] text-gray-400">Voces de Tabasco, Letras de México y Horizonte Internacional.</span>
+        </a>
+        <a href={`${basePath}/audioteca`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-oro-bright">
+            🎙️ Audioteca Lírica MP3
+          </strong>
+          <span class="text-[10px] text-gray-400">Grabaciones de voz y lecturas de autores representativos.</span>
+        </a>
+        <a href={`${basePath}/autores`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider">
+            ✍️ Padrón Oficial de Escritores
+          </strong>
+          <span class="text-[10px] text-gray-400">Directorio de miembros y semblanzas activas.</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 4. FORMACIÓN LITERARIA & TALLER SABATINO -->
     <div class="rounded-2xl bg-white/[0.04] border border-white/10 overflow-hidden">
       <div class="flex items-center justify-between p-3.5 bg-gradient-to-r from-cacao/20 to-transparent text-white">
         <a href={`${basePath}/EEJG`} class="drawer-nav-item flex-1">
-          <span class="font-bold text-sm tracking-wide block text-cacao-light">Escuela de Escritores</span>
-          <span class="text-[10px] text-gray-400 font-serif italic normal-case block">Filial Académica Oficial LVT</span>
+          <span class="font-bold text-sm tracking-wide block text-cacao-light">Formación Académica</span>
+          <span class="text-[10px] text-gray-400 font-serif italic normal-case block">Escuela de Escritores «José Gorostiza»</span>
         </a>
-        <button type="button" class="drawer-toggle-sub touch-target-48 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-cacao-light transition cursor-pointer" data-target="sub-escuela" aria-label="Desplegar submenú Escuela">
+        <button type="button" class="drawer-toggle-sub touch-target-48 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-cacao-light transition cursor-pointer" data-target="sub-escuela" aria-label="Desplegar submenú Formación">
           <svg class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
       </div>
@@ -141,129 +193,34 @@ const basePath = "";
             <span>📖 Taller Sabatino LVT-UJAT</span>
             <span class="text-[9px] text-emerald-400 font-bold">100% Libre</span>
           </strong>
-          <span class="text-[10px] text-gray-300">24 semanas, 4 módulos y antología impresa en Librería UJAT.</span>
+          <span class="text-[10px] text-gray-300">Sábados 11:00 a 13:00 hrs en Librería Universitaria UJAT.</span>
         </a>
         <a href={`${basePath}/EEJG#diplomados`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-cacao-light">10 Diplomados Oficiales</strong>
-          <span class="text-[10px] text-gray-400">Creación, Redacción, Periodismo, Guion, Oratoria...</span>
+          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-cacao-light">10 Diplomados Curriculares</strong>
+          <span class="text-[10px] text-gray-400">Creación, Redacción, Periodismo, Guion y Oratoria.</span>
         </a>
         <a href={`${basePath}/EEJG#cursos`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
           <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-cacao-light">7 Cursos Continuos & Talleres</strong>
-          <span class="text-[10px] text-gray-400">Cuento, Poesía, Novela, Teatro, Ortografía...</span>
-        </a>
-        <a href={`${basePath}/EEJG#pioneros`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider text-cacao-light">Dirección & Claustro</strong>
-          <span class="text-[10px] text-gray-400">Dra. Liliana Chuzeville & Dra. Rebeca Díaz</span>
+          <span class="text-[10px] text-gray-400">Cuento, Poesía, Novela, Ensayo y Ortografía.</span>
         </a>
       </div>
     </div>
 
-    <!-- 3. CATÁLOGO EDITORIAL & ANTOLOGÍAS -->
-    <div class="rounded-2xl bg-white/[0.04] border border-white/10 overflow-hidden">
-      <div class="flex items-center justify-between p-3.5 text-white">
-        <a href={`${basePath}/publicaciones`} class="drawer-nav-item flex-1">
-          <span class="font-bold text-sm tracking-wide block">Fondo Editorial</span>
-          <span class="text-[10px] text-oro-bright font-serif italic normal-case block">5 Antologías Oficiales</span>
-        </a>
-        <button type="button" class="drawer-toggle-sub touch-target-48 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-gray-200 transition cursor-pointer" data-target="sub-editorial" aria-label="Desplegar submenú Editorial">
-          <svg class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-      </div>
-
-      <div id="sub-editorial" class="p-3 bg-[#0B0A09]/60 border-t border-white/10 space-y-1.5 text-[11px] normal-case hidden">
-        <a href={`${basePath}/publicaciones`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <span class="font-bold text-white block">Animalia Literaria (2026)</span>
-          <span class="text-[9px] text-cacao-light font-bold">[En Imprenta]</span>
-        </a>
-        <a href={`${basePath}/publicaciones`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <span class="font-bold text-white block">A Corazón Abierto (2026)</span>
-          <span class="text-[9px] text-gray-400">Poemario & Pintura</span>
-        </a>
-        <a href={`${basePath}/publicaciones`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <span class="font-bold text-white block">Tardes Tabasqueñas de Ópalos y Topacios (2025)</span>
-        </a>
-        <a href={`${basePath}/publicaciones`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <span class="font-bold text-white block">La Mujer en el Siglo XXI & Amarellus</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- 4. AUDIOTECA LÍRICA -->
-    <a 
-      href={`${basePath}/audioteca`} 
-      class="drawer-nav-item flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-white/[0.06] to-cacao/20 border border-white/10 text-white active:scale-98 transition group"
-    >
-      <div>
-        <span class="font-bold text-sm tracking-wide block group-hover:text-cacao-light transition">Audioteca Lírica</span>
-        <span class="text-[10px] text-oro-bright font-serif italic normal-case block">Grabaciones Sonoras de Autores</span>
-      </div>
-      <span class="px-2 py-0.5 rounded-full bg-cacao text-white text-[9px] font-bold">Audio MP3</span>
-    </a>
-
-    <!-- 5. ESCRITORES ILUSTRES TABASQUEÑOS -->
-    <a 
-      href={`${basePath}/escritores-ilustres`} 
-      class="drawer-nav-item flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-oro/20 via-cacao/15 to-white/[0.04] border border-oro/40 text-white active:scale-98 transition group shadow-xs"
-    >
-      <div>
-        <span class="font-bold text-sm tracking-wide block group-hover:text-oro-bright transition">🏛️ Escritores Ilustres</span>
-        <span class="text-[10px] text-oro-bright font-serif italic normal-case block">Panteón Lírico & Obras Canónicas</span>
-      </div>
-      <span class="px-2 py-0.5 rounded-full bg-[#EF7B38] text-white text-[9px] font-bold">30 Autores</span>
-    </a>
-
-    <!-- 6. PADRÓN DE ESCRITORES -->
-    <a 
-      href={`${basePath}/autores`} 
-      class="drawer-nav-item flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-cacao hover:text-cacao-light text-white active:scale-98 transition"
-    >
-      <div>
-        <span class="font-bold text-sm tracking-wide block">Padrón de Escritores</span>
-        <span class="text-[10px] text-gray-400 font-serif italic normal-case block">Membresía Oficial & Fundadores</span>
-      </div>
-      <span class="text-[10px] text-gray-400 font-mono">2026</span>
-    </a>
-
-    <!-- 6. HISTORIA & GOBERNANZA -->
-    <div class="rounded-2xl bg-white/[0.04] border border-white/10 overflow-hidden">
-      <div class="flex items-center justify-between p-3.5 text-white">
-        <a href={`${basePath}/historia`} class="drawer-nav-item flex-1">
-          <span class="font-bold text-sm tracking-wide block">Historia & Gobernanza</span>
-          <span class="text-[10px] text-gray-400 font-serif italic normal-case block">39 Años de Trayectoria (1987–2026)</span>
-        </a>
-        <button type="button" class="drawer-toggle-sub touch-target-48 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-gray-200 transition cursor-pointer" data-target="sub-historia" aria-label="Desplegar submenú Historia">
-          <svg class="w-4 h-4 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </button>
-      </div>
-
-      <div id="sub-historia" class="p-3 bg-[#0B0A09]/60 border-t border-white/10 space-y-1.5 text-[11px] normal-case hidden">
-        <a href={`${basePath}/historia`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider">Cronología Fundacional 1987-2026</strong>
-        </a>
-        <a href={`${basePath}/historia#directiva`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider">Mesa Directiva (2026–2029)</strong>
-        </a>
-        <a href={`${basePath}/historia#solvencia`} class="drawer-nav-item block p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-gray-200 border border-white/5 transition">
-          <strong class="text-white block font-swiss uppercase text-[10px] tracking-wider">Solvencia Jurídica & Estatutos</strong>
-        </a>
-      </div>
-    </div>
-
-    <!-- 7. DESCARGAS & CONVOCATORIAS -->
+    <!-- 5. COMUNIDAD & CONVOCATORIAS -->
     <a 
       href={`${basePath}/descargas`} 
       class="drawer-nav-item flex items-center justify-between p-3.5 rounded-2xl bg-white/[0.04] border border-white/10 hover:border-cacao text-white active:scale-98 transition"
     >
       <div>
-        <span class="font-bold text-sm tracking-wide block">Centro de Descargas & Convocatorias</span>
-        <span class="text-[10px] text-gray-400 font-serif italic normal-case block">Formatos PDF, Nuevos Socios & Eventos</span>
+        <span class="font-bold text-sm tracking-wide block">Comunidad & Descargas</span>
+        <span class="text-[10px] text-gray-400 font-serif italic normal-case block">Convocatorias Abiertas, PDF y Rifa</span>
       </div>
-      <span class="text-[10px] text-gray-400 font-mono">PDF</span>
+      <span class="text-[10px] text-gray-400 font-mono">Oficial</span>
     </a>
 
   </div>
 
-  <!-- 3. Pie del Menú con Redes Sociales y Contacto Directo de 48px -->
+  <!-- 3. Pie del Menú con Enlaces Oficiales y WhatsApp -->
   <div class="p-4 border-t border-white/10 bg-[#191614] space-y-2.5 shrink-0 pb-[max(1rem,env(safe-area-inset-bottom))]">
     <div class="grid grid-cols-2 gap-2">
       <a 
@@ -286,7 +243,7 @@ const basePath = "";
       </a>
     </div>
     <a 
-      href="https://wa.me/522205889391?text=Hola%20Sociedad%20de%20Escritores%20LVT,%20deseo%20información%20institucional." 
+      href="https://wa.me/522205889391?text=Hola%20Sociedad%20de%20Escritores%20LVT%2C%20deseo%20informaci%C3%B3n%20institucional." 
       target="_blank" 
       rel="noopener noreferrer" 
       class="touch-target-48 flex items-center justify-center gap-2 w-full py-3 rounded-2xl bg-cacao hover:bg-cacao-dark text-white font-swiss text-xs font-bold uppercase tracking-wider shadow-lg active:scale-95 transition"
@@ -304,7 +261,7 @@ const basePath = "";
 </aside>
 
 <script is:inline>
-  // Control Maestro Global del Menú Móvil Táctil
+  // Control Maestro Global del Menú Móvil Táctil LVT
   (function setupGlobalMobileDrawer() {
     function init() {
       var backdrop = document.getElementById('global-mobile-backdrop');
@@ -331,17 +288,9 @@ const basePath = "";
 
       if (closeBtn) {
         closeBtn.addEventListener('click', window.closeGlobalMobileNav);
-        closeBtn.addEventListener('touchstart', function(e) {
-          e.preventDefault();
-          window.closeGlobalMobileNav();
-        }, { passive: false });
       }
 
       backdrop.addEventListener('click', window.closeGlobalMobileNav);
-      backdrop.addEventListener('touchstart', function(e) {
-        e.preventDefault();
-        window.closeGlobalMobileNav();
-      }, { passive: false });
 
       navItems.forEach(function(item) {
         item.addEventListener('click', function() {
@@ -349,7 +298,7 @@ const basePath = "";
         });
       });
 
-      // Acordeones de Subsecciones con animación fluida
+      // Despliegue de Acordeones
       subToggles.forEach(function(toggle) {
         toggle.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -369,43 +318,54 @@ const basePath = "";
         });
       });
 
-      // Sincronización del Modo Lectura en el Drawer
-      var drawerModoBtn = document.getElementById('drawer-modo-lectura-btn');
-      var drawerIcono = document.getElementById('drawer-icono-modo');
-      var drawerTexto = document.getElementById('drawer-texto-modo');
+      // Sincronización del Modo Nocturno / Diurno en el Drawer
+      var drawerTemaBtn = document.getElementById('drawer-tema-toggle-btn');
+      var drawerIcono = document.getElementById('drawer-icono-tema');
+      var drawerTexto = document.getElementById('drawer-texto-tema');
 
-      function actualizarDrawerModo() {
-        var esLectura = document.documentElement.classList.contains('modo-lectura');
-        if (drawerTexto) drawerTexto.textContent = esLectura ? 'Modo Nosotros' : 'Modo Lectura';
-        if (drawerIcono) drawerIcono.textContent = esLectura ? '☀️' : '📖';
-        if (drawerModoBtn) {
-          if (esLectura) {
-            drawerModoBtn.classList.add('bg-[#EF7B38]/30', 'border-[#EF7B38]');
-            drawerModoBtn.classList.remove('bg-white/10', 'border-white/15');
+      function actualizarDrawerTema() {
+        var esNocturno = document.documentElement.classList.contains('modo-nocturno');
+        if (drawerTexto) drawerTexto.textContent = esNocturno ? 'Modo Diurno' : 'Modo Nocturno';
+        if (drawerIcono) drawerIcono.textContent = esNocturno ? '☀️' : '🌙';
+        if (drawerTemaBtn) {
+          if (esNocturno) {
+            drawerTemaBtn.classList.add('bg-[#EF7B38]/30', 'border-[#EF7B38]');
+            drawerTemaBtn.classList.remove('bg-white/10', 'border-white/15');
           } else {
-            drawerModoBtn.classList.remove('bg-[#EF7B38]/30', 'border-[#EF7B38]');
-            drawerModoBtn.classList.add('bg-white/10', 'border-white/15');
+            drawerTemaBtn.classList.remove('bg-[#EF7B38]/30', 'border-[#EF7B38]');
+            drawerTemaBtn.classList.add('bg-white/10', 'border-white/15');
           }
         }
       }
 
-      if (drawerModoBtn) {
-        actualizarDrawerModo();
-        drawerModoBtn.addEventListener('click', function() {
-          var actual = document.documentElement.classList.toggle('modo-lectura');
+      if (drawerTemaBtn) {
+        actualizarDrawerTema();
+        drawerTemaBtn.addEventListener('click', function() {
+          var esNocturnoActual = document.documentElement.classList.contains('modo-nocturno');
+          var nuevoEstado = !esNocturnoActual;
+
+          if (nuevoEstado) {
+            document.documentElement.classList.add('modo-nocturno');
+            document.documentElement.classList.add('modo-lectura');
+          } else {
+            document.documentElement.classList.remove('modo-nocturno');
+            document.documentElement.classList.remove('modo-lectura');
+          }
+
           try {
-            localStorage.setItem('lvt-theme', actual ? 'lectura' : 'nosotros');
+            localStorage.setItem('lvt-theme', nuevoEstado ? 'nocturno' : 'diurno');
           } catch(e) {}
-          actualizarDrawerModo();
-          window.dispatchEvent(new CustomEvent('lvt-theme-changed', { detail: { esLectura: actual } }));
+
+          actualizarDrawerTema();
+          window.dispatchEvent(new CustomEvent('lvt-theme-changed', { detail: { esNocturno: nuevoEstado } }));
         });
       }
 
       window.addEventListener('lvt-theme-changed', function() {
-        actualizarDrawerModo();
+        actualizarDrawerTema();
       });
 
-      actualizarDrawerModo();
+      actualizarDrawerTema();
     }
 
     if (document.readyState === 'loading') {

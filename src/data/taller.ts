@@ -161,7 +161,7 @@ export const DATOS_GENERALES_TALLER = {
   ],
   productosTangibles: [
     {
-      nombre: "Dossier Individual de Obra",
+      nombre: "Compendio Individual de Obra",
       descripcion: "Portafolio profesional maquetado con textos rigurosamente corregidos, listo para postularse a convocatorias del SACPC/FONCA, PECDA Tabasco o premios literarios nacionales."
     },
     {

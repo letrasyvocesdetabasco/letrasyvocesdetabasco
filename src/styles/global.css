@@ -4,19 +4,44 @@
 
 @layer base {
   :root {
-    --bg-paper: #FAF7F0;
-    --bg-paper-warm: #F2ECE1;
-    --text-ink: #191614;
-    --text-muted: #4A443E;
-    --color-cacao: #B84E20;
-    --color-oro: #9E782F;
-    --border-paper: #E3D7C5;
-    --touch-target-min: 48px;
+    /* Paleta Modo Diurno (Fondo Papel y Tinta Noble) */
+    --lvt-bg-primary: #FAF7F0;        /* Pergamino marfil editorial */
+    --lvt-bg-surface: #FFFFFF;        /* Tarjetas y superficies blancas */
+    --lvt-bg-muted: #F2ECE1;          /* Fondos secundarios cálidos */
+    --lvt-bg-card: #FFFFFF;           /* Tarjeta estándar */
+    --lvt-text-primary: #191614;      /* Tinta carbón puro (legibilidad AA/AAA) */
+    --lvt-text-muted: #4A443E;        /* Texto secundario de lectura */
+    --lvt-text-faint: #7A7268;        /* Metadatos, colofón y fechas */
+    --lvt-border: #E3D7C5;            /* Filetes y bordes editoriales */
+    --lvt-border-light: #EFE8DC;      /* Separadores sutiles */
+
+    /* Acentos Institucionales de Marca LVT */
+    --lvt-cacao: #EF7B38;             /* Naranja / Terracota LVT Oficial */
+    --lvt-cacao-dark: #8F3812;        /* Terracota oscuro para contraste y hover */
+    --lvt-cacao-light: #FDF1EA;       /* Tinte suave de acento */
+    --lvt-cacao-glow: rgba(239, 123, 56, 0.25);
+    --lvt-oro: #C59B27;               /* Oro colonial bibliófilo */
+    --lvt-oro-bright: #D4A832;        /* Oro luminoso */
+    --lvt-oro-dark: #7A5B1E;          /* Oro oscuro accesible */
+
+    /* Tipografías Oficiales LVT */
+    --font-serif: 'EB Garamond', 'Newsreader', Georgia, serif;
+    --font-display: 'Cinzel', 'EB Garamond', serif;
+    --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+
+    /* Geometría y Elevaciones Homogéneas */
+    --lvt-radius-btn: 0.75rem;        /* 12px estándar en todos los botones */
+    --lvt-radius-card: 1.5rem;        /* 24px para tarjetas y paneles */
+    --lvt-shadow-subtle: 0 2px 8px rgba(25, 22, 20, 0.04), 0 1px 3px rgba(25, 22, 20, 0.02);
+    --lvt-shadow-md: 0 8px 24px -4px rgba(25, 22, 20, 0.08);
+    --lvt-shadow-elevated: 0 16px 36px -6px rgba(25, 22, 20, 0.10), 0 4px 12px -2px rgba(25, 22, 20, 0.04);
+
+    --touch-target-min: 44px;
   }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 5.5rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -25,141 +50,254 @@
   }
 
   body {
-    background-color: var(--bg-paper);
-    color: var(--text-ink);
-    font-family: 'EB Garamond', 'Newsreader', Georgia, serif;
+    background-color: var(--lvt-bg-primary);
+    color: var(--lvt-text-primary);
+    font-family: var(--font-serif);
     font-size: 17px;
     line-height: 1.68;
     overflow-x: hidden;
     padding-bottom: env(safe-area-inset-bottom, 0px);
-    /* Textura micro-orgánica de papel editorial artesanal */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
-    background-repeat: repeat;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Ligaduras tipográficas y versalitas */
-  h1, h2, h3, h4, .editorial-heading {
+  h1, h2, h3, h4, h5, h6 {
     font-feature-settings: "liga" 1, "dlig" 1, "clig" 1, "cv02" 1;
-  }
-
-  .small-caps {
-    font-variant-caps: all-small-caps;
-    letter-spacing: 0.14em;
+    letter-spacing: -0.015em;
   }
 }
 
 /* =========================================================================
-   MODO LECTURA INSTITUCIONAL (PALETA NOCTURNA Y CONFORT VISUAL)
+   MODO NOCTURNO INSTITUCIONAL (ANTIRREFLEJO & CONTRASTE WCAG AAA)
    ========================================================================= */
-html.modo-lectura {
-  --bg-paper: #141210;
-  --bg-paper-warm: #1E1B18;
-  --text-ink: #FAF7F0;
-  --text-muted: #D1C7B7;
-  --border-paper: #2E2822;
+html.modo-nocturno {
+  --lvt-bg-primary: #0F172A;        /* Azul noche pizarra profundo antirreflejo */
+  --lvt-bg-surface: #1E293B;        /* Superficie de tarjeta azul carbón */
+  --lvt-bg-muted: #141D2E;          /* Fondo terciario */
+  --lvt-bg-card: #1E293B;
+  --lvt-text-primary: #F8FAFC;      /* Blanco perla de máximo contraste WCAG AAA */
+  --lvt-text-muted: #CBD5E1;        /* Gris claro para párrafos de lectura */
+  --lvt-text-faint: #94A3B8;        /* Metadatos y notas al pie */
+  --lvt-border: #334155;            /* Separador atenuado */
+  --lvt-border-light: #253347;
+
+  --lvt-cacao-light: rgba(239, 123, 56, 0.18);
+  --lvt-shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --lvt-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --lvt-shadow-elevated: 0 16px 36px rgba(0, 0, 0, 0.55);
+
   color-scheme: dark;
 }
 
-html.modo-lectura body {
-  background-color: #141210;
-  color: #FAF7F0;
+/* Reescrituras selectivas para Modo Nocturno */
+html.modo-nocturno body {
+  background-color: var(--lvt-bg-primary) !important;
+  color: var(--lvt-text-primary) !important;
 }
 
-html.modo-lectura header {
-  background-color: rgba(20, 18, 16, 0.95) !important;
-  border-color: #2E2822 !important;
+html.modo-nocturno header {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+  border-color: var(--lvt-border) !important;
 }
 
-html.modo-lectura footer {
-  background-color: #0F0D0C !important;
-  border-color: #2E2822 !important;
+html.modo-nocturno footer {
+  background-color: #0A0F1D !important;
+  border-color: var(--lvt-border) !important;
 }
 
-html.modo-lectura main {
-  background-color: #141210;
+html.modo-nocturno main {
+  background-color: var(--lvt-bg-primary) !important;
 }
 
-html.modo-lectura .bg-\[\#F5EFE6\],
-html.modo-lectura .bg-\[\#FAF7F0\],
-html.modo-lectura .bg-\[\#FDFBF7\] {
-  background-color: #1A1714 !important;
+html.modo-nocturno .bg-white,
+html.modo-nocturno .bg-\[\#FDFBF7\],
+html.modo-nocturno .bg-\[\#FAF7F0\],
+html.modo-nocturno .bg-\[\#F5EFE6\],
+html.modo-nocturno .bg-paper-card {
+  background-color: var(--lvt-bg-surface) !important;
 }
 
-html.modo-lectura .border-\[\#E3D7C5\],
-html.modo-lectura .border-\[\#E6DCCE\] {
-  border-color: #2E2822 !important;
+html.modo-nocturno .bg-paper,
+html.modo-nocturno .bg-paper-warm {
+  background-color: var(--lvt-bg-muted) !important;
 }
 
-html.modo-lectura .text-\[\#191614\],
-html.modo-lectura .text-\[\#222222\] {
-  color: #FAF7F0 !important;
+html.modo-nocturno .border-\[\#E6DCCE\],
+html.modo-nocturno .border-\[\#E3D7C5\],
+html.modo-nocturno .border-paper-border {
+  border-color: var(--lvt-border) !important;
 }
 
-html.modo-lectura .text-\[\#4A443E\],
-html.modo-lectura .text-gray-500 {
-  color: #C8BFB0 !important;
+html.modo-nocturno .text-\[\#191614\],
+html.modo-nocturno .text-\[\#222222\],
+html.modo-nocturno .text-ink,
+html.modo-nocturno .text-ink-deep {
+  color: var(--lvt-text-primary) !important;
+}
+
+html.modo-nocturno .text-\[\#4A443E\],
+html.modo-nocturno .text-\[\#555555\],
+html.modo-nocturno .text-gray-500,
+html.modo-nocturno .text-gray-600,
+html.modo-nocturno .text-ink-muted {
+  color: var(--lvt-text-muted) !important;
+}
+
+html.modo-nocturno .text-\[\#7A7268\],
+html.modo-nocturno .text-ink-faint {
+  color: var(--lvt-text-faint) !important;
+}
+
+/* Compatibilidad transitoria para selectores heredados */
+html.modo-lectura {
+  --lvt-bg-primary: #0F172A;
+  --lvt-bg-surface: #1E293B;
+  --lvt-bg-muted: #141D2E;
+  --lvt-text-primary: #F8FAFC;
+  --lvt-text-muted: #CBD5E1;
+  --lvt-text-faint: #94A3B8;
+  --lvt-border: #334155;
+  color-scheme: dark;
 }
 
 /* =========================================================================
-   ELEMENTOS DE MAQUETACIÓN EDITORIAL NOBLE & CLÁSICA
+   SISTEMA DE MICROINTERACCIONES 3D Y GLASSMORPHISM
    ========================================================================= */
 
-/* Filete Francés / Separador Tipográfico */
+/* Glassmorphism Puro de Alto Desempeño */
+.lvt-glass {
+  background: rgba(253, 251, 247, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--lvt-border);
+}
+
+html.modo-nocturno .lvt-glass {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--lvt-border);
+}
+
+/* Microinteracción 3D Suave en Tarjetas (Solo Desktop con Ratón) */
+@media (hover: hover) and (pointer: fine) {
+  .card-3d-subtle {
+    perspective: 1000px;
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+    will-change: transform;
+  }
+
+  .card-3d-subtle:hover {
+    transform: perspective(1000px) translateY(-5px) rotateX(1.2deg);
+    box-shadow: var(--lvt-shadow-elevated);
+    border-color: var(--lvt-cacao);
+  }
+}
+
+/* Dispositivos Táctiles: 100% Planos, Estables y sin deformaciones */
+@media (hover: none) {
+  .card-3d-subtle {
+    transform: none !important;
+  }
+}
+
+/* =========================================================================
+   GEOMETRÍA Y HOMOGENEIZACIÓN DE BOTONES LVT
+   ========================================================================= */
+.lvt-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: var(--touch-target-min);
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--lvt-radius-btn);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.lvt-btn:active {
+  transform: scale(0.97);
+}
+
+.lvt-btn-primary {
+  background-color: var(--lvt-cacao);
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: var(--lvt-shadow-subtle);
+}
+
+.lvt-btn-primary:hover {
+  background-color: var(--lvt-cacao-dark);
+  box-shadow: var(--lvt-shadow-md);
+}
+
+.lvt-btn-secondary {
+  background-color: var(--lvt-bg-muted);
+  color: var(--lvt-text-primary);
+  border: 1px solid var(--lvt-border);
+}
+
+.lvt-btn-secondary:hover {
+  border-color: var(--lvt-cacao);
+  color: var(--lvt-cacao);
+  background-color: var(--lvt-bg-surface);
+}
+
+/* =========================================================================
+   ELEMENTOS EDITORIALES Y DIVISORES ESTÉTICOS
+   ========================================================================= */
 .french-rule {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
 }
-.french-rule::before, .french-rule::after {
+
+.french-rule::before, 
+.french-rule::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--border-paper), transparent);
+  background: linear-gradient(to right, transparent, var(--lvt-border), transparent);
 }
+
 .french-rule span {
-  padding: 0 0.85rem;
-  color: var(--color-cacao);
-  font-family: 'Newsreader', serif;
+  padding: 0 1rem;
+  color: var(--lvt-cacao);
+  font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
 }
 
-/* Letra Capitular de Imprenta (Drop Cap) */
-.drop-cap::first-letter {
-  font-family: 'Cinzel', 'Newsreader', serif;
-  float: left;
-  font-size: 3.6em;
-  line-height: 0.78;
-  padding-top: 4px;
-  padding-right: 10px;
-  padding-bottom: 0px;
-  color: var(--color-cacao);
-  font-weight: 700;
+/* Divisor Curvo Sutil LVT */
+.lvt-divider-curve {
+  width: 100%;
+  height: 24px;
+  overflow: hidden;
+  line-height: 0;
 }
 
-/* Efectos de Escenografía Editorial 3D */
-.book-stage {
-  perspective: 1200px;
+.lvt-divider-curve svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.book-3d {
-  position: relative;
-  border-left: 7px solid #281B12;
-  border-radius: 3px 12px 12px 3px;
-  box-shadow: 14px 18px 30px rgba(0, 0, 0, 0.18), -3px 0 6px rgba(255, 255, 255, 0.6) inset;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
-  transform: rotateY(-5deg) rotateX(2deg);
+/* Adaptabilidad Táctil Móvil */
+.touch-target-44 {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.book-3d:hover {
-  transform: translateY(-8px) rotateY(-1deg) rotateX(0deg) scale(1.02);
-  box-shadow: 20px 26px 40px rgba(0, 0, 0, 0.25), -3px 0 8px rgba(255, 255, 255, 0.75) inset;
-}
-
-/* =========================================================================
-   ERGONOMÍA MÓVIL & ACCESIBILIDAD TÁCTIL (WCAG AA / AAA)
-   ========================================================================= */
 
 .touch-target-48 {
   min-width: 48px;
@@ -167,75 +305,4 @@ html.modo-lectura .text-gray-500 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.modal-viewport-safe {
-  max-height: calc(100dvh - 2rem);
-  max-height: calc(100vh - 2rem);
-  margin-top: env(safe-area-inset-top, 0px);
-  margin-bottom: env(safe-area-inset-bottom, 0px);
-}
-
-/* Prevención de Sticky Hover en Touch */
-@media (hover: hover) and (pointer: fine) {
-  .interactive-hover:hover {
-    transform: translateY(-3px);
-  }
-}
-
-.interactive-active:active {
-  transform: scale(0.96);
-  transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Visor Modal: Modos de Lectura Editorial */
-.reader-marfil {
-  background-color: #FFFFFF !important;
-  color: #191614 !important;
-}
-
-.reader-pergamino {
-  background-color: #F8F4EC !important;
-  color: #2A2521 !important;
-}
-
-.reader-noche {
-  background-color: #141210 !important;
-  color: #E3D7C5 !important;
-}
-
-/* Botones y controles de la Rifa Interactiva */
-.num-btn {
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.num-btn.selected {
-  background-color: #B84E20 !important;
-  color: #FFFFFF !important;
-  border-color: #8F3812 !important;
-  transform: scale(1.08);
-  box-shadow: 0 4px 16px rgba(184, 78, 32, 0.45);
-}
-
-/* Animaciones suaves */
-@keyframes modalEnter {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.animate-modal-enter {
-  animation: modalEnter 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Blindaje de proporciones para avatares e imágenes en fichas */
-.author-card img {
-  max-width: 100% !important;
-  max-height: 100% !important;
-  object-fit: cover !important;
 }
