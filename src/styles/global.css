@@ -49,6 +49,58 @@
 }
 
 /* =========================================================================
+   MODO LECTURA INSTITUCIONAL (PALETA NOCTURNA Y CONFORT VISUAL)
+   ========================================================================= */
+html.modo-lectura {
+  --bg-paper: #141210;
+  --bg-paper-warm: #1E1B18;
+  --text-ink: #FAF7F0;
+  --text-muted: #D1C7B7;
+  --border-paper: #2E2822;
+  color-scheme: dark;
+}
+
+html.modo-lectura body {
+  background-color: #141210;
+  color: #FAF7F0;
+}
+
+html.modo-lectura header {
+  background-color: rgba(20, 18, 16, 0.95) !important;
+  border-color: #2E2822 !important;
+}
+
+html.modo-lectura footer {
+  background-color: #0F0D0C !important;
+  border-color: #2E2822 !important;
+}
+
+html.modo-lectura main {
+  background-color: #141210;
+}
+
+html.modo-lectura .bg-\[\#F5EFE6\],
+html.modo-lectura .bg-\[\#FAF7F0\],
+html.modo-lectura .bg-\[\#FDFBF7\] {
+  background-color: #1A1714 !important;
+}
+
+html.modo-lectura .border-\[\#E3D7C5\],
+html.modo-lectura .border-\[\#E6DCCE\] {
+  border-color: #2E2822 !important;
+}
+
+html.modo-lectura .text-\[\#191614\],
+html.modo-lectura .text-\[\#222222\] {
+  color: #FAF7F0 !important;
+}
+
+html.modo-lectura .text-\[\#4A443E\],
+html.modo-lectura .text-gray-500 {
+  color: #C8BFB0 !important;
+}
+
+/* =========================================================================
    ELEMENTOS DE MAQUETACIÓN EDITORIAL NOBLE & CLÁSICA
    ========================================================================= */
 

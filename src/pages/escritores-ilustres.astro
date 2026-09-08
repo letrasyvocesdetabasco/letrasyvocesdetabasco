@@ -1,0 +1,89 @@
+---
+// src/pages/escritores-ilustres.astro - Panteón Oficial de Escritores Ilustres Tabasqueños
+// Sociedad de Escritores «Letras y Voces de Tabasco, A.C.»
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import EscritoresIlustres from '../components/EscritoresIlustres.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const basePath = "";
+---
+
+<BaseLayout 
+  title="Canon Literario de 30 Autores · Panteón de Escritores Ilustres · LVT, A.C."
+  description="Biografías exhaustivas, obras capitales, textos íntegros sin elipsis y semblanzas patrimoniales de los 30 autores canónicos de Tabasco, México y el mundo."
+>
+  <Navbar />
+
+  <main class="pt-16 sm:pt-20">
+    <!-- Miga de Pan / Breadcrumbs Institucional -->
+    <div class="bg-[#F5EFE6] border-b border-[#E3D7C5] py-3.5">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div class="flex items-center gap-2 text-xs font-title uppercase tracking-wider text-gray-500">
+          <a href="/" class="hover:text-[#EF7B38] transition flex items-center gap-1">
+            <span>Inicio</span>
+          </a>
+          <span>/</span>
+          <a href="/publicaciones" class="hover:text-[#EF7B38] transition">Acervo</a>
+          <span>/</span>
+          <span class="text-[#EF7B38] font-bold">Canon Literario de 30 Autores</span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-3 text-xs font-title font-semibold text-[#7A5B1E]">
+          <span>🏛️ Archivo Histórico & Lírico</span>
+          <span>·</span>
+          <span>Canon de 30 Autores (162,135 Palabras)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panteón y Galería 3D de Escritores Ilustres -->
+    <EscritoresIlustres 
+      mostrarPabellonCompleto={true}
+      tituloSeccion="Panteón Canónico de Escritores Ilustres"
+      subtituloSeccion="Descubra la vida, las obras capitales y los textos íntegros de las treinta figuras tutelares que forjaron la literatura de Tabasco, México y el canon universal."
+    />
+
+    <!-- Sección de Conexión con la Fonoteca y Talleres -->
+    <section class="py-16 bg-[#FDFBF7] border-t border-[#E3D7C5]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-br from-[#191614] via-[#241F1B] to-[#141210] rounded-3xl p-8 sm:p-12 text-white border border-[#C5A059]/30 shadow-2xl relative overflow-hidden">
+          <div class="absolute -right-20 -top-20 w-80 h-80 bg-[#EF7B38]/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+            <div class="lg:col-span-8 space-y-4 text-left">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EF7B38]/20 text-[#EF7B38] text-xs font-title font-bold uppercase tracking-wider border border-[#EF7B38]/30">
+                🎙️ De la Página a la Voz Viva
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-serif font-black text-[#F6F0E2]">
+                Escuche la palabra viva en nuestra Fonoteca y Audioteca
+              </h3>
+              <p class="text-xs sm:text-sm font-serif italic text-gray-300 leading-relaxed max-w-2xl">
+                Muchos de los versos de Carlos Pellicer, José Gorostiza, Oliverio Girondo, Jaime Sabines y Juan Rulfo han sido preservados en grabaciones sonoras históricas de libre acceso en nuestro portal institucional.
+              </p>
+            </div>
+
+            <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
+              <a 
+                href="/audioteca" 
+                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#EF7B38] hover:bg-[#8F3812] text-white font-title font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg"
+              >
+                <span>🎙️ Explorar Audioteca Lírica</span>
+              </a>
+              <a 
+                href="/taller-literario" 
+                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-title font-bold text-xs uppercase tracking-wider border border-white/20 transition-all duration-200"
+              >
+                <span>📖 Taller Sabatino LVT-UJAT</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
