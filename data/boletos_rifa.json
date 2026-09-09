@@ -155,6 +155,17 @@
       "notas": "Pago validado con IA (Nu (Nubank) $100.00 MXN Folio: NU3AJ8TG6S3R8SOABBFEHG58Q4AO)",
       "num1": "07",
       "num2": "57"
+    },
+    "26": {
+      "estado": "Apartado",
+      "participante": "Fernanda Mendoza",
+      "whatsapp": "5215620481140",
+      "fecha": "2026-09-09 14:08:08",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "25",
+      "num2": "75"
     }
   }
 }
