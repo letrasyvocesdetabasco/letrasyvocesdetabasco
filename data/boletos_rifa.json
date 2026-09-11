@@ -169,14 +169,25 @@
     },
     "29": {
       "estado": "Pagado",
-      "participante": "Rebeca",
+      "participante": "Rebeca Díaz Suárez",
       "whatsapp": "5219931467390",
       "fecha": "2026-09-10 19:35:44",
       "fecha_pago": "2026-09-10 22:10:50",
       "canal": "panel",
-      "notas": "",
+      "notas": "Citibanamex $200.00 MXN Folio: 085907262250325369 (Ampara Boletos #29 y #44)",
       "num1": "28",
       "num2": "78"
+    },
+    "44": {
+      "estado": "Pagado",
+      "participante": "Rebeca Díaz Suárez",
+      "whatsapp": "5219931467390",
+      "fecha": "2026-09-10 19:35:44",
+      "fecha_pago": "2026-09-10 22:10:50",
+      "canal": "panel",
+      "notas": "Citibanamex $200.00 MXN Folio: 085907262250325369 (Ampara Boletos #29 y #44)",
+      "num1": "43",
+      "num2": "93"
     }
   }
 }
