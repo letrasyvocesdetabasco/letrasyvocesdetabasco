@@ -201,11 +201,11 @@
       "num2": "76"
     },
     "21": {
-      "estado": "Apartado",
+      "estado": "Pagado",
       "participante": "Ara Verde",
       "whatsapp": "5219931432771",
       "fecha": "2026-09-11 20:57:08",
-      "fecha_pago": "",
+      "fecha_pago": "2026-09-11 21:23:11",
       "canal": "panel",
       "notas": "",
       "num1": "20",
