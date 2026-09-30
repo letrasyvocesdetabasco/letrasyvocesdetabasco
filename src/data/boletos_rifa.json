@@ -210,6 +210,17 @@
       "notas": "",
       "num1": "20",
       "num2": "70"
+    },
+    "15": {
+      "estado": "Apartado",
+      "participante": "Rudy",
+      "whatsapp": "5219371198818",
+      "fecha": "2026-09-30 16:27:25",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "14",
+      "num2": "64"
     }
   }
 }
