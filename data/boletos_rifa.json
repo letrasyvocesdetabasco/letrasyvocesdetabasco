@@ -221,6 +221,28 @@
       "notas": "",
       "num1": "14",
       "num2": "64"
+    },
+    "49": {
+      "estado": "Pagado",
+      "participante": "pragedis hernandez",
+      "whatsapp": "",
+      "fecha": "2026-10-04 18:17:17",
+      "fecha_pago": "2026-10-04 18:17:17",
+      "canal": "panel",
+      "notas": "",
+      "num1": "48",
+      "num2": "98"
+    },
+    "37": {
+      "estado": "Pagado",
+      "participante": "pragedis hernandez",
+      "whatsapp": "",
+      "fecha": "2026-10-04 18:17:33",
+      "fecha_pago": "2026-10-04 18:17:33",
+      "canal": "panel",
+      "notas": "",
+      "num1": "36",
+      "num2": "86"
     }
   }
 }
