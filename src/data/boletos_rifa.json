@@ -234,13 +234,13 @@
       "num2": "98"
     },
     "37": {
-      "estado": "Apartado",
+      "estado": "Pagado",
       "participante": "Pragedis Hernández García",
       "whatsapp": "5219932466531",
       "fecha": "2026-10-04 18:50:49",
-      "fecha_pago": "",
+      "fecha_pago": "2026-10-04 18:51:53",
       "canal": "whatsapp",
-      "notas": "Solicitud recibida por WhatsApp 2026-10-04 (Folio LVT-2026-B3749-MWKT). Registro manual por falla del bot (IA pausada).",
+      "notas": "Pago confirmado. Folio solicitud LVT-2026-B3749-MWKT. Restaurado estado PAGADO (registro original del panel 2026-10-04 18:17).",
       "num1": "36",
       "num2": "86"
     }
