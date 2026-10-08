@@ -113,7 +113,7 @@ dialog[open] { animation: entra .35s cubic-bezier(.16,1,.3,1); }
    Capa editorial 2026.1 · piezas de alto impacto
    ========================================================================== */
 @layer components {
-  .titular-hero { @apply font-display font-extrabold leading-[0.95] tracking-[-0.03em]; font-size: clamp(3rem, 8.5vw, 7.5rem); }
+  .titular-hero { @apply font-display font-extrabold leading-[0.95] tracking-[-0.03em]; font-size: clamp(2.9rem, 7vw, 6.2rem); }
   .titular-hero em { @apply font-serif font-medium not-italic italic tracking-normal text-naranja; font-size: 1.04em; }
   .marquesina { display: flex; overflow: hidden; gap: 0; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
   .marquesina > div { display: flex; flex: none; gap: 2.5rem; padding-right: 2.5rem; animation: desliza 60s linear infinite; white-space: nowrap; }
