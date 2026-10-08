@@ -1,0 +1,11 @@
+{
+  "name": "Letras y Voces de Tabasco",
+  "short_name": "Letras y Voces",
+  "description": "Sociedad de Escritores Letras y Voces de Tabasco, A.C.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBF7",
+  "theme_color": "#EF7B38",
+  "lang": "es-MX",
+  "icons": [{ "src": "/apple-touch-icon.png", "sizes": "512x512", "type": "image/png" }]
+}
