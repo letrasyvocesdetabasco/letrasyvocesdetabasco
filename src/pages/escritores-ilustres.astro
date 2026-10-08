@@ -1,89 +1,138 @@
 ---
-// src/pages/escritores-ilustres.astro - Panteón Oficial de Escritores Ilustres Tabasqueños
-// Sociedad de Escritores «Letras y Voces de Tabasco, A.C.»
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import EscritoresIlustres from '../components/EscritoresIlustres.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-
-const basePath = "";
+import { ESCRITORES, BLOQUES } from '../lib/escritores';
+const cuenta = (b: string) => ESCRITORES.filter((x) => x.e.bloqueCanon === b).length;
 ---
-
-<BaseLayout 
-  title="Panteón Canónico de Escritores Ilustres · LVT, A.C."
-  description="Biografías exhaustivas, obras capitales, compendios canónicos y semblanzas patrimoniales de autores de Tabasco, México y el mundo."
->
-  <Navbar />
-
-  <main class="pt-16 sm:pt-20">
-    <!-- Miga de Pan / Breadcrumbs Institucional -->
-    <div class="bg-[#F5EFE6] border-b border-[#E3D7C5] py-3.5">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        <div class="flex items-center gap-2 text-xs font-title uppercase tracking-wider text-gray-500">
-          <a href="/" class="hover:text-[#EF7B38] transition flex items-center gap-1">
-            <span>Inicio</span>
-          </a>
-          <span>/</span>
-          <a href="/publicaciones" class="hover:text-[#EF7B38] transition">Sala de Lectura</a>
-          <span>/</span>
-          <span class="text-[#EF7B38] font-bold">Escritores Ilustres</span>
-        </div>
-
-        <div class="hidden md:flex items-center gap-3 text-xs font-title font-semibold text-[#7A5B1E]">
-          <span>🏛️ Archivo Histórico & Lírico</span>
-          <span>·</span>
-          <span>Colección Patrimonial en Línea</span>
-        </div>
-      </div>
+<BaseLayout title="Escritores ilustres · Letras y Voces de Tabasco" description="Semblanzas, obras y citas con fuente de los escritores de Tabasco, México y el mundo que forman el canon de lectura de Letras y Voces de Tabasco.">
+  <section class="envoltura pb-10 pt-14 sm:pt-20">
+    <p class="etiqueta">Canon de lectura</p>
+    <div class="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+      <h1 class="titular-xl max-w-[12ch]">Escritores ilustres</h1>
+      <p class="entradilla">Las voces de Tabasco primero, y junto a ellas los autores de México y del mundo que leemos en el taller. Cada ficha reúne su vida, su obra y citas con su fuente.</p>
     </div>
-
-    <!-- Panteón Canónico de Escritores Ilustres -->
-    <EscritoresIlustres 
-      mostrarPabellonCompleto={true}
-      tituloSeccion="Panteón Canónico de Escritores Ilustres"
-      subtituloSeccion="Descubra la vida, las obras capitales y los textos íntegros de las figuras tutelares que forjaron la literatura de Tabasco, México y el canon universal."
-    />
-
-    <!-- Sección de Conexión con la Fonoteca y Talleres -->
-    <section class="py-16 bg-[#FDFBF7] border-t border-[#E3D7C5]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-br from-[#191614] via-[#241F1B] to-[#141210] rounded-3xl p-8 sm:p-12 text-white border border-[#C5A059]/30 shadow-2xl relative overflow-hidden">
-          <div class="absolute -right-20 -top-20 w-80 h-80 bg-[#EF7B38]/10 rounded-full blur-3xl pointer-events-none"></div>
-          
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            <div class="lg:col-span-8 space-y-4 text-left">
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EF7B38]/20 text-[#EF7B38] text-xs font-title font-bold uppercase tracking-wider border border-[#EF7B38]/30">
-                🎙️ De la Página a la Voz Viva
-              </div>
-              <h3 class="text-2xl sm:text-3xl font-serif font-black text-[#F6F0E2]">
-                Escuche la palabra viva en nuestra Fonoteca y Audioteca
-              </h3>
-              <p class="text-xs sm:text-sm font-serif italic text-gray-300 leading-relaxed max-w-2xl">
-                Muchos de los versos de Carlos Pellicer, José Gorostiza, Oliverio Girondo, Jaime Sabines y Juan Rulfo han sido preservados en grabaciones sonoras históricas de libre acceso en nuestro portal institucional.
-              </p>
-            </div>
-
-            <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
-              <a 
-                href="/audioteca" 
-                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#EF7B38] hover:bg-[#8F3812] text-white font-title font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg"
-              >
-                <span>🎙️ Explorar Audioteca Lírica</span>
-              </a>
-              <a 
-                href="/taller-literario" 
-                class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-title font-bold text-xs uppercase tracking-wider border border-white/20 transition-all duration-200"
-              >
-                <span>📖 Taller Sabatino LVT-UJAT</span>
-              </a>
-            </div>
-          </div>
-        </div>
+    <div class="mt-10 flex flex-col gap-4 border-y border-linea py-5 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por origen">
+        <button type="button" class="chip" data-filtro="todos" aria-pressed="true">Todos <span class="ml-1.5 text-tenue numero">{ESCRITORES.length}</span></button>
+        {BLOQUES.map((b) => <button type="button" class="chip" data-filtro={b.id} aria-pressed="false">{b.nombre} <span class="ml-1.5 text-tenue numero">{cuenta(b.id)}</span></button>)}
       </div>
-    </section>
+      <label class="relative block sm:w-72">
+        <span class="sr-only">Buscar escritor</span>
+        <input id="buscar" type="search" placeholder="Buscar por nombre u obra" class="w-full rounded-full border border-linea bg-superficie py-2.5 pl-10 pr-4 text-sm outline-none transition placeholder:text-tenue focus:border-naranja" />
+        <svg class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-tenue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </label>
+    </div>
+  </section>
 
-  </main>
+  <section class="envoltura">
+    <ul id="rejilla" class="grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      {ESCRITORES.map(({ e, foto }) => (
+        <li data-bloque={e.bloqueCanon} data-texto={`${e.nombre} ${e.obrasCapitales.map((o) => o.titulo).join(' ')} ${e.municipioOrigen}`.toLowerCase()}>
+          <button type="button" data-abrir={e.id} class="group block w-full text-left">
+            <span class="relative block aspect-[3/4] overflow-hidden rounded-pieza bg-linea">
+              <img src={foto} alt={`Retrato de ${e.nombre}`} loading="lazy" class="retrato h-full w-full group-hover:scale-[1.04] group-hover:grayscale-0" />
+              <span class="absolute left-3 top-3 rounded-full bg-fondo/90 px-2.5 py-1 text-[0.68rem] font-semibold text-grafito backdrop-blur">{BLOQUES.find((b) => b.id === e.bloqueCanon)?.nombre}</span>
+            </span>
+            <span class="mt-3 block font-display text-[1.05rem] font-bold leading-tight group-hover:text-naranja-tinta">{e.nombre.replace(/\s*\(.*?\)/, "")}</span>
+            <span class="mt-0.5 block text-sm text-tenue numero">{e.anios}</span>
+            <span class="mt-1 block font-serif text-[0.98rem] italic leading-snug text-grafito">{e.tituloHonorifico}</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+    <p id="sin-resultados" class="hidden py-16 text-center text-grafito">No encontramos a nadie con esa búsqueda.</p>
+  </section>
 
-  <Footer />
+  {ESCRITORES.map(({ e, foto, citas, verificados }) => (
+    <dialog id={`d-${e.id}`} data-ficha={e.id} class="m-auto h-[100dvh] max-h-[100dvh] w-full max-w-none overflow-hidden bg-transparent p-0 sm:h-[92vh] sm:max-h-[92vh] sm:max-w-5xl sm:rounded-[1.5rem]" aria-labelledby={`t-${e.id}`}>
+      <div class="grid h-full overflow-y-auto bg-fondo text-tinta md:grid-cols-[22rem_1fr] md:overflow-hidden">
+        <aside class="relative bg-noche text-white md:overflow-y-auto">
+          <img src={foto} alt={`Retrato de ${e.nombre}`} loading="lazy" class="aspect-[4/5] w-full object-cover grayscale md:aspect-[3/4]" />
+          <div class="p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Nació</p>
+            <p class="mt-1 text-sm text-white/85">{e.nacimiento}</p>
+            {e.fallecimiento && <><p class="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Murió</p><p class="mt-1 text-sm text-white/85">{e.fallecimiento}</p></>}
+            {e.movimiento && <><p class="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Movimiento</p><p class="mt-1 text-sm text-white/85">{e.movimiento}</p></>}
+          </div>
+        </aside>
+        <article class="relative md:overflow-y-auto">
+          <div class="sticky top-0 z-10 flex justify-end bg-gradient-to-b from-fondo via-fondo/90 to-transparent p-4">
+            <button type="button" data-cerrar class="grid h-11 w-11 place-items-center rounded-full bg-tinta text-fondo" aria-label="Cerrar ficha">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
+          </div>
+          <div class="px-6 pb-14 sm:px-10">
+            <p class="etiqueta">{e.municipioOrigen}</p>
+            <h2 id={`t-${e.id}`} class="mt-3 font-display text-3xl font-extrabold leading-tight sm:text-[2.6rem]">{e.nombre}</h2>
+            <p class="mt-2 font-serif text-xl italic text-grafito">{e.tituloHonorifico} · <span class="numero">{e.anios}</span></p>
+            <p class="mt-6 max-w-lectura text-lg leading-relaxed">{e.semblanzaSintetica}</p>
+
+            {citas.length > 0 && (
+              <div class="mt-10 grid gap-5">
+                {citas.slice(0, 3).map((c) => (
+                  <figure class="border-l-4 border-naranja pl-5">
+                    <blockquote class="font-serif text-[1.35rem] italic leading-snug" set:html={`«${c.texto.replace(/\s*\/\s*/g, '<br />')}»`} />
+                    <figcaption class="mt-2 text-sm text-grafito">{c.obra}{c.url && <> · <a href={c.url} target="_blank" rel="noopener" class="enlace">fuente</a></>}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            <h3 class="mt-12 font-display text-xl font-bold">Vida</h3>
+            <div class="prosa mt-3">{e.biografiaCompleta.map((p) => <p>{p}</p>)}</div>
+
+            <h3 class="mt-12 font-display text-xl font-bold">Obras esenciales</h3>
+            <ul class="mt-4 grid gap-4">
+              {e.obrasCapitales.map((o) => (
+                <li class="grid grid-cols-[4rem_1fr] gap-4 border-t border-linea pt-4">
+                  <span class="font-display font-bold text-naranja-tinta numero">{o.anio}</span>
+                  <div><p class="font-serif text-lg font-semibold italic">{o.titulo}</p><p class="text-sm text-tenue">{o.genero}</p><p class="mt-1 text-[0.97rem] text-grafito">{o.descripcion}</p></div>
+                </li>
+              ))}
+            </ul>
+
+            {verificados.length > 0 && (
+              <>
+                <h3 class="mt-12 font-display text-xl font-bold">Para conversar</h3>
+                <ul class="mt-4 grid gap-3">
+                  {verificados.slice(0, 5).map((d) => <li class="text-[0.97rem] text-grafito">{d.texto} {d.url && <a href={d.url} target="_blank" rel="noopener" class="enlace text-xs">fuente</a>}</li>)}
+                </ul>
+              </>
+            )}
+
+            {e.legadoPatrimonial && <><h3 class="mt-12 font-display text-xl font-bold">Legado</h3><p class="prosa mt-3">{e.legadoPatrimonial}</p></>}
+          </div>
+        </article>
+      </div>
+    </dialog>
+  ))}
+
+  <script is:inline>
+    (function () {
+      var chips = document.querySelectorAll('[data-filtro]'), items = document.querySelectorAll('#rejilla > li'), q = document.getElementById('buscar'), vacio = document.getElementById('sin-resultados');
+      var filtro = 'todos';
+      function aplicar() {
+        var t = (q.value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''), n = 0;
+        items.forEach(function (li) {
+          var txt = li.dataset.texto.normalize('NFD').replace(/[̀-ͯ]/g, '');
+          var ok = (filtro === 'todos' || li.dataset.bloque === filtro) && (!t || txt.indexOf(t) >= 0);
+          li.hidden = !ok; if (ok) n++;
+        });
+        vacio.classList.toggle('hidden', n > 0);
+      }
+      chips.forEach(function (c) { c.addEventListener('click', function () { filtro = c.dataset.filtro; chips.forEach(function (x) { x.setAttribute('aria-pressed', x === c); }); aplicar(); }); });
+      q.addEventListener('input', aplicar);
+      function abrir(id, empujar) {
+        var d = document.getElementById('d-' + id); if (!d) return;
+        d.showModal(); document.body.style.overflow = 'hidden';
+        if (empujar) history.replaceState(null, '', '#' + id);
+      }
+      document.querySelectorAll('[data-abrir]').forEach(function (b) { b.addEventListener('click', function () { abrir(b.dataset.abrir, true); }); });
+      document.querySelectorAll('dialog[data-ficha]').forEach(function (d) {
+        d.addEventListener('close', function () { document.body.style.overflow = ''; history.replaceState(null, '', location.pathname); });
+        d.addEventListener('click', function (ev) { if (ev.target === d) d.close(); });
+        d.querySelector('[data-cerrar]').addEventListener('click', function () { d.close(); });
+      });
+      if (location.hash.length > 1) abrir(decodeURIComponent(location.hash.slice(1)), false);
+    })();
+  </script>
 </BaseLayout>

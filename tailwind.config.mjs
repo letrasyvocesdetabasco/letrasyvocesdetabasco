@@ -1,78 +1,43 @@
 /** @type {import('tailwindcss').Config} */
+// Sistema visual LVT 2026 — Manual de Marca v2.0 (70/20/10)
+// Los colores salen de variables CSS (src/styles/global.css) para que el modo nocturno cambie todo a la vez.
+const v = (name) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  content: ['./src/**/*.{astro,html,js,ts,md,mdx}'],
+  darkMode: ['class', '.modo-nocturno'],
   theme: {
+    container: { center: true, padding: { DEFAULT: '1.25rem', sm: '1.5rem', lg: '2rem' } },
     extend: {
       colors: {
-        paper: {
-          DEFAULT: '#FAF7F0', // Fondo pergamino marfil / vellum
-          warm: '#F2ECE1',    // Fondo secundario cálido
-          card: '#FFFFFF',    // Tarjeta blanca pura
-          border: '#E3D7C5',  // Filete de encuadernación
-          line: '#D1C2AC',    // Línea de separación
-        },
-        ink: {
-          DEFAULT: '#191614', // Tinta carbón puro
-          deep: '#0B0A09',    // Negro obsidiana profundo
-          card: '#141210',    // Superficie oscura de lujo
-          muted: '#4A443E',   // Gris grafito de lectura
-          faint: '#7A7268',   // Metadatos y colofón
-        },
-        cacao: {
-          DEFAULT: '#B84E20', // Terracota cálido de Tabasco
-          light: '#F8EDE7',
-          dark: '#8F3812',
-          glow: 'rgba(184, 78, 32, 0.35)',
-        },
-        oro: {
-          DEFAULT: '#9E782F', // Oro viejo / Bistre con contraste accesible
-          bright: '#C4973B',  // Destello dorado
-          subtle: '#F6F0E2',
-          dark: '#7A5B1E',
-        },
-        editorial: {
-          DEFAULT: '#FAF7F0',
-          warm: '#F2ECE1',
-          border: '#E3D7C5',
-        },
-        carbon: {
-          DEFAULT: '#191614',
-          card: '#141210',
-          light: '#2D2926',
-          border: '#3A3430',
-        },
-        terracota: {
-          DEFAULT: '#B84E20',
-          light: '#F8EDE7',
-          dark: '#8F3812',
-          hover: '#8F3812',
-        },
-        dorado: {
-          DEFAULT: '#9E782F',
-          subtle: '#F6F0E2',
-          light: '#E8CA78',
-        }
+        fondo: v('fondo'),        // Crema (fondo principal)
+        superficie: v('superficie'),
+        hundido: v('hundido'),    // fondo secundario
+        tinta: v('tinta'),        // Carbón (texto principal)
+        grafito: v('grafito'),    // texto secundario
+        tenue: v('tenue'),        // metadatos
+        linea: v('linea'),        // filetes
+        naranja: v('naranja'),    // acento de marca (10 %)
+        'naranja-tinta': v('naranja-tinta'), // naranja accesible para texto
+        noche: v('noche'),        // bloques oscuros fijos
+        'noche-2': v('noche-2'),
+        crema: '#FDFBF7',
+        carbon: '#222222',
       },
       fontFamily: {
-        monograph: ['Newsreader', 'EB Garamond', 'Georgia', 'serif'],
-        serif: ['EB Garamond', 'Newsreader', 'Georgia', 'serif'],
-        display: ['Cinzel', 'EB Garamond', 'serif'],
-        swiss: ['Plus Jakarta Sans', 'Inter', '-apple-system', 'sans-serif'],
-        title: ['Plus Jakarta Sans', 'Montserrat', 'sans-serif'],
-        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+        display: ['Montserrat', 'system-ui', 'sans-serif'],
+        serif: ['"EB Garamond"', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
-      letterSpacing: {
-        'widest-editorial': '0.22em',
-        'loose-caps': '0.15em',
-        'tight-title': '-0.025em',
+      fontSize: {
+        'eyebrow': ['0.75rem', { lineHeight: '1', letterSpacing: '0.16em' }],
       },
+      maxWidth: { lectura: '68ch' },
       boxShadow: {
-        elevated: '0 16px 36px -6px rgba(25, 22, 20, 0.08), 0 4px 12px -2px rgba(25, 22, 20, 0.04)',
-        subtle: '0 2px 8px rgba(25, 22, 20, 0.04), 0 1px 3px rgba(25, 22, 20, 0.02)',
-        'book-spine': '-4px 0 12px rgba(0,0,0,0.08), 8px 12px 24px rgba(25,22,20,0.08)',
-        'folio-hover': '0 20px 35px -8px rgba(25,22,20,0.12), 0 1px 3px rgba(25,22,20,0.05)',
-        'glow-terracota': '0 0 25px rgba(184, 78, 32, 0.25)',
-      }
+        suave: '0 1px 2px rgb(34 34 34 / 0.04), 0 8px 24px -12px rgb(34 34 34 / 0.18)',
+        alta: '0 24px 60px -24px rgb(34 34 34 / 0.35)',
+      },
+      borderRadius: { pieza: '1.25rem' },
     },
   },
   plugins: [],

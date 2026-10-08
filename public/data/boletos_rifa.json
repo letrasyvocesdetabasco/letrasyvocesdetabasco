@@ -114,133 +114,61 @@
   "boletos_ocupados": {
     "5": {
       "estado": "Pagado",
-      "participante": "J. David Cabrera",
-      "whatsapp": "5219931090153",
-      "fecha": "2026-08-30 12:47:26",
-      "fecha_pago": "2026-08-31 15:02:08",
-      "canal": "panel",
-      "notas": "",
       "num1": "04",
       "num2": "54"
     },
     "4": {
       "estado": "Pagado",
-      "participante": "Daly",
-      "whatsapp": "5219933839520",
-      "fecha": "2026-09-02 16:08:57",
-      "fecha_pago": "2026-09-02 16:18:03",
-      "canal": "panel",
-      "notas": "",
       "num1": "03",
       "num2": "53"
     },
     "40": {
       "estado": "Apartado",
-      "participante": "Luis Mariano Peregrino",
-      "whatsapp": "5219814225182",
-      "fecha": "2026-09-03 14:14:41",
-      "fecha_pago": "",
-      "canal": "panel",
-      "notas": "",
       "num1": "39",
       "num2": "89"
     },
     "8": {
       "estado": "Pagado",
-      "participante": "Carlos Manuel López Arellano",
-      "whatsapp": "5219932127196",
-      "fecha": "2026-09-04 00:19:08",
-      "fecha_pago": "2026-09-04 00:20:08",
-      "canal": "whatsapp",
-      "notas": "Pago validado con IA (Nu (Nubank) $100.00 MXN Folio: NU3AJ8TG6S3R8SOABBFEHG58Q4AO)",
       "num1": "07",
       "num2": "57"
     },
     "26": {
       "estado": "Pagado",
-      "participante": "Fernanda Mendoza",
-      "whatsapp": "5215620481140",
-      "fecha": "2026-09-09 14:08:08",
-      "fecha_pago": "2026-09-26 09:45:15",
-      "canal": "panel",
-      "notas": "",
       "num1": "25",
       "num2": "75"
     },
     "29": {
       "estado": "Pagado",
-      "participante": "Rebeca Díaz Suárez",
-      "whatsapp": "5219931467390",
-      "fecha": "2026-09-10 19:35:44",
-      "fecha_pago": "2026-09-10 22:10:50",
-      "canal": "panel",
-      "notas": "Citibanamex $200.00 MXN Folio: 085907262250325369 (Ampara Boletos #29 y #44)",
       "num1": "28",
       "num2": "78"
     },
     "44": {
       "estado": "Pagado",
-      "participante": "Rebeca Díaz Suárez",
-      "whatsapp": "5219931467390",
-      "fecha": "2026-09-10 19:35:44",
-      "fecha_pago": "2026-09-10 22:10:50",
-      "canal": "panel",
-      "notas": "Citibanamex $200.00 MXN Folio: 085907262250325369 (Ampara Boletos #29 y #44)",
       "num1": "43",
       "num2": "93"
     },
     "27": {
       "estado": "Apartado",
-      "participante": "❤️",
-      "whatsapp": "5219931284048",
-      "fecha": "2026-09-11 18:59:31",
-      "fecha_pago": "",
-      "canal": "panel",
-      "notas": "",
       "num1": "26",
       "num2": "76"
     },
     "21": {
       "estado": "Pagado",
-      "participante": "Ara Verde",
-      "whatsapp": "5219931432771",
-      "fecha": "2026-09-11 20:57:08",
-      "fecha_pago": "2026-09-11 21:23:11",
-      "canal": "panel",
-      "notas": "",
       "num1": "20",
       "num2": "70"
     },
     "15": {
       "estado": "Apartado",
-      "participante": "Rudy",
-      "whatsapp": "5219371198818",
-      "fecha": "2026-09-30 16:27:25",
-      "fecha_pago": "",
-      "canal": "panel",
-      "notas": "",
       "num1": "14",
       "num2": "64"
     },
     "49": {
       "estado": "Pagado",
-      "participante": "Pragedis Hernández García",
-      "whatsapp": "5219932466531",
-      "fecha": "2026-10-04 18:50:50",
-      "fecha_pago": "2026-10-04 18:51:55",
-      "canal": "whatsapp",
-      "notas": "Pago confirmado. Folio solicitud LVT-2026-B3749-MWKT. Restaurado estado PAGADO (registro original del panel 2026-10-04 18:17).",
       "num1": "48",
       "num2": "98"
     },
     "37": {
       "estado": "Pagado",
-      "participante": "Pragedis Hernández García",
-      "whatsapp": "5219932466531",
-      "fecha": "2026-10-04 18:50:49",
-      "fecha_pago": "2026-10-04 18:51:53",
-      "canal": "whatsapp",
-      "notas": "Pago confirmado. Folio solicitud LVT-2026-B3749-MWKT. Restaurado estado PAGADO (registro original del panel 2026-10-04 18:17).",
       "num1": "36",
       "num2": "86"
     }

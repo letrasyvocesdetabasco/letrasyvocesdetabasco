@@ -1,0 +1,20 @@
+---
+// Logotipo LVT: isotipo + letras (versiones oficiales del manual), legible en tamaños pequeños
+interface Props { claro?: boolean; clase?: string; }
+const { claro = false, clase = 'h-10' } = Astro.props;
+---
+<span class:list={['inline-flex items-center gap-2.5', clase]}>
+  {claro ? (
+    <>
+      <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" class="h-full w-auto" width="40" height="40" />
+      <img src="/assets/logos/LVT Logo LetIzq 3 Blanco.svg" alt="Letras y Voces de Tabasco, A.C." class="h-[62%] w-auto" width="120" height="32" />
+    </>
+  ) : (
+    <>
+      <img src="/assets/logos/LVT Logo Iso 1 Original.svg" alt="" class="h-full w-auto dark:hidden" width="40" height="40" />
+      <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" class="hidden h-full w-auto dark:block" width="40" height="40" />
+      <img src="/assets/logos/LVT Logo LetIzq 1 Negro.svg" alt="Letras y Voces de Tabasco, A.C." class="h-[62%] w-auto dark:hidden" width="120" height="32" />
+      <img src="/assets/logos/LVT Logo LetIzq 3 Blanco.svg" alt="Letras y Voces de Tabasco, A.C." class="hidden h-[62%] w-auto dark:block" width="120" height="32" />
+    </>
+  )}
+</span>

@@ -1,0 +1,65 @@
+---
+// Tarjeta «próxima sesión del taller»: se calcula al compilar y se recalcula en el navegador con la fecha real.
+import { SESIONES, TALLER, sesionVigente, fechaLarga, lecturas, TOTAL_SESIONES } from '../../lib/taller';
+interface Props { oscuro?: boolean; compacta?: boolean; }
+const { oscuro = false, compacta = false } = Astro.props;
+const { proxima, recesos, esHoy } = sesionVigente();
+const mini = TALLER.calendario.map((s) => ({ f: s.fecha, n: s.sesion ?? null, t: s.titulo ?? '', m: s.modulo_nombre ?? '', l: s.lecturas ?? '' }));
+const lec = proxima ? lecturas(proxima).slice(0, 2) : [];
+---
+<article data-sesion-taller class:list={['relative overflow-hidden rounded-pieza p-6 sm:p-7', oscuro ? 'bg-white/[0.06] text-white ring-1 ring-white/15 backdrop-blur-md' : 'pieza shadow-suave']}>
+  {proxima ? (
+    <>
+      <div class="flex items-center justify-between gap-3">
+        <p class:list={['etiqueta', oscuro && 'etiqueta-clara']} data-st-estado>{esHoy ? 'Hoy hay taller' : 'Próxima sesión del taller'}</p>
+        <span class:list={['rounded-full px-2.5 py-1 text-[0.7rem] font-semibold', oscuro ? 'bg-naranja text-white' : 'bg-naranja/10 text-naranja-tinta']}>Entrada libre</span>
+      </div>
+      <div class="mt-5 flex items-end gap-3">
+        <p class="font-display text-[4.2rem] font-extrabold leading-[0.85] numero" data-st-num>{String(proxima.sesion).padStart(2, '0')}</p>
+        <p class:list={['pb-1 text-sm', oscuro ? 'text-white/60' : 'text-tenue']}>de {TOTAL_SESIONES}<br /><span data-st-modulo>{proxima.modulo_nombre}</span></p>
+      </div>
+      <h3 class="mt-4 font-serif text-[1.55rem] font-medium leading-tight" data-st-titulo>{proxima.titulo}</h3>
+      <p class:list={['mt-3 font-display text-sm font-bold', oscuro ? 'text-naranja' : 'text-naranja-tinta']}>
+        <span data-st-fecha class="inline-block first-letter:uppercase">{fechaLarga(proxima.fecha)}</span> · 11:00 a 13:00 h
+      </p>
+      {!compacta && lec.length > 0 && (
+        <ul class:list={['mt-4 grid gap-1 border-t pt-4 text-sm', oscuro ? 'border-white/15 text-white/75' : 'border-linea text-grafito']} data-st-lecturas>
+          {lec.map((x) => <li><span class="font-semibold">{x.autor}</span>{x.obra && <span class="voz">, {x.obra}</span>}</li>)}
+        </ul>
+      )}
+      {recesos.length > 0 && <p class="mt-3 text-xs opacity-70" data-st-receso>Sin sesión el {recesos.map((r) => fechaLarga(r.fecha, false)).join(' y el ')} por vacaciones de la UJAT.</p>}
+    </>
+  ) : (
+    <p class="font-serif text-xl">El ciclo del taller concluyó. Pronto anunciaremos el siguiente.</p>
+  )}
+  <script type="application/json" data-st-cal set:html={JSON.stringify(mini)} />
+</article>
+
+<script is:inline>
+  (function () {
+    var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    var DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    function larga(iso) { var p = iso.split('-').map(Number); var f = new Date(Date.UTC(p[0], p[1]-1, p[2], 12)); return DIAS[f.getUTCDay()] + ' ' + p[2] + ' de ' + MESES[p[1]-1] + (p[0] !== 2026 ? ' de ' + p[0] : ''); }
+    var ahora = new Date();
+    var hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Mexico_City' }).format(ahora);
+    var hora = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Mexico_City', hour: 'numeric', hour12: false }).format(ahora));
+    document.querySelectorAll('[data-sesion-taller]').forEach(function (el) {
+      var cal; try { cal = JSON.parse(el.querySelector('[data-st-cal]').textContent); } catch (e) { return; }
+      var ses = cal.filter(function (s) { return s.n; });
+      var p = ses.find(function (s) { return s.f > hoy || (s.f === hoy && hora < 13); });
+      if (!p || !el.querySelector('[data-st-num]')) return;
+      var q = function (s) { return el.querySelector(s); };
+      q('[data-st-num]').textContent = String(p.n).padStart(2, '0');
+      q('[data-st-titulo]').textContent = p.t;
+      q('[data-st-modulo]').textContent = p.m;
+      q('[data-st-fecha]').textContent = larga(p.f);
+      q('[data-st-estado]').textContent = p.f === hoy ? 'Hoy hay taller' : 'Próxima sesión del taller';
+      var l = q('[data-st-lecturas]');
+      if (l) l.innerHTML = p.l.split(';').filter(Boolean).slice(0, 2).map(function (x) { var i = x.indexOf(','); var a = (i > 0 ? x.slice(0, i) : x).trim(); var o = i > 0 ? x.slice(i + 1).trim().replace(/\.$/, '') : ''; return '<li><span class="font-semibold"></span>' + (o ? '<span class="voz"></span>' : '') + '</li>'; }).join('');
+      if (l) { var lis = l.querySelectorAll('li'); p.l.split(';').filter(Boolean).slice(0, 2).forEach(function (x, k) { var i = x.indexOf(','); lis[k].children[0].textContent = (i > 0 ? x.slice(0, i) : x).trim(); if (lis[k].children[1]) lis[k].children[1].textContent = ', ' + x.slice(i + 1).trim().replace(/\.$/, ''); }); }
+      var r = q('[data-st-receso]');
+      var rec = cal.filter(function (s) { return !s.n && s.f >= hoy && s.f < p.f; });
+      if (r) r.hidden = rec.length === 0;
+    });
+  })();
+</script>

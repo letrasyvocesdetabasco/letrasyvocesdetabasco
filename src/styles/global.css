@@ -2,307 +2,138 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   LVT 2026 · Sistema visual del sitio
+   Crema / Carbón / Grafito (90 %) + Naranja LVT (10 %)
+   Montserrat (titulares) · EB Garamond (voz literaria) · Inter (lectura y datos)
+   ========================================================================== */
 @layer base {
   :root {
-    /* Paleta Modo Diurno (Fondo Papel y Tinta Noble) */
-    --lvt-bg-primary: #FAF7F0;        /* Pergamino marfil editorial */
-    --lvt-bg-surface: #FFFFFF;        /* Tarjetas y superficies blancas */
-    --lvt-bg-muted: #F2ECE1;          /* Fondos secundarios cálidos */
-    --lvt-bg-card: #FFFFFF;           /* Tarjeta estándar */
-    --lvt-text-primary: #191614;      /* Tinta carbón puro (legibilidad AA/AAA) */
-    --lvt-text-muted: #4A443E;        /* Texto secundario de lectura */
-    --lvt-text-faint: #7A7268;        /* Metadatos, colofón y fechas */
-    --lvt-border: #E3D7C5;            /* Filetes y bordes editoriales */
-    --lvt-border-light: #EFE8DC;      /* Separadores sutiles */
-
-    /* Acentos Institucionales de Marca LVT */
-    --lvt-cacao: #EF7B38;             /* Naranja / Terracota LVT Oficial */
-    --lvt-cacao-dark: #8F3812;        /* Terracota oscuro para contraste y hover */
-    --lvt-cacao-light: #FDF1EA;       /* Tinte suave de acento */
-    --lvt-cacao-glow: rgba(239, 123, 56, 0.25);
-    --lvt-oro: #C59B27;               /* Oro colonial bibliófilo */
-    --lvt-oro-bright: #D4A832;        /* Oro luminoso */
-    --lvt-oro-dark: #7A5B1E;          /* Oro oscuro accesible */
-
-    /* Tipografías Oficiales LVT */
-    --font-serif: 'EB Garamond', 'Newsreader', Georgia, serif;
-    --font-display: 'Cinzel', 'EB Garamond', serif;
-    --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-
-    /* Geometría y Elevaciones Homogéneas */
-    --lvt-radius-btn: 0.75rem;        /* 12px estándar en todos los botones */
-    --lvt-radius-card: 1.5rem;        /* 24px para tarjetas y paneles */
-    --lvt-shadow-subtle: 0 2px 8px rgba(25, 22, 20, 0.04), 0 1px 3px rgba(25, 22, 20, 0.02);
-    --lvt-shadow-md: 0 8px 24px -4px rgba(25, 22, 20, 0.08);
-    --lvt-shadow-elevated: 0 16px 36px -6px rgba(25, 22, 20, 0.10), 0 4px 12px -2px rgba(25, 22, 20, 0.04);
-
-    --touch-target-min: 44px;
+    --fondo: 253 251 247;        /* #FDFBF7 Crema */
+    --superficie: 255 255 255;
+    --hundido: 245 240 232;      /* #F5F0E8 */
+    --tinta: 34 34 34;           /* #222222 Carbón */
+    --grafito: 85 85 85;         /* #555555 */
+    --tenue: 122 116 108;
+    --linea: 228 221 210;
+    --naranja: 239 123 56;       /* #EF7B38 */
+    --naranja-tinta: 184 82 26;  /* #B8521A, AA sobre crema */
+    --noche: 28 26 24;
+    --noche-2: 40 37 34;
+    color-scheme: light;
+  }
+  html.modo-nocturno {
+    --fondo: 22 21 20;
+    --superficie: 31 29 27;
+    --hundido: 38 35 32;
+    --tinta: 241 236 228;
+    --grafito: 196 189 178;
+    --tenue: 150 143 133;
+    --linea: 58 54 50;
+    --naranja: 242 140 80;
+    --naranja-tinta: 246 160 108;
+    --noche: 14 13 12;
+    --noche-2: 30 28 26;
+    color-scheme: dark;
   }
 
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: transparent;
-  }
-
+  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; }
   body {
-    background-color: var(--lvt-bg-primary);
-    color: var(--lvt-text-primary);
-    font-family: var(--font-serif);
-    font-size: 17px;
-    line-height: 1.68;
-    overflow-x: hidden;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-                color 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgb(var(--fondo)); color: rgb(var(--tinta));
+    font-family: Inter, system-ui, sans-serif; font-size: 1.0625rem; line-height: 1.65;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: clip;
   }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-feature-settings: "liga" 1, "dlig" 1, "clig" 1, "cv02" 1;
-    letter-spacing: -0.015em;
+  h1, h2, h3, h4 { font-family: Montserrat, system-ui, sans-serif; letter-spacing: -0.02em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: rgb(var(--naranja)); color: #fff; }
+  :focus-visible { outline: 2px solid rgb(var(--naranja)); outline-offset: 3px; border-radius: 4px; }
+  img { max-width: 100%; height: auto; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   }
 }
 
-/* =========================================================================
-   MODO NOCTURNO INSTITUCIONAL (ANTIRREFLEJO & CONTRASTE WCAG AAA)
-   ========================================================================= */
-html.modo-nocturno {
-  --lvt-bg-primary: #0F172A;        /* Azul noche pizarra profundo antirreflejo */
-  --lvt-bg-surface: #1E293B;        /* Superficie de tarjeta azul carbón */
-  --lvt-bg-muted: #141D2E;          /* Fondo terciario */
-  --lvt-bg-card: #1E293B;
-  --lvt-text-primary: #F8FAFC;      /* Blanco perla de máximo contraste WCAG AAA */
-  --lvt-text-muted: #CBD5E1;        /* Gris claro para párrafos de lectura */
-  --lvt-text-faint: #94A3B8;        /* Metadatos y notas al pie */
-  --lvt-border: #334155;            /* Separador atenuado */
-  --lvt-border-light: #253347;
+@layer components {
+  .envoltura { @apply mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8; }
 
-  --lvt-cacao-light: rgba(239, 123, 56, 0.18);
-  --lvt-shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --lvt-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
-  --lvt-shadow-elevated: 0 16px 36px rgba(0, 0, 0, 0.55);
+  /* Etiqueta de serie: punto naranja + versalitas espaciadas (igual que en redes) */
+  .etiqueta { @apply inline-flex items-center gap-2 font-sans text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-grafito; }
+  .etiqueta::before { content: ""; @apply h-2 w-2 shrink-0 rounded-full bg-naranja; }
+  .etiqueta-clara { @apply text-white/80; }
 
-  color-scheme: dark;
+  .titular-xl { @apply font-display text-[2.4rem] font-extrabold leading-[1.02] sm:text-6xl lg:text-[4.6rem]; }
+  .titular-l  { @apply font-display text-3xl font-extrabold leading-[1.08] sm:text-[2.75rem]; }
+  .titular-m  { @apply font-display text-2xl font-bold leading-tight sm:text-[1.75rem]; }
+  .voz        { @apply font-serif italic; }
+  .entradilla { @apply max-w-lectura font-serif text-xl italic leading-snug text-grafito sm:text-2xl; }
+
+  .barra { @apply block h-1.5 w-16 rounded-full bg-naranja; }
+
+  .boton { @apply inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[0.9rem] font-bold transition duration-200 active:scale-[0.98]; }
+  .boton-primario { @apply boton bg-naranja text-white hover:bg-naranja-tinta; }
+  .boton-oscuro { @apply boton bg-tinta text-fondo hover:bg-naranja; }
+  .boton-contorno { @apply boton border border-linea bg-superficie text-tinta hover:border-naranja hover:text-naranja-tinta; }
+  .boton-claro { @apply boton border border-white/30 text-white hover:bg-white hover:text-carbon; }
+
+  .enlace { @apply font-semibold text-naranja-tinta underline decoration-naranja/40 underline-offset-4 transition hover:decoration-naranja; }
+
+  .pieza { @apply rounded-pieza border border-linea bg-superficie; }
+  .chip { @apply inline-flex items-center rounded-full border border-linea bg-superficie px-3 py-1 font-sans text-xs font-semibold text-grafito; }
+  .chip[aria-pressed="true"] { @apply border-tinta bg-tinta text-fondo; }
+
+  .retrato { @apply object-cover grayscale-[0.85] contrast-[1.05] transition duration-500; }
+  .retrato-vivo { @apply grayscale-0; }
+
+  .prosa p + p { @apply mt-4; }
+  .prosa { @apply max-w-lectura text-[1.0625rem] leading-[1.75] text-grafito; }
+  .prosa strong { @apply font-semibold text-tinta; }
+
+  .numero { font-variant-numeric: tabular-nums; }
 }
 
-/* Reescrituras selectivas para Modo Nocturno */
-html.modo-nocturno body {
-  background-color: var(--lvt-bg-primary) !important;
-  color: var(--lvt-text-primary) !important;
+/* Revelado suave al hacer scroll (parte visible; solo se anima si JS está activo) */
+.js .aparece { opacity: 0; transform: translateY(14px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.js .aparece.visto { opacity: 1; transform: none; }
+
+/* Grano editorial sobre fotos oscuras */
+.grano::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Diálogos nativos */
+dialog::backdrop { background: rgb(14 13 12 / .72); backdrop-filter: blur(4px); }
+dialog[open] { animation: entra .35s cubic-bezier(.16,1,.3,1); }
+@keyframes entra { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+
+/* Cinta horizontal con desplazamiento */
+.cinta { display: grid; grid-auto-flow: column; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-bottom: .75rem; }
+.cinta > * { scroll-snap-align: start; }
+
+/* ==========================================================================
+   Capa editorial 2026.1 · piezas de alto impacto
+   ========================================================================== */
+@layer components {
+  .titular-hero { @apply font-display font-extrabold leading-[0.95] tracking-[-0.03em]; font-size: clamp(3rem, 8.5vw, 7.5rem); }
+  .titular-hero em { @apply font-serif font-medium not-italic italic tracking-normal text-naranja; font-size: 1.04em; }
+  .marquesina { display: flex; overflow: hidden; gap: 0; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .marquesina > div { display: flex; flex: none; gap: 2.5rem; padding-right: 2.5rem; animation: desliza 60s linear infinite; white-space: nowrap; }
+  .marquesina:hover > div { animation-play-state: paused; }
+  .cifra-grande { @apply font-display font-extrabold leading-none tracking-[-0.03em]; font-size: clamp(2.6rem, 5vw, 4.5rem); font-variant-numeric: tabular-nums; }
+  .tarjeta-foto { @apply relative isolate overflow-hidden rounded-[1.5rem]; }
+  .tarjeta-foto img { @apply absolute inset-0 h-full w-full object-cover transition duration-[900ms] ease-out; }
+  .tarjeta-foto:hover img { transform: scale(1.06); }
+  .tarjeta-foto::after { content: ""; @apply absolute inset-0 -z-0; background: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(14 13 12 / .92)); }
+  .tarjeta-foto > div { @apply relative z-10; }
+  .borde-luz { position: relative; }
+  .borde-luz::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, rgb(255 255 255 / .35), rgb(255 255 255 / .05) 40%, rgb(239 123 56 / .5)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude; -webkit-mask-composite: xor; pointer-events: none; }
+  .cita-gigante { @apply font-serif italic leading-[1.05] tracking-[-0.01em]; font-size: clamp(1.9rem, 4.2vw, 3.8rem); text-wrap: balance; }
+  .paso-grande { @apply grid gap-4 rounded-[1.5rem] border border-linea bg-superficie p-7 sm:p-9; }
+  .paso-grande .n { @apply font-display font-extrabold leading-none text-naranja; font-size: 4.5rem; }
+  .paso-grande h3 { @apply font-display text-2xl font-extrabold sm:text-[1.9rem]; }
+  .paso-grande p { @apply text-lg leading-relaxed text-grafito sm:text-xl; }
+  .boton-xl { @apply inline-flex min-h-[64px] items-center justify-center gap-3 rounded-full px-8 font-display text-xl font-bold shadow-alta transition active:scale-[0.98]; }
 }
-
-html.modo-nocturno header {
-  background-color: rgba(15, 23, 42, 0.92) !important;
-  border-color: var(--lvt-border) !important;
-}
-
-html.modo-nocturno footer {
-  background-color: #0A0F1D !important;
-  border-color: var(--lvt-border) !important;
-}
-
-html.modo-nocturno main {
-  background-color: var(--lvt-bg-primary) !important;
-}
-
-html.modo-nocturno .bg-white,
-html.modo-nocturno .bg-\[\#FDFBF7\],
-html.modo-nocturno .bg-\[\#FAF7F0\],
-html.modo-nocturno .bg-\[\#F5EFE6\],
-html.modo-nocturno .bg-paper-card {
-  background-color: var(--lvt-bg-surface) !important;
-}
-
-html.modo-nocturno .bg-paper,
-html.modo-nocturno .bg-paper-warm {
-  background-color: var(--lvt-bg-muted) !important;
-}
-
-html.modo-nocturno .border-\[\#E6DCCE\],
-html.modo-nocturno .border-\[\#E3D7C5\],
-html.modo-nocturno .border-paper-border {
-  border-color: var(--lvt-border) !important;
-}
-
-html.modo-nocturno .text-\[\#191614\],
-html.modo-nocturno .text-\[\#222222\],
-html.modo-nocturno .text-ink,
-html.modo-nocturno .text-ink-deep {
-  color: var(--lvt-text-primary) !important;
-}
-
-html.modo-nocturno .text-\[\#4A443E\],
-html.modo-nocturno .text-\[\#555555\],
-html.modo-nocturno .text-gray-500,
-html.modo-nocturno .text-gray-600,
-html.modo-nocturno .text-ink-muted {
-  color: var(--lvt-text-muted) !important;
-}
-
-html.modo-nocturno .text-\[\#7A7268\],
-html.modo-nocturno .text-ink-faint {
-  color: var(--lvt-text-faint) !important;
-}
-
-/* Compatibilidad transitoria para selectores heredados */
-html.modo-lectura {
-  --lvt-bg-primary: #0F172A;
-  --lvt-bg-surface: #1E293B;
-  --lvt-bg-muted: #141D2E;
-  --lvt-text-primary: #F8FAFC;
-  --lvt-text-muted: #CBD5E1;
-  --lvt-text-faint: #94A3B8;
-  --lvt-border: #334155;
-  color-scheme: dark;
-}
-
-/* =========================================================================
-   SISTEMA DE MICROINTERACCIONES 3D Y GLASSMORPHISM
-   ========================================================================= */
-
-/* Glassmorphism Puro de Alto Desempeño */
-.lvt-glass {
-  background: rgba(253, 251, 247, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--lvt-border);
-}
-
-html.modo-nocturno .lvt-glass {
-  background: rgba(30, 41, 59, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--lvt-border);
-}
-
-/* Microinteracción 3D Suave en Tarjetas (Solo Desktop con Ratón) */
-@media (hover: hover) and (pointer: fine) {
-  .card-3d-subtle {
-    perspective: 1000px;
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
-    will-change: transform;
-  }
-
-  .card-3d-subtle:hover {
-    transform: perspective(1000px) translateY(-5px) rotateX(1.2deg);
-    box-shadow: var(--lvt-shadow-elevated);
-    border-color: var(--lvt-cacao);
-  }
-}
-
-/* Dispositivos Táctiles: 100% Planos, Estables y sin deformaciones */
-@media (hover: none) {
-  .card-3d-subtle {
-    transform: none !important;
-  }
-}
-
-/* =========================================================================
-   GEOMETRÍA Y HOMOGENEIZACIÓN DE BOTONES LVT
-   ========================================================================= */
-.lvt-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: var(--touch-target-min);
-  padding: 0.625rem 1.25rem;
-  border-radius: var(--lvt-radius-btn);
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-
-.lvt-btn:active {
-  transform: scale(0.97);
-}
-
-.lvt-btn-primary {
-  background-color: var(--lvt-cacao);
-  color: #FFFFFF;
-  border: 1px solid transparent;
-  box-shadow: var(--lvt-shadow-subtle);
-}
-
-.lvt-btn-primary:hover {
-  background-color: var(--lvt-cacao-dark);
-  box-shadow: var(--lvt-shadow-md);
-}
-
-.lvt-btn-secondary {
-  background-color: var(--lvt-bg-muted);
-  color: var(--lvt-text-primary);
-  border: 1px solid var(--lvt-border);
-}
-
-.lvt-btn-secondary:hover {
-  border-color: var(--lvt-cacao);
-  color: var(--lvt-cacao);
-  background-color: var(--lvt-bg-surface);
-}
-
-/* =========================================================================
-   ELEMENTOS EDITORIALES Y DIVISORES ESTÉTICOS
-   ========================================================================= */
-.french-rule {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2rem 0;
-}
-
-.french-rule::before, 
-.french-rule::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--lvt-border), transparent);
-}
-
-.french-rule span {
-  padding: 0 1rem;
-  color: var(--lvt-cacao);
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.15rem;
-}
-
-/* Divisor Curvo Sutil LVT */
-.lvt-divider-curve {
-  width: 100%;
-  height: 24px;
-  overflow: hidden;
-  line-height: 0;
-}
-
-.lvt-divider-curve svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* Adaptabilidad Táctil Móvil */
-.touch-target-44 {
-  min-width: 44px;
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.touch-target-48 {
-  min-width: 48px;
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
+@keyframes desliza { to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) { .marquesina > div { animation: none; } }
+.contador { font-variant-numeric: tabular-nums; }
+html.modo-nocturno .retrato { filter: grayscale(.85) contrast(1.05) brightness(.92); }

@@ -1,38 +1,95 @@
 ---
-// src/pages/publicaciones.astro - Catálogo Editorial Completo y Fondo Bibliográfico Histórico de LVT
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import Publicaciones from '../components/Publicaciones.astro';
-import ProximamenteRevista from '../components/ProximamenteRevista.astro';
-import ReadingModal from '../components/ReadingModal.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-
-const basePath = "";
+import { CATALOGO_EDITORIAL as LIBROS } from '../data/libros';
+import { wa, portadaWeb } from '../lib/sitio';
+const fondos = [...new Set(LIBROS.map((l) => l.fondo))];
+const ordenados = [...LIBROS].sort((a, b) => b.anio - a.anio);
+const estado: Record<string, string> = { 'En Imprenta': 'En imprenta', 'Venta / Distribución': 'Disponible', 'Digitalización PDF': 'Digital', 'Consulta / Archivo': 'Archivo' };
 ---
-
-<BaseLayout 
-  title="Catálogo Editorial & Antologías Oficiales · Sociedad de Escritores LVT, A.C."
-  description="Acervo editorial oficial de Letras y Voces de Tabasco: Animalia Literaria, A corazón abierto, Tardes Tabasqueñas de Ópalos y Topacios, La Mujer en el Siglo XXI, Amarellus y publicaciones históricas."
->
-  <Navbar />
-
-  <main class="pt-16 sm:pt-20">
-    <div class="bg-paper-warm border-b border-paper-border py-3">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs font-swiss tracking-normal text-ink-muted">
-        <a href="/" class="hover:text-cacao transition">Inicio</a>
-        <span>/</span>
-        <span class="text-cacao font-bold">Catálogo Editorial & Antologías</span>
-      </div>
+<BaseLayout title="Publicaciones y fondo editorial · Letras y Voces de Tabasco" description="Antologías y libros del fondo editorial de la Sociedad de Escritores Letras y Voces de Tabasco: poesía, narrativa y ensayo de autores tabasqueños.">
+  <section class="envoltura pb-10 pt-14 sm:pt-20">
+    <p class="etiqueta">Fondo editorial</p>
+    <div class="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+      <h1 class="titular-xl max-w-[12ch]">Publicaciones</h1>
+      <p class="entradilla">Antologías colectivas y libros de autor editados por la Sociedad desde los años noventa. Toca una portada para leer la sinopsis y un fragmento.</p>
     </div>
+    <div class="mt-10 flex flex-wrap gap-2 border-y border-linea py-5" role="group" aria-label="Filtrar por fondo">
+      <button type="button" class="chip" data-fondo="todos" aria-pressed="true">Todos <span class="ml-1.5 text-tenue numero">{LIBROS.length}</span></button>
+      {fondos.map((f) => <button type="button" class="chip" data-fondo={f} aria-pressed="false">{f} <span class="ml-1.5 text-tenue numero">{LIBROS.filter((l) => l.fondo === f).length}</span></button>)}
+    </div>
+  </section>
 
-    <!-- 1. Catálogo de Libros y Obras Publicadas -->
-    <Publicaciones />
+  <section class="envoltura">
+    <ul id="libros" class="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      {ordenados.map((l) => (
+        <li data-fondo={l.fondo} id={l.id}>
+          <button type="button" data-abrir={l.id} class="group block w-full text-left">
+            <span class="relative block aspect-[2/3] overflow-hidden rounded-md shadow-suave transition duration-500 group-hover:-translate-y-1.5 group-hover:shadow-alta" style={`background:${l.portadaColor || '#2a2725'}`}>
+              {l.portadaImg ? <img src={portadaWeb(l.portadaImg)} alt={`Portada de ${l.titulo}`} loading="lazy" class="h-full w-full object-cover" /> : (
+                <span class="flex h-full flex-col justify-between p-4 text-white">
+                  <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" class="h-8 w-8 opacity-80" />
+                  <span><span class="block font-serif text-xl font-semibold italic leading-tight">{l.titulo}</span><span class="mt-2 block text-xs text-white/70">{l.anio}</span></span>
+                </span>
+              )}
+              <span class="absolute left-2 top-2 rounded-full bg-fondo/90 px-2 py-0.5 text-[0.65rem] font-semibold text-grafito">{estado[l.disponibilidad] ?? l.disponibilidad}</span>
+            </span>
+            <span class="mt-3 block font-display text-[0.98rem] font-bold leading-tight group-hover:text-naranja-tinta">{l.titulo}</span>
+            <span class="mt-0.5 block text-sm text-tenue"><span class="numero">{l.anio}</span> · {l.genero}</span>
+          </button>
+        </li>
+      ))}
+    </ul>
+  </section>
 
-    <!-- 2. Próximamente: Revista Literaria Letra y Voz -->
-    <ProximamenteRevista />
-  </main>
+  <section class="envoltura mt-24">
+    <div class="relative overflow-hidden rounded-[1.75rem] bg-noche p-8 text-white sm:p-14">
+      <img src="/assets/logos/LVT Logo Iso 2 Naranja Relleno.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-16 -top-10 w-80 opacity-15" />
+      <p class="etiqueta etiqueta-clara">En preparación</p>
+      <h2 class="titular-l mt-4 max-w-[16ch]">Revista literaria «Letra y Voz»</h2>
+      <p class="mt-5 max-w-xl text-white/75">Un espacio para cuento, poesía, ensayo, crónica y gráfica de autores del sureste. ¿Quieres colaborar en el primer número?</p>
+      <a href={wa('Hola, me interesa colaborar en la revista «Letra y Voz».')} target="_blank" rel="noopener" class="boton-primario mt-8">Quiero colaborar</a>
+    </div>
+  </section>
 
-  <ReadingModal />
-  <Footer />
+  {LIBROS.map((l) => (
+    <dialog id={`d-${l.id}`} data-ficha class="m-auto w-full max-w-3xl overflow-hidden rounded-[1.5rem] bg-transparent p-0" aria-labelledby={`t-${l.id}`}>
+      <div class="max-h-[92dvh] overflow-y-auto bg-fondo text-tinta">
+        <div class="grid gap-8 p-6 sm:grid-cols-[11rem_1fr] sm:p-10">
+          <div>
+            {l.portadaImg ? <img src={portadaWeb(l.portadaImg)} alt={`Portada de ${l.titulo}`} loading="lazy" class="w-40 rounded-md shadow-alta sm:w-full" /> : <div class="aspect-[2/3] w-40 rounded-md sm:w-full" style={`background:${l.portadaColor || '#2a2725'}`}></div>}
+          </div>
+          <div>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="etiqueta">{l.genero} · <span class="numero">{l.anio}</span></p>
+                <h2 id={`t-${l.id}`} class="mt-3 font-display text-3xl font-extrabold leading-tight">{l.titulo}</h2>
+                {l.subtitulo && <p class="mt-1 font-serif text-lg italic text-grafito">{l.subtitulo}</p>}
+              </div>
+              <form method="dialog"><button class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-tinta text-fondo" aria-label="Cerrar"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form>
+            </div>
+            <p class="mt-5 text-[0.97rem] text-grafito">{l.autores}</p>
+            <p class="prosa mt-5">{l.sinopsis}</p>
+            {l.fragmentoMuestra && <blockquote class="mt-6 border-l-4 border-naranja pl-5 font-serif text-lg italic leading-relaxed whitespace-pre-line">{l.fragmentoMuestra}</blockquote>}
+            <dl class="mt-8 grid grid-cols-2 gap-4 border-t border-linea pt-5 text-sm">
+              <div><dt class="text-tenue">Páginas</dt><dd class="font-semibold numero">{l.paginas}</dd></div>
+              <div><dt class="text-tenue">Estado</dt><dd class="font-semibold">{estado[l.disponibilidad] ?? l.disponibilidad}</dd></div>
+              {l.isbn && <div><dt class="text-tenue">ISBN</dt><dd class="font-semibold numero">{l.isbn}</dd></div>}
+              <div><dt class="text-tenue">Coedición</dt><dd class="font-semibold">{l.coeditores}</dd></div>
+            </dl>
+            <a href={wa(`Hola, me interesa el libro «${l.titulo}».`)} target="_blank" rel="noopener" class="boton-oscuro mt-8">Pedir informes</a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  ))}
+
+  <script is:inline>
+    (function () {
+      var chips = document.querySelectorAll('[data-fondo]:is(button)'), items = document.querySelectorAll('#libros > li');
+      chips.forEach(function (c) { c.addEventListener('click', function () { chips.forEach(function (x) { x.setAttribute('aria-pressed', x === c); }); items.forEach(function (li) { li.hidden = !(c.dataset.fondo === 'todos' || li.dataset.fondo === c.dataset.fondo); }); }); });
+      document.querySelectorAll('[data-abrir]').forEach(function (b) { b.addEventListener('click', function () { document.getElementById('d-' + b.dataset.abrir).showModal(); }); });
+      document.querySelectorAll('dialog[data-ficha]').forEach(function (d) { d.addEventListener('click', function (ev) { if (ev.target === d) d.close(); }); });
+      if (location.hash.length > 1) { var d = document.getElementById('d-' + location.hash.slice(1)); if (d) d.showModal(); }
+    })();
+  </script>
 </BaseLayout>

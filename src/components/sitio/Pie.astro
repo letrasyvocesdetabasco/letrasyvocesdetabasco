@@ -1,0 +1,55 @@
+---
+import { NAV, NAV_SECUNDARIA, CONTACTO, wa } from '../../lib/sitio';
+import { sesionVigente, fechaLarga } from '../../lib/taller';
+import Logo from './Logo.astro';
+const { proxima } = sesionVigente();
+const anio = new Date().getFullYear();
+---
+<footer class="relative mt-24 overflow-hidden bg-noche text-white">
+  <div class="envoltura grid gap-12 py-16 lg:grid-cols-[1.3fr_1fr_1fr] lg:py-20">
+    <div class="max-w-md">
+      <Logo claro clase="h-12" />
+      <p class="mt-6 font-serif text-2xl italic leading-snug text-white/85">Desde 1987 hacemos comunidad alrededor de la palabra escrita en Tabasco.</p>
+      <p class="mt-4 text-sm text-white/55">Sociedad de Escritores Letras y Voces de Tabasco, A.C. Asociación civil sin fines de lucro con sede en Villahermosa, Tabasco.</p>
+      <div class="mt-6 flex gap-2">
+        <a href={CONTACTO.facebook} target="_blank" rel="noopener" class="grid h-11 w-11 place-items-center rounded-full border border-white/15 transition hover:border-naranja hover:text-naranja" aria-label="Facebook">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.3c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.4H7.5V14h2.7v8h3.3Z"/></svg>
+        </a>
+        <a href={CONTACTO.instagram} target="_blank" rel="noopener" class="grid h-11 w-11 place-items-center rounded-full border border-white/15 transition hover:border-naranja hover:text-naranja" aria-label="Instagram">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href={wa('Hola, Letras y Voces de Tabasco.')} target="_blank" rel="noopener" class="grid h-11 w-11 place-items-center rounded-full border border-white/15 transition hover:border-naranja hover:text-naranja" aria-label="WhatsApp">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.7-.1 1.4Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <p class="etiqueta etiqueta-clara">Explora</p>
+      <ul class="mt-5 grid gap-2.5 text-[0.95rem]">
+        {[...NAV, ...NAV_SECUNDARIA].map((n) => <li><a href={n.href} class="text-white/75 transition hover:text-white">{n.texto}</a></li>)}
+      </ul>
+    </div>
+    <div class="grid content-start gap-8">
+      <div>
+        <p class="etiqueta etiqueta-clara">Taller literario</p>
+        <p class="mt-4 font-display text-lg font-bold">Sábados, 11:00 a 13:00 h</p>
+        <p class="mt-1 text-sm text-white/65">{CONTACTO.sedeTaller}</p>
+        {proxima && <p class="mt-3 text-sm text-white/80">Próxima: sesión {proxima.sesion}, {fechaLarga(proxima.fecha)}</p>}
+      </div>
+      <div>
+        <p class="etiqueta etiqueta-clara">Contacto</p>
+        <p class="mt-4 text-sm leading-7 text-white/80">
+          <span class="select-all">{CONTACTO.correo}</span><br />
+          WhatsApp <span class="select-all">{CONTACTO.whatsappVisible}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="envoltura flex flex-col gap-2 py-6 text-xs text-white/45 sm:flex-row sm:justify-between">
+      <p>© {anio} Sociedad de Escritores Letras y Voces de Tabasco, A.C.</p>
+      <p>Fotografías: archivo de Letras y Voces de Tabasco y Wikimedia Commons.</p>
+    </div>
+  </div>
+  <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -bottom-24 -right-24 w-[26rem] opacity-[0.04]" loading="lazy" />
+</footer>

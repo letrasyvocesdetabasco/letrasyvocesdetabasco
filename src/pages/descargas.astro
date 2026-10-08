@@ -1,44 +1,145 @@
 ---
-// src/pages/descargas.astro - Centro de Descargas Documentales, Certámenes y Afiliación de LVT
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import CentroDescargas from '../components/CentroDescargas.astro';
-import Convocatorias from '../components/Convocatorias.astro';
-import ProcesoMembresia from '../components/ProcesoMembresia.astro';
-import GaleriaEventos from '../components/GaleriaEventos.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-
-const basePath = "";
+import { CONCURSOS_EXTERNOS_DESTACADOS as CONCURSOS, RECURSOS_ESCRITORES as RECURSOS } from '../data/convocatorias';
+import { ALBUMES_EVENTOS as ALBUMES } from '../data/galeria';
+import { CONTACTO, wa } from '../lib/sitio';
+const web = (src: string) => src.startsWith('/assets/galeria/') ? src.replace(/^\/assets\/galeria\/(?:eventos\/)?(.+)\.jpg$/, '/assets/galeria/web/$1.webp') : src;
+const pasos = [
+  ['Envía tu solicitud', 'Semblanza, carta de motivos y una muestra de obra (poesía, cuento, ensayo o novela), por correo o en el taller.'],
+  ['Dictamen colegiado', 'El comité editorial y la mesa directiva revisan el material en sesión ordinaria.'],
+  ['Toma de protesta', 'Ratificación en asamblea, constancia de acreditación e integración a los proyectos editoriales.'],
+];
 ---
+<BaseLayout title="Convocatorias, socios y descargas · Letras y Voces de Tabasco" description="Cómo ser socio de Letras y Voces de Tabasco, convocatorias vigentes, concursos literarios, recursos para escritores y memoria gráfica de nuestros eventos.">
+  <section class="envoltura pb-12 pt-14 sm:pt-20">
+    <p class="etiqueta">Convocatorias y recursos</p>
+    <div class="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+      <h1 class="titular-xl max-w-[13ch]">Para quienes escriben</h1>
+      <p class="entradilla">Cómo integrarte a la Sociedad, en qué antologías estamos trabajando, concursos abiertos y herramientas útiles para tu oficio.</p>
+    </div>
+    <nav class="mt-10 flex flex-wrap gap-2 border-y border-linea py-5" aria-label="En esta página">
+      {[['#socios', 'Ser socio'], ['#antologias', 'Antologías'], ['#concursos', 'Concursos'], ['#recursos', 'Recursos'], ['#memoria', 'Memoria gráfica']].map(([h, t]) => <a href={h} class="chip hover:border-naranja">{t}</a>)}
+    </nav>
+  </section>
 
-<BaseLayout 
-  title="Centro de Descargas Documentales, Convocatorias & Afiliación · Sociedad de Escritores LVT"
-  description="Descarga de estatutos sociales públicos, formatos de postulación para nuevos socios, directorio de concursos literarios y convocatorias oficiales de LVT, A.C."
->
-  <Navbar />
+  <section id="socios" class="envoltura py-12">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
+      <div>
+        <p class="etiqueta">Convocatoria permanente</p>
+        <h2 class="titular-l mt-4">Cómo ser socio</h2>
+        <p class="prosa mt-5">Un espacio colegiado, plural e independiente. Como socio puedes publicar en las antologías anuales, tener respaldo en tus presentaciones y votar en asamblea.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={wa('Hola, quiero solicitar mi ingreso como socio de Letras y Voces de Tabasco.')} target="_blank" rel="noopener" class="boton-primario">Iniciar por WhatsApp</a>
+          <span class="chip !py-2.5 select-all">{CONTACTO.correo}</span>
+        </div>
+      </div>
+      <ol class="grid gap-4">
+        {pasos.map(([t, d], i) => (
+          <li class="pieza grid grid-cols-[3rem_1fr] gap-4 p-6">
+            <span class="font-display text-4xl font-extrabold leading-none text-naranja numero">{i + 1}</span>
+            <div><h3 class="font-display text-lg font-bold">{t}</h3><p class="mt-1 text-grafito">{d}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
 
-  <main class="pt-16 sm:pt-20">
-    <div class="bg-paper-warm border-b border-paper-border py-3">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs font-swiss tracking-normal text-ink-muted">
-        <a href="/" class="hover:text-cacao transition">Inicio</a>
-        <span>/</span>
-        <span class="text-cacao font-bold">Descargas, Convocatorias & Afiliación</span>
+  <section id="antologias" class="bg-hundido py-20">
+    <div class="envoltura">
+      <p class="etiqueta">Antologías</p>
+      <h2 class="titular-l mt-4">En qué estamos trabajando</h2>
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        <article class="pieza grid gap-6 overflow-hidden sm:grid-cols-[9rem_1fr]">
+          <img src="/assets/portadas/web/portada_animalialiteraria.webp" alt="Portada de Animalia Literaria" loading="lazy" class="h-full w-full object-cover" />
+          <div class="p-6 sm:pl-0">
+            <span class="chip !border-naranja/40 !text-naranja-tinta">En imprenta</span>
+            <h3 class="mt-3 font-display text-xl font-bold">Animalia Literaria (2026)</h3>
+            <p class="mt-2 text-grafito">16 autores de Tabasco escriben cuento y poesía sobre la fauna endémica, mítica y cotidiana de México.</p>
+            <a href="/publicaciones#animalia-literaria" class="enlace mt-4 inline-block text-sm">Ver ficha</a>
+          </div>
+        </article>
+        <article class="pieza p-6">
+          <span class="chip">Próxima convocatoria</span>
+          <h3 class="mt-3 font-display text-xl font-bold">Plantae Literaria</h3>
+          <p class="mt-2 text-grafito">Homenaje en poesía y narrativa a la flora del sureste: ceibas, manglares, cacao y selva tabasqueña.</p>
+          <a href={wa('Hola, quiero que me avisen cuando abra la convocatoria de Plantae Literaria.')} target="_blank" rel="noopener" class="enlace mt-4 inline-block text-sm">Avísenme cuando abra</a>
+        </article>
       </div>
     </div>
+  </section>
 
-    <!-- 1. Repositorio de Documentos PDF -->
-    <CentroDescargas />
+  <section id="concursos" class="envoltura py-20">
+    <p class="etiqueta">Concursos</p>
+    <h2 class="titular-l mt-4">Certámenes que vale la pena seguir</h2>
+    <p class="mt-3 text-sm text-tenue">Las bases y fechas cambian cada año; consulta siempre la convocatoria oficial.</p>
+    <ul class="mt-10 grid gap-4 md:grid-cols-2">
+      {CONCURSOS.map((c) => (
+        <li><a href={c.enlace} target="_blank" rel="noopener" class="pieza group flex h-full flex-col p-6 transition hover:border-naranja">
+          <span class="text-xs font-semibold uppercase tracking-[0.12em] text-naranja-tinta">{c.categoria} · {c.genero}</span>
+          <span class="mt-2 font-display text-lg font-bold leading-snug">{c.titulo}</span>
+          <span class="mt-1 text-sm text-grafito">{c.organizador}</span>
+          <span class="mt-4 flex items-center justify-between pt-2 text-sm"><span class="font-semibold">{c.premio}</span><span class="text-naranja-tinta transition group-hover:translate-x-1">Ver bases ↗</span></span>
+        </a></li>
+      ))}
+    </ul>
+  </section>
 
-    <!-- 2. Certámenes y Convocatorias Estatales -->
-    <Convocatorias />
+  <section id="recursos" class="envoltura pb-20">
+    <p class="etiqueta">Recursos</p>
+    <h2 class="titular-l mt-4">Herramientas para tu oficio</h2>
+    <ul class="mt-10 grid gap-px overflow-hidden rounded-pieza border border-linea bg-linea sm:grid-cols-2">
+      {RECURSOS.map((r) => (
+        <li class="bg-superficie"><a href={r.url} target="_blank" rel="noopener" class="group block h-full p-6 transition hover:bg-hundido">
+          <span class="text-xs font-semibold uppercase tracking-[0.12em] text-tenue">{r.tipo}</span>
+          <span class="mt-2 block font-display font-bold group-hover:text-naranja-tinta">{r.nombre} ↗</span>
+          <span class="mt-1 block text-sm text-grafito">{r.descripcion}</span>
+        </a></li>
+      ))}
+      <li class="bg-superficie sm:col-span-2"><a href="/descargas/LVT_CANON_LITERARIO_30_AUTORES.zip" class="group block p-6 transition hover:bg-hundido">
+        <span class="text-xs font-semibold uppercase tracking-[0.12em] text-tenue">Descarga</span>
+        <span class="mt-2 block font-display font-bold group-hover:text-naranja-tinta">Dossiers del canon literario · 30 autores (ZIP)</span>
+        <span class="mt-1 block text-sm text-grafito">Fichas de lectura de los escritores ilustres para el taller y el aula.</span>
+      </a></li>
+    </ul>
+  </section>
 
-    <!-- 3. Protocolo de Ingreso y Membresía Gremial -->
-    <ProcesoMembresia />
+  <section id="memoria" class="bg-noche py-20 text-white">
+    <div class="envoltura">
+      <p class="etiqueta etiqueta-clara">Memoria gráfica</p>
+      <h2 class="titular-l mt-4">Nuestros eventos</h2>
+      <div class="mt-12 grid grid-cols-1 gap-14">
+        {ALBUMES.map((a) => (
+          <article class="min-w-0">
+            <div class="flex flex-wrap items-end justify-between gap-3 border-b border-white/10 pb-4">
+              <div><p class="text-xs font-semibold uppercase tracking-[0.14em] text-naranja">{a.categoriaBadge} · {a.fecha}</p><h3 class="mt-1 font-display text-2xl font-bold">{a.titulo}</h3><p class="text-sm text-white/60">{a.lugar}</p></div>
+            </div>
+            <p class="mt-4 max-w-3xl text-white/70">{a.resumen}</p>
+            <ul class="cinta mt-6 [grid-auto-columns:minmax(15rem,1fr)] sm:[grid-auto-columns:20rem]">
+              {a.fotos.map((f) => (
+                <li><button type="button" class="foto group block w-full text-left" data-src={web(f.src)} data-titulo={f.titulo} data-desc={`${f.descripcion} · ${f.lugar}`}>
+                  <span class="block aspect-[4/3] overflow-hidden rounded-xl bg-white/5"><img src={web(f.src)} alt={f.titulo} loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]" /></span>
+                  <span class="mt-2 block text-sm font-semibold">{f.titulo}</span>
+                </button></li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
 
-    <!-- 4. Galería y Archivo Gráfico -->
-    <GaleriaEventos />
-  </main>
-
-  <Footer />
+  <dialog id="visor" class="m-auto w-full max-w-5xl bg-transparent p-0">
+    <figure class="overflow-hidden rounded-2xl bg-noche text-white">
+      <img id="visor-img" src="" alt="" class="max-h-[78vh] w-full object-contain" />
+      <figcaption class="flex items-start justify-between gap-4 p-5"><div><p id="visor-t" class="font-display font-bold"></p><p id="visor-d" class="text-sm text-white/65"></p></div>
+        <form method="dialog"><button class="boton-claro !min-h-[40px] !px-4 !text-xs">Cerrar</button></form></figcaption>
+    </figure>
+  </dialog>
+  <script is:inline>
+    (function () {
+      var v = document.getElementById('visor');
+      document.querySelectorAll('.foto').forEach(function (b) { b.addEventListener('click', function () { var i = document.getElementById('visor-img'); i.src = b.dataset.src; i.alt = b.dataset.titulo; document.getElementById('visor-t').textContent = b.dataset.titulo; document.getElementById('visor-d').textContent = b.dataset.desc; v.showModal(); }); });
+      v.addEventListener('click', function (e) { if (e.target === v) v.close(); });
+    })();
+  </script>
 </BaseLayout>

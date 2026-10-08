@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { RIFA, boletos, resumen } from '../lib/rifa';
+import { wa } from '../lib/sitio';
+const B = boletos();
+const R = resumen();
+const pct = Math.round(((R.pagados + R.apartados) / R.total) * 100);
+---
+<BaseLayout title="Gran Rifa Cultural LVT 2026" description="Rifa cultural a beneficio del taller literario gratuito de Letras y Voces de Tabasco. Boleto doble de $100. Sorteo con la Lotería Nacional el 16 de octubre.">
+  <section class="relative overflow-hidden bg-naranja text-white">
+    <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-20 -top-16 w-[28rem] opacity-10" />
+    <div class="envoltura relative grid gap-10 py-16 sm:py-20 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+      <div>
+        <p class="etiqueta etiqueta-clara !text-white/85 before:!bg-white">A beneficio del taller literario gratuito</p>
+        <h1 class="titular-xl mt-6 max-w-[12ch]">Gran Rifa Cultural LVT 2026</h1>
+        <p class="mt-6 max-w-xl text-lg text-white/90">{RIFA.sorteo}. {RIFA.fecha}.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#tablero" class="boton bg-white text-carbon hover:bg-carbon hover:text-white">Elegir mis números</a>
+          <a href="#como" class="boton-claro">Cómo comprar</a>
+        </div>
+      </div>
+      <div class="rounded-pieza bg-black/15 p-6 ring-1 ring-white/25">
+        <p class="font-display text-6xl font-extrabold numero" data-disp>{R.disponibles}</p>
+        <p class="text-white/85">boletos dobles disponibles de {R.total}</p>
+        <div class="mt-5 h-2.5 overflow-hidden rounded-full bg-white/25"><div class="h-full rounded-full bg-white" style={`width:${pct}%`} data-barra></div></div>
+        <p class="mt-3 text-sm text-white/80"><span class="font-semibold">${RIFA.precio} MXN</span> por boleto · cada boleto juega con dos números</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="envoltura py-16 sm:py-20">
+    <p class="etiqueta">Cómo comprar un boleto</p>
+    <h2 class="titular-l mt-4 max-w-[20ch]">Tres pasos, sin complicaciones</h2>
+    <p class="mt-4 max-w-2xl text-lg text-grafito">Si prefieres que alguien te ayude en todo el proceso, escríbenos o llámanos: te acompañamos paso a paso.</p>
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      <div class="paso-grande"><span class="n">1</span><h3>Elige tu número</h3><p>Mira el tablero de abajo y escoge un boleto que esté en blanco. Cada boleto cuesta <b>$100</b> y juega con <b>dos números</b>.</p></div>
+      <div class="paso-grande"><span class="n">2</span><h3>Avísanos por WhatsApp</h3><p>Toca el botón verde y escribe el número que quieres. Te lo apartamos y te mandamos los datos para pagar.</p></div>
+      <div class="paso-grande"><span class="n">3</span><h3>Paga y manda la foto</h3><p>Transfiere o deposita <b>$100</b> a la cuenta Klar y envíanos la foto del comprobante por el mismo chat. Listo.</p></div>
+    </div>
+    <div class="mt-8 grid gap-3 sm:grid-cols-2">
+      <a href={wa('Hola, quiero comprar un boleto de la rifa. ¿Me ayudan?')} target="_blank" rel="noopener" class="boton-xl bg-[#25D366] text-white hover:bg-[#1DA851]">💬 Pedir ayuda por WhatsApp</a>
+      <a href="tel:+529931284048" class="boton-xl border-2 border-linea bg-superficie text-tinta hover:border-naranja">📞 Llamar al 993 128 4048</a>
+    </div>
+  </section>
+
+  <section id="tablero" class="envoltura py-16 sm:py-20">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div><p class="etiqueta">Tablero en vivo</p><h2 class="titular-l mt-4">Toca un boleto para apartarlo</h2></div>
+      <ul class="flex flex-wrap gap-4 text-sm">
+        <li class="flex items-center gap-2"><span class="h-4 w-4 rounded border border-linea bg-superficie"></span>Disponible</li>
+        <li class="flex items-center gap-2"><span class="h-4 w-4 rounded bg-naranja/25"></span>Apartado</li>
+        <li class="flex items-center gap-2"><span class="h-4 w-4 rounded bg-tinta"></span>Pagado</li>
+      </ul>
+    </div>
+    <ol class="mt-10 grid grid-cols-5 gap-2 sm:grid-cols-10" id="boletos">
+      {B.map((b) => (
+        <li>
+          <a href={wa(`Hola, quiero apartar el boleto #${b.n} (números ${b.a} y ${b.b}) de la Gran Rifa Cultural LVT.`)} target="_blank" rel="noopener" data-n={b.n} data-estado={b.estado}
+             class:list={['boleto flex aspect-square flex-col items-center justify-center rounded-lg border text-center transition',
+               b.estado === 'disponible' ? 'border-linea bg-superficie hover:-translate-y-0.5 hover:border-naranja hover:shadow-suave' : b.estado === 'apartado' ? 'pointer-events-none border-transparent bg-naranja/25' : 'pointer-events-none border-transparent bg-tinta text-fondo']}
+             aria-label={`Boleto ${b.n}, números ${b.a} y ${b.b}: ${b.estado}`}>
+            <span class="font-display text-[0.95rem] font-extrabold leading-none numero sm:text-base">{b.a}·{b.b}</span>
+            <span class="mt-1 text-[0.62rem] opacity-60 numero">#{b.n}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  {RIFA.premios.length > 0 && (
+    <section class="bg-hundido py-16 sm:py-20">
+      <div class="envoltura">
+        <p class="etiqueta">Premios</p>
+        <h2 class="titular-l mt-4">Tres lotes de libros y más</h2>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {RIFA.premios.map((p) => (
+            <article class="pieza overflow-hidden">
+              {p.imagen && <img src={p.imagen} alt={p.titulo} loading="lazy" class="aspect-[4/3] w-full object-cover" />}
+              <div class="p-6">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-naranja-tinta">{p.lugar}</p>
+                <h3 class="mt-2 font-display text-xl font-bold">{p.titulo}</h3>
+                <p class="mt-1 text-sm text-grafito">{p.subtitulo}</p>
+                <ul class="mt-4 grid gap-1.5 text-sm">{(p.items || []).map((i: any) => <li><span class="font-semibold">{i.nombre}</span></li>)}</ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="como" class="envoltura py-16 sm:py-20">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <p class="etiqueta">Cómo comprar</p>
+        <h2 class="titular-l mt-4">Cuatro pasos</h2>
+        <ol class="mt-8 grid gap-5">
+          {['Elige un boleto disponible en el tablero y escríbenos por WhatsApp.', `Transfiere $${RIFA.precio} MXN por boleto a la cuenta de abajo.`, 'Manda la foto de tu comprobante por el mismo chat.', 'Te confirmamos el pago y tu boleto aparece como pagado en el tablero.'].map((t, i) => (
+            <li class="grid grid-cols-[2.5rem_1fr] gap-4"><span class="grid h-10 w-10 place-items-center rounded-full bg-tinta font-display font-bold text-fondo">{i + 1}</span><p class="pt-2 text-grafito">{t}</p></li>
+          ))}
+        </ol>
+        <p class="mt-6 text-sm text-tenue">{RIFA.mecanica}</p>
+      </div>
+      <div class="pieza self-start p-7">
+        <p class="etiqueta">Datos para transferir</p>
+        <dl class="mt-5 grid gap-4">
+          <div><dt class="text-sm text-tenue">Banco</dt><dd class="font-display text-lg font-bold">{RIFA.banco.institucion}</dd></div>
+          <div><dt class="text-sm text-tenue">Beneficiaria</dt><dd class="font-display text-lg font-bold">{RIFA.banco.beneficiario}</dd></div>
+          <div><dt class="text-sm text-tenue">CLABE</dt><dd class="flex flex-wrap items-center gap-3"><span id="clabe" class="select-all font-display text-xl font-bold tracking-wider numero">{RIFA.banco.clabe}</span><button type="button" id="copiar" class="chip hover:border-naranja">Copiar</button></dd></div>
+          <div><dt class="text-sm text-tenue">Concepto</dt><dd class="font-semibold">Rifa LVT + número de boleto</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var b = document.getElementById('copiar');
+      b && b.addEventListener('click', function () { var t = document.getElementById('clabe').textContent.trim(); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'Copiada'; }, function () { var r = document.createRange(); r.selectNodeContents(document.getElementById('clabe')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); }); });
+      // Estado al momento: lee el archivo público (solo números y estado) que actualiza el bot
+      fetch('/data/rifa_publica.json?t=' + Date.now()).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+        if (!d || !d.boletos) return;
+        var disp = 0;
+        document.querySelectorAll('.boleto').forEach(function (a) {
+          var e = d.boletos[a.dataset.n] || 'disponible'; if (e === 'disponible') disp++;
+          if (e === a.dataset.estado) return;
+          a.dataset.estado = e;
+          a.className = 'boleto flex aspect-square flex-col items-center justify-center rounded-lg border text-center transition ' + (e === 'disponible' ? 'border-linea bg-superficie hover:-translate-y-0.5 hover:border-naranja hover:shadow-suave' : e === 'apartado' ? 'pointer-events-none border-transparent bg-naranja/25' : 'pointer-events-none border-transparent bg-tinta text-fondo');
+        });
+        var n = document.querySelector('[data-disp]'); if (n) n.textContent = disp;
+        var bar = document.querySelector('[data-barra]'); if (bar) bar.style.width = Math.round((1 - disp / 50) * 100) + '%';
+      }).catch(function () {});
+    })();
+  </script>
+</BaseLayout>

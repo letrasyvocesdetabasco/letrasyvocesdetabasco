@@ -1,126 +1,73 @@
 ---
-import MobileDrawer from '../components/MobileDrawer.astro';
-import BotonWhatsAppFlotante from '../components/BotonWhatsAppFlotante.astro';
 import '../styles/global.css';
+import Encabezado from '../components/sitio/Encabezado.astro';
+import Pie from '../components/sitio/Pie.astro';
+import WhatsApp from '../components/sitio/WhatsApp.astro';
 
-interface Props {
-  title?: string;
-  description?: string;
-  image?: string;
-}
-
+interface Props { title?: string; description?: string; image?: string; }
 const {
-  title = "Sociedad de Escritores Letras y Voces de Tabasco, A.C. · Portal Oficial",
-  description = "Portal oficial de la Sociedad de Escritores Letras y Voces de Tabasco, A.C. Difusión literaria, fondo editorial, fonoteca de poesía, Escuela de Escritores «José Gorostiza» (EEJG), convocatorias y gobernanza cultural en el sureste mexicano.",
-  image = "/assets/galeria/evento_cacao_01.jpg",
+  title = 'Letras y Voces de Tabasco · Sociedad de Escritores',
+  description = 'Sociedad de Escritores Letras y Voces de Tabasco, A.C. Desde 1987: taller literario gratuito, Escuela de Escritores «José Gorostiza», fondo editorial, audioteca y memoria de la literatura tabasqueña.',
+  image = '/assets/galeria/eventos/presentacion_tardes_opalos_grupal.jpg',
 } = Astro.props;
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://letrasyvocesdetabasco.org");
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://letrasyvocesdetabasco.org');
+const imagenAbs = new URL(image, Astro.site ?? 'https://letrasyvocesdetabasco.org');
 ---
-
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es-MX">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    
-    <!-- Favicons Oficiales LVT Multi-Navegador -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#FAF7F0" />
-    <meta name="generator" content={Astro.generator} />
-
-    <!-- Primarios SEO -->
-    <title>{title}</title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <meta name="author" content="Sociedad de Escritores Letras y Voces de Tabasco, A.C." />
-    <link rel="canonical" href={canonicalURL} />
-
-    <!-- Tarjetas Open Graph / Redes Sociales -->
+    <meta name="theme-color" content="#FDFBF7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161514" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Letras y Voces de Tabasco" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta property="og:locale" content="es_MX" />
-    <meta property="og:site_name" content="Letras y Voces de Tabasco, A.C." />
-
-    <!-- Tarjetas Twitter / X -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={image} />
-
-    <!-- Tipografías Oficiales & Alta Gama Editorial con display=swap -->
+    <meta property="og:image" content={imagenAbs} />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Datos Estructurados Schema.org (Organización Cultural & Educativa) -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": ["NGO", "EducationalOrganization"],
-        "name": "Sociedad de Escritores Letras y Voces de Tabasco, A.C.",
-        "alternateName": "Letras y Voces de Tabasco",
-        "url": "https://letrasyvocesdetabasco.org",
-        "logo": "https://letrasyvocesdetabasco.org/assets/logos/LVT%20Logo%20Hor%201%20Original.svg",
-        "image": "https://letrasyvocesdetabasco.org/assets/galeria/evento_cacao_01.jpg",
-        "email": "contacto@letrasyvocesdetabasco.org",
-        "telephone": "+522205889391",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Calle Centenario Instituto Juárez s/n, Colonia Reforma",
-          "addressLocality": "Villahermosa",
-          "addressRegion": "Tabasco",
-          "postalCode": "86080",
-          "addressCountry": "MX"
-        },
-        "sameAs": [
-          "https://web.facebook.com/profile.php?id=100063472631282",
-          "https://www.instagram.com/letrasyvoces.tabasco/"
-        ],
-        "description": "Asociación civil fundada en 1987 dedicada a la promoción literaria, docencia especializada en la Escuela de Escritores «José Gorostiza» (EEJG), edición de antologías y preservación patrimonial en el Sureste de México."
-      }
-    </script>
-
-    <slot name="head" />
-
-    <!-- Script anti-parpadeo inmediato para Modo Diurno / Modo Nocturno -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&family=Montserrat:wght@500..800&display=swap" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'NGO',
+      name: 'Sociedad de Escritores Letras y Voces de Tabasco, A.C.', alternateName: 'Letras y Voces de Tabasco',
+      url: 'https://letrasyvocesdetabasco.org', foundingDate: '1987', email: 'contacto@letrasyvocesdetabasco.org',
+      telephone: '+522205889391', logo: 'https://letrasyvocesdetabasco.org/assets/logos/LVT%20Logo%20Iso%201%20Original.png',
+      address: { '@type': 'PostalAddress', addressLocality: 'Villahermosa', addressRegion: 'Tabasco', addressCountry: 'MX' },
+      sameAs: ['https://www.facebook.com/letrayvoces.tabasco', 'https://www.instagram.com/letrasyvocestabasco'],
+    })} />
     <script is:inline>
-      (function() {
-        try {
-          var temaGuardado = localStorage.getItem('lvt-theme');
-          // Migración transparente de claves antiguas
-          if (temaGuardado === 'lectura' || temaGuardado === 'nocturno') {
-            document.documentElement.classList.add('modo-nocturno');
-            document.documentElement.classList.add('modo-lectura');
-          } else {
-            document.documentElement.classList.remove('modo-nocturno');
-            document.documentElement.classList.remove('modo-lectura');
-          }
-        } catch(e) {}
+      (function () {
+        var d = document.documentElement; d.classList.add('js');
+        var t = null; try { t = localStorage.getItem('lvt-theme'); } catch (e) {}
+        var oscuro = t === 'nocturno' || t === 'lectura' || (!t && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+        if (oscuro) d.classList.add('modo-nocturno');
       })();
     </script>
+    <slot name="head" />
   </head>
-  <body class="bg-paper text-ink font-serif antialiased selection:bg-cacao selection:text-white min-h-screen flex flex-col justify-between">
-    <div class="relative flex-1 flex flex-col">
-      <slot />
-    </div>
-
-    <!-- Menú Desplegable Táctil Móvil Centralizado -->
-    <MobileDrawer />
-
-    <!-- Botón Oficial Flotante de WhatsApp LVT -->
-    <BotonWhatsAppFlotante />
+  <body class="min-h-screen">
+    <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-tinta focus:px-4 focus:py-2 focus:text-fondo">Saltar al contenido</a>
+    <Encabezado />
+    <main id="contenido"><slot /></main>
+    <Pie />
+    <WhatsApp />
+    <script is:inline>
+      (function () {
+        if (!('IntersectionObserver' in window)) { document.querySelectorAll('.aparece').forEach(function (e) { e.classList.add('visto'); }); return; }
+        var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.aparece').forEach(function (e) { io.observe(e); });
+        setTimeout(function () { document.querySelectorAll('.aparece').forEach(function (e) { e.classList.add('visto'); }); }, 1200);
+      })();
+    </script>
   </body>
 </html>

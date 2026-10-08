@@ -1,0 +1,259 @@
+{
+ "nombre": "Taller Literario «Letras y Voces» · Librería Universitaria UJAT",
+ "horario": "Sábados de 11:00 a 13:00 h",
+ "sede": "Librería Universitaria UJAT, Av. 27 de Febrero 626, Centro, Villahermosa",
+ "acceso": "Entrada libre y gratuita",
+ "calendario_base": "Calendario escolar UJAT 2026-2027 (vacaciones de invierno: 21 de diciembre de 2026 al 6 de enero de 2027)",
+ "calendario": [
+  {
+   "fecha": "2026-09-05",
+   "sesion": 1,
+   "modulo": "I",
+   "modulo_nombre": "Prosa narrativa y ficción",
+   "titulo": "El Umbral de la Escritura y la Voz Narrativa",
+   "eje": "Presentación del taller, diagnóstico de intereses y normas de trabajo académico. La escritura como oficio disciplinado y aprendizaje técnico frente al mito romántico de la inspiración. Tipología del narrador: focalización cero, interna y externa; narradores omniscientes, equiscientes, testigos y deficientes. Distancia narrativa y pacto ficcional.",
+   "lecturas": "Horacio Quiroga, Decálogo del perfecto cuentista; Juan Rulfo, Luvina (análisis de la voz fantasmal y la textura del monólogo).",
+   "ejercicio": "Elaboración de un relato breve (máximo 300 palabras) a partir de un hecho cotidiano real o ficticio, narrado secuencialmente desde dos perspectivas contrapuestas: primero en primera persona testimonial y luego en tercera persona distante y fría."
+  },
+  {
+   "fecha": "2026-09-12",
+   "sesion": 2,
+   "modulo": "I",
+   "modulo_nombre": "Prosa narrativa y ficción",
+   "titulo": "La Estructura del Relato y la Unidad de Acción",
+   "eje": "La arquitectura del cuento: planteamiento, detonante, nudo, clímax y desenlace. Criterios de tensión e intensidad narrativa según Julio Cortázar (el cuento como nocaut frente a la novela por puntos). La teoría del iceberg de Ernest Hemingway: el arte de la elipsis y la administración del dato escondido.",
+   "lecturas": "Julio Cortázar, Algunos aspectos del cuento; Ernest Hemingway, Los asesinos (análisis de lo que nunca se nombra).",
+   "ejercicio": "Redacción del primer párrafo de un relato de misterio o suspenso donde ocurra un suceso perturbador, ocultando deliberadamente la causa principal para generar intriga inmediata."
+  },
+  {
+   "fecha": "2026-09-19",
+   "sesion": 3,
+   "modulo": "I",
+   "modulo_nombre": "Prosa narrativa y ficción",
+   "titulo": "Arquetipos y Diseño Tridimensional de Personajes",
+   "eje": "Construcción de personajes: dimensiones física, psicológica y sociológica (matriz de Lajos Egri). Contraposición de valores, contradicciones internas y motivación dramática. Personajes planos frente a personajes redondos y complejos. La técnica del “mostrar en lugar de decir” (Show, don’t tell).",
+   "lecturas": "Antón Chéjov, La dama del perrito; Raymond Carver, De qué hablamos cuando hablamos de amor.",
+   "ejercicio": "Redacción de un monólogo dramático o confesión de una página en la cual un personaje revele una grieta moral inconfesable sin declararla explícitamente, únicamente a través de sus justificaciones y manías cotidianas."
+  },
+  {
+   "fecha": "2026-09-26",
+   "sesion": 4,
+   "modulo": "I",
+   "modulo_nombre": "Prosa narrativa y ficción",
+   "titulo": "Creación de Atmósferas y Espacio Narrativo",
+   "eje": "El espacio narrativo no como mero telón de fondo decorativo, sino como agente dramático y proyección simbólica del estado emocional. Construcción atmosférica mediante la estimulación sensorial completa: texturas, olores, temperaturas y acústica.",
+   "lecturas": "Amparo Dávila, El huésped; Juan Carlos Onetti, Un sueño realizado.",
+   "ejercicio": "Descripción de una habitación sofocante o amenazante sin usar adjetivos valorativos abstractos (prohibido usar: “misterioso”, “tenebroso”, “triste”), recurriendo exclusivamente a objetos, humedad, sombras y sonidos."
+  },
+  {
+   "fecha": "2026-10-03",
+   "sesion": 5,
+   "modulo": "I",
+   "modulo_nombre": "Prosa narrativa y ficción",
+   "titulo": "El Diálogo y las Capas de Subtexto",
+   "eje": "Funciones del diálogo dramático: aceleración del ritmo, caracterización verosímil y avance de la trama. Estilos directo, indirecto e indirecto libre. El subtexto narrativo: cómo hacer que los personajes hablen de algo trivial mientras resuelven un conflicto existencial soterrado.",
+   "lecturas": "Ernest Hemingway, Colinas como elefantes blancos; Carmen Boullosa, textos narrativos y teatrales seleccionados.",
+   "ejercicio": "Escribir un diálogo entre dos personajes que toman café en la librería y deciden terminar una relación de años mientras fingen discutir sobre el clima o el precio de un libro."
+  },
+  {
+   "fecha": "2026-10-10",
+   "sesion": 6,
+   "modulo": "I",
+   "modulo_nombre": "Prosa narrativa y ficción",
+   "titulo": "El Microrrelato y la Condensación Dramática",
+   "eje": "La poética de la extrema brevedad: economía de lenguaje, intertextualidad, resignificación del título, elipsis radical y giro de tuerca final. El rol activo del lector como cocreador del sentido.",
+   "lecturas": "Augusto Monterroso, La oveja negra y demás fábulas; Edmundo Valadés, La muerte tiene permiso.",
+   "ejercicio": "Composición de dos microrrelatos de máximo 80 palabras cada uno, basados en la inversión irónica de una fábula clásica o en un hecho insólito de la vida cotidiana en Tabasco."
+  },
+  {
+   "fecha": "2026-10-17",
+   "sesion": 7,
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "titulo": "Fundamentos de la Poética: Ritmo, Imagen y Verso",
+   "eje": "Naturaleza del lenguaje poético: la suspensión de la función meramente referencial o utilitaria de la lengua. El ritmo como latido vertebrador del poema (cadencia, acentos, pausas versales e interversales). Diferencias entre la métrica clásica (silábica/acentual) y el verso libre contemporáneo.",
+   "lecturas": "Octavio Paz, El arco y la lira (capítulo sobre el ritmo y el verso); Rosario Castellanos, selecciones de Poesía no eres tú.",
+   "ejercicio": "Reescribir un fragmento de noticia o prosa cotidiana transformándolo en un poema de 10 a 14 líneas en verso libre, donde los cortes de línea respondan estrictamente a la respiración y a la tensión emocional."
+  },
+  {
+   "fecha": "2026-10-24",
+   "sesion": 8,
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "titulo": "Tropos, Figuras Retóricas y Desplazamiento Semántico",
+   "eje": "La metáfora como instrumento de conocimiento ontológico y no como mero adorno retórico. Metonimia, sinestesia, oxímoron e hipérbole. La caza y erradicación del cliché poético (los lugares comunes del amor, el dolor y la muerte).",
+   "lecturas": "Jaime Sabines, Horal y Tarumba; Xavier Villaurrutia, Nostalgia de la muerte (las sinestesias y la noche).",
+   "ejercicio": "Escribir un poema breve (12 versos) sobre una pérdida o una obsesión, bajo una restricción tajante: prohibido usar palabras abstractas (“dolor”, “olvido”, “alma”, “corazón”) y forzar asociaciones sensoriales insólitas."
+  },
+  {
+   "fecha": "2026-10-31",
+   "sesion": 9,
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "titulo": "La Voz Poética y el Sujeto Lírico",
+   "eje": "Distinción teórica entre el autor empírico (la persona de carne y hueso) y el sujeto lírico (la voz construida en el texto). El poema de personaje, la máscara poética (persona) y el monólogo dramático lírico.",
+   "lecturas": "Blanca Varela, Canto villano; José Emilio Pacheco, No me preguntes cómo pasa el tiempo.",
+   "ejercicio": "Composición de un poema asumiendo la voz de un elemento no humano (un río contaminado, una ceiba centenaria, una máquina abandonada) o de un personaje histórico observado desde su vulnerabilidad privada."
+  },
+  {
+   "fecha": "2026-11-07",
+   "sesion": 10,
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "titulo": "Poesía de la Experiencia e Itinerarios Urbanos",
+   "eje": "La poética de la inmanencia y lo cotidiano: cómo elevar a rango estético el paisaje urbano, el calor del trópico, el transporte colectivo, el mercado y los objetos domésticos. La mirada del flâneur contemporáneo.",
+   "lecturas": "Eduardo Lizalde, El tigre en la casa; Efraín Huerta, Poemas urbanos y los célebres Poemínimos.",
+   "ejercicio": "Escribir una serie de 3 poemínimos o una estampa poética inspirada en un rincón específico del Centro Histórico de Villahermosa o el malecón."
+  },
+  {
+   "fecha": "2026-11-14",
+   "sesion": 11,
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "titulo": "Hibridación Lírica: La Prosa Poética",
+   "eje": "El poema en prosa como género híbrido y de frontera: cómo sostener la condensación, la intensidad metafórica y la musicalidad interna sin el apoyo de los cortes de verso.",
+   "lecturas": "Charles Baudelaire, Pequeños poemas en prosa; Oliverio Girondo, En la masmédula; Pura López Colomé, textos selectos.",
+   "ejercicio": "Redacción de un poema en prosa de una cuartilla centrado en una experiencia táctil de la infancia o en un sueño recurrente."
+  },
+  {
+   "fecha": "2026-11-21",
+   "sesion": 12,
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "titulo": "Edición, Corte de Verso y Depuración Poética",
+   "eje": "La arquitectura visual del poema en la página: el uso expresivo del espacio blanco, encabalgamientos suaves y abruptos, y la carpintería final del verso. La poesía como el arte de quitar lo que sobra.",
+   "lecturas": "Jorge Luis Borges, Siete noches (la poesía); T. S. Eliot, El oficio de la poesía.",
+   "ejercicio": "Taller Intensivo de Ebanistería: Tomar los 3 mejores poemas elaborados durante el módulo y someterlos a una poda del 40 % de palabras, reajustando la disposición de las estrofas en la página."
+  },
+  {
+   "fecha": "2026-11-28",
+   "sesion": 13,
+   "modulo": "III",
+   "modulo_nombre": "Ensayo y filosofía de la prosa",
+   "titulo": "Anatomía del Ensayo Literario: Pensar por Escrito",
+   "eje": "El ensayo como territorio fronterizo entre la literatura, la autobiografía y la filosofía. La lección de Michel de Montaigne: el ensayo no como tesis dogmática, sino como tentativa, paseo intelectual, pesaje de dudas y libre ejercicio del pensamiento.",
+   "lecturas": "Michel de Montaigne, De los olores y selecciones de los Ensayos; Alfonso Reyes, El deslinde y Las jitanjáforas.",
+   "ejercicio": "Elección de una paradoja o contradicción cotidiana (ejemplo: “la tiranía de la puntualidad” o “el placer de perder cosas”) y elaboración de un mapa de ideas cruzadas para un ensayo de 3 páginas."
+  },
+  {
+   "fecha": "2026-12-05",
+   "sesion": 14,
+   "modulo": "III",
+   "modulo_nombre": "Ensayo y filosofía de la prosa",
+   "titulo": "La Voz Ensayística y la Erudición Lúdica",
+   "eje": "Cómo incorporar lecturas, citas y datos científicos o históricos sin caer en la aridez del tratado académico ni en la pedantería. El arte de la digresión con brújula y la complicidad con el lector.",
+   "lecturas": "Hugo Hiriart, El arte de la dedicatoria; Gabriel Zaid, selecciones de Los demasiados libros y Este era un gato.",
+   "ejercicio": "Redacción de dos cuartillas argumentativas donde se entrelace una referencia cultural o libresca con una anécdota personal cómica o desconcertante."
+  },
+  {
+   "fecha": "2026-12-12",
+   "sesion": 15,
+   "modulo": "III",
+   "modulo_nombre": "Ensayo y filosofía de la prosa",
+   "titulo": "La Mirada Crítica y la Desmitificación del Dogma",
+   "eje": "El ensayo como ariete contra el sentido común y los lugares comunes de época. El uso de la ironía, el humor sutil, el escepticismo pedagógico y la provocación dialéctica.",
+   "lecturas": "G. K. Chesterton, Correr tras el propio sombrero; Wisława Szymborska, Lecturas no obligatorias.",
+   "ejercicio": "Escritura de un alegato apasionado pero argumentado que defienda una postura impopular o refute una verdad aceptada por todos (ejemplo: “el sobrevalorado valor del éxito”)."
+  },
+  {
+   "fecha": "2026-12-19",
+   "sesion": 16,
+   "modulo": "III",
+   "modulo_nombre": "Ensayo y filosofía de la prosa",
+   "titulo": "La Orfebrería de la Prosa: El Ensayo sobre lo Ínfimo",
+   "eje": "El “ensayo-objeto”: la capacidad de asombro ante lo minúsculo o lo descartado. Cómo derivar reflexiones filosóficas, estéticas o históricas profundas a partir de objetos domésticos ordinarios.",
+   "lecturas": "Luigi Amara, La promiscuidad de los encendedores y Los elásticos; Alma Guillermoprieto, Harinas.",
+   "ejercicio": "Escribir una pieza de 400 palabras explorando la biografía secreta y las implicaciones existenciales de un objeto de bolsillo (unas llaves, una moneda falsa, un paraguas roto)."
+  },
+  {
+   "fecha": "2026-12-26",
+   "sesion": null,
+   "sin_taller": "Vacaciones de invierno UJAT"
+  },
+  {
+   "fecha": "2027-01-02",
+   "sesion": null,
+   "sin_taller": "Vacaciones de invierno UJAT"
+  },
+  {
+   "fecha": "2027-01-09",
+   "sesion": 17,
+   "modulo": "III",
+   "modulo_nombre": "Ensayo y filosofía de la prosa",
+   "titulo": "El Ensayo Personal, la Memoria y la Subjetividad",
+   "eje": "El yo como herramienta de indagación universal. La gestión de la memoria, el pudor, la vulnerabilidad y la diferencia entre la catarsis quejumbrosa y la lucidez ensayística.",
+   "lecturas": "Laura Sofía Rivero, Dios tiene tripas; Vivian Abenshushan, Contra el ensayista sin estilo.",
+   "ejercicio": "Escribir un texto que parta de un error o ridículo del propio autor para reflexionar sobre un dilema moral de nuestra época."
+  },
+  {
+   "fecha": "2027-01-16",
+   "sesion": 18,
+   "modulo": "III",
+   "modulo_nombre": "Ensayo y filosofía de la prosa",
+   "titulo": "Estructuración, Pulido y Cierre del Ensayo",
+   "eje": "Arquitectura del texto ensayístico: transiciones entre párrafos, modulación del tono y elaboración de finales abiertos que dejen preguntas resonando en el lector.",
+   "lecturas": "Liliana Weinberg, El ensayo, entre el paraíso y el infierno.",
+   "ejercicio": "Reescritura completa y estructuración en limpio del ensayo desarrollado a lo largo del módulo (extensión: 3 a 5 cuartillas)."
+  },
+  {
+   "fecha": "2027-01-23",
+   "sesion": 19,
+   "modulo": "IV",
+   "modulo_nombre": "Crónica literaria y edición",
+   "titulo": "La Crónica Periodístico-Literaria: Mirada y Técnica",
+   "eje": "La hibridez de la crónica: rigor con los hechos reales y libertad expresiva en los recursos formales de la ficción narrativa. El cronista como testigo, observador participante y reconstructor de atmósferas sociales.",
+   "lecturas": "Carlos Monsiváis, A ustedes les consta; Elena Poniatowska, La noche de Tlatelolco y Fuerte es el silencio.",
+   "ejercicio": "Puesta en común de notas de campo tomadas durante la semana en un espacio público de Villahermosa (Mercado Pino Suárez, Parque Tomás Garrido, transporte público o malecón). Selección del ángulo narrativo."
+  },
+  {
+   "fecha": "2027-01-30",
+   "sesion": 20,
+   "modulo": "IV",
+   "modulo_nombre": "Crónica literaria y edición",
+   "titulo": "Investigación, Entrevista e Inmersión Narrativa",
+   "eje": "La entrevista en profundidad y la escucha etnográfica. Cómo capturar la voz del otro sin tergiversarla ni acartonarla. Ética de la representación de personas reales en la literatura testimonial.",
+   "lecturas": "Leila Guerriero, selecciones de Plano americano y Los suicidas del fin del mundo; Martín Caparrós, El Hambre.",
+   "ejercicio": "Transcripción y reelaboración narrativa de un fragmento de testimonio oral real, transformándolo en una escena dinámica con diálogos vivos y caracterización gestual."
+  },
+  {
+   "fecha": "2027-02-06",
+   "sesion": 21,
+   "modulo": "IV",
+   "modulo_nombre": "Crónica literaria y edición",
+   "titulo": "Construcción del Relato Testimonial y Ritmo Informativo",
+   "eje": "Alternancia de planos en la crónica: la descripción atmosférica, el dato duro verificado, la voz de los protagonistas y la mirada reflexiva del autor. El montaje cinematográfico en la prosa de no ficción.",
+   "lecturas": "Juan Villoro, Los cielos de la tribu; Alma Guillermoprieto, Los placeres y los días.",
+   "ejercicio": "Redacción y ensamblaje del borrador completo de la crónica testimonial (4 a 6 cuartillas)."
+  },
+  {
+   "fecha": "2027-02-13",
+   "sesion": 22,
+   "modulo": "IV",
+   "modulo_nombre": "Crónica literaria y edición",
+   "titulo": "Corrección de Estilo Superior y Normas Editoriales",
+   "eje": "Principios de la corrección de estilo editorial profesional: erradicación de cacofonías, pleonasmos, queísmos/dequeísmos, discordancias de género/número y gerundios de posterioridad. Marcas y signos tipográficos estandarizados de corrección.",
+   "lecturas": "Manuales y prontuarios de corrección de estilo editorial profesional.",
+   "ejercicio": "Intercambio cruzado de originales para ejecutar una corrección de estilo minuciosa a mano con tinta roja sobre el texto de un compañero."
+  },
+  {
+   "fecha": "2027-02-20",
+   "sesion": 23,
+   "modulo": "IV",
+   "modulo_nombre": "Crónica literaria y edición",
+   "titulo": "Procesos Editoriales, Maquetación y Diseño de Antología",
+   "eje": "La cadena del libro: dictaminación, cuidado de edición, diseño de interiores, tipometría, maquetación, portada, trámites de ISBN, derechos de autor y depósito legal.",
+   "lecturas": "Lineamientos de gestión y producción editorial universitaria e independiente.",
+   "ejercicio": "Selección colectiva de textos, ordenamiento del índice temático y redacción del prefacio coral de la Antología del Taller Literario “Letras y Voces”."
+  },
+  {
+   "fecha": "2027-02-27",
+   "sesion": 24,
+   "modulo": "IV",
+   "modulo_nombre": "Crónica literaria y edición",
+   "titulo": "Lectura Pública de Clausura y Evaluación Integral",
+   "eje": "La dimensión performática y oral de la literatura: técnicas de lectura en voz alta ante el público, modulación de la voz, manejo escénico del micrófono y el desenvolvimiento del autor.",
+   "lecturas": "Lectura pública del material antologado en el libro semestral.",
+   "ejercicio": "Ensayo de lectura cronometrada y preparación del programa del evento cultural."
+  }
+ ]
+}

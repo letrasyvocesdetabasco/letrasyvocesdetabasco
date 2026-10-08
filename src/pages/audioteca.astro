@@ -1,31 +1,73 @@
 ---
-// src/pages/audioteca.astro - Fonoteca y Archivo Sonoro de 14 Obras Nativas en MP3
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Navbar from '../components/Navbar.astro';
-import VocesDeTabasco from '../components/VocesDeTabasco.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
-
-const basePath = "";
+import { CATALOGO_VOCES_HISTORICAS as PISTAS } from '../data/voces';
+const lvt = PISTAS.filter((p) => p.origen === 'miembro_lvt');
+const historicas = PISTAS.filter((p) => p.origen !== 'miembro_lvt');
+const grupos = [{ titulo: 'Voces de Letras y Voces', pistas: lvt }, { titulo: 'Voces de los autores', pistas: historicas }].filter((g) => g.pistas.length);
 ---
-
-<BaseLayout 
-  title="Audioteca Lírica & Archivo Sonoro (14 Obras Nativas) · Sociedad de Escritores LVT"
-  description="Fonoteca literaria de Letras y Voces de Tabasco con 14 reproducciones sonoras de poemas de Oliverio Girondo, Juan Rulfo, García Lorca, Jaime Sabines, Pablo Neruda y Julio Cortázar."
->
-  <Navbar />
-
-  <main class="pt-16 sm:pt-20">
-    <div class="bg-paper-warm border-b border-paper-border py-3">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs font-swiss tracking-normal text-ink-muted">
-        <a href="/" class="hover:text-cacao transition">Inicio</a>
-        <span>/</span>
-        <span class="text-cacao font-bold">Audioteca Lírica & Archivo Sonoro</span>
+<BaseLayout title="Audioteca · Letras y Voces de Tabasco" description="Poemas y relatos en la voz de sus autores y de los miembros de Letras y Voces de Tabasco. Escúchalos en línea.">
+  <section class="relative overflow-hidden bg-noche text-white">
+    <div class="envoltura grid gap-10 py-16 sm:py-24 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+      <div>
+        <p class="etiqueta etiqueta-clara">Audioteca</p>
+        <h1 class="titular-xl mt-6 max-w-[11ch]">La poesía también se escucha.</h1>
+        <p class="mt-6 max-w-xl font-serif text-2xl italic leading-snug text-white/75">Grabaciones de autores leyendo su propia obra y lecturas de los miembros de la Sociedad.</p>
+      </div>
+      <div class="rounded-pieza bg-white/[0.06] p-6 ring-1 ring-white/15" id="reproductor" aria-live="polite">
+        <p class="etiqueta etiqueta-clara">Ahora suena</p>
+        <p class="mt-4 font-serif text-2xl italic leading-tight" data-r-titulo>Elige una grabación</p>
+        <p class="mt-1 text-sm text-white/60" data-r-autor>{PISTAS.length} grabaciones disponibles</p>
+        <audio id="audio" class="mt-5 w-full" controls preload="none"></audio>
       </div>
     </div>
+    <svg class="absolute inset-x-0 bottom-0 h-16 w-full text-naranja/30" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+      {Array.from({ length: 120 }, (_, i) => { const h = 8 + Math.abs(Math.sin(i * 0.37) * 40 + Math.cos(i * 0.11) * 12); return <rect x={i * 10} y={60 - h} width="5" height={h} rx="2" fill="currentColor" />; })}
+    </svg>
+  </section>
 
-    <VocesDeTabasco />
-  </main>
+  <section class="envoltura py-16 sm:py-20">
+    {grupos.map((g) => (
+      <div class="mb-16">
+        <h2 class="titular-m">{g.titulo}</h2>
+        <ol class="mt-6 divide-y divide-linea border-y border-linea">
+          {g.pistas.map((p) => (
+            <li class="pista">
+              <div class="grid grid-cols-[3rem_1fr_auto] items-center gap-4 py-4">
+                <button type="button" data-src={p.audioUrl} data-titulo={p.titulo} data-autor={`${p.autor} · ${p.declamador}`} class="reproducir grid h-12 w-12 place-items-center rounded-full bg-tinta text-fondo transition hover:bg-naranja" aria-label={`Escuchar ${p.titulo}`}>
+                  <svg class="icono-play h-4 w-4 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+                  <svg class="icono-pausa hidden h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+                </button>
+                <div class="min-w-0">
+                  <p class="font-serif text-xl font-medium italic leading-tight">{p.titulo}</p>
+                  <p class="mt-0.5 truncate text-sm text-grafito"><span class="font-semibold text-tinta">{p.autor}</span> · {p.declamador}</p>
+                </div>
+                <span class="hidden text-xs text-tenue sm:block">{p.pais}</span>
+              </div>
+              {p.textoPoema && (
+                <details class="group pb-4 pl-16">
+                  <summary class="cursor-pointer list-none text-sm font-semibold text-naranja-tinta [&::-webkit-details-marker]:hidden">Leer mientras escuchas</summary>
+                  <p class="mt-3 max-w-lectura whitespace-pre-line font-serif text-lg leading-relaxed text-grafito">{p.textoPoema}</p>
+                </details>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
+  </section>
 
-  <Footer />
+  <script is:inline>
+    (function () {
+      var a = document.getElementById('audio'), t = document.querySelector('[data-r-titulo]'), au = document.querySelector('[data-r-autor]'), actual = null;
+      function iconos() { document.querySelectorAll('.reproducir').forEach(function (b) { var on = b === actual && !a.paused; b.querySelector('.icono-play').classList.toggle('hidden', on); b.querySelector('.icono-pausa').classList.toggle('hidden', !on); b.classList.toggle('bg-naranja', b === actual); }); }
+      document.querySelectorAll('.reproducir').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (actual === b) { a.paused ? a.play() : a.pause(); return; }
+          actual = b; a.src = b.dataset.src; t.textContent = b.dataset.titulo; au.textContent = b.dataset.autor; a.play().catch(function () {});
+        });
+      });
+      ['play', 'pause', 'ended'].forEach(function (e) { a.addEventListener(e, iconos); });
+      a.addEventListener('ended', function () { var bs = Array.prototype.slice.call(document.querySelectorAll('.reproducir')); var i = bs.indexOf(actual); if (bs[i + 1]) bs[i + 1].click(); });
+    })();
+  </script>
 </BaseLayout>
