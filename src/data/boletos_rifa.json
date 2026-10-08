@@ -212,13 +212,13 @@
       "num2": "70"
     },
     "15": {
-      "estado": "Apartado",
+      "estado": "Pagado",
       "participante": "Rudy",
       "whatsapp": "5219371198818",
       "fecha": "2026-09-30 16:27:25",
-      "fecha_pago": "",
-      "canal": "panel",
-      "notas": "",
+      "fecha_pago": "2026-10-08 10:17:10",
+      "canal": "presidencia_whatsapp",
+      "notas": "Marcado por Presidencia vía WhatsApp",
       "num1": "14",
       "num2": "64"
     },
