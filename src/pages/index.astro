@@ -1,39 +1,45 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SesionTaller from '../components/sitio/SesionTaller.astro';
-import { ESCRITORES } from '../lib/escritores';
+import Efemeride from '../components/sitio/Efemeride.astro';
+import TarjetaEscritor from '../components/sitio/TarjetaEscritor.astro';
+import { ESCRITORES, porId } from '../lib/escritores';
+import { LECTURAS, textoDelDia } from '../lib/lecturas';
+import { PISTAS, aPistaJSON } from '../lib/voces';
 import { CATALOGO_EDITORIAL } from '../data/libros';
-import { ALBUMES_EVENTOS } from '../data/galeria';
 import { RIFA_ACTIVA, wa, portadaWeb } from '../lib/sitio';
 import { resumen } from '../lib/rifa';
-import { SESIONES } from '../lib/taller';
+import { SESIONES as SES } from '../lib/taller';
 
-const tabasco = ESCRITORES.filter((x) => x.e.bloqueCanon === 'tabasquenos').slice(0, 10);
+const tabasco = ESCRITORES.filter((x) => x.bloque === 'tabasquenos').slice(0, 10);
 const libros = CATALOGO_EDITORIAL.filter((l) => l.portadaImg).slice(0, 5);
 const rifa = resumen();
-const gorostiza = ESCRITORES.find((x) => x.e.id === 'jose-gorostiza');
-const conFuente = ESCRITORES.flatMap((x) => x.citas.filter((c) => c.url).map((c) => ({ ...c, autor: x.e.nombre })));
-const citaPortada = conFuente.find((c) => c.autor === gorostiza?.e.nombre) ?? conFuente[0];
+const gorostiza = porId('jose-gorostiza');
+const conFuente = ESCRITORES.flatMap((x) => x.citas.filter((c) => c.url).map((c) => ({ ...c, autor: x.nombreCorto, id: x.id })));
+const citaPortada = conFuente.find((c) => c.id === 'jose-gorostiza') ?? conFuente[0];
 const anios = new Date().getFullYear() - 1987;
+const dia = textoDelDia();
+const autorDia = dia ? porId(dia.autorId) : null;
+const destacadas = PISTAS.filter((p) => p.origen !== 'miembro_lvt').slice(0, 4);
+const listaDestacadas = destacadas.map(aPistaJSON);
 const momentos = [
   { src: '/assets/galeria/web/evento_cacao_03.webp', titulo: 'Presentación de «A corazón abierto»', lugar: 'Casa Universitaria Cacao y Chocolate', fecha: 'Mayo 2026' },
   { src: '/assets/galeria/web/presentacion_leyendas_voces_mesa.webp', titulo: '«Leyendas y Voces de Tabasco»', lugar: 'Recinto universitario UJAT', fecha: 'Presentación editorial' },
   { src: '/assets/galeria/web/aniversario_37_lvt.webp', titulo: 'Aniversario de fundación', lugar: 'Villahermosa', fecha: 'Sesión solemne' },
 ];
-import { sesionVigente, fechaLarga, SESIONES as SES } from '../lib/taller';
 const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Mexico_City' }).format(new Date());
 const MESC = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 const dm = (iso: string) => ({ iso, dia: String(Number(iso.slice(8, 10))), mes: MESC[Number(iso.slice(5, 7)) - 1] });
 const agenda = [
   ...SES.filter((s) => s.fecha >= hoy).slice(0, 2).map((s) => ({ ...dm(s.fecha), tipo: 'Taller literario · gratis', titulo: `Sesión ${s.sesion}: ${s.titulo}`, detalle: 'Sábado 11:00 a 13:00 · Librería Universitaria UJAT', href: '/taller-literario#calendario', accion: 'Ver sesión' })),
   ...(RIFA_ACTIVA ? [{ iso: '2026-10-16', dia: '16', mes: 'oct', tipo: 'Gran Rifa Cultural', titulo: 'Sorteo con la Lotería Nacional', detalle: 'Viernes 20:00 h · Sorteo Especial 317 · resultados en redes', href: '/rifa', accion: 'Participar' }] : []),
-  { iso: '2026-11-12', dia: '12', mes: 'nov', tipo: 'Efeméride', titulo: 'Día Nacional del Libro', detalle: 'Natalicio de Sor Juana · lectura especial en el taller del sábado 14', href: '/publicaciones', accion: 'Ver libros' },
+  { iso: '2026-11-12', dia: '12', mes: 'nov', tipo: 'Efeméride', titulo: 'Día Nacional del Libro', detalle: 'Natalicio de Sor Juana · lectura especial en el taller del sábado 14', href: '/escritores/sor-juana', accion: 'Leer a Sor Juana' },
 ].filter((e) => e.iso >= hoy).sort((a, b) => a.iso.localeCompare(b.iso)).slice(0, 4);
 const areas = [
-  { href: '/taller-literario', titulo: 'Taller literario', texto: 'Cada sábado en la Librería Universitaria UJAT. Narrativa, poesía, ensayo y crónica en 24 sesiones. Sin costo y sin requisitos.', dato: `${SESIONES.length} sesiones`, img: '/assets/galeria/web/evento_cacao_04.webp' },
-  { href: '/EEJG', titulo: 'Escuela de Escritores «José Gorostiza»', texto: 'Diplomados y cursos con aval de la UJAT desde 2001: creación literaria, redacción, periodismo, guion y oratoria.', dato: 'Desde 2001', img: '/assets/galeria/web/presentacion_tardes_opalos_autores.webp' },
-  { href: '/publicaciones', titulo: 'Fondo editorial', texto: 'Antologías colectivas con ISBN que reúnen a las voces consagradas y nuevas de Tabasco.', dato: `${CATALOGO_EDITORIAL.length} títulos`, img: '/assets/galeria/web/presentacion_tardes_opalos_grupal.webp' },
-  { href: '/audioteca', titulo: 'Audioteca', texto: 'Poemas y relatos en la voz de sus lectores. Escúchalos en línea, en cualquier momento.', dato: 'En línea', img: '/assets/galeria/web/presentacion_leyendas_voces_grupal.webp' },
+  { href: '/taller-literario', titulo: 'Taller literario', texto: 'Cada sábado en la Librería Universitaria UJAT. Narrativa, poesía, ensayo y crónica en 24 sesiones. Sin costo y sin requisitos.', dato: `${SES.length} sesiones`, img: '/assets/galeria/web/evento_cacao_04.webp' },
+  { href: '/escritores-ilustres', titulo: 'Escritores ilustres', texto: `${ESCRITORES.length} fichas con vida, obra y citas con fuente: Tabasco, México y el mundo.`, dato: `${ESCRITORES.length} autores`, img: '/assets/galeria/web/presentacion_tardes_opalos_autores.webp' },
+  { href: '/sala-de-lectura', titulo: 'Sala de lectura', texto: 'Poemas, sonetos y relatos de dominio público para leer completos, con tipografía cuidada y texto del día.', dato: `${LECTURAS.length} textos`, img: '/assets/galeria/web/presentacion_tardes_opalos_grupal.webp' },
+  { href: '/audioteca', titulo: 'Audioteca', texto: 'Lírica y narrativa en la voz de sus autores y de los miembros de la Sociedad. Escucha mientras lees.', dato: `${PISTAS.length} grabaciones`, img: '/assets/galeria/web/presentacion_leyendas_voces_grupal.webp' },
 ];
 ---
 <BaseLayout title="Letras y Voces de Tabasco · Sociedad de Escritores desde 1987">
@@ -45,33 +51,70 @@ const areas = [
     <div class="grano absolute inset-0 -z-10"></div>
     <div class="envoltura grid gap-12 pb-14 pt-12 sm:pt-20 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:pb-20 lg:pt-24">
       <div>
-        <p class="etiqueta etiqueta-clara">Sociedad de Escritores · Villahermosa · desde 1987</p>
-        <h1 class="titular-hero mt-7 max-w-[13ch]">La literatura de Tabasco <em>tiene casa.</em></h1>
-        <p class="mt-7 max-w-[32rem] font-serif text-[1.35rem] italic leading-snug text-white/80 sm:text-2xl">Formamos escritores, editamos antologías y cuidamos la memoria de quienes hicieron de esta tierra de agua una tierra de palabras.</p>
-        <div class="mt-9 flex flex-wrap gap-3">
+        <p class="etiqueta etiqueta-clara entra" style="--i:0">Sociedad de Escritores · Villahermosa · desde 1987</p>
+        <h1 class="titular-hero mt-7 max-w-[13ch]">
+          <span class="linea-revela visto"><span style="--i:0">La literatura</span></span>
+          <span class="linea-revela visto"><span style="--i:1">de Tabasco</span></span>
+          <span class="linea-revela visto"><span style="--i:2"><em>tiene casa.</em></span></span>
+        </h1>
+        <p class="entra mt-7 max-w-[32rem] font-serif text-[1.35rem] italic leading-snug text-white/80 sm:text-2xl" style="--i:3">Formamos escritores, editamos antologías y cuidamos la memoria de quienes hicieron de esta tierra de agua una tierra de palabras.</p>
+        <div class="entra mt-9 flex flex-wrap gap-3" style="--i:4">
           <a href="/taller-literario#inscripcion" class="boton-primario !min-h-[52px] !px-7 !text-base">Únete al taller gratuito</a>
-          <a href="/escritores-ilustres" class="boton-claro !min-h-[52px] !px-7 !text-base">Escritores ilustres</a>
+          <a href="/sala-de-lectura" class="boton-claro !min-h-[52px] !px-7 !text-base">Empieza a leer</a>
         </div>
       </div>
-      <div class="borde-luz rounded-pieza"><SesionTaller oscuro /></div>
+      <div class="borde-luz entra rounded-pieza" style="--i:3"><SesionTaller oscuro /></div>
     </div>
     <div class="marquesina border-t border-white/10 py-4 font-serif text-xl italic text-white/55" aria-hidden="true">
-      {[0, 1].map(() => <div>{ESCRITORES.map(({ e }) => <span>{e.nombre.replace(/\s*\(.*?\)/, '')} <span class="mx-3 not-italic text-naranja">·</span></span>)}</div>)}
+      {[0, 1].map(() => <div>{ESCRITORES.map((e) => <span>{e.nombreCorto} <span class="mx-3 not-italic text-naranja">·</span></span>)}</div>)}
     </div>
   </section>
 
   <section class="envoltura">
     <dl class="grid grid-cols-2 gap-x-6 gap-y-8 border-b border-linea py-10 sm:grid-cols-4">
-      {[[anios, 'años de trayectoria'], [24, 'sesiones gratuitas por ciclo'], [ESCRITORES.length, 'escritores en el canon'], [CATALOGO_EDITORIAL.length, 'títulos en el fondo editorial']].map(([n, t]) => (
+      {[[anios, 'años de trayectoria'], [SES.length, 'sesiones gratuitas por ciclo'], [ESCRITORES.length, 'escritores en el canon'], [LECTURAS.length + PISTAS.length, 'textos y grabaciones para leer y oír']].map(([n, t]) => (
         <div><dt class="sr-only">{t}</dt><dd class="cifra-grande contador" data-hasta={n}>{n}</dd><dd class="mt-2 text-sm text-grafito">{t}</dd></div>
       ))}
     </dl>
   </section>
 
+  <!-- TEXTO DEL DÍA + EFEMÉRIDE -->
+  {dia && (
+    <section class="envoltura grid gap-5 py-16 lg:grid-cols-[1.6fr_1fr] sm:py-20">
+      <a href={`/sala-de-lectura/${dia.id}`} class="group relative flex flex-col justify-between overflow-hidden rounded-[1.75rem] border border-linea bg-superficie p-8 transition duration-500 ease-suave hover:-translate-y-1 hover:shadow-alta sm:p-10">
+        <div>
+          <p class="etiqueta">Texto del día · Sala de lectura</p>
+          <h2 class="mt-5 font-serif text-3xl font-medium italic leading-tight sm:text-[2.4rem]">{dia.titulo}</h2>
+          <p class="mt-5 line-clamp-5 whitespace-pre-line font-serif text-xl leading-relaxed text-grafito">{dia.texto}</p>
+        </div>
+        <div class="mt-8 flex items-center gap-4 border-t border-linea pt-5">
+          {autorDia && <img src={autorDia.foto} alt="" class="h-12 w-12 rounded-full object-cover object-top grayscale" loading="lazy" />}
+          <div class="min-w-0 flex-1"><p class="font-display font-bold">{dia.autor}</p><p class="truncate text-sm text-tenue">{dia.obra} · {dia.minutosLectura} min</p></div>
+          <span class="font-display text-sm font-bold text-naranja-tinta">Leer completo <span class="inline-block transition group-hover:translate-x-1">→</span></span>
+        </div>
+      </a>
+      <div class="grid content-start gap-5">
+        <Efemeride />
+        <div class="rounded-[1.5rem] bg-noche p-7 text-white">
+          <div class="flex items-center justify-between"><p class="etiqueta etiqueta-clara">Audioteca</p><span class="ondas text-naranja" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+          <ul class="mt-4 divide-y divide-white/10">
+            {destacadas.map((p, k) => (
+              <li class="flex items-center gap-3 py-3">
+                <button type="button" class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/10 text-white transition hover:bg-naranja" data-escuchar={JSON.stringify(listaDestacadas)} data-indice={k} aria-label={`Escuchar ${p.titulo}`}><svg class="h-3.5 w-3.5 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+                <div class="min-w-0"><p class="truncate font-serif italic leading-tight">{p.titulo}</p><p class="truncate text-xs text-white/55">{p.autor}</p></div>
+              </li>
+            ))}
+          </ul>
+          <a href="/audioteca" class="enlace-vivo mt-4 inline-block text-sm font-semibold text-naranja">Todas las grabaciones →</a>
+        </div>
+      </div>
+    </section>
+  )}
+
   {RIFA_ACTIVA && (
-    <section class="envoltura py-16 sm:py-20">
+    <section class="envoltura pb-16 sm:pb-20">
       <div class="relative overflow-hidden rounded-[2rem] bg-naranja text-white">
-        <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -right-16 -top-20 w-[26rem] opacity-10" />
+        <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" aria-hidden="true" class="flota pointer-events-none absolute -right-16 -top-20 w-[26rem] opacity-10" />
         <div class="relative grid gap-8 p-8 sm:p-12 lg:grid-cols-[1.3fr_1fr] lg:items-center">
           <div>
             <p class="etiqueta etiqueta-clara !text-white/85 before:!bg-white">Gran Rifa Cultural · sorteo el viernes 16 de octubre</p>
@@ -88,17 +131,14 @@ const areas = [
   )}
 
   <!-- QUÉ HACEMOS -->
-  <section class="envoltura py-20 sm:py-28">
+  <section class="envoltura py-16 sm:py-24">
     <div class="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-end">
-      <div>
-        <p class="etiqueta">Lo que hacemos</p>
-        <h2 class="titular-l mt-4">Cuatro maneras de entrar a la literatura</h2>
-      </div>
+      <div><p class="etiqueta">Lo que hacemos</p><h2 class="titular-l mt-4">Cuatro maneras de entrar a la literatura</h2></div>
       <p class="entradilla lg:justify-self-end">Somos una asociación civil sin fines de lucro. Todo lo que hacemos busca que más personas lean y escriban en Tabasco.</p>
     </div>
     <div class="mt-12 grid gap-5 md:grid-cols-6">
       {areas.map((a, i) => (
-        <a href={a.href} class:list={['tarjeta-foto aparece group block min-h-[22rem] text-white', i === 0 ? 'md:col-span-4 md:min-h-[30rem]' : i === 1 ? 'md:col-span-2 md:min-h-[30rem]' : 'md:col-span-3']}>
+        <a href={a.href} class:list={['tarjeta-foto aparece group block min-h-[22rem] text-white', i === 0 ? 'md:col-span-4 md:min-h-[30rem]' : i === 1 ? 'md:col-span-2 md:min-h-[30rem]' : 'md:col-span-3']} style={`--i:${i}`}>
           <img src={a.img} alt="" loading="lazy" class="grayscale group-hover:grayscale-0" />
           <div class="flex h-full flex-col justify-between p-7 sm:p-8">
             <span class="w-fit rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] backdrop-blur">{a.dato}</span>
@@ -117,34 +157,23 @@ const areas = [
   <section class="relative overflow-hidden bg-hundido py-20 sm:py-28">
     <div class="envoltura">
       <div class="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <p class="etiqueta">Escritores ilustres</p>
-          <h2 class="titular-l mt-4 max-w-[18ch]">Las voces que nacieron entre ríos</h2>
-        </div>
+        <div><p class="etiqueta">Escritores ilustres</p><h2 class="titular-l mt-4 max-w-[18ch]">Las voces que nacieron entre ríos</h2></div>
         <a href="/escritores-ilustres" class="boton-contorno">Ver los {ESCRITORES.length} escritores</a>
       </div>
       <div class="cinta mt-12 [grid-auto-columns:minmax(11.5rem,1fr)] sm:[grid-auto-columns:13.5rem]">
-        {tabasco.map(({ e, foto, citas }) => (
-          <a href={`/escritores-ilustres#${e.id}`} class="group block">
-            <div class="relative aspect-[3/4] overflow-hidden rounded-pieza bg-linea">
-              <img src={foto} alt={`Retrato de ${e.nombre}`} loading="lazy" class="retrato h-full w-full group-hover:scale-[1.04] group-hover:grayscale-0" />
-              {citas[0] && <div class="absolute inset-x-0 bottom-0 translate-y-full bg-gradient-to-t from-noche/95 to-noche/0 p-4 pt-10 text-white transition duration-500 group-hover:translate-y-0"><p class="font-serif text-sm italic leading-snug line-clamp-4">«{citas[0].texto}»</p></div>}
-            </div>
-            <p class="mt-3 font-display text-[1.02rem] font-bold leading-tight">{e.nombre}</p>
-            <p class="text-sm text-tenue numero">{e.anios}</p>
-          </a>
-        ))}
+        {tabasco.map((e, i) => <div class="aparece" style={`--i:${i}`}><TarjetaEscritor e={e} i={i} cita={e.citas[0]?.texto} /></div>)}
       </div>
     </div>
   </section>
+
   {citaPortada && (
     <section class="relative isolate overflow-hidden bg-noche py-24 text-white sm:py-32">
-      {gorostiza && <img src={gorostiza.foto} alt="" class="absolute inset-y-0 right-0 z-0 h-full w-[60%] object-cover object-top opacity-30 grayscale [mask-image:linear-gradient(90deg,transparent,#000_40%)]" loading="eager" />}
+      {gorostiza && <img src={gorostiza.foto} alt="" class="absolute inset-y-0 right-0 z-0 h-full w-[60%] object-cover object-top opacity-30 grayscale [mask-image:linear-gradient(90deg,transparent,#000_40%)]" loading="lazy" />}
       <div class="envoltura relative z-10">
         <p class="etiqueta etiqueta-clara">Voz de Tabasco</p>
         <figure class="mt-8 max-w-4xl">
-          <blockquote class="cita-gigante" set:html={`«${citaPortada.texto.replace(/\s*\/\s*/g, '<br />')}»`} />
-          <figcaption class="mt-8 flex items-center gap-4 text-white/70"><span class="h-px w-16 bg-naranja"></span><span><b class="font-display text-white">{citaPortada.autor}</b>, {citaPortada.obra}</span></figcaption>
+          <blockquote class="cita-gigante aparece" set:html={`«${citaPortada.texto.replace(/\s*\/\s*/g, '<br />')}»`} />
+          <figcaption class="mt-8 flex items-center gap-4 text-white/70"><span class="h-px w-16 bg-naranja"></span><span><a href={`/escritores/${citaPortada.id}`} class="font-display font-bold text-white hover:text-naranja">{citaPortada.autor}</a>, {citaPortada.obra}</span></figcaption>
         </figure>
       </div>
     </section>
@@ -161,8 +190,8 @@ const areas = [
       </div>
       <div class="cinta [grid-auto-columns:minmax(9.5rem,1fr)] lg:grid-cols-5 lg:[grid-auto-flow:row]">
         {libros.map((l, i) => (
-          <a href={`/publicaciones#${l.id}`} class="group block" style={`--d:${i}`}>
-            <div class="aspect-[2/3] overflow-hidden rounded-md bg-linea shadow-suave transition duration-500 group-hover:-translate-y-1.5 group-hover:shadow-alta">
+          <a href={`/publicaciones#${l.id}`} class="group aparece block" style={`--i:${i}`}>
+            <div class="aspect-[2/3] overflow-hidden rounded-md bg-linea shadow-suave transition duration-500 ease-suave group-hover:-translate-y-2 group-hover:rotate-[-1deg] group-hover:shadow-alta">
               <img src={portadaWeb(l.portadaImg)} alt={`Portada de ${l.titulo}`} loading="lazy" class="h-full w-full object-cover" />
             </div>
             <p class="mt-3 font-display text-sm font-bold leading-tight">{l.titulo}</p>
@@ -177,20 +206,14 @@ const areas = [
   <section class="bg-noche py-20 text-white sm:py-28">
     <div class="envoltura">
       <div class="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <p class="etiqueta etiqueta-clara">Memoria gráfica</p>
-          <h2 class="titular-l mt-4 max-w-[20ch]">Lo que pasa cuando nos reunimos a leer</h2>
-        </div>
+        <div><p class="etiqueta etiqueta-clara">Memoria gráfica</p><h2 class="titular-l mt-4 max-w-[20ch]">Lo que pasa cuando nos reunimos a leer</h2></div>
         <a href="/descargas#memoria" class="boton-claro">Ver todos los álbumes</a>
       </div>
       <div class="mt-12 grid gap-4 md:grid-cols-[1.4fr_1fr] md:grid-rows-2">
         {momentos.map((m, i) => (
-          <figure class:list={['aparece relative overflow-hidden rounded-pieza', i === 0 ? 'aspect-[4/3] md:row-span-2 md:aspect-auto' : 'aspect-[16/10]']}>
-            <img src={m.src} alt={m.titulo} loading="lazy" class="absolute inset-0 h-full w-full object-cover" />
-            <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 to-transparent p-5 pt-16">
-              <p class="font-display font-bold">{m.titulo}</p>
-              <p class="text-sm text-white/65">{m.lugar} · {m.fecha}</p>
-            </figcaption>
+          <figure class:list={['aparece-escala tarjeta-foto', i === 0 ? 'aspect-[4/3] md:row-span-2 md:aspect-auto' : 'aspect-[16/10]']} style={`--i:${i}`}>
+            <img src={m.src} alt={m.titulo} loading="lazy" />
+            <div class="flex h-full items-end p-5"><figcaption><p class="font-display font-bold">{m.titulo}</p><p class="text-sm text-white/65">{m.lugar} · {m.fecha}</p></figcaption></div>
           </figure>
         ))}
       </div>
@@ -207,8 +230,8 @@ const areas = [
         <a href="/taller-literario#calendario" class="boton-contorno mt-6">Calendario completo</a>
       </div>
       <ol class="grid gap-3">
-        {agenda.map((ev) => (
-          <li class="grid grid-cols-[5.5rem_1fr] items-center gap-5 rounded-pieza border border-linea bg-superficie p-5 sm:grid-cols-[6.5rem_1fr_auto]">
+        {agenda.map((ev, i) => (
+          <li class="pieza-viva aparece grid grid-cols-[5.5rem_1fr] items-center gap-5 p-5 sm:grid-cols-[6.5rem_1fr_auto]" style={`--i:${i}`}>
             <div class="text-center"><span class="block font-display text-4xl font-extrabold leading-none text-naranja numero">{ev.dia}</span><span class="text-xs font-semibold uppercase tracking-[0.12em] text-tenue">{ev.mes}</span></div>
             <div class="min-w-0"><p class="text-xs font-semibold uppercase tracking-[0.12em] text-tenue">{ev.tipo}</p><p class="font-display text-lg font-bold leading-tight">{ev.titulo}</p><p class="text-sm text-grafito">{ev.detalle}</p></div>
             <a href={ev.href} class="boton-contorno !min-h-[40px] !px-4 !text-xs max-sm:col-span-2">{ev.accion}</a>
@@ -227,8 +250,8 @@ const areas = [
       <div class="mt-10 grid gap-4 md:grid-cols-3">
         {[['Asiste y comparte', 'Ven al taller, trae a alguien que quiera escribir y comparte nuestras publicaciones en redes.', '/taller-literario', 'Ir al taller'],
           ['Compra un libro o un boleto', 'Las antologías y la rifa cultural financian la impresión de los libros y los materiales del taller.', RIFA_ACTIVA ? '/rifa' : '/publicaciones', RIFA_ACTIVA ? 'Ver la rifa' : 'Ver libros'],
-          ['Hazte socio o aliado', 'Escritores, maestros, librerías e instituciones pueden sumarse con convenios y donativos en especie.', wa('Hola, quiero apoyar a Letras y Voces de Tabasco.'), 'Escribirnos']].map(([t, d, h, b]) => (
-          <div class="pieza flex flex-col p-7"><h3 class="font-display text-xl font-bold">{t}</h3><p class="mt-3 flex-1 text-grafito">{d}</p><a href={h} class="boton-oscuro mt-6 w-fit" target={String(h).startsWith('http') ? '_blank' : undefined} rel="noopener">{b}</a></div>
+          ['Hazte socio o aliado', 'Escritores, maestros, librerías e instituciones pueden sumarse con convenios y donativos en especie.', '/contacto?asunto=Hacerme+socio', 'Escribirnos']].map(([t, d, h, b], i) => (
+          <div class="pieza-viva aparece flex flex-col p-7" style={`--i:${i}`}><h3 class="font-display text-xl font-bold">{t}</h3><p class="mt-3 flex-1 text-grafito">{d}</p><a href={h} class="boton-oscuro mt-6 w-fit">{b}</a></div>
         ))}
       </div>
     </div>
@@ -249,17 +272,13 @@ const areas = [
       </div>
     </div>
   </section>
-  <script is:inline>
-    (function () {
-      var halo = document.getElementById('halo');
-      if (halo && matchMedia('(hover:hover)').matches) document.addEventListener('pointermove', function (e) { halo.style.transform = 'translate(' + (e.clientX * 0.18) + 'px,' + (e.clientY * 0.12) + 'px)'; }, { passive: true });
-      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.querySelectorAll('.contador[data-hasta]').forEach(function (el) {
-        var fin = Number(el.dataset.hasta); if (reduce || !fin) return;
-        var io = new IntersectionObserver(function (es) { if (!es[0].isIntersecting) return; io.disconnect(); var t0 = performance.now();
-          (function paso(t) { var k = Math.min(1, (t - t0) / 1400); el.textContent = Math.round(fin * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(paso); })(t0); });
-        io.observe(el);
-      });
-    })();
+
+  <script>
+    function init() {
+      const halo = document.getElementById('halo');
+      if (halo && matchMedia('(hover:hover)').matches) document.addEventListener('pointermove', (e) => { halo.style.transform = `translate(${e.clientX * 0.18}px,${e.clientY * 0.12}px)`; }, { passive: true });
+      document.querySelectorAll<HTMLButtonElement>('[data-escuchar]:not([data-listo])').forEach((b) => { b.dataset.listo = '1'; b.addEventListener('click', () => document.dispatchEvent(new CustomEvent('lvt:reproducir', { detail: { lista: JSON.parse(b.dataset.escuchar!), indice: Number(b.dataset.indice || 0), alternar: false } }))); });
+    }
+    document.addEventListener('astro:page-load', init);
   </script>
 </BaseLayout>

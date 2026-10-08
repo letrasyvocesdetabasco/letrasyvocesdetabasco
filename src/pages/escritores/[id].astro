@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ESCRITORES, porId, relacionados, nombreBloque } from '../../lib/escritores';
+import { lecturasDe } from '../../lib/lecturas';
+import { pistasDe, aPistaJSON } from '../../lib/voces';
+import { SITIO } from '../../lib/sitio';
+export async function getStaticPaths() { return ESCRITORES.map((e) => ({ params: { id: e.id } })); }
+const e = porId(Astro.params.id!)!;
+const i = ESCRITORES.indexOf(e);
+const prev = ESCRITORES[(i - 1 + ESCRITORES.length) % ESCRITORES.length], next = ESCRITORES[(i + 1) % ESCRITORES.length];
+const afines = relacionados(e);
+const lecturas = lecturasDe(e.id);
+const pistas = pistasDe(e.id);
+const citaPrincipal = e.citas[0];
+const sinFoto = e.foto.includes('placeholder');
+const iniciales = e.nombreCorto.split(' ').filter((w) => w.length > 2 && !/^(de|la|del|los|las|y)$/i.test(w)).slice(0, 2).map((w) => w[0]).join('');
+const descripcion = `${e.nombreCorto} (${e.anios}). ${e.semblanza}`.slice(0, 300);
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Person', name: e.nombreCorto, alternateName: e.nombre, description: e.semblanza,
+  image: new URL(e.foto, SITIO).href, url: new URL(`/escritores/${e.id}`, SITIO).href, jobTitle: 'Escritor',
+  ...(e.anioNac ? { birthDate: String(e.anioNac) } : {}), ...(e.anioMuerte ? { deathDate: String(e.anioMuerte) } : {}),
+  birthPlace: e.municipioOrigen, sameAs: e.fuentes.filter((u) => /wikipedia|elem\.mx|cervantesvirtual|britannica/.test(u)).slice(0, 4),
+};
+const anclas = [['semblanza', 'Semblanza'], e.citas.length && ['citas', 'Citas'], ['vida', 'Vida'], ['obras', 'Obras'], lecturas.length && ['leer', 'Leer'], pistas.length && ['escuchar', 'Escuchar'], e.datos.length && ['conversar', 'Para conversar']].filter(Boolean) as [string, string][];
+---
+<BaseLayout title={`${e.nombreCorto} · Escritores ilustres · Letras y Voces de Tabasco`} description={descripcion} image={e.foto} tipo="profile" jsonLd={jsonLd}>
+  <div id="progreso-lectura"></div>
+  <article>
+    <header class="relative isolate overflow-hidden bg-noche text-white">
+      {!sinFoto && <img src={e.foto} alt="" aria-hidden="true" class="absolute inset-y-0 right-0 -z-10 h-full w-[70%] object-cover object-top opacity-25 grayscale blur-[2px] [mask-image:linear-gradient(90deg,transparent,#000_45%)]" />}
+      <div class="grano absolute inset-0 -z-10"></div>
+      <div class="envoltura grid gap-10 pb-14 pt-10 sm:pt-14 lg:grid-cols-[18rem_1fr] lg:items-end lg:gap-14 lg:pb-20">
+        <figure class="entra" style="--i:0">
+          {sinFoto ? (
+            <div class="flex aspect-[3/4] w-56 flex-col justify-between rounded-[1.25rem] bg-white/[0.06] p-6 ring-1 ring-white/15 sm:w-64 lg:w-full" transition:name={`retrato-${e.id}`}>
+              <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" class="h-8 w-8 opacity-60" />
+              <span class="font-display text-[4.5rem] font-extrabold leading-none tracking-tight text-naranja">{iniciales}</span>
+              <span class="font-serif text-sm italic text-white/50">No hay un retrato de licencia libre. Si tienes uno, <a href="/contacto?asunto=Propuesta+de+autor" class="underline">escríbenos</a>.</span>
+            </div>
+          ) : (
+            <img src={e.foto} alt={`Retrato de ${e.nombreCorto}`} width="600" height="800" class="aspect-[3/4] w-56 rounded-[1.25rem] object-cover object-top shadow-alta grayscale sm:w-64 lg:w-full" transition:name={`retrato-${e.id}`} fetchpriority="high" />
+          )}
+          {e.fotoCredito && !sinFoto && <figcaption class="mt-2 text-[0.65rem] text-white/40">{e.fotoCredito}</figcaption>}
+        </figure>
+        <div>
+          <nav class="entra flex flex-wrap items-center gap-2 text-xs text-white/60" aria-label="Migas" style="--i:0">
+            <a href="/escritores-ilustres" class="hover:text-white">Escritores ilustres</a><span>/</span>
+            <a href={`/escritores-ilustres?bloque=${e.bloque}`} class="hover:text-white">{nombreBloque(e.bloque)}</a>
+            {e.dominioPublico && <span class="ml-2 rounded-full bg-white/10 px-2.5 py-1 font-semibold text-naranja">Dominio público</span>}
+          </nav>
+          <p class="etiqueta etiqueta-clara entra mt-6" style="--i:1">{e.municipioOrigen} · <span class="numero">{e.anios}</span></p>
+          <h1 class="titular-hero entra mt-4 !text-[clamp(2.4rem,6vw,5rem)]" style="--i:2">{e.nombreCorto}</h1>
+          <p class="entra mt-5 max-w-2xl font-serif text-2xl italic leading-snug text-white/80" style="--i:3">{e.tituloHonorifico}</p>
+          <dl class="entra mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-white/10 pt-6 text-sm sm:grid-cols-3" style="--i:4">
+            <div><dt class="text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Nació</dt><dd class="mt-1 text-white/85">{e.nacimiento}</dd></div>
+            {e.fallecimiento && <div><dt class="text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Murió</dt><dd class="mt-1 text-white/85">{e.fallecimiento}</dd></div>}
+            {e.movimiento && <div class="col-span-2 sm:col-span-1"><dt class="text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Movimiento</dt><dd class="mt-1 text-white/85">{e.movimiento}</dd></div>}
+          </dl>
+          <div class="entra mt-8 flex flex-wrap gap-3" style="--i:5">
+            {lecturas.length > 0 && <a href="#leer" class="boton-primario">Leer sus textos</a>}
+            {pistas.length > 0 && <button type="button" class="boton-claro" data-escuchar={JSON.stringify(pistas.map(aPistaJSON))}>▶ Escuchar</button>}
+            <button type="button" class="boton-claro" data-compartir data-titulo={e.nombreCorto}>Compartir</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="envoltura grid gap-12 py-14 lg:grid-cols-[15rem_1fr] lg:gap-16">
+      <aside class="hidden lg:block">
+        <nav class="sticky top-28 grid gap-1 text-sm" aria-label="En esta ficha">
+          <p class="etiqueta mb-3">En esta ficha</p>
+          {anclas.map(([h, t]) => <a href={`#${h}`} class="rounded-lg px-3 py-2 text-grafito transition hover:bg-hundido hover:text-tinta" data-ancla={h}>{t}</a>)}
+          <div class="mt-6 border-t border-linea pt-5 text-xs text-tenue">
+            <p class="font-semibold text-grafito">Géneros</p><p class="mt-1">{e.generos.join(' · ') || '—'}</p>
+            <p class="mt-3 font-semibold text-grafito">Época</p><p class="mt-1">{e.siglo}</p>
+          </div>
+        </nav>
+      </aside>
+
+      <div class="min-w-0">
+        <section id="semblanza" class="scroll-mt-28">
+          <p class="etiqueta">Semblanza</p>
+          <p class="mt-4 max-w-lectura font-serif text-[1.45rem] leading-snug sm:text-[1.7rem]">{e.semblanza}</p>
+        </section>
+
+        {e.citas.length > 0 && (
+          <section id="citas" class="mt-14 scroll-mt-28">
+            <p class="etiqueta">Citas con fuente</p>
+            <div class="mt-6 grid gap-5">
+              {e.citas.slice(0, 4).map((c, k) => (
+                <figure class="aparece border-l-4 border-naranja pl-5 sm:pl-7" style={`--i:${k}`}>
+                  <blockquote class="font-serif text-[1.35rem] italic leading-snug sm:text-[1.5rem]" set:html={`«${c.texto.replace(/\s*\/\s*/g, '<br />')}»`} />
+                  <figcaption class="mt-2 text-sm text-grafito">{c.obra}{c.url && <> · <a href={c.url} target="_blank" rel="noopener" class="enlace">fuente ↗</a></>}</figcaption>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section id="vida" class="mt-14 scroll-mt-28">
+          <h2 class="titular-m">Vida</h2>
+          <div class="prosa mt-4">{e.biografia.map((p) => <p>{p}</p>)}</div>
+        </section>
+
+        <section id="obras" class="mt-14 scroll-mt-28">
+          <h2 class="titular-m">Obras esenciales</h2>
+          <ol class="mt-6 grid gap-0 border-t border-linea">
+            {e.obras.map((o, k) => (
+              <li class="aparece grid grid-cols-[4.5rem_1fr] gap-4 border-b border-linea py-5 sm:grid-cols-[6rem_1fr]" style={`--i:${k}`}>
+                <span class="font-display text-lg font-extrabold text-naranja-tinta numero">{o.anio}</span>
+                <div><p class="font-serif text-xl font-semibold italic">{o.titulo}</p><p class="text-sm text-tenue">{o.genero}</p><p class="mt-1.5 text-[0.97rem] text-grafito">{o.descripcion}</p></div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {lecturas.length > 0 && (
+          <section id="leer" class="mt-14 scroll-mt-28">
+            <div class="flex flex-wrap items-end justify-between gap-4"><h2 class="titular-m">Leer</h2><p class="text-sm text-tenue">Textos íntegros de dominio público</p></div>
+            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+              {lecturas.map((l, k) => (
+                <li class="aparece" style={`--i:${k}`}><a href={`/sala-de-lectura/${l.id}`} class="pieza-viva flex h-full flex-col p-5">
+                  <span class="text-xs font-semibold uppercase tracking-[0.12em] text-naranja-tinta">{l.genero === 'lirica' ? 'Lírica' : 'Narrativa'} · {l.forma}</span>
+                  <span class="mt-2 font-serif text-xl font-semibold italic leading-tight">{l.titulo}</span>
+                  <span class="mt-2 line-clamp-3 whitespace-pre-line font-serif text-[0.95rem] text-grafito">{l.texto.slice(0, 180)}</span>
+                  <span class="mt-4 text-xs text-tenue">{l.obra} · {l.minutosLectura} min de lectura</span>
+                </a></li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {pistas.length > 0 && (
+          <section id="escuchar" class="mt-14 scroll-mt-28">
+            <h2 class="titular-m">Escuchar</h2>
+            <ol class="mt-6 divide-y divide-linea border-y border-linea">
+              {pistas.map((p, k) => (
+                <li class="grid grid-cols-[3rem_1fr] items-center gap-4 py-4">
+                  <button type="button" class="grid h-12 w-12 place-items-center rounded-full bg-tinta text-fondo transition hover:bg-naranja" data-escuchar={JSON.stringify(pistas.map(aPistaJSON))} data-indice={k} aria-label={`Escuchar ${p.titulo}`}>
+                    <svg class="h-4 w-4 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+                  </button>
+                  <div class="min-w-0"><p class="font-serif text-lg font-medium italic leading-tight">{p.titulo}</p><p class="truncate text-sm text-grafito">{p.declamador}</p></div>
+                </li>
+              ))}
+            </ol>
+            <a href="/audioteca" class="enlace mt-4 inline-block text-sm">Ir a la audioteca completa</a>
+          </section>
+        )}
+
+        {e.datos.length > 0 && (
+          <section id="conversar" class="mt-14 scroll-mt-28">
+            <h2 class="titular-m">Para conversar en el taller</h2>
+            <ul class="mt-5 grid gap-3">
+              {e.datos.slice(0, 6).map((d) => <li class="flex gap-3 text-[0.97rem] text-grafito"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-naranja"></span><span>{d.texto} {d.url && <a href={d.url} target="_blank" rel="noopener" class="enlace text-xs">fuente ↗</a>}</span></li>)}
+            </ul>
+          </section>
+        )}
+
+        {e.legado && <section class="mt-14"><h2 class="titular-m">Legado</h2><p class="prosa mt-4">{e.legado}</p></section>}
+
+        {e.fuentes.length > 0 && (
+          <details class="mt-14 rounded-pieza border border-linea p-5 text-sm">
+            <summary class="cursor-pointer font-display font-bold">Fuentes consultadas ({e.fuentes.length})</summary>
+            <ul class="mt-3 grid gap-1.5 break-all text-grafito">{e.fuentes.map((u) => <li><a href={u} target="_blank" rel="noopener" class="enlace font-normal">{u.replace(/^https?:\/\//, '')}</a></li>)}</ul>
+          </details>
+        )}
+      </div>
+    </div>
+
+    <section class="bg-hundido py-16">
+      <div class="envoltura">
+        <div class="flex flex-wrap items-end justify-between gap-4"><div><p class="etiqueta">Voces afines</p><h2 class="titular-l mt-3">Para seguir leyendo</h2></div><a href="/escritores-ilustres" class="boton-contorno">Todos los escritores</a></div>
+        <div class="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
+          {afines.map((a, k) => (
+            <a href={`/escritores/${a.id}`} class="group aparece block" style={`--i:${k}`}>
+              <span class="block aspect-[3/4] overflow-hidden rounded-pieza bg-linea"><img src={a.foto} alt={`Retrato de ${a.nombreCorto}`} loading="lazy" class="retrato h-full w-full object-top group-hover:scale-[1.04] group-hover:grayscale-0" /></span>
+              <span class="mt-3 block font-display font-bold leading-tight group-hover:text-naranja-tinta">{a.nombreCorto}</span><span class="block text-sm text-tenue numero">{a.anios}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <nav class="envoltura grid gap-3 py-10 sm:grid-cols-2" aria-label="Escritor anterior y siguiente">
+      <a href={`/escritores/${prev.id}`} class="pieza-viva flex items-center gap-4 p-4"><span class="text-2xl text-naranja">←</span><span><span class="block text-xs text-tenue">Anterior</span><span class="font-display font-bold">{prev.nombreCorto}</span></span></a>
+      <a href={`/escritores/${next.id}`} class="pieza-viva flex items-center justify-end gap-4 p-4 text-right"><span><span class="block text-xs text-tenue">Siguiente</span><span class="font-display font-bold">{next.nombreCorto}</span></span><span class="text-2xl text-naranja">→</span></a>
+    </nav>
+  </article>
+
+  <script>
+    function init() {
+      document.querySelectorAll<HTMLButtonElement>('[data-escuchar]:not([data-listo])').forEach((b) => { b.dataset.listo = '1'; b.addEventListener('click', () => {
+        document.dispatchEvent(new CustomEvent('lvt:reproducir', { detail: { lista: JSON.parse(b.dataset.escuchar!), indice: Number(b.dataset.indice || 0), alternar: false } }));
+      }); });
+      const c = document.querySelector<HTMLButtonElement>('[data-compartir]');
+      c?.addEventListener('click', async () => {
+        const d = { title: c.dataset.titulo, text: `${c.dataset.titulo} · Escritores ilustres · Letras y Voces de Tabasco`, url: location.href };
+        try { if (navigator.share) await navigator.share(d); else { await navigator.clipboard.writeText(location.href); c.textContent = 'Enlace copiado'; } } catch {}
+      });
+      // Resalta la sección visible en el índice lateral
+      const enlaces = [...document.querySelectorAll<HTMLAnchorElement>('[data-ancla]')]; if (!enlaces.length) return;
+      const io = new IntersectionObserver((es) => { es.forEach((x) => { if (x.isIntersecting) enlaces.forEach((a) => a.classList.toggle('bg-hundido', a.dataset.ancla === x.target.id)); }); }, { rootMargin: '-30% 0px -60% 0px' });
+      enlaces.forEach((a) => { const s = document.getElementById(a.dataset.ancla!); if (s) io.observe(s); });
+    }
+    document.addEventListener('astro:page-load', init);
+  </script>
+</BaseLayout>

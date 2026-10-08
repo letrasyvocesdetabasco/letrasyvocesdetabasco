@@ -1,17 +1,32 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import Encabezado from '../components/sitio/Encabezado.astro';
 import Pie from '../components/sitio/Pie.astro';
 import WhatsApp from '../components/sitio/WhatsApp.astro';
+import Reproductor from '../components/sitio/Reproductor.astro';
+import { SITIO } from '../lib/sitio';
 
-interface Props { title?: string; description?: string; image?: string; }
+interface Props { title?: string; description?: string; image?: string; tipo?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; sinIndexar?: boolean; }
 const {
   title = 'Letras y Voces de Tabasco · Sociedad de Escritores',
-  description = 'Sociedad de Escritores Letras y Voces de Tabasco, A.C. Desde 1987: taller literario gratuito, Escuela de Escritores «José Gorostiza», fondo editorial, audioteca y memoria de la literatura tabasqueña.',
-  image = '/assets/galeria/eventos/presentacion_tardes_opalos_grupal.jpg',
+  description = 'Sociedad de Escritores Letras y Voces de Tabasco, A.C. Desde 1987: taller literario gratuito, Escuela de Escritores «José Gorostiza», fondo editorial, sala de lectura, audioteca y memoria de la literatura tabasqueña.',
+  image = '/assets/galeria/web/presentacion_tardes_opalos_grupal.webp',
+  tipo = 'website',
+  jsonLd,
+  sinIndexar = false,
 } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://letrasyvocesdetabasco.org');
-const imagenAbs = new URL(image, Astro.site ?? 'https://letrasyvocesdetabasco.org');
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITIO);
+const imagenAbs = new URL(image, Astro.site ?? SITIO);
+const org = {
+  '@context': 'https://schema.org', '@type': 'NGO',
+  name: 'Sociedad de Escritores Letras y Voces de Tabasco, A.C.', alternateName: 'Letras y Voces de Tabasco',
+  url: SITIO, foundingDate: '1987', email: 'contacto@letrasyvocesdetabasco.org',
+  telephone: '+522205889391', logo: `${SITIO}/assets/logos/LVT%20Logo%20Iso%201%20Original.png`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Villahermosa', addressRegion: 'Tabasco', addressCountry: 'MX' },
+  sameAs: ['https://www.facebook.com/letrayvoces.tabasco', 'https://www.instagram.com/letrasyvocestabasco'],
+};
+const ld = jsonLd ? (Array.isArray(jsonLd) ? [org, ...jsonLd] : [org, jsonLd]) : [org];
 ---
 <!doctype html>
 <html lang="es-MX">
@@ -21,12 +36,14 @@ const imagenAbs = new URL(image, Astro.site ?? 'https://letrasyvocesdetabasco.or
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {sinIndexar && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#FDFBF7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#161514" media="(prefers-color-scheme: dark)" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={tipo} />
     <meta property="og:site_name" content="Letras y Voces de Tabasco" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:url" content={canonical} />
@@ -37,37 +54,58 @@ const imagenAbs = new URL(image, Astro.site ?? 'https://letrasyvocesdetabasco.or
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Inter:wght@400..700&family=Montserrat:wght@500..800&display=swap" />
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org', '@type': 'NGO',
-      name: 'Sociedad de Escritores Letras y Voces de Tabasco, A.C.', alternateName: 'Letras y Voces de Tabasco',
-      url: 'https://letrasyvocesdetabasco.org', foundingDate: '1987', email: 'contacto@letrasyvocesdetabasco.org',
-      telephone: '+522205889391', logo: 'https://letrasyvocesdetabasco.org/assets/logos/LVT%20Logo%20Iso%201%20Original.png',
-      address: { '@type': 'PostalAddress', addressLocality: 'Villahermosa', addressRegion: 'Tabasco', addressCountry: 'MX' },
-      sameAs: ['https://www.facebook.com/letrayvoces.tabasco', 'https://www.instagram.com/letrasyvocestabasco'],
-    })} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script type="application/ld+json" set:html={JSON.stringify(ld)} />
     <script is:inline>
+      // Tema (claro/nocturno) sin parpadeo; se reaplica tras cada transición de página.
       (function () {
-        var d = document.documentElement; d.classList.add('js');
-        var t = null; try { t = localStorage.getItem('lvt-theme'); } catch (e) {}
-        var oscuro = t === 'nocturno' || t === 'lectura' || (!t && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
-        if (oscuro) d.classList.add('modo-nocturno');
+        function aplicar() {
+          var d = document.documentElement; d.classList.add('js');
+          var t = null; try { t = localStorage.getItem('lvt-theme'); } catch (e) {}
+          var oscuro = t === 'nocturno' || t === 'lectura' || (!t && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+          d.classList.toggle('modo-nocturno', oscuro);
+        }
+        aplicar();
+        document.addEventListener('astro:after-swap', aplicar);
       })();
     </script>
+    <ClientRouter fallback="swap" />
     <slot name="head" />
   </head>
   <body class="min-h-screen">
     <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-tinta focus:px-4 focus:py-2 focus:text-fondo">Saltar al contenido</a>
     <Encabezado />
-    <main id="contenido"><slot /></main>
+    <main id="contenido" data-pagefind-body><slot /></main>
     <Pie />
+    <Reproductor />
     <WhatsApp />
-    <script is:inline>
-      (function () {
-        if (!('IntersectionObserver' in window)) { document.querySelectorAll('.aparece').forEach(function (e) { e.classList.add('visto'); }); return; }
-        var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
-        document.querySelectorAll('.aparece').forEach(function (e) { io.observe(e); });
-        setTimeout(function () { document.querySelectorAll('.aparece').forEach(function (e) { e.classList.add('visto'); }); }, 1200);
-      })();
+    <script>
+      // Revelado al hacer scroll (idempotente, se ejecuta en cada navegación)
+      function revelar() {
+        const nodos = document.querySelectorAll<HTMLElement>('.aparece:not(.visto), .aparece-escala:not(.visto), .linea-revela:not(.visto)');
+        if (!('IntersectionObserver' in window)) { nodos.forEach((e) => e.classList.add('visto')); return; }
+        const io = new IntersectionObserver((es) => { es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visto'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+        nodos.forEach((e) => io.observe(e));
+        // Red de seguridad: nada se queda invisible
+        setTimeout(() => nodos.forEach((e) => e.classList.add('visto')), 1800);
+      }
+      // Contadores animados
+      function contadores() {
+        const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.querySelectorAll<HTMLElement>('.contador[data-hasta]').forEach((el) => {
+          const fin = Number(el.dataset.hasta); if (reduce || !fin || el.dataset.listo) return; el.dataset.listo = '1';
+          const io = new IntersectionObserver((es) => { if (!es[0].isIntersecting) return; io.disconnect(); const t0 = performance.now();
+            const paso = (t: number) => { const k = Math.min(1, (t - t0) / 1400); el.textContent = String(Math.round(fin * (1 - Math.pow(1 - k, 3)))); if (k < 1) requestAnimationFrame(paso); }; requestAnimationFrame(paso); });
+          io.observe(el);
+        });
+      }
+      // Barra de progreso de lectura (solo si la página la incluye)
+      function progreso() {
+        const b = document.getElementById('progreso-lectura'); if (!b) return;
+        const f = () => { const h = document.documentElement; const max = h.scrollHeight - h.clientHeight; b.style.transform = `scaleX(${max > 0 ? Math.min(1, h.scrollTop / max) : 0})`; };
+        f(); window.addEventListener('scroll', f, { passive: true });
+      }
+      document.addEventListener('astro:page-load', () => { revelar(); contadores(); progreso(); });
     </script>
   </body>
 </html>

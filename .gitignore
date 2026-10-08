@@ -27,3 +27,4 @@ Thumbs.db
 .agents/
 ORIGINAL_REQUEST.md
 public/comprobantes_rifa/admin_*
+.claude/

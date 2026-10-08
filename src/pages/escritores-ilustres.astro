@@ -1,138 +1,93 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Portada from '../components/sitio/Portada.astro';
+import TarjetaEscritor from '../components/sitio/TarjetaEscritor.astro';
+import Efemeride from '../components/sitio/Efemeride.astro';
 import { ESCRITORES, BLOQUES } from '../lib/escritores';
-const cuenta = (b: string) => ESCRITORES.filter((x) => x.e.bloqueCanon === b).length;
+const cuenta = (b: string) => ESCRITORES.filter((x) => x.bloque === b).length;
+const generos = [...new Set(ESCRITORES.flatMap((e) => e.generos))];
+const siglos = [...new Set(ESCRITORES.map((e) => e.siglo).filter(Boolean))].sort();
+const letras = [...new Set(ESCRITORES.map((e) => e.nombreCorto.split(' ').pop()![0].toUpperCase()))].sort();
 ---
-<BaseLayout title="Escritores ilustres · Letras y Voces de Tabasco" description="Semblanzas, obras y citas con fuente de los escritores de Tabasco, México y el mundo que forman el canon de lectura de Letras y Voces de Tabasco.">
-  <section class="envoltura pb-10 pt-14 sm:pt-20">
-    <p class="etiqueta">Canon de lectura</p>
-    <div class="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-      <h1 class="titular-xl max-w-[12ch]">Escritores ilustres</h1>
-      <p class="entradilla">Las voces de Tabasco primero, y junto a ellas los autores de México y del mundo que leemos en el taller. Cada ficha reúne su vida, su obra y citas con su fuente.</p>
-    </div>
-    <div class="mt-10 flex flex-col gap-4 border-y border-linea py-5 sm:flex-row sm:items-center sm:justify-between">
-      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por origen">
-        <button type="button" class="chip" data-filtro="todos" aria-pressed="true">Todos <span class="ml-1.5 text-tenue numero">{ESCRITORES.length}</span></button>
-        {BLOQUES.map((b) => <button type="button" class="chip" data-filtro={b.id} aria-pressed="false">{b.nombre} <span class="ml-1.5 text-tenue numero">{cuenta(b.id)}</span></button>)}
+<BaseLayout title="Escritores ilustres · Letras y Voces de Tabasco" description={`Semblanzas, obras y citas con fuente de ${ESCRITORES.length} escritores de Tabasco, México y el mundo que forman el canon de lectura de Letras y Voces de Tabasco.`}>
+  <Portada etiqueta="Canon de lectura" titulo="Escritores ilustres" entradilla="Las voces de Tabasco primero, y junto a ellas los autores de México y del mundo que leemos en el taller. Cada ficha reúne su vida, su obra, sus textos y citas con fuente.">
+    <div class="mt-10 grid gap-6 border-y border-linea py-6 lg:grid-cols-[1fr_22rem] lg:items-start">
+      <div class="grid gap-4">
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por origen">
+          <button type="button" class="chip" data-f="bloque" data-v="" aria-pressed="true">Todos <span class="ml-1.5 text-tenue numero">{ESCRITORES.length}</span></button>
+          {BLOQUES.map((b) => <button type="button" class="chip" data-f="bloque" data-v={b.id} aria-pressed="false">{b.nombre} <span class="ml-1.5 text-tenue numero">{cuenta(b.id)}</span></button>)}
+        </div>
+        <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por género">
+          {generos.map((g) => <button type="button" class="chip" data-f="genero" data-v={g} aria-pressed="false">{g}</button>)}
+          <span class="mx-1 hidden h-6 w-px bg-linea sm:block"></span>
+          {siglos.map((s) => <button type="button" class="chip" data-f="siglo" data-v={s} aria-pressed="false">{s}</button>)}
+          <button type="button" class="chip" data-f="pd" data-v="1" aria-pressed="false" title="Autores cuya obra puede leerse íntegra en la Sala de lectura">Dominio público</button>
+        </div>
       </div>
-      <label class="relative block sm:w-72">
-        <span class="sr-only">Buscar escritor</span>
-        <input id="buscar" type="search" placeholder="Buscar por nombre u obra" class="w-full rounded-full border border-linea bg-superficie py-2.5 pl-10 pr-4 text-sm outline-none transition placeholder:text-tenue focus:border-naranja" />
-        <svg class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-tenue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      </label>
+      <div class="grid gap-3">
+        <label class="relative block">
+          <span class="sr-only">Buscar escritor</span>
+          <input id="buscar" type="search" placeholder="Buscar por nombre, obra o lugar" class="campo !rounded-full !pl-10" autocomplete="off" />
+          <svg class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-tenue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </label>
+        <Efemeride />
+      </div>
     </div>
-  </section>
+  </Portada>
 
-  <section class="envoltura">
+  <section class="envoltura pb-8">
+    <div class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm text-tenue">
+      <p><span id="conteo" class="font-semibold text-tinta numero">{ESCRITORES.length}</span> escritores</p>
+      <nav class="hidden flex-wrap gap-1 lg:flex" aria-label="Índice alfabético por apellido">
+        {letras.map((l) => <button type="button" class="h-7 w-7 rounded-full text-xs font-semibold text-grafito transition hover:bg-hundido hover:text-tinta" data-letra={l}>{l}</button>)}
+      </nav>
+    </div>
     <ul id="rejilla" class="grid grid-cols-2 gap-x-5 gap-y-10 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {ESCRITORES.map(({ e, foto }) => (
-        <li data-bloque={e.bloqueCanon} data-texto={`${e.nombre} ${e.obrasCapitales.map((o) => o.titulo).join(' ')} ${e.municipioOrigen}`.toLowerCase()}>
-          <button type="button" data-abrir={e.id} class="group block w-full text-left">
-            <span class="relative block aspect-[3/4] overflow-hidden rounded-pieza bg-linea">
-              <img src={foto} alt={`Retrato de ${e.nombre}`} loading="lazy" class="retrato h-full w-full group-hover:scale-[1.04] group-hover:grayscale-0" />
-              <span class="absolute left-3 top-3 rounded-full bg-fondo/90 px-2.5 py-1 text-[0.68rem] font-semibold text-grafito backdrop-blur">{BLOQUES.find((b) => b.id === e.bloqueCanon)?.nombre}</span>
-            </span>
-            <span class="mt-3 block font-display text-[1.05rem] font-bold leading-tight group-hover:text-naranja-tinta">{e.nombre.replace(/\s*\(.*?\)/, "")}</span>
-            <span class="mt-0.5 block text-sm text-tenue numero">{e.anios}</span>
-            <span class="mt-1 block font-serif text-[0.98rem] italic leading-snug text-grafito">{e.tituloHonorifico}</span>
-          </button>
+      {ESCRITORES.map((e, i) => (
+        <li class="aparece" data-bloque={e.bloque} data-genero={e.generos.join('|')} data-siglo={e.siglo} data-pd={e.dominioPublico ? '1' : ''} data-letra={e.nombreCorto.split(' ').pop()![0].toUpperCase()}
+            data-texto={`${e.nombre} ${e.obras.map((o) => o.titulo).join(' ')} ${e.municipioOrigen} ${e.movimiento}`.toLowerCase()}>
+          <TarjetaEscritor e={e} i={i} cita={e.citas[0]?.texto} />
         </li>
       ))}
     </ul>
-    <p id="sin-resultados" class="hidden py-16 text-center text-grafito">No encontramos a nadie con esa búsqueda.</p>
+    <p id="sin-resultados" class="hidden py-16 text-center text-grafito">No encontramos a nadie con esa búsqueda. <button type="button" id="limpiar" class="enlace">Limpiar filtros</button></p>
   </section>
 
-  {ESCRITORES.map(({ e, foto, citas, verificados }) => (
-    <dialog id={`d-${e.id}`} data-ficha={e.id} class="m-auto h-[100dvh] max-h-[100dvh] w-full max-w-none overflow-hidden bg-transparent p-0 sm:h-[92vh] sm:max-h-[92vh] sm:max-w-5xl sm:rounded-[1.5rem]" aria-labelledby={`t-${e.id}`}>
-      <div class="grid h-full overflow-y-auto bg-fondo text-tinta md:grid-cols-[22rem_1fr] md:overflow-hidden">
-        <aside class="relative bg-noche text-white md:overflow-y-auto">
-          <img src={foto} alt={`Retrato de ${e.nombre}`} loading="lazy" class="aspect-[4/5] w-full object-cover grayscale md:aspect-[3/4]" />
-          <div class="p-6">
-            <p class="text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Nació</p>
-            <p class="mt-1 text-sm text-white/85">{e.nacimiento}</p>
-            {e.fallecimiento && <><p class="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Murió</p><p class="mt-1 text-sm text-white/85">{e.fallecimiento}</p></>}
-            {e.movimiento && <><p class="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-white/50">Movimiento</p><p class="mt-1 text-sm text-white/85">{e.movimiento}</p></>}
-          </div>
-        </aside>
-        <article class="relative md:overflow-y-auto">
-          <div class="sticky top-0 z-10 flex justify-end bg-gradient-to-b from-fondo via-fondo/90 to-transparent p-4">
-            <button type="button" data-cerrar class="grid h-11 w-11 place-items-center rounded-full bg-tinta text-fondo" aria-label="Cerrar ficha">
-              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
-            </button>
-          </div>
-          <div class="px-6 pb-14 sm:px-10">
-            <p class="etiqueta">{e.municipioOrigen}</p>
-            <h2 id={`t-${e.id}`} class="mt-3 font-display text-3xl font-extrabold leading-tight sm:text-[2.6rem]">{e.nombre}</h2>
-            <p class="mt-2 font-serif text-xl italic text-grafito">{e.tituloHonorifico} · <span class="numero">{e.anios}</span></p>
-            <p class="mt-6 max-w-lectura text-lg leading-relaxed">{e.semblanzaSintetica}</p>
-
-            {citas.length > 0 && (
-              <div class="mt-10 grid gap-5">
-                {citas.slice(0, 3).map((c) => (
-                  <figure class="border-l-4 border-naranja pl-5">
-                    <blockquote class="font-serif text-[1.35rem] italic leading-snug" set:html={`«${c.texto.replace(/\s*\/\s*/g, '<br />')}»`} />
-                    <figcaption class="mt-2 text-sm text-grafito">{c.obra}{c.url && <> · <a href={c.url} target="_blank" rel="noopener" class="enlace">fuente</a></>}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            )}
-
-            <h3 class="mt-12 font-display text-xl font-bold">Vida</h3>
-            <div class="prosa mt-3">{e.biografiaCompleta.map((p) => <p>{p}</p>)}</div>
-
-            <h3 class="mt-12 font-display text-xl font-bold">Obras esenciales</h3>
-            <ul class="mt-4 grid gap-4">
-              {e.obrasCapitales.map((o) => (
-                <li class="grid grid-cols-[4rem_1fr] gap-4 border-t border-linea pt-4">
-                  <span class="font-display font-bold text-naranja-tinta numero">{o.anio}</span>
-                  <div><p class="font-serif text-lg font-semibold italic">{o.titulo}</p><p class="text-sm text-tenue">{o.genero}</p><p class="mt-1 text-[0.97rem] text-grafito">{o.descripcion}</p></div>
-                </li>
-              ))}
-            </ul>
-
-            {verificados.length > 0 && (
-              <>
-                <h3 class="mt-12 font-display text-xl font-bold">Para conversar</h3>
-                <ul class="mt-4 grid gap-3">
-                  {verificados.slice(0, 5).map((d) => <li class="text-[0.97rem] text-grafito">{d.texto} {d.url && <a href={d.url} target="_blank" rel="noopener" class="enlace text-xs">fuente</a>}</li>)}
-                </ul>
-              </>
-            )}
-
-            {e.legadoPatrimonial && <><h3 class="mt-12 font-display text-xl font-bold">Legado</h3><p class="prosa mt-3">{e.legadoPatrimonial}</p></>}
-          </div>
-        </article>
+  <section class="envoltura mt-16">
+    <div class="grid gap-6 rounded-[1.75rem] bg-noche p-8 text-white sm:p-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <div>
+        <p class="etiqueta etiqueta-clara">¿Falta alguien?</p>
+        <h2 class="titular-l mt-4">El canon es una conversación abierta</h2>
+        <p class="mt-4 max-w-xl text-white/75">Cada ficha cita sus fuentes. Si encuentras un dato que corregir o quieres proponer a un autor tabasqueño, escríbenos: lo revisamos en la mesa del taller.</p>
       </div>
-    </dialog>
-  ))}
+      <div class="grid gap-3"><a href="/contacto?asunto=Propuesta+de+autor" class="boton-primario">Proponer un autor</a><a href="/sala-de-lectura" class="boton-claro">Ir a la Sala de lectura</a></div>
+    </div>
+  </section>
 
-  <script is:inline>
-    (function () {
-      var chips = document.querySelectorAll('[data-filtro]'), items = document.querySelectorAll('#rejilla > li'), q = document.getElementById('buscar'), vacio = document.getElementById('sin-resultados');
-      var filtro = 'todos';
-      function aplicar() {
-        var t = (q.value || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''), n = 0;
-        items.forEach(function (li) {
-          var txt = li.dataset.texto.normalize('NFD').replace(/[̀-ͯ]/g, '');
-          var ok = (filtro === 'todos' || li.dataset.bloque === filtro) && (!t || txt.indexOf(t) >= 0);
+  <script>
+    function init() {
+      const items = [...document.querySelectorAll<HTMLLIElement>('#rejilla > li')]; if (!items.length) return;
+      const q = document.getElementById('buscar') as HTMLInputElement, vacio = document.getElementById('sin-resultados')!, conteo = document.getElementById('conteo')!;
+      const filtros: Record<string, string> = { bloque: '', genero: '', siglo: '', pd: '' };
+      const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+      const params = new URLSearchParams(location.search);
+      if (params.get('bloque')) filtros.bloque = params.get('bloque')!;
+      const aplicar = () => {
+        const t = norm((q.value || '').toLowerCase()); let n = 0;
+        items.forEach((li) => {
+          const ok = (!filtros.bloque || li.dataset.bloque === filtros.bloque) && (!filtros.genero || (li.dataset.genero || '').split('|').includes(filtros.genero))
+            && (!filtros.siglo || li.dataset.siglo === filtros.siglo) && (!filtros.pd || li.dataset.pd === '1') && (!t || norm(li.dataset.texto || '').includes(t));
           li.hidden = !ok; if (ok) n++;
         });
-        vacio.classList.toggle('hidden', n > 0);
-      }
-      chips.forEach(function (c) { c.addEventListener('click', function () { filtro = c.dataset.filtro; chips.forEach(function (x) { x.setAttribute('aria-pressed', x === c); }); aplicar(); }); });
+        vacio.classList.toggle('hidden', n > 0); conteo.textContent = String(n);
+        document.querySelectorAll<HTMLButtonElement>('[data-f]').forEach((b) => b.setAttribute('aria-pressed', String(filtros[b.dataset.f!] === b.dataset.v)));
+      };
+      document.querySelectorAll<HTMLButtonElement>('[data-f]').forEach((b) => b.addEventListener('click', () => { const f = b.dataset.f!, v = b.dataset.v!; filtros[f] = filtros[f] === v && v !== '' ? '' : v; aplicar(); }));
       q.addEventListener('input', aplicar);
-      function abrir(id, empujar) {
-        var d = document.getElementById('d-' + id); if (!d) return;
-        d.showModal(); document.body.style.overflow = 'hidden';
-        if (empujar) history.replaceState(null, '', '#' + id);
-      }
-      document.querySelectorAll('[data-abrir]').forEach(function (b) { b.addEventListener('click', function () { abrir(b.dataset.abrir, true); }); });
-      document.querySelectorAll('dialog[data-ficha]').forEach(function (d) {
-        d.addEventListener('close', function () { document.body.style.overflow = ''; history.replaceState(null, '', location.pathname); });
-        d.addEventListener('click', function (ev) { if (ev.target === d) d.close(); });
-        d.querySelector('[data-cerrar]').addEventListener('click', function () { d.close(); });
-      });
-      if (location.hash.length > 1) abrir(decodeURIComponent(location.hash.slice(1)), false);
-    })();
+      document.getElementById('limpiar')?.addEventListener('click', () => { Object.keys(filtros).forEach((k) => (filtros[k] = '')); q.value = ''; aplicar(); });
+      document.querySelectorAll<HTMLButtonElement>('[data-letra]').forEach((b) => b.addEventListener('click', () => { const li = items.find((x) => !x.hidden && x.dataset.letra === b.dataset.letra); li?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }));
+      aplicar();
+    }
+    document.addEventListener('astro:page-load', init);
   </script>
 </BaseLayout>

@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Portada from '../components/sitio/Portada.astro';
+import { CONTACTO } from '../lib/sitio';
+---
+<BaseLayout title="Aviso de privacidad · Letras y Voces de Tabasco" description="Aviso de privacidad simplificado de la Sociedad de Escritores Letras y Voces de Tabasco, A.C." sinIndexar>
+  <Portada etiqueta="Transparencia" titulo="Aviso de privacidad" entradilla="Versión simplificada conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares." compacta />
+  <section class="envoltura py-8"><div class="prosa">
+    <p><strong>Responsable.</strong> Sociedad de Escritores Letras y Voces de Tabasco, A.C., con domicilio en Villahermosa, Tabasco, México, y correo {CONTACTO.correo}.</p>
+    <p><strong>Datos que recabamos.</strong> Únicamente los que tú nos proporcionas de forma voluntaria en los formularios de este sitio: nombre, correo electrónico, número de WhatsApp y el contenido de tu mensaje. En la audioteca registramos de manera anónima qué pista se reproduce, sin asociarla a persona alguna.</p>
+    <p><strong>Finalidades.</strong> Responder tus mensajes, registrar tu interés en el taller literario, enviarte el boletín mensual si te suscribes y mejorar los contenidos del sitio. No usamos tus datos con fines comerciales ni los compartimos con terceros, salvo el proveedor tecnológico que aloja la base de datos (Supabase) bajo sus propias medidas de seguridad.</p>
+    <p><strong>Derechos ARCO.</strong> Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos, así como darte de baja del boletín en cualquier momento, escribiendo a {CONTACTO.correo}. Atenderemos tu solicitud en un plazo máximo de veinte días hábiles.</p>
+    <p><strong>Rifa cultural.</strong> Los datos de quienes participan en la rifa se gestionan fuera de este sitio, por WhatsApp, y el tablero público muestra solo el número de boleto y su estado, nunca nombres ni teléfonos.</p>
+    <p><strong>Cambios.</strong> Cualquier modificación a este aviso se publicará en esta misma página. Última actualización: octubre de 2026.</p>
+  </div></section>
+</BaseLayout>

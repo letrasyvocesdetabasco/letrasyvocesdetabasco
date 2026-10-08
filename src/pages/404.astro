@@ -1,16 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ESCRITORES } from '../lib/escritores';
+const cita = ESCRITORES.find((e) => e.id === 'jorge-luis-borges')?.citas[0];
 ---
-<BaseLayout title="Página no encontrada · Letras y Voces de Tabasco">
-  <section class="envoltura grid min-h-[60vh] place-items-center py-20 text-center">
-    <div>
-      <p class="font-display text-[7rem] font-extrabold leading-none text-naranja numero">404</p>
-      <h1 class="titular-l mt-4">Esta página se perdió entre los ríos</h1>
-      <p class="mx-auto mt-4 max-w-md font-serif text-xl italic text-grafito">Quizá cambió de lugar con el rediseño. Prueba desde el inicio o ve directo al taller.</p>
-      <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href="/" class="boton-oscuro">Ir al inicio</a>
-        <a href="/taller-literario" class="boton-contorno">Ver el taller</a>
-      </div>
+<BaseLayout title="Página no encontrada · Letras y Voces de Tabasco" sinIndexar>
+  <section class="envoltura grid min-h-[70vh] place-items-center py-20 text-center">
+    <div class="max-w-xl">
+      <p class="etiqueta justify-center">Error 404</p>
+      <h1 class="titular-xl mt-6">Esta página se extravió entre los libros.</h1>
+      {cita && <blockquote class="mt-8 font-serif text-xl italic text-grafito">«{cita.texto}»<footer class="mt-2 text-sm not-italic text-tenue">{cita.obra}</footer></blockquote>}
+      <div class="mt-10 flex flex-wrap justify-center gap-3"><a href="/" class="boton-primario">Volver al inicio</a><a href="/buscar" class="boton-contorno">Buscar en el sitio</a></div>
     </div>
   </section>
 </BaseLayout>

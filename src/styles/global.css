@@ -3,23 +3,25 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   LVT 2026 · Sistema visual del sitio
-   Crema / Carbón / Grafito (90 %) + Naranja LVT (10 %)
+   LVT 2026.2 · Sistema visual del sitio
+   Regla 70/20/10 del Manual de Marca: Crema (fondo) · Carbón/Grafito (texto y estructura) · Naranja Creador (acentos)
    Montserrat (titulares) · EB Garamond (voz literaria) · Inter (lectura y datos)
    ========================================================================== */
 @layer base {
   :root {
-    --fondo: 253 251 247;        /* #FDFBF7 Crema */
-    --superficie: 255 255 255;
+    --fondo: 253 251 247;        /* #FDFBF7 Crema editorial */
+    --superficie: 255 255 255;   /* Blanco papel */
     --hundido: 245 240 232;      /* #F5F0E8 */
     --tinta: 34 34 34;           /* #222222 Carbón */
     --grafito: 85 85 85;         /* #555555 */
     --tenue: 122 116 108;
     --linea: 228 221 210;
-    --naranja: 239 123 56;       /* #EF7B38 */
+    --naranja: 239 123 56;       /* #EF7B38 Naranja Creador */
     --naranja-tinta: 184 82 26;  /* #B8521A, AA sobre crema */
     --noche: 28 26 24;
     --noche-2: 40 37 34;
+    --suave: cubic-bezier(.16, 1, .3, 1);
+    --rapido: cubic-bezier(.2, .8, .2, 1);
     color-scheme: light;
   }
   html.modo-nocturno {
@@ -48,16 +50,18 @@
   ::selection { background: rgb(var(--naranja)); color: #fff; }
   :focus-visible { outline: 2px solid rgb(var(--naranja)); outline-offset: 3px; border-radius: 4px; }
   img { max-width: 100%; height: auto; }
+  button, [role="button"] { touch-action: manipulation; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   }
 }
 
 @layer components {
   .envoltura { @apply mx-auto w-full max-w-[1200px] px-5 sm:px-6 lg:px-8; }
+  .envoltura-ancha { @apply mx-auto w-full max-w-[1440px] px-5 sm:px-6 lg:px-8; }
 
-  /* Etiqueta de serie: punto naranja + versalitas espaciadas (igual que en redes) */
+  /* Etiqueta de serie: punto naranja + versalitas espaciadas */
   .etiqueta { @apply inline-flex items-center gap-2 font-sans text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-grafito; }
   .etiqueta::before { content: ""; @apply h-2 w-2 shrink-0 rounded-full bg-naranja; }
   .etiqueta-clara { @apply text-white/80; }
@@ -70,57 +74,52 @@
 
   .barra { @apply block h-1.5 w-16 rounded-full bg-naranja; }
 
-  .boton { @apply inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full px-6 py-3 font-display text-[0.9rem] font-bold transition duration-200 active:scale-[0.98]; }
-  .boton-primario { @apply boton bg-naranja text-white hover:bg-naranja-tinta; }
-  .boton-oscuro { @apply boton bg-tinta text-fondo hover:bg-naranja; }
+  .boton { @apply relative inline-flex min-h-[46px] items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 font-display text-[0.9rem] font-bold transition duration-300 active:scale-[0.98]; transition-timing-function: var(--rapido); }
+  .boton-primario { @apply boton bg-naranja text-white hover:bg-naranja-tinta hover:shadow-[0_12px_30px_-12px_rgb(239_123_56/.7)]; }
+  .boton-oscuro { @apply boton bg-tinta text-fondo hover:bg-naranja hover:text-white; }
   .boton-contorno { @apply boton border border-linea bg-superficie text-tinta hover:border-naranja hover:text-naranja-tinta; }
   .boton-claro { @apply boton border border-white/30 text-white hover:bg-white hover:text-carbon; }
+  /* brillo que recorre el botón al pasar el cursor */
+  .boton-primario::after, .boton-oscuro::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / .22) 50%, transparent 70%); transform: translateX(-120%); transition: transform .9s var(--suave); pointer-events: none; }
+  .boton-primario:hover::after, .boton-oscuro:hover::after { transform: translateX(120%); }
 
   .enlace { @apply font-semibold text-naranja-tinta underline decoration-naranja/40 underline-offset-4 transition hover:decoration-naranja; }
+  /* subrayado que crece de izquierda a derecha */
+  .enlace-vivo { position: relative; text-decoration: none; }
+  .enlace-vivo::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .45s var(--suave); }
+  .enlace-vivo:hover::after { transform: scaleX(1); transform-origin: left; }
 
   .pieza { @apply rounded-pieza border border-linea bg-superficie; }
-  .chip { @apply inline-flex items-center rounded-full border border-linea bg-superficie px-3 py-1 font-sans text-xs font-semibold text-grafito; }
+  .pieza-viva { @apply pieza transition duration-500; transition-timing-function: var(--suave); }
+  @media (hover: hover) and (pointer: fine) { .pieza-viva:hover { @apply -translate-y-1 border-naranja/60 shadow-alta; } }
+  .chip { @apply inline-flex items-center rounded-full border border-linea bg-superficie px-3 py-1 font-sans text-xs font-semibold text-grafito transition; }
   .chip[aria-pressed="true"] { @apply border-tinta bg-tinta text-fondo; }
+  .chip-naranja { @apply border-naranja/40 bg-naranja/10 text-naranja-tinta; }
 
-  .retrato { @apply object-cover grayscale-[0.85] contrast-[1.05] transition duration-500; }
+  .retrato { @apply object-cover grayscale-[0.85] contrast-[1.05] transition duration-700; transition-timing-function: var(--suave); }
   .retrato-vivo { @apply grayscale-0; }
 
   .prosa p + p { @apply mt-4; }
   .prosa { @apply max-w-lectura text-[1.0625rem] leading-[1.75] text-grafito; }
   .prosa strong { @apply font-semibold text-tinta; }
+  .prosa a { @apply enlace; }
 
   .numero { font-variant-numeric: tabular-nums; }
-}
 
-/* Revelado suave al hacer scroll (parte visible; solo se anima si JS está activo) */
-.js .aparece { opacity: 0; transform: translateY(14px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
-.js .aparece.visto { opacity: 1; transform: none; }
+  /* Portada estándar de página interior */
+  .portada { @apply relative isolate overflow-hidden; }
+  .portada-oscura { @apply bg-noche text-white; }
+  .portada-oscura .etiqueta { @apply text-white/80; }
 
-/* Grano editorial sobre fotos oscuras */
-.grano::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18; mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-
-/* Diálogos nativos */
-dialog::backdrop { background: rgb(14 13 12 / .72); backdrop-filter: blur(4px); }
-dialog[open] { animation: entra .35s cubic-bezier(.16,1,.3,1); }
-@keyframes entra { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
-
-/* Cinta horizontal con desplazamiento */
-.cinta { display: grid; grid-auto-flow: column; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-bottom: .75rem; }
-.cinta > * { scroll-snap-align: start; }
-
-/* ==========================================================================
-   Capa editorial 2026.1 · piezas de alto impacto
-   ========================================================================== */
-@layer components {
+  /* Capa editorial · piezas de alto impacto */
   .titular-hero { @apply font-display font-extrabold leading-[0.95] tracking-[-0.03em]; font-size: clamp(2.9rem, 7vw, 6.2rem); }
-  .titular-hero em { @apply font-serif font-medium not-italic italic tracking-normal text-naranja; font-size: 1.04em; }
+  .titular-hero em { @apply font-serif font-medium italic tracking-normal text-naranja; font-size: 1.04em; }
   .marquesina { display: flex; overflow: hidden; gap: 0; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
   .marquesina > div { display: flex; flex: none; gap: 2.5rem; padding-right: 2.5rem; animation: desliza 60s linear infinite; white-space: nowrap; }
   .marquesina:hover > div { animation-play-state: paused; }
   .cifra-grande { @apply font-display font-extrabold leading-none tracking-[-0.03em]; font-size: clamp(2.6rem, 5vw, 4.5rem); font-variant-numeric: tabular-nums; }
   .tarjeta-foto { @apply relative isolate overflow-hidden rounded-[1.5rem]; }
-  .tarjeta-foto img { @apply absolute inset-0 h-full w-full object-cover transition duration-[900ms] ease-out; }
+  .tarjeta-foto img { @apply absolute inset-0 h-full w-full object-cover transition duration-[1100ms]; transition-timing-function: var(--suave); }
   .tarjeta-foto:hover img { transform: scale(1.06); }
   .tarjeta-foto::after { content: ""; @apply absolute inset-0 -z-0; background: linear-gradient(180deg, rgb(0 0 0 / 0) 35%, rgb(14 13 12 / .92)); }
   .tarjeta-foto > div { @apply relative z-10; }
@@ -132,8 +131,78 @@ dialog[open] { animation: entra .35s cubic-bezier(.16,1,.3,1); }
   .paso-grande h3 { @apply font-display text-2xl font-extrabold sm:text-[1.9rem]; }
   .paso-grande p { @apply text-lg leading-relaxed text-grafito sm:text-xl; }
   .boton-xl { @apply inline-flex min-h-[64px] items-center justify-center gap-3 rounded-full px-8 font-display text-xl font-bold shadow-alta transition active:scale-[0.98]; }
+
+  /* Campos de formulario */
+  .campo { @apply w-full rounded-2xl border border-linea bg-superficie px-4 py-3 text-[0.97rem] text-tinta outline-none transition placeholder:text-tenue focus:border-naranja focus:ring-4 focus:ring-naranja/15; }
+  .campo-oscuro { @apply border-white/15 bg-white/[0.06] text-white placeholder:text-white/40 focus:border-naranja focus:ring-naranja/25; }
+
+  /* Lectura: controles tipográficos de la Sala de lectura */
+  .texto-lectura { font-family: var(--lectura-fuente, "EB Garamond", Georgia, serif); font-size: var(--lectura-tamano, 1.35rem); line-height: var(--lectura-interlineado, 1.6); }
+  .texto-lectura.verso { white-space: pre-line; }
+  .texto-lectura.prosa-larga p + p { margin-top: 1.1em; }
+  .texto-lectura.prosa-larga p:first-of-type::first-letter { font-family: Montserrat, sans-serif; font-weight: 800; font-size: 3.4em; float: left; line-height: .8; margin: .08em .12em 0 0; color: rgb(var(--naranja)); }
 }
+
+/* ==========================================================================
+   Movimiento
+   ========================================================================== */
+/* Revelado suave al hacer scroll (solo con JS activo). --i = índice para escalonar. */
+.js .aparece { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--suave), transform .8s var(--suave); transition-delay: calc(var(--i, 0) * 70ms); }
+.js .aparece.visto { opacity: 1; transform: none; }
+.js .aparece-escala { opacity: 0; transform: scale(.96); transition: opacity .9s var(--suave), transform .9s var(--suave); transition-delay: calc(var(--i, 0) * 80ms); }
+.js .aparece-escala.visto { opacity: 1; transform: none; }
+
+/* Titulares que entran línea por línea (máscara) */
+.js .linea-revela { display: block; overflow: hidden; }
+.js .linea-revela > span { display: inline-block; transform: translateY(110%); transition: transform 1s var(--suave); transition-delay: calc(var(--i, 0) * 110ms + var(--retardo, 0ms)); }
+.js .linea-revela.visto > span, .js .visto .linea-revela > span { transform: none; }
+
+/* Entradas de portada al cargar */
+@keyframes sube { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+.js .entra { animation: sube 1s var(--suave) both; animation-delay: calc(var(--i, 0) * 120ms); }
+@keyframes flota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.flota { animation: flota 7s ease-in-out infinite; }
+@keyframes pulso-anillo { 0% { box-shadow: 0 0 0 0 rgb(239 123 56 / .45); } 100% { box-shadow: 0 0 0 18px rgb(239 123 56 / 0); } }
+.pulso { animation: pulso-anillo 1.8s var(--suave) infinite; }
 @keyframes desliza { to { transform: translateX(-100%); } }
-@media (prefers-reduced-motion: reduce) { .marquesina > div { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .marquesina > div { animation: none; } .flota, .pulso { animation: none; } }
+
+/* Barras de audio en movimiento */
+.ondas { display: inline-flex; align-items: flex-end; gap: 2px; height: 16px; }
+.ondas i { display: block; width: 3px; border-radius: 2px; background: currentColor; height: 30%; animation: onda 1s ease-in-out infinite; }
+.ondas i:nth-child(2) { animation-delay: .15s; } .ondas i:nth-child(3) { animation-delay: .3s; } .ondas i:nth-child(4) { animation-delay: .45s; }
+@keyframes onda { 0%, 100% { height: 30%; } 50% { height: 100%; } }
+[data-estado="pausado"] .ondas i { animation-play-state: paused; }
+
+/* Grano editorial sobre fotos oscuras */
+.grano::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+/* Diálogos nativos */
+dialog::backdrop { background: rgb(14 13 12 / .72); backdrop-filter: blur(6px); }
+dialog[open] { animation: entra .4s var(--suave); }
+@keyframes entra { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+
+/* Cinta horizontal con desplazamiento */
+.cinta { display: grid; grid-auto-flow: column; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; padding-bottom: .75rem; }
+.cinta > * { scroll-snap-align: start; }
+
+/* Barra de progreso de lectura (arriba) */
+#progreso-lectura { position: fixed; top: 0; left: 0; height: 3px; width: 100%; transform-origin: left; transform: scaleX(0); background: rgb(var(--naranja)); z-index: 70; pointer-events: none; }
+
+/* Modo lectura: cursor y contador */
 .contador { font-variant-numeric: tabular-nums; }
 html.modo-nocturno .retrato { filter: grayscale(.85) contrast(1.05) brightness(.92); }
+
+/* Transiciones de vista (Astro ClientRouter) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: 260ms var(--rapido) both desvanece; }
+::view-transition-new(root) { animation: 420ms var(--suave) both aparece-vista; }
+@keyframes desvanece { to { opacity: 0; } }
+@keyframes aparece-vista { from { opacity: 0; transform: translateY(10px); } }
+html.modo-nocturno::view-transition-group(root) { background: rgb(22 21 20); }
+
+/* Buscador Pagefind con la identidad LVT */
+.pagefind-ui { --pagefind-ui-scale: 1; --pagefind-ui-primary: rgb(var(--naranja-tinta)); --pagefind-ui-text: rgb(var(--tinta)); --pagefind-ui-background: rgb(var(--superficie)); --pagefind-ui-border: rgb(var(--linea)); --pagefind-ui-tag: rgb(var(--hundido)); --pagefind-ui-border-width: 1px; --pagefind-ui-border-radius: 1rem; --pagefind-ui-image-border-radius: .75rem; --pagefind-ui-font: Inter, system-ui, sans-serif; }
+.pagefind-ui .pagefind-ui__result-title { font-family: Montserrat, sans-serif; font-weight: 700; }
+.pagefind-ui .pagefind-ui__search-input { font-size: 1.05rem; }

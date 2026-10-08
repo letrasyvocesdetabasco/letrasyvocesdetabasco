@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Portada from '../../components/sitio/Portada.astro';
+import { LECTURAS, textoDelDia } from '../../lib/lecturas';
+import { porId } from '../../lib/escritores';
+const dia = textoDelDia();
+const autores = [...new Map(LECTURAS.map((l) => [l.autorId, l.autor])).entries()].sort((a, b) => a[1].localeCompare(b[1]));
+const liricas = LECTURAS.filter((l) => l.genero === 'lirica').length, narrativas = LECTURAS.length - liricas;
+const formas = [...new Set(LECTURAS.map((l) => l.forma))];
+---
+<BaseLayout title="Sala de lectura · Letras y Voces de Tabasco" description={`${LECTURAS.length} textos íntegros de dominio público para leer en línea: poemas, sonetos, cuentos y capítulos de autores clásicos en español, con su fuente.`}>
+  <Portada etiqueta="Sala de lectura" titulo="Para leer despacio." entradilla="Textos completos de dominio público, transcritos de fuentes abiertas y cuidados en su tipografía. Lírica y narrativa para leer en pantalla como en un libro, o para escuchar mientras lees." />
+
+  {dia && (
+    <section class="envoltura">
+      <a href={`/sala-de-lectura/${dia.id}`} class="group relative block overflow-hidden rounded-[1.75rem] bg-noche p-8 text-white sm:p-12">
+        <div class="grano absolute inset-0"></div>
+        <div class="relative grid gap-8 lg:grid-cols-[1fr_16rem] lg:items-end">
+          <div>
+            <p class="etiqueta etiqueta-clara">Texto del día</p>
+            <h2 class="mt-5 font-serif text-3xl font-medium italic leading-tight sm:text-[2.6rem]">{dia.titulo}</h2>
+            <p class="mt-3 text-white/60">{dia.autor} · {dia.obra}</p>
+            <p class="mt-6 max-w-2xl whitespace-pre-line font-serif text-xl leading-relaxed text-white/85 line-clamp-6">{dia.texto}</p>
+          </div>
+          <div class="flex items-end gap-4 lg:flex-col lg:items-end">
+            {porId(dia.autorId)?.foto && <img src={porId(dia.autorId)!.foto} alt="" class="h-28 w-24 rounded-xl object-cover object-top grayscale lg:h-40 lg:w-32" loading="lazy" />}
+            <span class="boton-primario">Leer completo <span class="transition group-hover:translate-x-1">→</span></span>
+          </div>
+        </div>
+      </a>
+    </section>
+  )}
+
+  <section class="envoltura mt-16">
+    <div class="flex flex-col gap-5 border-y border-linea py-5 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar">
+        <button type="button" class="chip" data-f="genero" data-v="" aria-pressed="true">Todo <span class="ml-1.5 text-tenue numero">{LECTURAS.length}</span></button>
+        <button type="button" class="chip" data-f="genero" data-v="lirica" aria-pressed="false">Lírica <span class="ml-1.5 text-tenue numero">{liricas}</span></button>
+        <button type="button" class="chip" data-f="genero" data-v="narrativa" aria-pressed="false">Narrativa <span class="ml-1.5 text-tenue numero">{narrativas}</span></button>
+        <span class="mx-1 hidden h-6 w-px bg-linea sm:block"></span>
+        {formas.map((f) => <button type="button" class="chip" data-f="forma" data-v={f} aria-pressed="false">{f}</button>)}
+      </div>
+      <label class="relative block lg:w-72"><span class="sr-only">Buscar texto</span>
+        <select id="autor" class="campo !rounded-full"><option value="">Todos los autores</option>{autores.map(([id, n]) => <option value={id}>{n}</option>)}</select>
+      </label>
+    </div>
+  </section>
+
+  <section class="envoltura py-10">
+    <ul id="textos" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {LECTURAS.map((l, i) => { const a = porId(l.autorId); return (
+        <li class="aparece" style={`--i:${i % 9}`} data-genero={l.genero} data-forma={l.forma} data-autor={l.autorId}>
+          <a href={`/sala-de-lectura/${l.id}`} class="pieza-viva group flex h-full flex-col p-6">
+            <div class="flex items-start justify-between gap-3">
+              <span class="text-xs font-semibold uppercase tracking-[0.12em] text-naranja-tinta">{l.genero === 'lirica' ? 'Lírica' : 'Narrativa'} · {l.forma}</span>
+              <span class="shrink-0 text-xs text-tenue numero">{l.minutosLectura} min</span>
+            </div>
+            <h3 class="mt-3 font-serif text-2xl font-semibold italic leading-tight group-hover:text-naranja-tinta">{l.titulo}</h3>
+            <p class="mt-3 line-clamp-4 whitespace-pre-line font-serif text-[1.02rem] leading-snug text-grafito">{l.texto.slice(0, 220)}</p>
+            <div class="mt-5 flex items-center gap-3 border-t border-linea pt-4">
+              {a && <img src={a.foto} alt="" class="h-9 w-9 rounded-full object-cover object-top grayscale" loading="lazy" />}
+              <div class="min-w-0"><p class="truncate text-sm font-semibold">{l.autor}</p><p class="truncate text-xs text-tenue">{l.obra}</p></div>
+            </div>
+          </a>
+        </li>
+      ); })}
+    </ul>
+    {LECTURAS.length === 0 && <p class="py-16 text-center text-grafito">Estamos preparando los primeros textos de la sala.</p>}
+    <p id="sin" class="hidden py-16 text-center text-grafito">Ningún texto coincide con ese filtro.</p>
+  </section>
+
+  <section class="envoltura mt-10">
+    <div class="grid gap-6 rounded-[1.75rem] border border-linea bg-superficie p-8 sm:p-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <div><p class="etiqueta">Sobre esta sala</p><h2 class="titular-l mt-4">Solo lo que es de todos</h2>
+        <p class="prosa mt-4">Publicamos únicamente obras en dominio público según la ley mexicana (cien años después de la muerte del autor) y las tomamos de ediciones abiertas, indicando siempre la fuente. De los autores contemporáneos ofrecemos citas breves con referencia, y te invitamos a leerlos en sus ediciones.</p></div>
+      <div class="grid gap-3"><a href="/glosario" class="boton-oscuro">Glosario literario</a><a href="/escritores-ilustres?pd=1" class="boton-contorno">Autores en dominio público</a></div>
+    </div>
+  </section>
+
+  <script>
+    function init() {
+      const items = [...document.querySelectorAll<HTMLLIElement>('#textos > li')]; if (!items.length) return;
+      const f: Record<string, string> = { genero: '', forma: '' }; const sel = document.getElementById('autor') as HTMLSelectElement;
+      const aplicar = () => { let n = 0; items.forEach((li) => { const ok = (!f.genero || li.dataset.genero === f.genero) && (!f.forma || li.dataset.forma === f.forma) && (!sel.value || li.dataset.autor === sel.value); li.hidden = !ok; if (ok) n++; });
+        document.getElementById('sin')!.classList.toggle('hidden', n > 0);
+        document.querySelectorAll<HTMLButtonElement>('[data-f]').forEach((b) => b.setAttribute('aria-pressed', String(f[b.dataset.f!] === b.dataset.v))); };
+      document.querySelectorAll<HTMLButtonElement>('[data-f]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.f!, v = b.dataset.v!; f[k] = f[k] === v && v ? '' : v; aplicar(); }));
+      sel.addEventListener('change', aplicar);
+    }
+    document.addEventListener('astro:page-load', init);
+  </script>
+</BaseLayout>

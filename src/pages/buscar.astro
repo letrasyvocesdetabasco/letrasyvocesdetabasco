@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Portada from '../components/sitio/Portada.astro';
+import { ESCRITORES } from '../lib/escritores';
+const sugerencias = ['Pellicer', 'Gorostiza', 'soneto', 'taller', 'Sabines', 'rifa', 'diplomado', 'Rulfo'];
+---
+<BaseLayout title="Buscar · Letras y Voces de Tabasco" description="Busca escritores, textos, grabaciones, publicaciones y términos del glosario en el sitio de Letras y Voces de Tabasco." sinIndexar>
+  <Portada etiqueta="Buscar" titulo="¿Qué quieres leer hoy?" entradilla={`Escritores, textos de la Sala de lectura, grabaciones, libros del fondo editorial, el glosario y el taller: todo el sitio en un solo buscador. ${ESCRITORES.length} fichas de autores y creciendo.`} compacta />
+  <section class="envoltura py-6">
+    <div id="buscador" class="min-h-[14rem]"></div>
+    <p class="mt-6 text-sm text-tenue">Prueba con: {sugerencias.map((s, i) => <><button type="button" class="enlace" data-sug={s}>{s}</button>{i < sugerencias.length - 1 ? ', ' : ''}</>)}</p>
+    <p id="sin-indice" class="mt-6 hidden rounded-pieza border border-dashed border-linea p-6 text-sm text-grafito">El índice de búsqueda se genera al publicar el sitio. En el servidor de desarrollo usa el menú para navegar.</p>
+  </section>
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script is:inline data-astro-rerun>
+    (function () {
+      var cont = document.getElementById('buscador'); if (!cont) return;
+      var s = document.createElement('script'); s.src = '/pagefind/pagefind-ui.js';
+      s.onload = function () {
+        var ui = new PagefindUI({ element: '#buscador', showSubResults: true, showImages: true, pageSize: 8, translations: { placeholder: 'Buscar en el sitio…', clear_search: 'Limpiar', load_more: 'Ver más resultados', search_label: 'Buscar', filters_label: 'Filtros', zero_results: 'Sin resultados para [SEARCH_TERM]', many_results: '[COUNT] resultados para [SEARCH_TERM]', one_result: '[COUNT] resultado para [SEARCH_TERM]', alt_search: 'Sin resultados para [SEARCH_TERM]. Mostrando resultados para [DIFFERENT_TERM]', search_suggestion: 'Sin resultados para [SEARCH_TERM]. Prueba con:', searching: 'Buscando [SEARCH_TERM]…' } });
+        var q = new URLSearchParams(location.search).get('q'); if (q) ui.triggerSearch(q);
+        document.querySelectorAll('[data-sug]').forEach(function (b) { b.addEventListener('click', function () { ui.triggerSearch(b.dataset.sug); }); });
+      };
+      s.onerror = function () { document.getElementById('sin-indice').classList.remove('hidden'); };
+      document.body.appendChild(s);
+    })();
+  </script>
+</BaseLayout>

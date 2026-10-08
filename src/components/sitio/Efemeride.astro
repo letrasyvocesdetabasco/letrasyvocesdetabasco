@@ -1,0 +1,22 @@
+---
+// «Hoy en la literatura»: natalicios del canon en la fecha actual; si no hay, los próximos del mes.
+import { ESCRITORES, efemerides } from '../../lib/escritores';
+const hoy = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Mexico_City' }));
+const mes = hoy.getMonth() + 1, dia = hoy.getDate();
+let lista = efemerides(mes, dia); let titulo = 'Hoy en la literatura';
+if (!lista.length) {
+  const prox = ESCRITORES.filter((e) => e.nacMes && e.nacDia && (e.nacMes > mes || (e.nacMes === mes && e.nacDia > dia))).sort((a, b) => (a.nacMes! - b.nacMes!) || (a.nacDia! - b.nacDia!));
+  lista = prox.slice(0, 1); titulo = 'Próximo natalicio';
+}
+const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+---
+{lista.length > 0 && (
+  <div class="pieza-viva flex items-center gap-4 p-4 sm:p-5" data-efemeride data-mes={mes} data-dia={dia}>
+    <a href={`/escritores/${lista[0].id}`} class="relative block h-16 w-14 shrink-0 overflow-hidden rounded-xl bg-linea"><img src={lista[0].foto} alt="" class="retrato h-full w-full object-top" loading="lazy" /></a>
+    <div class="min-w-0">
+      <p class="etiqueta">{titulo}</p>
+      <p class="mt-1 truncate font-display font-bold leading-tight"><a href={`/escritores/${lista[0].id}`} class="hover:text-naranja-tinta">{lista[0].nombreCorto}</a></p>
+      <p class="text-sm text-grafito">Nació el {lista[0].nacDia} de {MESES[(lista[0].nacMes ?? 1) - 1]}{lista[0].anioNac ? ` de ${lista[0].anioNac}` : ''}{lista.length > 1 ? ` · y ${lista.length - 1} más` : ''}</p>
+    </div>
+  </div>
+)}

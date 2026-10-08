@@ -1,0 +1,17 @@
+---
+// Portada estándar de página interior: etiqueta + titular + entradilla, con revelado por líneas.
+interface Props { etiqueta: string; titulo: string; entradilla?: string; oscura?: boolean; imagen?: string; compacta?: boolean; clase?: string; }
+const { etiqueta, titulo, entradilla, oscura = false, imagen, compacta = false, clase = '' } = Astro.props;
+---
+<section class:list={['portada', oscura && 'portada-oscura', clase]}>
+  {imagen && <img src={imagen} alt="" class="absolute inset-0 -z-10 h-full w-full object-cover opacity-30 grayscale" fetchpriority="high" />}
+  {imagen && <div class="absolute inset-0 -z-10 bg-gradient-to-r from-noche via-noche/85 to-noche/30"></div>}
+  <div class:list={['envoltura', compacta ? 'pb-8 pt-12 sm:pt-16' : 'pb-10 pt-14 sm:pt-20']}>
+    <p class="etiqueta entra" style="--i:0">{etiqueta}</p>
+    <div class="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+      <h1 class="titular-xl max-w-[13ch]"><span class="linea-revela visto"><span class="entra" style="--i:1">{titulo}</span></span></h1>
+      {entradilla && <p class:list={['entradilla entra', oscura && '!text-white/75']} style="--i:2">{entradilla}</p>}
+    </div>
+    <slot />
+  </div>
+</section>

@@ -1,16 +1,22 @@
 ---
-import { NAV, NAV_SECUNDARIA, CONTACTO, wa } from '../../lib/sitio';
+import { NAV, NAV_SECUNDARIA, CONTACTO, wa, RIFA_ACTIVA } from '../../lib/sitio';
 import { sesionVigente, fechaLarga } from '../../lib/taller';
 import Logo from './Logo.astro';
+import Boletin from './Boletin.astro';
 const { proxima } = sesionVigente();
 const anio = new Date().getFullYear();
+const enlaces = [...NAV, ...NAV_SECUNDARIA.filter((n) => n.href !== '/rifa' || RIFA_ACTIVA)];
 ---
-<footer class="relative mt-24 overflow-hidden bg-noche text-white">
-  <div class="envoltura grid gap-12 py-16 lg:grid-cols-[1.3fr_1fr_1fr] lg:py-20">
+<footer data-pagefind-ignore class="relative mt-24 overflow-hidden bg-noche text-white">
+  <div class="envoltura grid gap-12 py-16 lg:grid-cols-[1.4fr_0.8fr_1fr] lg:py-20">
     <div class="max-w-md">
       <Logo claro clase="h-12" />
       <p class="mt-6 font-serif text-2xl italic leading-snug text-white/85">Desde 1987 hacemos comunidad alrededor de la palabra escrita en Tabasco.</p>
       <p class="mt-4 text-sm text-white/55">Sociedad de Escritores Letras y Voces de Tabasco, A.C. Asociación civil sin fines de lucro con sede en Villahermosa, Tabasco.</p>
+      <div class="mt-8">
+        <p class="etiqueta etiqueta-clara">Boletín</p>
+        <div class="mt-3"><Boletin origen="pie" /></div>
+      </div>
       <div class="mt-6 flex gap-2">
         <a href={CONTACTO.facebook} target="_blank" rel="noopener" class="grid h-11 w-11 place-items-center rounded-full border border-white/15 transition hover:border-naranja hover:text-naranja" aria-label="Facebook">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.3c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.4H7.5V14h2.7v8h3.3Z"/></svg>
@@ -26,7 +32,7 @@ const anio = new Date().getFullYear();
     <div>
       <p class="etiqueta etiqueta-clara">Explora</p>
       <ul class="mt-5 grid gap-2.5 text-[0.95rem]">
-        {[...NAV, ...NAV_SECUNDARIA].map((n) => <li><a href={n.href} class="text-white/75 transition hover:text-white">{n.texto}</a></li>)}
+        {enlaces.map((n) => <li><a href={n.href} class="enlace-vivo text-white/75 transition hover:text-white">{n.texto}</a></li>)}
       </ul>
     </div>
     <div class="grid content-start gap-8">
@@ -39,17 +45,18 @@ const anio = new Date().getFullYear();
       <div>
         <p class="etiqueta etiqueta-clara">Contacto</p>
         <p class="mt-4 text-sm leading-7 text-white/80">
-          <span class="select-all">{CONTACTO.correo}</span><br />
-          WhatsApp <span class="select-all">{CONTACTO.whatsappVisible}</span>
+          <a href={`mailto:${CONTACTO.correo}`} class="enlace-vivo select-all">{CONTACTO.correo}</a><br />
+          WhatsApp <span class="select-all">{CONTACTO.whatsappVisible}</span><br />
+          <a href="/contacto" class="enlace-vivo text-naranja">Escríbenos →</a>
         </p>
       </div>
     </div>
   </div>
   <div class="border-t border-white/10">
-    <div class="envoltura flex flex-col gap-2 py-6 text-xs text-white/45 sm:flex-row sm:justify-between">
-      <p>© {anio} Sociedad de Escritores Letras y Voces de Tabasco, A.C.</p>
-      <p>Fotografías: archivo de Letras y Voces de Tabasco y Wikimedia Commons.</p>
+    <div class="envoltura flex flex-col gap-2 py-6 text-xs text-white/45 sm:flex-row sm:flex-wrap sm:justify-between">
+      <p>© {anio} Sociedad de Escritores Letras y Voces de Tabasco, A.C. · <a href="/privacidad" class="hover:text-white">Aviso de privacidad</a></p>
+      <p>Retratos: archivo de Letras y Voces de Tabasco y Wikimedia Commons (dominio público o licencia libre, acreditados en cada ficha).</p>
     </div>
   </div>
-  <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" aria-hidden="true" class="pointer-events-none absolute -bottom-24 -right-24 w-[26rem] opacity-[0.04]" loading="lazy" />
+  <img src="/assets/logos/LVT Logo Iso 6 Blanco Relleno.svg" alt="" aria-hidden="true" class="flota pointer-events-none absolute -bottom-24 -right-24 w-[26rem] opacity-[0.04]" loading="lazy" />
 </footer>

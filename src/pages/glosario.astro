@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Portada from '../components/sitio/Portada.astro';
+import { GLOSARIO, CATEGORIAS_GLOSARIO } from '../data/glosario';
+const ordenado = [...GLOSARIO].sort((a, b) => a.termino.localeCompare(b.termino, 'es'));
+const porId = (id: string) => GLOSARIO.find((t) => t.id === id);
+const jsonLd = { '@context': 'https://schema.org', '@type': 'DefinedTermSet', name: 'Glosario literario de Letras y Voces de Tabasco', hasDefinedTerm: GLOSARIO.map((t) => ({ '@type': 'DefinedTerm', name: t.termino, description: t.definicion })) };
+---
+<BaseLayout title="Glosario literario · Letras y Voces de Tabasco" description={`${GLOSARIO.length} términos de métrica, figuras retóricas, géneros, técnica narrativa y oficio, explicados con ejemplos de los autores del canon.`} jsonLd={jsonLd}>
+  <Portada etiqueta="Aprender" titulo="Glosario literario" entradilla="Las palabras del oficio, explicadas con claridad y con ejemplos de los autores que leemos en el taller. Para consultar antes de la clínica de textos o cuando un poema te deje una duda.">
+    <div class="mt-10 flex flex-col gap-4 border-y border-linea py-5 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Filtrar por categoría">
+        <button type="button" class="chip" data-cat="" aria-pressed="true">Todos <span class="ml-1.5 text-tenue numero">{GLOSARIO.length}</span></button>
+        {CATEGORIAS_GLOSARIO.map((c) => <button type="button" class="chip" data-cat={c} aria-pressed="false">{c} <span class="ml-1.5 text-tenue numero">{GLOSARIO.filter((t) => t.categoria === c).length}</span></button>)}
+      </div>
+      <label class="relative block sm:w-72"><span class="sr-only">Buscar término</span><input id="buscar" type="search" placeholder="Buscar un término" class="campo !rounded-full !pl-10" /><svg class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-tenue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></label>
+    </div>
+  </Portada>
+
+  <section class="envoltura py-8">
+    <dl id="terminos" class="grid gap-4 md:grid-cols-2">
+      {ordenado.map((t, i) => (
+        <div id={t.id} class="pieza-viva aparece scroll-mt-28 p-6" style={`--i:${i % 8}`} data-cat={t.categoria} data-texto={`${t.termino} ${t.definicion} ${t.ejemplo || ''}`.toLowerCase()}>
+          <div class="flex items-start justify-between gap-3"><dt class="font-display text-xl font-bold leading-tight">{t.termino}</dt><span class="chip shrink-0 !text-[0.65rem]">{t.categoria}</span></div>
+          <dd class="mt-3 text-[0.97rem] leading-relaxed text-grafito">{t.definicion}</dd>
+          {t.ejemplo && <dd class="mt-4 border-l-2 border-naranja pl-4"><p class="whitespace-pre-line font-serif text-lg italic leading-snug">{t.ejemplo}</p>{t.autorEjemplo && <p class="mt-1 text-xs text-tenue">{t.autorEjemplo}</p>}</dd>}
+          {t.relacionados?.length && <dd class="mt-4 flex flex-wrap gap-1.5 text-xs">{t.relacionados.map((r) => porId(r) && <a href={`#${r}`} class="chip hover:border-naranja">{porId(r)!.termino}</a>)}</dd>}
+        </div>
+      ))}
+    </dl>
+    <p id="sin" class="hidden py-16 text-center text-grafito">No hay términos con esa búsqueda.</p>
+  </section>
+
+  <section class="envoltura mt-12">
+    <div class="grid gap-6 rounded-[1.75rem] bg-noche p-8 text-white sm:p-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <div><p class="etiqueta etiqueta-clara">Ponlo en práctica</p><h2 class="titular-l mt-4">El glosario se aprende escribiendo</h2><p class="mt-4 max-w-xl text-white/75">Cada sábado, en el taller gratuito, trabajamos una de estas nociones con lecturas y un ejercicio en la mesa. Ven con tu libreta.</p></div>
+      <div class="grid gap-3"><a href="/taller-literario" class="boton-primario">Ver el taller</a><a href="/sala-de-lectura" class="boton-claro">Leer ejemplos completos</a></div>
+    </div>
+  </section>
+
+  <script>
+    function init() {
+      const items = [...document.querySelectorAll<HTMLElement>('#terminos > div')]; if (!items.length) return;
+      const q = document.getElementById('buscar') as HTMLInputElement; let cat = '';
+      const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+      const aplicar = () => { const t = norm(q.value.toLowerCase()); let n = 0; items.forEach((d) => { const ok = (!cat || d.dataset.cat === cat) && (!t || norm(d.dataset.texto!).includes(t)); d.hidden = !ok; if (ok) n++; }); document.getElementById('sin')!.classList.toggle('hidden', n > 0); document.querySelectorAll<HTMLButtonElement>('[data-cat]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.cat === cat))); };
+      document.querySelectorAll<HTMLButtonElement>('[data-cat]').forEach((b) => b.addEventListener('click', () => { cat = b.dataset.cat!; aplicar(); }));
+      q.addEventListener('input', aplicar);
+      if (location.hash) { const el = document.getElementById(location.hash.slice(1)); if (el) { el.classList.add('!border-naranja'); setTimeout(() => el.scrollIntoView({ block: 'center' }), 50); } }
+    }
+    document.addEventListener('astro:page-load', init);
+  </script>
+</BaseLayout>

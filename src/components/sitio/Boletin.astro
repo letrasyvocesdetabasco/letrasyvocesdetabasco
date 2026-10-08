@@ -1,0 +1,39 @@
+---
+// Formulario del boletín: usa Supabase si está configurado; si no, abre el correo.
+import { CONTACTO } from '../../lib/sitio';
+interface Props { oscuro?: boolean; origen?: string; }
+const { oscuro = true, origen = 'pie' } = Astro.props;
+---
+<form data-boletin data-origen={origen} class="grid gap-2" novalidate>
+  <label class="sr-only" for={`boletin-${origen}`}>Tu correo electrónico</label>
+  <div class="flex gap-2">
+    <input id={`boletin-${origen}`} type="email" name="correo" required placeholder="tu@correo.com" autocomplete="email" class:list={['campo !rounded-full', oscuro && 'campo-oscuro']} />
+    <button type="submit" class:list={['boton shrink-0', oscuro ? 'bg-white text-carbon hover:bg-naranja hover:text-white' : 'boton-oscuro']}>Suscribirme</button>
+  </div>
+  <p data-msg class:list={['min-h-[1.25rem] text-xs', oscuro ? 'text-white/60' : 'text-tenue']}>Lecturas, taller y novedades del fondo editorial. Sin ruido, una vez al mes.</p>
+  <input type="hidden" name="correo-fallback" value={CONTACTO.correo} />
+</form>
+<script>
+  import { suscribirBoletin, SUPABASE_ACTIVO } from '../../lib/supabase';
+  function init() {
+    document.querySelectorAll<HTMLFormElement>('form[data-boletin]:not([data-listo])').forEach((f) => {
+      f.dataset.listo = '1';
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const correo = (f.elements.namedItem('correo') as HTMLInputElement).value.trim();
+        const msg = f.querySelector('[data-msg]')!;
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) { msg.textContent = 'Escribe un correo válido.'; return; }
+        if (!SUPABASE_ACTIVO) {
+          const fb = (f.elements.namedItem('correo-fallback') as HTMLInputElement).value;
+          location.href = `mailto:${fb}?subject=${encodeURIComponent('Suscripción al boletín')}&body=${encodeURIComponent(`Hola, quiero recibir el boletín en ${correo}.`)}`;
+          msg.textContent = 'Se abrió tu correo para completar la suscripción.'; return;
+        }
+        msg.textContent = 'Un momento…';
+        const r = await suscribirBoletin(correo, '', f.dataset.origen);
+        msg.textContent = r.ok ? '¡Listo! Gracias por acompañarnos.' : r.error === 'duplicado' ? 'Ese correo ya está suscrito.' : 'No pudimos registrarte. Inténtalo más tarde.';
+        if (r.ok) f.reset();
+      });
+    });
+  }
+  document.addEventListener('astro:page-load', init);
+</script>

@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Portada from '../components/sitio/Portada.astro';
+import Boletin from '../components/sitio/Boletin.astro';
+import { CONTACTO, wa } from '../lib/sitio';
+import { IDENTIDAD_ESCUELA as E } from '../data/escuela';
+const asuntos = ['Taller literario', 'Hacerme socio', 'Escuela «José Gorostiza»', 'Publicaciones y antologías', 'Propuesta de autor', 'Prensa y alianzas', 'Otro'];
+---
+<BaseLayout title="Contacto · Letras y Voces de Tabasco" description="Escríbenos: taller literario, membresía, Escuela de Escritores «José Gorostiza», publicaciones, prensa y alianzas. WhatsApp, correo y formulario de contacto.">
+  <Portada etiqueta="Contacto" titulo="Conversemos." entradilla="Respondemos por WhatsApp casi al momento y por correo en pocos días. Si prefieres, déjanos tu mensaje aquí y te buscamos nosotros." />
+  <section class="envoltura grid gap-12 py-10 lg:grid-cols-[1fr_1.2fr]">
+    <div class="grid content-start gap-6">
+      <a href={wa('Hola, Letras y Voces de Tabasco. Quisiera información.')} target="_blank" rel="noopener" class="pieza-viva flex items-center gap-5 p-6">
+        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#25D366] text-white"><svg class="h-7 w-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8 0-1.4.7-2 1-2.3.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.4.2.5.3.1.2.1.7-.1 1.4Z"/></svg></span>
+        <span><span class="block text-xs font-semibold uppercase tracking-[0.12em] text-tenue">WhatsApp</span><span class="block font-display text-xl font-bold numero">{CONTACTO.whatsappVisible}</span><span class="text-sm text-grafito">La vía más rápida</span></span>
+      </a>
+      <a href={`mailto:${CONTACTO.correo}`} class="pieza-viva flex items-center gap-5 p-6">
+        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-tinta text-fondo"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <span><span class="block text-xs font-semibold uppercase tracking-[0.12em] text-tenue">Correo</span><span class="block break-all font-display text-lg font-bold">{CONTACTO.correo}</span></span>
+      </a>
+      <div class="pieza p-6">
+        <p class="etiqueta">Dónde encontrarnos</p>
+        <p class="mt-3 font-display font-bold">Taller literario · sábados 11:00 a 13:00 h</p>
+        <p class="text-sm text-grafito">{CONTACTO.sedeTaller} · <a href={CONTACTO.mapaTaller} target="_blank" rel="noopener" class="enlace">mapa</a></p>
+        <p class="mt-4 font-display font-bold">Escuela de Escritores «José Gorostiza»</p>
+        <p class="text-sm text-grafito">{E.ubicacion.sede}. {E.ubicacion.horarios}</p>
+        <p class="mt-1 text-sm text-grafito">Informes: {E.contactoDirecto.telefonos.join(' · ')}</p>
+      </div>
+      <div class="pieza p-6"><p class="etiqueta">Boletín mensual</p><div class="mt-3"><Boletin oscuro={false} origen="contacto" /></div></div>
+    </div>
+
+    <form id="contacto" class="pieza grid gap-5 p-6 sm:p-8" novalidate>
+      <div><p class="etiqueta">Formulario</p><h2 class="titular-m mt-3">Déjanos tu mensaje</h2></div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <label class="grid gap-1.5 text-sm font-semibold">Nombre<input name="nombre" required minlength="2" maxlength="120" autocomplete="name" class="campo font-normal" /></label>
+        <label class="grid gap-1.5 text-sm font-semibold">Correo<input name="correo" type="email" required autocomplete="email" class="campo font-normal" /></label>
+        <label class="grid gap-1.5 text-sm font-semibold">WhatsApp <span class="font-normal text-tenue">(opcional)</span><input name="telefono" type="tel" autocomplete="tel" class="campo font-normal" /></label>
+        <label class="grid gap-1.5 text-sm font-semibold">Asunto<select name="asunto" class="campo font-normal">{asuntos.map((a) => <option>{a}</option>)}</select></label>
+      </div>
+      <label class="grid gap-1.5 text-sm font-semibold">Mensaje<textarea name="mensaje" required minlength="5" maxlength="4000" rows="6" class="campo font-normal" placeholder="Cuéntanos en qué podemos ayudarte."></textarea></label>
+      <label class="flex items-start gap-3 text-sm text-grafito"><input type="checkbox" name="privacidad" required class="mt-1 h-4 w-4 accent-[#EF7B38]" /><span>He leído el <a href="/privacidad" class="enlace">aviso de privacidad</a> y acepto que mis datos se usen solo para responder este mensaje.</span></label>
+      <input type="text" name="sitio_web" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+      <div class="flex flex-wrap items-center gap-3">
+        <button type="submit" class="boton-primario">Enviar mensaje</button>
+        <a data-wa href={wa('Hola, Letras y Voces de Tabasco.')} target="_blank" rel="noopener" class="boton-contorno">Mejor por WhatsApp</a>
+        <p data-msg class="text-sm text-tenue" aria-live="polite"></p>
+      </div>
+    </form>
+  </section>
+
+  <script>
+    import { enviarMensaje, SUPABASE_ACTIVO } from '../lib/supabase';
+    function init() {
+      const f = document.getElementById('contacto') as HTMLFormElement | null; if (!f || f.dataset.listo) return; f.dataset.listo = '1';
+      const p = new URLSearchParams(location.search).get('asunto'); if (p) { const s = f.elements.namedItem('asunto') as HTMLSelectElement; [...s.options].forEach((o) => { if (o.text === p) s.value = p; }); }
+      const wa = f.querySelector<HTMLAnchorElement>('[data-wa]')!, base = wa.href.split('?text=')[0];
+      const datos = () => Object.fromEntries(new FormData(f).entries()) as Record<string, string>;
+      f.addEventListener('input', () => { const d = datos(); wa.href = `${base}?text=${encodeURIComponent(`Hola, soy ${d.nombre || ''}. Asunto: ${d.asunto}. ${d.mensaje || ''}`)}`; });
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault(); const msg = f.querySelector('[data-msg]')!; const d = datos();
+        if (!f.checkValidity()) { f.reportValidity(); return; }
+        if (d.sitio_web) { msg.textContent = 'Gracias.'; return; }
+        if (!SUPABASE_ACTIVO) { location.href = `mailto:contacto@letrasyvocesdetabasco.org?subject=${encodeURIComponent(d.asunto)}&body=${encodeURIComponent(`${d.mensaje}\n\n— ${d.nombre}\n${d.correo}${d.telefono ? '\n' + d.telefono : ''}`)}`; msg.textContent = 'Se abrió tu correo con el mensaje listo para enviar.'; return; }
+        msg.textContent = 'Enviando…'; const r = await enviarMensaje({ nombre: d.nombre, correo: d.correo, telefono: d.telefono, asunto: d.asunto, mensaje: d.mensaje });
+        if (r.ok) { f.reset(); msg.textContent = '¡Recibido! Te respondemos pronto.'; } else msg.textContent = 'No pudimos enviar el mensaje. Escríbenos por WhatsApp.';
+      });
+    }
+    document.addEventListener('astro:page-load', init);
+  </script>
+</BaseLayout>
