@@ -243,6 +243,17 @@
       "notas": "Pago confirmado. Folio solicitud LVT-2026-B3749-MWKT. Restaurado estado PAGADO (registro original del panel 2026-10-04 18:17).",
       "num1": "36",
       "num2": "86"
+    },
+    "11": {
+      "estado": "Apartado",
+      "participante": "Daly",
+      "whatsapp": "5219933839520",
+      "fecha": "2026-10-08 10:51:36",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "10",
+      "num2": "60"
     }
   }
 }

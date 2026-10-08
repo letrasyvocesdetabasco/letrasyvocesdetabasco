@@ -171,6 +171,11 @@
       "estado": "Pagado",
       "num1": "36",
       "num2": "86"
+    },
+    "11": {
+      "estado": "Apartado",
+      "num1": "10",
+      "num2": "60"
     }
   }
 }
