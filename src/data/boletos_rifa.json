@@ -298,6 +298,17 @@
       "notas": "",
       "num1": "47",
       "num2": "97"
+    },
+    "13": {
+      "estado": "Apartado",
+      "participante": "a Gustavo Osorio",
+      "whatsapp": "",
+      "fecha": "2026-10-08 20:23:27",
+      "fecha_pago": "",
+      "canal": "presidencia_whatsapp",
+      "notas": "Apartado por Presidencia vía WhatsApp",
+      "num1": "12",
+      "num2": "62"
     }
   }
 }
