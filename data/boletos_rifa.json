@@ -176,6 +176,16 @@
       "estado": "Apartado",
       "num1": "10",
       "num2": "60"
+    },
+    "2": {
+      "estado": "Apartado",
+      "num1": "01",
+      "num2": "51"
+    },
+    "1": {
+      "estado": "Apartado",
+      "num1": "00",
+      "num2": "50"
     }
   }
 }
