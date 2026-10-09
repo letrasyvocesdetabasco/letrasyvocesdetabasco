@@ -276,6 +276,17 @@
       "notas": "Pago validado con IA (BBVA México $200.00 MXN Folio: MBANO1002610090084653592)",
       "num1": "00",
       "num2": "50"
+    },
+    "3": {
+      "estado": "Apartado",
+      "participante": "Luis",
+      "whatsapp": "5219931164202",
+      "fecha": "2026-10-08 19:04:00",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "02",
+      "num2": "52"
     }
   }
 }
