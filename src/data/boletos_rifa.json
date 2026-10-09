@@ -287,6 +287,17 @@
       "notas": "",
       "num1": "02",
       "num2": "52"
+    },
+    "48": {
+      "estado": "Apartado",
+      "participante": "Luis",
+      "whatsapp": "5219931164202",
+      "fecha": "2026-10-08 19:04:03",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "47",
+      "num2": "97"
     }
   }
 }
