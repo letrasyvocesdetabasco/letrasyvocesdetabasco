@@ -186,6 +186,16 @@
       "estado": "Pagado",
       "num1": "00",
       "num2": "50"
+    },
+    "3": {
+      "estado": "Apartado",
+      "num1": "02",
+      "num2": "52"
+    },
+    "48": {
+      "estado": "Apartado",
+      "num1": "47",
+      "num2": "97"
     }
   }
 }
