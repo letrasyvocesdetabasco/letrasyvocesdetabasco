@@ -320,6 +320,17 @@
       "notas": "",
       "num1": "08",
       "num2": "58"
+    },
+    "30": {
+      "estado": "Apartado",
+      "participante": "a Anabel Cabrera",
+      "whatsapp": "",
+      "fecha": "2026-10-15 15:53:28",
+      "fecha_pago": "",
+      "canal": "presidencia_whatsapp",
+      "notas": "Apartado por Presidencia vía WhatsApp",
+      "num1": "29",
+      "num2": "79"
     }
   }
 }
