@@ -342,6 +342,17 @@
       "notas": "Apartado por Presidencia vía WhatsApp",
       "num1": "32",
       "num2": "82"
+    },
+    "10": {
+      "estado": "Apartado",
+      "participante": "J.",
+      "whatsapp": "5219931090153",
+      "fecha": "2026-10-15 15:56:58",
+      "fecha_pago": "",
+      "canal": "panel",
+      "notas": "",
+      "num1": "09",
+      "num2": "59"
     }
   }
 }
