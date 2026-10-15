@@ -331,6 +331,17 @@
       "notas": "Apartado por Presidencia vía WhatsApp",
       "num1": "29",
       "num2": "79"
+    },
+    "33": {
+      "estado": "Apartado",
+      "participante": "a Miriam Cabrera",
+      "whatsapp": "",
+      "fecha": "2026-10-15 15:54:10",
+      "fecha_pago": "",
+      "canal": "presidencia_whatsapp",
+      "notas": "Apartado por Presidencia vía WhatsApp",
+      "num1": "32",
+      "num2": "82"
     }
   }
 }
