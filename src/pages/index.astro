@@ -10,6 +10,10 @@ import { CATALOGO_EDITORIAL } from '../data/libros';
 import { RIFA_ACTIVA, wa, portadaWeb } from '../lib/sitio';
 import { resumen } from '../lib/rifa';
 import { SESIONES as SES } from '../lib/taller';
+import VideoYouTube from '../components/sitio/VideoYouTube.astro';
+import { VIDEOS_LVT, VIDEOS_RECOMENDADOS, CANAL_YOUTUBE } from '../data/videos';
+import { ANIMALIA, TEXTOS_ANIMALIA, AUTORES_ANIMALIA } from '../data/animalia';
+import { MESA_DIRECTIVA, cargo } from '../lib/personas';
 
 const tabasco = ESCRITORES.filter((x) => x.bloque === 'tabasquenos').slice(0, 10);
 const libros = CATALOGO_EDITORIAL.filter((l) => l.portadaImg).slice(0, 5);
@@ -130,6 +134,28 @@ const areas = [
     </section>
   )}
 
+  <!-- NOVEDAD EDITORIAL -->
+  <section class="envoltura pb-16 sm:pb-20">
+    <div class="relative isolate overflow-hidden rounded-[2rem] bg-[#0b3b47] text-white">
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_15%_30%,rgb(196_154_60/0.35),transparent_55%)]"></div>
+      <div class="grano absolute inset-0 -z-10"></div>
+      <div class="grid gap-10 p-8 sm:p-12 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-14">
+        <a href={ANIMALIA.ficha} class="group mx-auto block w-40 shrink-0 sm:w-48" aria-label="Ver la ficha de Animalia Literaria">
+          <img src={ANIMALIA.portadaChica} alt="Portada de Animalia Literaria" loading="lazy" width="800" height="1227" class="w-full rounded-[3px_8px_8px_3px] shadow-[0_30px_60px_-20px_rgb(0_0_0/0.7)] transition duration-700 ease-suave group-hover:-translate-y-2 group-hover:rotate-[-2deg]" />
+        </a>
+        <div>
+          <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f0d28a]"><span class="h-2 w-2 rounded-full bg-[#f0d28a]"></span>Novedad editorial · ya está impreso</p>
+          <h2 class="mt-4 font-display text-4xl font-extrabold leading-[1.02] sm:text-5xl">Animalia <span class="font-serif font-medium italic text-[#f0d28a]">Literaria</span></h2>
+          <p class="mt-4 max-w-2xl text-lg text-white/80">{TEXTOS_ANIMALIA.length} textos de {AUTORES_ANIMALIA.length} autores sobre el jaguar, el manatí, el coyote y los animales que nos acompañan. Mientras preparamos su primera presentación, puedes leerlo completo aquí, gratis y en línea.</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href={ANIMALIA.lector} class="boton-primario !min-h-[50px] !px-7">Leer el libro en línea</a>
+            <a href={ANIMALIA.ficha} class="boton-claro !min-h-[50px] !px-7">Índice y autores</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- QUÉ HACEMOS -->
   <section class="envoltura py-16 sm:py-24">
     <div class="grid gap-6 lg:grid-cols-[1fr_1.4fr] lg:items-end">
@@ -190,7 +216,7 @@ const areas = [
       </div>
       <div class="cinta [grid-auto-columns:minmax(9.5rem,1fr)] lg:grid-cols-5 lg:[grid-auto-flow:row]">
         {libros.map((l, i) => (
-          <a href={`/publicaciones#${l.id}`} class="group aparece block" style={`--i:${i}`}>
+          <a href={l.fichaUrl ?? `/publicaciones#${l.id}`} class="group aparece block" style={`--i:${i}`}>
             <div class="aspect-[2/3] overflow-hidden rounded-md bg-linea shadow-suave transition duration-500 ease-suave group-hover:-translate-y-2 group-hover:rotate-[-1deg] group-hover:shadow-alta">
               <img src={portadaWeb(l.portadaImg)} alt={`Portada de ${l.titulo}`} loading="lazy" class="h-full w-full object-cover" />
             </div>
@@ -199,6 +225,29 @@ const areas = [
           </a>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- EN VIDEO -->
+  <section class="bg-hundido py-20 sm:py-28">
+    <div class="envoltura">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div><p class="etiqueta">En video · Literatura animada al óleo</p><h2 class="titular-l mt-4 max-w-[20ch]">Clásicos que cobran vida, pintados a mano</h2></div>
+        <div class="flex flex-wrap gap-3"><a href="/videos" class="boton-oscuro">Ver la videoteca</a><a href={CANAL_YOUTUBE.suscribirse} target="_blank" rel="noopener" class="boton-contorno">Suscribirme al canal</a></div>
+      </div>
+      <div class="mt-12 grid gap-8 lg:grid-cols-2">
+        {VIDEOS_LVT.map((v, i) => (
+          <article class="aparece" style={`--i:${i}`}>
+            <VideoYouTube id={v.id} titulo={`${v.titulo} · ${v.autorObra}`} miniatura={v.miniaturaChica} duracionSegundos={v.duracionSegundos} />
+            <div class="mt-5 flex items-start justify-between gap-4">
+              <div><p class="text-xs font-semibold uppercase tracking-[0.12em] text-naranja-tinta">{v.formato} · {v.autorObra}</p><h3 class="mt-1 font-serif text-3xl font-medium italic leading-tight">{v.titulo}</h3></div>
+              <a href={`/videos#${v.id}`} class="mt-1 shrink-0 text-sm font-semibold text-naranja-tinta hover:underline">Detalles →</a>
+            </div>
+            <p class="mt-2 line-clamp-2 text-grafito">{v.sinopsis}</p>
+          </article>
+        ))}
+      </div>
+      <p class="mt-10 text-sm text-grafito">Además, {VIDEOS_RECOMENDADOS.length} videos recomendados: Sabines, Borges, Rulfo, Pellicer, Gorostiza y más, en la <a href="/videos#recomendados" class="enlace">videoteca</a>.</p>
     </div>
   </section>
 
@@ -218,6 +267,25 @@ const areas = [
         ))}
       </div>
     </div>
+  </section>
+
+  <!-- PERSONAS -->
+  <section class="envoltura pt-20 sm:pt-28">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div><p class="etiqueta">Quiénes somos</p><h2 class="titular-l mt-4 max-w-[20ch]">Las personas detrás de la Sociedad</h2></div>
+      <a href="/historia#directiva" class="boton-contorno">Mesa directiva e historia</a>
+    </div>
+    <ul class="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
+      {MESA_DIRECTIVA.map((m, i) => (
+        <li class="aparece group" style={`--i:${i}`}>
+          <a href={`/autores#${m.id}`} class="block">
+            <span class="relative block aspect-[4/5] overflow-hidden rounded-pieza bg-linea">{m.foto && <img src={m.foto} alt={`Retrato de ${m.nombre}`} loading="lazy" width="600" height="750" class="retrato absolute inset-0 h-full w-full object-top group-hover:scale-[1.04] group-hover:grayscale-0" />}</span>
+            <span class="mt-3 block font-display font-bold leading-tight group-hover:text-naranja-tinta">{m.nombre}</span>
+            <span class="mt-0.5 block text-sm text-tenue">{cargo(m).replace(/ LVT.*$/, '')}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </section>
 
   <!-- AGENDA -->

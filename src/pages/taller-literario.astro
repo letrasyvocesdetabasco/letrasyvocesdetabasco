@@ -4,6 +4,8 @@ import SesionTaller from '../components/sitio/SesionTaller.astro';
 import { DATOS_GENERALES_TALLER as T } from '../data/taller';
 import { TALLER, SESIONES, modulos, fechaLarga, lecturas, sesionVigente } from '../lib/taller';
 import { CONTACTO, wa } from '../lib/sitio';
+import { personaPorNombre } from '../lib/personas';
+const coordinador = personaPorNombre(T.titularAcademico.nombre);
 
 const mods = modulos();
 const { proxima } = sesionVigente();
@@ -129,7 +131,8 @@ const preguntas = [
   <section class="envoltura grid gap-12 py-20 sm:py-24 lg:grid-cols-[1fr_1.2fr]">
     <div>
       <p class="etiqueta">Quién coordina</p>
-      <h2 class="titular-l mt-4">{T.titularAcademico.nombre}</h2>
+      {coordinador?.foto && <img src={coordinador.foto} alt={`Retrato de ${T.titularAcademico.nombre}`} loading="lazy" width="600" height="750" class="retrato mt-6 aspect-[4/5] w-44 rounded-pieza object-top shadow-alta hover:grayscale-0 sm:w-52" />}
+      <h2 class="titular-l mt-6">{T.titularAcademico.nombre}</h2>
       <p class="mt-2 font-display text-sm font-semibold text-naranja-tinta">{T.titularAcademico.cargo}</p>
       <p class="prosa mt-6">{T.titularAcademico.semblanza}</p>
       <p class="prosa mt-4">{T.coordinacionDocente.enfoque}</p>

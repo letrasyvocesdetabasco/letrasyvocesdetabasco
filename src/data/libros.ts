@@ -15,11 +15,17 @@ export interface Libro {
   clasificacion?: string;
   sinopsis: string;
   fondo: 'Patrimonial Histórico' | 'Contemporáneo' | 'Formativo Gorostiza';
-  disponibilidad: 'Consulta / Archivo' | 'Digitalización PDF' | 'Venta / Distribución' | 'En Imprenta';
+  disponibilidad: 'Consulta / Archivo' | 'Digitalización PDF' | 'Venta / Distribución' | 'En Imprenta' | 'Recién impreso';
   portadaImg?: string;
   portadaColor: string;
   fragmentoMuestra: string;
   autoresDetallados?: string[];
+  /** Página del libro con ficha completa */
+  fichaUrl?: string;
+  /** Lector en línea (solo lectura, sin descarga) */
+  lecturaEnLinea?: string;
+  /** Nota de estado editorial visible en la ficha */
+  nota?: string;
 }
 
 export const CATALOGO_EDITORIAL: Libro[] = [
@@ -29,17 +35,20 @@ export const CATALOGO_EDITORIAL: Libro[] = [
     subtitulo: 'Antología de Narrativa y Lírica',
     anio: 2026,
     genero: 'Multigénero',
-    autores: 'Juan David Pérez Cabrera (Compilador) / 16 Autores Tabasqueños',
+    autores: '16 autores · compilación y edición general de Juan David Pérez Cabrera',
     compiladores: 'Juan David Pérez Cabrera',
     prologo: 'Liliana Chuzeville Córdoba (Delegada Emérita LVT)',
-    ilustracionPortada: 'Diseño editorial y maquetación por Juan David Pérez Cabrera (Tipografía EB Garamond)',
+    ilustracionPortada: 'Diseño editorial, maquetación y arte de cubierta por Juan David Pérez Cabrera (Tipografía EB Garamond)',
     coeditores: 'Sociedad de Escritores «Letras y Voces de Tabasco», A.C.',
     paginas: 131,
     fondo: 'Contemporáneo',
-    disponibilidad: 'En Imprenta',
-    portadaImg: '/assets/portadas/portada_animalialiteraria.png',
+    disponibilidad: 'Recién impreso',
+    portadaImg: '/assets/portadas/web/animalia_literaria_portada_oficial.webp',
     portadaColor: 'from-amber-950 to-stone-900',
-    sinopsis: 'Mosaico vivo donde dieciséis escritoras y escritores entablan un diálogo directo con la fauna nativa del trópico a través de versos íntimos y relatos en claroscuro. Reúne a plumas con trayectoria y voces emergentes.',
+    fichaUrl: '/publicaciones/animalia-literaria',
+    lecturaEnLinea: '/publicaciones/animalia-literaria/leer',
+    nota: 'Impreso en agosto de 2026. Su primera presentación pública se anunciará muy pronto.',
+    sinopsis: 'Una travesía íntima hacia el pulso secreto de la naturaleza. A través del mito, la lírica y la memoria viva, diecinueve textos de dieciséis autores trazan un puente entre el ser humano y el reino animal: del rugido ancestral del jaguar y el misterio del coyote en el semidesierto, al canto del manatí en los ríos tabasqueños y la noble lealtad del perro guardián.',
     autoresDetallados: [
       'Juan David Pérez Cabrera',
       'Víctor Manuel Ameca Mena',

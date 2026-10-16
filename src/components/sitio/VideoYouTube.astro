@@ -1,0 +1,64 @@
+---
+// Video de YouTube «ligero»: muestra la miniatura y solo carga el reproductor al pulsar.
+// Usa youtube-nocookie.com, pausa la audioteca y detiene otros videos en reproducción.
+// Para saltar a un momento: <button data-saltar="91" data-video="ID">…</button>
+import { duracion } from '../../data/videos';
+interface Props { id: string; titulo: string; miniatura?: string; duracionSegundos?: number; etiqueta?: string; clase?: string; grande?: boolean; }
+const { id, titulo, miniatura, duracionSegundos, etiqueta, clase = '', grande = false } = Astro.props;
+const img = miniatura ?? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+<div class:list={['video-yt group/video relative isolate aspect-video overflow-hidden rounded-[1.25rem] bg-black shadow-alta', clase]} data-video-yt={id} data-titulo={titulo}>
+  <button type="button" class="absolute inset-0 block h-full w-full cursor-pointer text-left" data-video-iniciar aria-label={`Reproducir el video «${titulo}»`}>
+    <img src={img} alt="" loading="lazy" decoding="async" class="absolute inset-0 h-full w-full object-cover transition duration-[1200ms] ease-suave group-hover/video:scale-[1.04]" />
+    <span class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/20 transition duration-500 group-hover/video:from-black/60"></span>
+    <span class:list={['absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-naranja text-white shadow-naranja transition duration-500 ease-suave group-hover/video:scale-110', grande ? 'h-20 w-20 sm:h-24 sm:w-24' : 'h-14 w-14']}>
+      <span class="absolute inset-0 rounded-full pulso"></span>
+      <svg class:list={['translate-x-[2px]', grande ? 'h-8 w-8' : 'h-5 w-5']} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+    </span>
+    {(etiqueta || duracionSegundos) && (
+      <span class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 text-white sm:p-5">
+        {etiqueta ? <span class="font-display text-sm font-bold leading-tight sm:text-base">{etiqueta}</span> : <span></span>}
+        {duracionSegundos && <span class="shrink-0 rounded-full bg-black/60 px-2.5 py-1 text-xs font-semibold backdrop-blur numero">{duracion(duracionSegundos)}</span>}
+      </span>
+    )}
+  </button>
+</div>
+
+<script>
+  type Ventana = Window & { __lvtVideo?: boolean };
+  const w = window as Ventana;
+  if (!w.__lvtVideo) {
+    w.__lvtVideo = true;
+    const ordenar = (iframe: HTMLIFrameElement, func: string, args: unknown[] = []) =>
+      iframe.contentWindow?.postMessage(JSON.stringify({ event: 'command', func, args }), '*');
+    const montar = (cont: HTMLElement, inicio = 0) => {
+      const id = cont.dataset.videoYt!;
+      document.dispatchEvent(new Event('lvt:pausar-audio'));
+      document.querySelectorAll<HTMLIFrameElement>('.video-yt iframe').forEach((f) => { if (!cont.contains(f)) ordenar(f, 'pauseVideo'); });
+      const actual = cont.querySelector('iframe');
+      if (actual) { ordenar(actual, 'seekTo', [inicio, true]); ordenar(actual, 'playVideo'); return; }
+      const f = document.createElement('iframe');
+      const params = new URLSearchParams({ autoplay: '1', rel: '0', modestbranding: '1', playsinline: '1', enablejsapi: '1', hl: 'es', cc_lang_pref: 'es', start: String(Math.floor(inicio)), origin: location.origin });
+      f.src = `https://www.youtube-nocookie.com/embed/${id}?${params}`;
+      f.title = cont.dataset.titulo || 'Video';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
+      f.allowFullscreen = true;
+      f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.className = 'absolute inset-0 h-full w-full';
+      cont.querySelector('[data-video-iniciar]')?.remove();
+      cont.appendChild(f);
+    };
+    document.addEventListener('click', (ev) => {
+      const t = ev.target as HTMLElement;
+      const iniciar = t.closest<HTMLElement>('[data-video-iniciar]');
+      if (iniciar) { montar(iniciar.closest<HTMLElement>('.video-yt')!); return; }
+      const saltar = t.closest<HTMLElement>('[data-saltar]');
+      if (saltar) {
+        const cont = document.querySelector<HTMLElement>(`.video-yt[data-video-yt="${saltar.dataset.video}"]`);
+        if (!cont) return;
+        cont.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        montar(cont, Number(saltar.dataset.saltar) || 0);
+      }
+    });
+  }
+</script>

@@ -14,14 +14,16 @@ npm run preview
 | Ruta | Qué es | Datos |
 |---|---|---|
 | `/` | Portada: texto del día, efeméride, audioteca, taller, canon | varios |
-| `/escritores-ilustres`, `/escritores/[id]` | Canon de 82 autores con filtros y ficha individual (vida, obras, citas con fuente, leer, escuchar) | `src/data/escritores_ilustres.ts` (30 originales) + `src/data/escritores_nuevos.ts` (52 añadidos, con fuentes y notas) + `src/data/citas_verificadas.json` |
+| `/escritores-ilustres`, `/escritores/[id]` | Canon de 83 autores con filtros y ficha individual (vida, obras, citas con fuente, leer, escuchar) | `src/data/escritores_ilustres.ts` (30 originales) + `src/data/escritores_nuevos.ts` (53 añadidos, con fuentes y notas) + `src/data/citas_verificadas.json` |
 | `/sala-de-lectura`, `/sala-de-lectura/[id]` | Textos íntegros de dominio público (lírica y narrativa) con modo de lectura | `src/data/lecturas.ts` |
 | `/audioteca` | Lírica y narrativa en voz alta; reproductor persistente entre páginas | `src/data/voces.ts`, `public/assets/audios/` |
 | `/glosario` | Glosario literario (métrica, figuras, géneros, narrativa, oficio) | `src/data/glosario.ts` |
 | `/taller-literario` | Taller sabatino gratuito y calendario | `src/data/taller_calendario.json` |
 | `/publicaciones` | Fondo editorial | `src/data/libros.ts` |
+| `/publicaciones/animalia-literaria`, `…/leer` | Ficha del libro y lector en línea sin descarga | `src/data/animalia.ts`, `src/data/animalia_lector.json`, `public/lectura/al/` (ver `scripts/lector/LEEME.md`) |
+| `/videos` | Producciones de LVT («Literatura animada al óleo») y videos recomendados verificados | `src/data/videos.ts` |
 | `/EEJG` | Escuela de Escritores «José Gorostiza» | `src/data/escuela.ts` |
-| `/historia`, `/autores` | Nosotros, mesa directiva y padrón | `src/data/historia.ts`, `src/data/autores.ts` |
+| `/historia`, `/autores` | Nosotros, mesa directiva y padrón (con retratos en `public/assets/personas/`) | `src/data/historia.ts`, `src/data/autores.ts` |
 | `/descargas` | Convocatorias, socios, recursos y memoria gráfica | `src/data/convocatorias.ts`, `src/data/galeria.ts` |
 | `/rifa` | Rifa cultural (tablero público) | `src/data/boletos_rifa.json` |
 | `/contacto`, `/buscar`, `/privacidad` | Contacto y boletín, buscador Pagefind, aviso de privacidad | — |

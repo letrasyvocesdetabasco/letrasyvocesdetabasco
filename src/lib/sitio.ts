@@ -5,6 +5,7 @@ export const CONTACTO = {
   correo: 'contacto@letrasyvocesdetabasco.org',
   facebook: 'https://www.facebook.com/letrayvoces.tabasco',
   instagram: 'https://www.instagram.com/letrasyvocestabasco',
+  youtube: 'https://www.youtube.com/@LetrasyVocesdeTabasco',
   sedeTaller: 'Librería Universitaria UJAT · Av. 27 de Febrero 626, Centro, Villahermosa',
   mapaTaller: 'https://www.google.com/maps/search/?api=1&query=Librer%C3%ADa+Universitaria+UJAT+Av.+27+de+Febrero+626+Villahermosa',
   ciudad: 'Villahermosa, Tabasco, México',
@@ -16,8 +17,9 @@ export const NAV = [
   { href: '/escritores-ilustres', texto: 'Escritores' },
   { href: '/sala-de-lectura', texto: 'Sala de lectura' },
   { href: '/audioteca', texto: 'Audioteca' },
+  { href: '/videos', texto: 'Videos' },
   { href: '/publicaciones', texto: 'Publicaciones' },
-  { href: '/EEJG', texto: 'Escuela Gorostiza' },
+  { href: '/EEJG', texto: 'Escuela' },
   { href: '/historia', texto: 'Nosotros' },
 ];
 export const NAV_SECUNDARIA = [

@@ -93,5 +93,7 @@
     });
     // Las páginas pueden pedir el estado actual al cargar
     document.addEventListener('lvt:consultar', emitir);
+    // Al reproducir un video, la audioteca se pausa para no encimar sonidos
+    document.addEventListener('lvt:pausar-audio', () => { if (!a.paused) a.pause(); });
   }
 </script>

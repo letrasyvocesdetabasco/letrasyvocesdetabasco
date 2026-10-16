@@ -3549,5 +3549,70 @@ export const ESCRITORES_NUEVOS: EscritorNuevo[] = [
    "https://commons.wikimedia.org/wiki/File:Mario_Benedetti,_1981.jpg"
   ],
   "notas": "Fechas y títulos coinciden en Wikipedia, la Fundación Mario Benedetti y Cervantes Virtual. Wikipedia añade «González» como último apellido en la infobox; se usó la forma que la propia Fundación y Cervantes Virtual recogen (Benedetti Farrugia). El poema «No te rindas», muy difundido en internet con su firma, no es de Benedetti y no debe usarse. La fotografía (CC BY-SA 2.0) exige atribución a Elisa Cabot y compartir con la misma licencia."
+ },
+ {
+  "id": "kate-chopin",
+  "nombre": "Kate Chopin (Katherine O'Flaherty)",
+  "anios": "1850 – 1904",
+  "nacimiento": "8 de febrero de 1850 · San Luis, Misuri, Estados Unidos",
+  "fallecimiento": "22 de agosto de 1904 · San Luis, Misuri",
+  "municipioOrigen": "San Luis, Misuri, Estados Unidos",
+  "movimiento": "Realismo y narrativa de color local del sur estadounidense",
+  "bloqueCanon": "universales",
+  "tituloHonorifico": "Pionera en narrar la vida interior de las mujeres de su tiempo",
+  "semblanzaSintetica": "Narradora estadounidense nacida en San Luis, Misuri, autora de cuentos y de la novela El despertar (1899). Sus relatos, ambientados en la Luisiana criolla, se leyeron en su época como literatura de color local; hoy se le reconoce como una de las primeras escritoras que retrataron con franqueza el deseo y la libertad de las mujeres.",
+  "biografiaCompleta": [
+   "Katherine O'Flaherty nació en San Luis, Misuri, el 8 de febrero de 1850, hija de Thomas O'Flaherty, comerciante de origen irlandés, y de Eliza Faris, de familia criolla francesa. Su padre murió en 1855 en el accidente del puente sobre el río Gasconade. En 1870 se casó con Oscar Chopin y vivió con él en Nueva Orleans; en 1879 la familia se trasladó a Cloutierville, en Luisiana.",
+   "Tras la muerte de su esposo regresó a San Luis con sus hijos. A finales de la década de 1880 comenzó a publicar cuentos, artículos y traducciones en periódicos y revistas; su primer relato apareció en el St. Louis Post-Dispatch. En 1890 publicó por cuenta propia su primera novela, At Fault.",
+   "Sus colecciones Bayou Folk (1894) y A Night in Acadie (1897), ambientadas entre los criollos y cajunes de Luisiana, le dieron fama como autora de color local. En 1894 la revista Vogue publicó «La historia de una hora», un cuento de apenas mil palabras sobre una mujer que recibe la noticia de la muerte de su esposo.",
+   "En 1899 apareció El despertar (The Awakening), novela sobre una mujer que busca su independencia; la crítica de su tiempo la recibió con dureza, por razones morales más que literarias. Chopin volvió al cuento breve y murió en San Luis el 22 de agosto de 1904. El despertar fue redescubierto en la década de 1970 y hoy es su obra más leída."
+  ],
+  "obrasCapitales": [
+   {
+    "titulo": "At Fault",
+    "anio": 1890,
+    "genero": "Novela",
+    "descripcion": "Primera novela de la autora, publicada por cuenta propia en San Luis."
+   },
+   {
+    "titulo": "Bayou Folk",
+    "anio": 1894,
+    "genero": "Cuentos",
+    "descripcion": "Colección publicada por Houghton, Mifflin and Co., ambientada en la Luisiana criolla."
+   },
+   {
+    "titulo": "La historia de una hora (The Story of an Hour)",
+    "anio": 1894,
+    "genero": "Cuento",
+    "descripcion": "Publicado en la revista Vogue: la noticia de una muerte y el descubrimiento inesperado de la libertad. Letras y Voces lo adaptó como cortometraje animado al óleo en 2026."
+   },
+   {
+    "titulo": "A Night in Acadie",
+    "anio": 1897,
+    "genero": "Cuentos",
+    "descripcion": "Segunda colección de relatos, publicada por Way & Williams."
+   },
+   {
+    "titulo": "El despertar (The Awakening)",
+    "anio": 1899,
+    "genero": "Novela",
+    "descripcion": "Publicada por H. S. Stone & Co.; rechazada en su tiempo y redescubierta en la década de 1970."
+   }
+  ],
+  "legadoPatrimonial": "Su obra anticipó temas centrales de la narrativa del siglo XX: la vida interior, el deseo y la libertad de las mujeres. «La historia de una hora» es uno de los cuentos más leídos y comentados en las aulas de todo el mundo.",
+  "dominioPublico": true,
+  "citas": [],
+  "retrato": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Kate_Chopin.jpg",
+   "licencia": "Dominio público",
+   "autorFoto": "Fotografía de c. 1894",
+   "paginaCommons": "https://commons.wikimedia.org/wiki/File:Kate_Chopin.jpg"
+  },
+  "fuentes": [
+   "https://es.wikipedia.org/wiki/Kate_Chopin",
+   "https://en.wikipedia.org/wiki/Kate_Chopin",
+   "https://www.youtube.com/watch?v=2DC8OTKaFss"
+  ],
+  "notas": "Año de la muerte de Oscar Chopin: 1882 según Wikipedia en inglés y 1884 según Wikipedia en español; se omite en la biografía. Las cifras de las deudas que dejó también difieren entre fuentes y se omiten. Verificado el 15 de octubre de 2026."
  }
 ];

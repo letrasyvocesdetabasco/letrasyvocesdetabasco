@@ -1,35 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Portada from '../components/sitio/Portada.astro';
 import { PADRON_AUTORES as A } from '../data/autores';
+import { iniciales, nombreBreve } from '../lib/personas';
 const categorias = [...new Set(A.map((a) => a.categoria))];
-const nombreCat: Record<string, string> = { 'Mesa Directiva & Órganos Colegiados': 'Mesa directiva', 'Socios Activos & Colaboradores': 'Socios y colaboradores', 'Expresidentes & Fundadores Históricos': 'Fundadores y expresidentes' };
-const iniciales = (n: string) => n.replace(/\(.*?\)|†/g, '').split(' ').filter(Boolean).slice(0, 2).map((p) => p[0]).join('');
+const nombreCat: Record<string, string> = { 'Mesa Directiva & Órganos Colegiados': 'Mesa directiva y comisión de honor', 'Socios Activos & Colaboradores': 'Socios y colaboradores', 'Expresidentes & Fundadores Históricos': 'Fundadores y expresidentes' };
+const conFoto = A.filter((a) => a.foto);
 ---
-<BaseLayout title="Padrón de autores · Letras y Voces de Tabasco" description="Directorio de socios, fundadores y mesa directiva de la Sociedad de Escritores Letras y Voces de Tabasco.">
-  <section class="envoltura pb-10 pt-14 sm:pt-20">
-    <p class="etiqueta">Padrón de autores</p>
-    <div class="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-      <h1 class="titular-xl max-w-[12ch]">Quienes escriben con nosotros</h1>
-      <p class="entradilla">Más de cien escritoras y escritores han formado parte de Letras y Voces de Tabasco. Aquí está una muestra de la mesa directiva, los socios y quienes fundaron la Sociedad.</p>
-    </div>
+<BaseLayout title="Padrón de autores · Letras y Voces de Tabasco" description="Directorio de socios, fundadores y mesa directiva de la Sociedad de Escritores Letras y Voces de Tabasco, con sus retratos y obras.">
+  <Portada etiqueta="Padrón de autores" titulo="Quienes escriben con nosotros" entradilla="Más de cien escritoras y escritores han formado parte de Letras y Voces de Tabasco. Aquí está la mesa directiva, los socios y quienes fundaron la Sociedad." />
+
+  <!-- Galería de retratos -->
+  <section class="envoltura pb-6">
+    <ul class="grid grid-cols-4 gap-3 sm:grid-cols-8">
+      {conFoto.map((a, i) => (
+        <li class="aparece-escala" style={`--i:${i}`}>
+          <a href={`#${a.id}`} class="group block">
+            <span class="relative block aspect-[4/5] overflow-hidden rounded-2xl bg-linea"><img src={a.foto} alt={`Retrato de ${a.nombre}`} loading="lazy" width="300" height="375" class="retrato absolute inset-0 h-full w-full object-top group-hover:scale-[1.05] group-hover:grayscale-0" /></span>
+            <span class="mt-2 block truncate text-center text-xs font-semibold text-grafito group-hover:text-naranja-tinta">{nombreBreve(a.nombre)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </section>
+
   {categorias.map((c) => (
     <section class="envoltura py-10">
       <h2 class="titular-m border-b border-linea pb-4">{nombreCat[c] ?? c}</h2>
       <ul class="mt-8 grid gap-5 md:grid-cols-2">
-        {A.filter((a) => a.categoria === c).map((a) => (
-          <li class="pieza grid grid-cols-[3.5rem_1fr] gap-5 p-6">
-            <span class="grid h-14 w-14 place-items-center rounded-full bg-tinta font-display text-lg font-bold text-fondo">{iniciales(a.nombre)}</span>
+        {A.filter((a) => a.categoria === c).map((a, i) => (
+          <li id={a.id} class="pieza-viva aparece group grid scroll-mt-28 grid-cols-[5.5rem_1fr] gap-5 p-5 sm:grid-cols-[7rem_1fr] sm:p-6" style={`--i:${i % 6}`}>
+            {a.foto
+              ? <span class="relative block aspect-[4/5] self-start overflow-hidden rounded-2xl bg-linea"><img src={a.foto} alt={`Retrato de ${a.nombre}`} loading="lazy" width="300" height="375" class="retrato absolute inset-0 h-full w-full object-top group-hover:grayscale-0" /></span>
+              : <span class="grid aspect-[4/5] place-items-center self-start rounded-2xl bg-tinta font-display text-2xl font-bold text-fondo">{iniciales(a.nombre)}</span>}
             <div class="min-w-0">
               <h3 class="font-display text-lg font-bold leading-tight">{a.tratamiento ? `${a.tratamiento} ` : ''}{a.nombre}</h3>
               <p class="mt-1 text-sm font-semibold text-naranja-tinta">{a.rolGremial}</p>
               <p class="mt-3 text-[0.96rem] text-grafito">{a.semblanza}</p>
               {a.obraRepresentativa && <p class="mt-3 text-sm"><span class="text-tenue">Obra:</span> <span class="voz">{a.obraRepresentativa}</span></p>}
-              {a.antologiasParticipadas?.length > 0 && <div class="mt-3 flex flex-wrap gap-1.5">{a.antologiasParticipadas.map((x) => <span class="chip !text-[0.7rem]">{x}</span>)}</div>}
+              {a.antologiasParticipadas?.length > 0 && <div class="mt-3 flex flex-wrap gap-1.5">{a.antologiasParticipadas.map((x) => x.startsWith('Animalia') ? <a href="/publicaciones/animalia-literaria" class="chip chip-naranja !text-[0.7rem] hover:border-naranja">{x}</a> : <span class="chip !text-[0.7rem]">{x}</span>)}</div>}
             </div>
           </li>
         ))}
       </ul>
     </section>
   ))}
+
+  <section class="envoltura mt-10">
+    <div class="grid gap-6 rounded-[1.75rem] border border-linea bg-superficie p-8 sm:p-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <div><p class="etiqueta">¿Eres socio?</p><h2 class="titular-l mt-4">Tu retrato también va aquí</h2><p class="prosa mt-4">Si formas parte de la Sociedad y aún no aparece tu fotografía o tu semblanza, mándanos un retrato reciente y unas líneas sobre tu obra.</p></div>
+      <div class="grid gap-3"><a href="/contacto?asunto=Hacerme+socio" class="boton-primario">Enviar mis datos</a><a href="/descargas#socios" class="boton-contorno">Cómo ser socio</a></div>
+    </div>
+  </section>
+
+  <script>
+    function init() { if (!location.hash) return; const el = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (el) { el.classList.add('!border-naranja'); el.scrollIntoView({ block: 'center' }); } }
+    document.addEventListener('astro:page-load', init);
+  </script>
 </BaseLayout>

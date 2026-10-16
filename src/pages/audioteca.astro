@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PISTAS, aPistaJSON } from '../lib/voces';
 import { porId } from '../lib/escritores';
+import { VIDEOS_LVT } from '../data/videos';
 const lvt = PISTAS.filter((p) => p.origen === 'miembro_lvt'), autores = PISTAS.filter((p) => p.origen !== 'miembro_lvt');
 const liricas = PISTAS.filter((p) => p.esLirica).length, narrativas = PISTAS.length - liricas;
 const lista = PISTAS.map(aPistaJSON);
@@ -90,6 +91,22 @@ const paises = [...new Set(PISTAS.map((p) => p.pais.split('/').pop()!.split(',')
       </div>
     ))}
     <p id="sin" class="hidden py-16 text-center text-grafito">Ninguna grabación coincide.</p>
+  </section>
+
+  <section class="envoltura mb-10">
+    <a href="/videos" class="group relative isolate grid overflow-hidden rounded-[1.75rem] bg-noche text-white lg:grid-cols-[1fr_1.1fr]">
+      <div class="relative min-h-[14rem] overflow-hidden lg:min-h-full">
+        <img src={VIDEOS_LVT[1].miniaturaChica} alt="" loading="lazy" class="absolute inset-0 h-full w-full object-cover transition duration-[1200ms] ease-suave group-hover:scale-105" />
+        <span class="absolute inset-0 bg-gradient-to-r from-transparent to-noche/80"></span>
+        <span class="absolute left-1/2 top-1/2 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-naranja shadow-naranja transition duration-500 group-hover:scale-110"><svg class="h-6 w-6 translate-x-[2px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+      </div>
+      <div class="p-8 sm:p-12">
+        <p class="etiqueta etiqueta-clara">Ahora también en video</p>
+        <h2 class="titular-l mt-4">La palabra, pintada al óleo</h2>
+        <p class="mt-4 max-w-md text-white/75">«A Leonor», de Amado Nervo, y «La historia de una hora», de Kate Chopin, animados cuadro por cuadro. Y una selección de autores leyendo su propia obra.</p>
+        <span class="boton-primario mt-7">Ir a la videoteca →</span>
+      </div>
+    </a>
   </section>
 
   <section class="envoltura">

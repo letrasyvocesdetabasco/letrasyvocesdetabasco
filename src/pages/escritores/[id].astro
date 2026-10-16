@@ -4,6 +4,8 @@ import { ESCRITORES, porId, relacionados, nombreBloque } from '../../lib/escrito
 import { lecturasDe } from '../../lib/lecturas';
 import { pistasDe, aPistaJSON } from '../../lib/voces';
 import { SITIO } from '../../lib/sitio';
+import VideoYouTube from '../../components/sitio/VideoYouTube.astro';
+import { VIDEOS_LVT, VIDEOS_RECOMENDADOS } from '../../data/videos';
 export async function getStaticPaths() { return ESCRITORES.map((e) => ({ params: { id: e.id } })); }
 const e = porId(Astro.params.id!)!;
 const i = ESCRITORES.indexOf(e);
@@ -11,6 +13,9 @@ const prev = ESCRITORES[(i - 1 + ESCRITORES.length) % ESCRITORES.length], next =
 const afines = relacionados(e);
 const lecturas = lecturasDe(e.id);
 const pistas = pistasDe(e.id);
+const videosLVT = VIDEOS_LVT.filter((v) => v.autorId === e.id);
+const videosRec = VIDEOS_RECOMENDADOS.filter((v) => v.autorId === e.id);
+const hayVideos = videosLVT.length + videosRec.length > 0;
 const citaPrincipal = e.citas[0];
 const sinFoto = e.foto.includes('placeholder');
 const iniciales = e.nombreCorto.split(' ').filter((w) => w.length > 2 && !/^(de|la|del|los|las|y)$/i.test(w)).slice(0, 2).map((w) => w[0]).join('');
@@ -21,7 +26,7 @@ const jsonLd = {
   ...(e.anioNac ? { birthDate: String(e.anioNac) } : {}), ...(e.anioMuerte ? { deathDate: String(e.anioMuerte) } : {}),
   birthPlace: e.municipioOrigen, sameAs: e.fuentes.filter((u) => /wikipedia|elem\.mx|cervantesvirtual|britannica/.test(u)).slice(0, 4),
 };
-const anclas = [['semblanza', 'Semblanza'], e.citas.length && ['citas', 'Citas'], ['vida', 'Vida'], ['obras', 'Obras'], lecturas.length && ['leer', 'Leer'], pistas.length && ['escuchar', 'Escuchar'], e.datos.length && ['conversar', 'Para conversar']].filter(Boolean) as [string, string][];
+const anclas = [['semblanza', 'Semblanza'], e.citas.length && ['citas', 'Citas'], ['vida', 'Vida'], ['obras', 'Obras'], lecturas.length && ['leer', 'Leer'], pistas.length && ['escuchar', 'Escuchar'], hayVideos && ['ver', 'Ver'], e.datos.length && ['conversar', 'Para conversar']].filter(Boolean) as [string, string][];
 ---
 <BaseLayout title={`${e.nombreCorto} · Escritores ilustres · Letras y Voces de Tabasco`} description={descripcion} image={e.foto} tipo="profile" jsonLd={jsonLd}>
   <div id="progreso-lectura"></div>
@@ -144,6 +149,26 @@ const anclas = [['semblanza', 'Semblanza'], e.citas.length && ['citas', 'Citas']
               ))}
             </ol>
             <a href="/audioteca" class="enlace mt-4 inline-block text-sm">Ir a la audioteca completa</a>
+          </section>
+        )}
+
+        {hayVideos && (
+          <section id="ver" class="mt-14 scroll-mt-28">
+            <div class="flex flex-wrap items-end justify-between gap-4"><h2 class="titular-m">Ver</h2><a href="/videos" class="text-sm font-semibold text-naranja-tinta hover:underline">Videoteca completa →</a></div>
+            <div class="mt-6 grid gap-8">
+              {videosLVT.map((v) => (
+                <div>
+                  <VideoYouTube id={v.id} titulo={`${v.titulo} · ${v.autorObra}`} miniatura={v.miniaturaChica} duracionSegundos={v.duracionSegundos} etiqueta={`${v.formato} por Letras y Voces · ${v.titulo}`} />
+                  <p class="mt-3 text-[0.97rem] text-grafito">{v.sinopsis} <a href={`/videos#${v.id}`} class="enlace text-sm">Detalles</a></p>
+                </div>
+              ))}
+              {videosRec.map((v) => (
+                <div>
+                  <VideoYouTube id={v.id} titulo={v.titulo} duracionSegundos={v.duracionSegundos} etiqueta={v.tituloVisible} />
+                  <p class="mt-3 text-[0.97rem] text-grafito">{v.descripcion} <span class="text-sm text-tenue">({v.canalVisible})</span></p>
+                </div>
+              ))}
+            </div>
           </section>
         )}
 

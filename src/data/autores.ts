@@ -6,6 +6,8 @@ export interface Autor {
   nombre: string;
   tratamiento?: string;
   rolGremial: string;
+  /** Retrato (archivo de LVT), 600×750 */
+  foto?: string;
   esMesaDirectiva?: boolean;
   categoria: 'Mesa Directiva & Órganos Colegiados' | 'Socios Activos & Colaboradores' | 'Expresidentes & Fundadores Históricos';
   generoPrincipal: 'Poesía' | 'Narrativa' | 'Ensayo' | 'Dramaturgia' | 'Multidisciplinario';
@@ -21,6 +23,7 @@ export const PADRON_AUTORES: Autor[] = [
   // =========================================================================
   {
     id: 'juan-david-perez-cabrera',
+    foto: '/assets/personas/juan-david-perez-cabrera.webp',
     nombre: 'Juan David Pérez Cabrera',
     tratamiento: 'Lic.',
     rolGremial: 'Presidente LVT (2026–2029) · Compilador y Editor',
@@ -34,6 +37,7 @@ export const PADRON_AUTORES: Autor[] = [
   },
   {
     id: 'eva-guadalupe-pineda-cruz',
+    foto: '/assets/personas/eva-guadalupe-pineda-cruz.webp',
     nombre: 'Eva Guadalupe Pineda Cruz',
     tratamiento: 'Dra.',
     rolGremial: 'Secretaria General LVT (2026–2029) · Poeta y Docente',
@@ -47,6 +51,7 @@ export const PADRON_AUTORES: Autor[] = [
   },
   {
     id: 'ana-laura-hernandez-jimenez',
+    foto: '/assets/personas/ana-laura-hernandez-jimenez.webp',
     nombre: 'Ana Laura Hernández Jiménez',
     tratamiento: 'Mtra.',
     rolGremial: 'Tesorera Institucional LVT (2026–2029) · Compiladora y Ensayista',
@@ -60,6 +65,7 @@ export const PADRON_AUTORES: Autor[] = [
   },
   {
     id: 'liliana-chuzeville-cordoba',
+    foto: '/assets/personas/liliana-chuzeville-cordoba.webp',
     nombre: 'Liliana Chuzeville Córdoba',
     tratamiento: 'Dra.',
     rolGremial: 'Comisión de Honor y Justicia LVT · Delegada Emérita LVT · Dir. General EEJG',
@@ -73,6 +79,7 @@ export const PADRON_AUTORES: Autor[] = [
   },
   {
     id: 'pragedis-hernandez-garcia',
+    foto: '/assets/personas/pragedis-hernandez-garcia.webp',
     nombre: 'Pragedis Hernández García',
     tratamiento: 'Mtra.',
     rolGremial: 'Comisión de Honor y Justicia LVT · Expresidenta LVT · Poeta Yokot’an',
@@ -90,6 +97,7 @@ export const PADRON_AUTORES: Autor[] = [
   // =========================================================================
   {
     id: 'juan-manuel-canepa-bertolini',
+    foto: '/assets/personas/juan-manuel-canepa-bertolini.webp',
     nombre: 'Juan Manuel Cánepa Bertolini',
     tratamiento: 'Mtro.',
     rolGremial: 'Socio Activo LVT · Escritor, Compositor y Promotor Cultural',
@@ -103,6 +111,7 @@ export const PADRON_AUTORES: Autor[] = [
   },
   {
     id: 'maria-de-los-angeles-cervantes',
+    foto: '/assets/personas/maria-de-los-angeles-cervantes.webp',
     nombre: 'María de los Ángeles Cervantes Rosas',
     tratamiento: 'Dra.',
     rolGremial: 'Socia Activa LVT · Poeta y Pintora Plástica',
@@ -158,6 +167,7 @@ export const PADRON_AUTORES: Autor[] = [
   },
   {
     id: 'rebeca-diaz-suarez',
+    foto: '/assets/personas/rebeca-diaz-suarez.webp',
     nombre: 'Rebeca Díaz Suárez',
     tratamiento: 'Dra.',
     rolGremial: 'Expresidenta LVT (2013–2016) · Coordinación de Admisiones EEJG',

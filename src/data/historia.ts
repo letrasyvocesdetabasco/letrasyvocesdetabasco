@@ -75,7 +75,8 @@ export const CRONOLOGIA_DIRECTIVA: GestionHistorica[] = [
       'Presidencia y representación legal del Lic. Juan David Pérez Cabrera.',
       'Secretaría General a cargo de Eva Guadalupe Pineda Cruz y Tesorería por Ana Laura Hernández Jiménez.',
       'Comisión de Honor y Justicia a cargo de la Mtra. Liliana Chuzeville Córdoba y la Mtra. Pragedis Hernández García.',
-      'Fondo editorial activo con «Animalia Literaria» (en imprenta) y lanzamiento de «Plantae Literaria».'
+      'Fondo editorial activo: «Animalia Literaria» impresa en agosto de 2026, disponible para lectura en línea, y convocatoria de «Plantae Literaria».',
+      'Apertura del canal de YouTube con la serie «Literatura animada al óleo» (octubre de 2026).'
     ]
   }
 ];

@@ -7,7 +7,7 @@ import WhatsApp from '../components/sitio/WhatsApp.astro';
 import Reproductor from '../components/sitio/Reproductor.astro';
 import { SITIO } from '../lib/sitio';
 
-interface Props { title?: string; description?: string; image?: string; tipo?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; sinIndexar?: boolean; }
+interface Props { title?: string; description?: string; image?: string; tipo?: string; jsonLd?: Record<string, unknown> | Record<string, unknown>[]; sinIndexar?: boolean; inmersivo?: boolean; }
 const {
   title = 'Letras y Voces de Tabasco · Sociedad de Escritores',
   description = 'Sociedad de Escritores Letras y Voces de Tabasco, A.C. Desde 1987: taller literario gratuito, Escuela de Escritores «José Gorostiza», fondo editorial, sala de lectura, audioteca y memoria de la literatura tabasqueña.',
@@ -15,6 +15,7 @@ const {
   tipo = 'website',
   jsonLd,
   sinIndexar = false,
+  inmersivo = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? SITIO);
 const imagenAbs = new URL(image, Astro.site ?? SITIO);
@@ -24,7 +25,7 @@ const org = {
   url: SITIO, foundingDate: '1987', email: 'contacto@letrasyvocesdetabasco.org',
   telephone: '+522205889391', logo: `${SITIO}/assets/logos/LVT%20Logo%20Iso%201%20Original.png`,
   address: { '@type': 'PostalAddress', addressLocality: 'Villahermosa', addressRegion: 'Tabasco', addressCountry: 'MX' },
-  sameAs: ['https://www.facebook.com/letrayvoces.tabasco', 'https://www.instagram.com/letrasyvocestabasco'],
+  sameAs: ['https://www.facebook.com/letrayvoces.tabasco', 'https://www.instagram.com/letrasyvocestabasco', 'https://www.youtube.com/@LetrasyVocesdeTabasco'],
 };
 const ld = jsonLd ? (Array.isArray(jsonLd) ? [org, ...jsonLd] : [org, jsonLd]) : [org];
 ---
@@ -74,11 +75,11 @@ const ld = jsonLd ? (Array.isArray(jsonLd) ? [org, ...jsonLd] : [org, jsonLd]) :
   </head>
   <body class="min-h-screen">
     <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-tinta focus:px-4 focus:py-2 focus:text-fondo">Saltar al contenido</a>
-    <Encabezado />
+    {!inmersivo && <Encabezado />}
     <main id="contenido" data-pagefind-body><slot /></main>
-    <Pie />
+    {!inmersivo && <Pie />}
     <Reproductor />
-    <WhatsApp />
+    {!inmersivo && <WhatsApp />}
     <script>
       // Revelado al hacer scroll (idempotente, se ejecuta en cada navegación)
       function revelar() {

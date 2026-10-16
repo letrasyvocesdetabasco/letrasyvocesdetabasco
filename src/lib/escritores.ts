@@ -60,7 +60,7 @@ const NOMBRE_USUAL: Record<string, string> = {
   'dolores-correa-zapata': 'Dolores Correa Zapata', 'jose-maria-pino-suarez': 'José María Pino Suárez', 'carlos-pellicer': 'Carlos Pellicer', 'jose-gorostiza': 'José Gorostiza',
   'celestino-gorostiza': 'Celestino Gorostiza', 'bruno-estanol': 'Bruno Estañol', 'juan-rulfo': 'Juan Rulfo', 'octavio-paz': 'Octavio Paz', 'rosario-castellanos': 'Rosario Castellanos',
   'jaime-sabines': 'Jaime Sabines', 'elena-garro': 'Elena Garro', 'juan-jose-arreola': 'Juan José Arreola', 'jose-emilio-pacheco': 'José Emilio Pacheco', 'ines-arredondo': 'Inés Arredondo',
-  'cesar-vallejo': 'César Vallejo', 'julio-cortazar': 'Julio Cortázar',
+  'cesar-vallejo': 'César Vallejo', 'julio-cortazar': 'Julio Cortázar', 'kate-chopin': 'Kate Chopin',
 };
 const corto = (n: string, id?: string) => (id && NOMBRE_USUAL[id]) || n.replace(/\s*\(.*?\)/g, '').replace(/\s*«.*?»/g, '').trim();
 

@@ -1,0 +1,191 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoYouTube from '../components/sitio/VideoYouTube.astro';
+import { VIDEOS_LVT, VIDEOS_RECOMENDADOS, CATEGORIAS_RECOMENDADOS, CANAL_YOUTUBE, duracion, duracionISO, miniaturaYT } from '../data/videos';
+import { porId } from '../lib/escritores';
+import { SITIO } from '../lib/sitio';
+
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+const fecha = (iso: string) => { const [y, m, d] = iso.split('-').map(Number); return `${d} de ${MESES[m - 1]} de ${y}`; };
+const cuenta = (c: string) => VIDEOS_RECOMENDADOS.filter((v) => v.categoria === c).length;
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'ItemList', name: 'Videoteca de Letras y Voces de Tabasco',
+  itemListElement: VIDEOS_LVT.map((v, i) => ({
+    '@type': 'ListItem', position: i + 1,
+    item: { '@type': 'VideoObject', name: `${v.titulo} · ${v.autorObra}`, description: v.sinopsis, thumbnailUrl: new URL(v.miniatura, SITIO).href, uploadDate: v.publicado, duration: duracionISO(v.duracionSegundos), embedUrl: `https://www.youtube-nocookie.com/embed/${v.id}`, contentUrl: `https://www.youtube.com/watch?v=${v.id}`, inLanguage: 'es', publisher: { '@type': 'Organization', name: 'Sociedad de Escritores Letras y Voces de Tabasco, A.C.' } },
+  })),
+};
+const [destacado] = VIDEOS_LVT;
+---
+<BaseLayout title="Videos · Literatura animada y recomendados · Letras y Voces de Tabasco" description="Cortometrajes de literatura animada al óleo producidos por Letras y Voces de Tabasco, y videos recomendados: autores leyendo su obra, documentales, Tabasco literario y conferencias." image={destacado.miniatura} jsonLd={jsonLd}>
+  <!-- PORTADA -->
+  <section class="relative isolate overflow-hidden bg-noche text-white">
+    <img src={destacado.miniatura} alt="" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-35" fetchpriority="high" />
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgb(14_13_12/0.96)_15%,rgb(14_13_12/0.7)_55%,rgb(14_13_12/0.35))]"></div>
+    <div class="grano absolute inset-0 -z-10"></div>
+    <div class="envoltura grid gap-10 py-16 sm:py-24 lg:grid-cols-[1.3fr_1fr] lg:items-end">
+      <div>
+        <p class="etiqueta etiqueta-clara entra" style="--i:0">Videoteca · Canal de YouTube</p>
+        <h1 class="titular-hero mt-6 max-w-[12ch]">
+          <span class="linea-revela visto"><span style="--i:0">La literatura</span></span>
+          <span class="linea-revela visto"><span style="--i:1">también <em>se mira.</em></span></span>
+        </h1>
+        <p class="entra mt-6 max-w-xl font-serif text-[1.35rem] italic leading-snug text-white/80 sm:text-2xl" style="--i:3">Cuentos y poemas que cobran vida en pinturas al óleo, hechos en Tabasco, y una selección de videos para escuchar a los autores en su propia voz.</p>
+        <div class="entra mt-8 flex flex-wrap gap-3" style="--i:4">
+          <a href={CANAL_YOUTUBE.suscribirse} target="_blank" rel="noopener" class="boton-primario !min-h-[52px] !px-7">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.1V8.9l5.8 3.1-5.8 3.1Z"/></svg>
+            Suscríbete al canal
+          </a>
+          <a href="#producciones" class="boton-claro !min-h-[52px] !px-7">Ver producciones</a>
+        </div>
+      </div>
+      <dl class="entra grid grid-cols-3 gap-4 rounded-pieza bg-white/[0.06] p-6 ring-1 ring-white/15 backdrop-blur" style="--i:3">
+        <div><dd class="font-display text-4xl font-extrabold leading-none numero">{VIDEOS_LVT.length}</dd><dt class="mt-1 text-xs text-white/60">producciones de LVT</dt></div>
+        <div><dd class="font-display text-4xl font-extrabold leading-none numero">{VIDEOS_RECOMENDADOS.length}</dd><dt class="mt-1 text-xs text-white/60">recomendados</dt></div>
+        <div><dd class="font-display text-4xl font-extrabold leading-none numero">{CATEGORIAS_RECOMENDADOS.length}</dd><dt class="mt-1 text-xs text-white/60">colecciones</dt></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- PRODUCCIONES -->
+  <section id="producciones" class="envoltura scroll-mt-24 py-20 sm:py-24">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <div><p class="etiqueta">Producciones de Letras y Voces</p><h2 class="titular-l mt-4 max-w-[18ch]">Literatura animada al óleo</h2></div>
+      <p class="max-w-md text-grafito">Una serie en la que cada cuadro está pintado al óleo para acompañar, verso a verso o escena a escena, un clásico de la literatura. Adaptación y animación de Juan David Pérez Cabrera.</p>
+    </div>
+
+    {VIDEOS_LVT.map((v, k) => { const autor = v.autorId ? porId(v.autorId) : undefined; return (
+      <article id={v.id} class:list={['mt-14 grid scroll-mt-24 gap-8 lg:items-start', k % 2 === 0 ? 'lg:grid-cols-[1.55fr_1fr]' : 'lg:grid-cols-[1fr_1.55fr]']}>
+        <div class:list={['aparece-escala', k % 2 === 1 && 'lg:order-2']}>
+          <VideoYouTube id={v.id} titulo={`${v.titulo} · ${v.autorObra}`} miniatura={v.miniatura} duracionSegundos={v.duracionSegundos} grande />
+        </div>
+        <div class="aparece">
+          <div class="flex flex-wrap items-center gap-2"><span class="chip chip-naranja">{v.formato}</span><span class="chip">{v.genero === 'lirica' ? 'Lírica' : 'Narrativa'}</span><span class="chip numero">{duracion(v.duracionSegundos)}</span></div>
+          <h3 class="mt-5 font-serif text-4xl font-medium italic leading-tight sm:text-5xl">{v.titulo}</h3>
+          <p class="mt-2 text-grafito">{autor ? <a href={`/escritores/${autor.id}`} class="enlace">{v.autorObra}</a> : v.autorObra} · {v.obra}</p>
+          <p class="mt-5 text-[1.05rem] leading-relaxed text-grafito">{v.sinopsis}</p>
+          <p class="mt-4 text-sm text-tenue">{v.realizacion} · Publicado el {fecha(v.publicado)}</p>
+          {v.capitulos && (
+            <div class="mt-7">
+              <p class="etiqueta">Capítulos</p>
+              <ol class="mt-3 grid grid-cols-1 gap-1 sm:grid-cols-2">
+                {v.capitulos.map((c) => (
+                  <li><button type="button" data-saltar={c.t} data-video={v.id} class="group flex w-full items-baseline gap-3 rounded-lg px-2 py-1.5 text-left text-sm transition hover:bg-hundido">
+                    <span class="w-10 shrink-0 font-display font-bold text-naranja-tinta numero">{duracion(c.t)}</span><span class="text-grafito group-hover:text-tinta">{c.titulo}</span>
+                  </button></li>
+                ))}
+              </ol>
+            </div>
+          )}
+          {v.texto && (
+            <details class="group mt-7 rounded-pieza border border-linea bg-superficie p-5" open>
+              <summary class="flex cursor-pointer list-none items-center justify-between font-display text-sm font-bold [&::-webkit-details-marker]:hidden">Leer el poema mientras lo ves <span class="text-naranja transition group-open:rotate-45" aria-hidden="true">+</span></summary>
+              <p class="mt-4 whitespace-pre-line font-serif text-lg leading-relaxed">{v.texto.versos}</p>
+              <p class="mt-3 text-xs text-tenue">{v.autorObra}, {v.texto.libro}. Obra en dominio público.</p>
+            </details>
+          )}
+          <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener" class="enlace-vivo mt-6 inline-block text-sm font-semibold text-naranja-tinta">Ver en YouTube y dejar un comentario ↗</a>
+        </div>
+      </article>
+    ); })}
+  </section>
+
+  <!-- RECOMENDADOS -->
+  {VIDEOS_RECOMENDADOS.length > 0 && (
+    <section id="recomendados" class="scroll-mt-24 bg-hundido py-20 sm:py-24">
+      <div class="envoltura">
+        <div class="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-end">
+          <div><p class="etiqueta">Recomendados por LVT</p><h2 class="titular-l mt-4">Para ver con calma</h2></div>
+          <p class="text-grafito lg:justify-self-end lg:text-right">Selección de la mesa del taller, tomada de canales de universidades, archivos sonoros y televisoras públicas. Cada video se comprobó antes de publicarlo.</p>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-2 border-y border-linea py-5" role="group" aria-label="Filtrar recomendados">
+          <button type="button" class="chip" data-cat="" aria-pressed="true">Todos <span class="ml-1.5 text-tenue numero">{VIDEOS_RECOMENDADOS.length}</span></button>
+          {CATEGORIAS_RECOMENDADOS.map((c) => <button type="button" class="chip" data-cat={c.id} aria-pressed="false" title={c.descripcion}>{c.nombre} <span class="ml-1.5 text-tenue numero">{cuenta(c.id)}</span></button>)}
+        </div>
+        <ul id="rec" class="mt-10 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {VIDEOS_RECOMENDADOS.map((v, i) => { const a = v.autorId ? porId(v.autorId) : undefined; const cat = CATEGORIAS_RECOMENDADOS.find((c) => c.id === v.categoria)!; return (
+            <li class="aparece" style={`--i:${i % 6}`} data-cat={v.categoria}>
+              <button type="button" class="group block w-full text-left" data-teatro={JSON.stringify({ id: v.id, t: v.tituloVisible, c: v.canalVisible, d: v.descripcion, a: a ? { id: a.id, n: a.nombreCorto } : null })}>
+                <span class="relative block aspect-video overflow-hidden rounded-pieza bg-noche">
+                  <img src={miniaturaYT(v.id)} alt="" loading="lazy" decoding="async" class="h-full w-full scale-[1.02] object-cover transition duration-700 ease-suave group-hover:scale-[1.07]" />
+                  <span class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></span>
+                  <span class="absolute left-1/2 top-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-carbon transition duration-500 group-hover:scale-110 group-hover:bg-naranja group-hover:text-white"><svg class="h-4 w-4 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+                  <span class="absolute bottom-3 right-3 rounded-full bg-black/70 px-2 py-0.5 text-xs font-semibold text-white numero">{duracion(v.duracionSegundos)}</span>
+                  <span class="absolute left-3 top-3 rounded-full bg-fondo/90 px-2.5 py-1 text-[0.68rem] font-semibold text-grafito backdrop-blur">{cat.nombre}</span>
+                </span>
+                <span class="mt-4 block font-display text-[1.08rem] font-bold leading-snug group-hover:text-naranja-tinta">{v.tituloVisible}</span>
+                <span class="mt-1 block text-sm text-tenue">{v.canalVisible}</span>
+                <span class="mt-2 line-clamp-3 block text-[0.95rem] text-grafito">{v.descripcion}</span>
+              </button>
+              {a && <a href={`/escritores/${a.id}`} class="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-naranja-tinta hover:underline"><img src={a.foto} alt="" class="h-6 w-6 rounded-full object-cover object-top grayscale" loading="lazy" />Ficha de {a.nombreCorto}</a>}
+            </li>
+          ); })}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- COLABORA -->
+  <section class="envoltura py-20 sm:py-24">
+    <div class="grid gap-8 rounded-[1.75rem] bg-noche p-8 text-white sm:p-12 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+      <div>
+        <p class="etiqueta etiqueta-clara">Haz video con nosotros</p>
+        <h2 class="titular-l mt-4">¿Qué texto quieres ver animado?</h2>
+        <p class="mt-4 max-w-xl text-white/75">Proponnos un cuento o un poema en dominio público, o una lectura de un socio de Letras y Voces. Los mejores pasarán a la serie.</p>
+      </div>
+      <div class="grid gap-3">
+        <a href="/contacto?asunto=Otro" class="boton-primario">Proponer un texto</a>
+        <a href={CANAL_YOUTUBE.url} target="_blank" rel="noopener" class="boton-claro">Ir al canal de YouTube ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SALA DE PROYECCIÓN -->
+  <dialog id="teatro" class="m-auto w-full bg-transparent p-0 backdrop:bg-black/80" style="max-width: min(64rem, calc((100dvh - 13rem) * 16 / 9), calc(100vw - 2rem))" aria-labelledby="teatro-t">
+    <div class="overflow-hidden rounded-[1.25rem] bg-noche text-white shadow-alta">
+      <div class="relative aspect-video bg-black" data-teatro-video></div>
+      <div class="flex flex-wrap items-start justify-between gap-4 p-5 sm:p-6">
+        <div class="min-w-0 flex-1">
+          <p id="teatro-t" class="font-display text-lg font-bold leading-tight sm:text-xl" data-teatro-t></p>
+          <p class="mt-1 text-sm text-white/55" data-teatro-c></p>
+          <p class="mt-3 max-w-3xl text-[0.95rem] text-white/75" data-teatro-d></p>
+          <a data-teatro-a href="#" class="enlace-vivo mt-3 hidden text-sm font-semibold text-naranja"></a>
+        </div>
+        <form method="dialog"><button class="boton-claro !min-h-[42px] !px-5 !text-sm">Cerrar</button></form>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    function init() {
+      const items = [...document.querySelectorAll<HTMLLIElement>('#rec > li')];
+      let cat = '';
+      document.querySelectorAll<HTMLButtonElement>('[data-cat]:is(button)').forEach((b) => b.addEventListener('click', () => {
+        cat = b.dataset.cat || ''; items.forEach((li) => (li.hidden = !!cat && li.dataset.cat !== cat));
+        document.querySelectorAll<HTMLButtonElement>('[data-cat]:is(button)').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      }));
+      const d = document.getElementById('teatro') as HTMLDialogElement | null; if (!d) return;
+      const caja = d.querySelector<HTMLElement>('[data-teatro-video]')!;
+      document.querySelectorAll<HTMLButtonElement>('[data-teatro]').forEach((b) => b.addEventListener('click', () => {
+        const v = JSON.parse(b.dataset.teatro!);
+        document.dispatchEvent(new Event('lvt:pausar-audio'));
+        document.querySelectorAll<HTMLIFrameElement>('.video-yt iframe').forEach((f) => f.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*'));
+        caja.innerHTML = '';
+        const f = document.createElement('iframe');
+        f.src = `https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1&hl=es`;
+        f.title = v.t; f.className = 'absolute inset-0 h-full w-full'; f.allowFullscreen = true;
+        f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen';
+        f.referrerPolicy = 'strict-origin-when-cross-origin';
+        caja.appendChild(f);
+        d.querySelector('[data-teatro-t]')!.textContent = v.t; d.querySelector('[data-teatro-c]')!.textContent = v.c; d.querySelector('[data-teatro-d]')!.textContent = v.d;
+        const a = d.querySelector<HTMLAnchorElement>('[data-teatro-a]')!;
+        if (v.a) { a.href = `/escritores/${v.a.id}`; a.textContent = `Ficha de ${v.a.n} →`; a.classList.remove('hidden'); } else a.classList.add('hidden');
+        d.showModal();
+      }));
+      d.addEventListener('close', () => { caja.innerHTML = ''; });
+      d.addEventListener('click', (e) => { if (e.target === d) d.close(); });
+      if (location.hash === '#recomendados' || location.hash === '#producciones') document.querySelector(location.hash)?.scrollIntoView();
+    }
+    document.addEventListener('astro:page-load', init);
+  </script>
+</BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { IDENTIDAD_ESCUELA as E, DIPLOMADOS_GOROSTIZA as DIPLO, CURSOS_CONTINUOS_GOROSTIZA as CURSOS } from '../data/escuela';
+import { personaPorNombre } from '../lib/personas';
 const waEscuela = (t: string) => `https://wa.me/${E.contactoDirecto.telefonosClean[0]}?text=${encodeURIComponent(t)}`;
 ---
 <BaseLayout title="Escuela de Escritores «José Gorostiza» · Letras y Voces de Tabasco" description="Diplomados y cursos de creación literaria, redacción, periodismo, guion y oratoria con aval de la UJAT desde 2001. Escuela de Escritores «José Gorostiza».">
@@ -86,8 +87,11 @@ const waEscuela = (t: string) => `https://wa.me/${E.contactoDirecto.telefonosCle
         <p class="etiqueta etiqueta-clara">Dirección</p>
         <ul class="mt-4 grid gap-4">
           {E.direccionActual.map((d, i) => (
-            <li class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
-              <div><p class="font-display font-bold">{d.nombre}</p><p class="text-sm text-white/60">{d.cargo}</p></div>
+            <li class="group flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5">
+              <div class="flex items-center gap-4">
+                {personaPorNombre(d.nombre)?.foto && <img src={personaPorNombre(d.nombre)!.foto} alt={`Retrato de ${d.nombre}`} loading="lazy" width="160" height="200" class="retrato h-20 w-16 rounded-xl object-top group-hover:grayscale-0" />}
+                <div><p class="font-display font-bold">{d.nombre}</p><p class="text-sm text-white/60">{d.cargo}</p></div>
+              </div>
               <a href={`https://wa.me/${d.telefonoClean}`} target="_blank" rel="noopener" class="boton-claro !min-h-[40px] !px-4 !text-xs">WhatsApp {d.telefono}</a>
             </li>
           ))}
