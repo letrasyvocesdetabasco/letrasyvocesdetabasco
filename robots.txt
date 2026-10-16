@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+# Páginas del lector en línea: no son documentos para indexar ni descargar
+Disallow: /lectura/
+
+Sitemap: https://letrasyvocesdetabasco.org/sitemap-index.xml
