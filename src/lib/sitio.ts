@@ -31,7 +31,8 @@ export const NAV_SECUNDARIA = [
   { href: '/buscar', texto: 'Buscar en el sitio' },
 ];
 // La rifa se muestra en portada y menú solo hasta el día del sorteo
-export const RIFA_ACTIVA = new Date() < new Date('2026-10-17T06:00:00Z');
+// El sorteo fue el 16-oct-2026: la rifa concluyó y se retira de portada y menú.
+export const RIFA_ACTIVA = false;
 
 // Portadas optimizadas (public/assets/portadas/web/*.webp)
 export const portadaWeb = (src?: string) => src ? src.replace(/^\/assets\/portadas\/(.+)\.(png|jpe?g)$/i, '/assets/portadas/web/$1.webp') : src;
