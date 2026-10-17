@@ -67,6 +67,11 @@
   },
   {
    "fecha": "2026-10-17",
+   "sesion": null,
+   "sin_taller": "Ajustes en la programación de la sede"
+  },
+  {
+   "fecha": "2026-10-24",
    "sesion": 7,
    "modulo": "II",
    "modulo_nombre": "Lírica, poética y lenguaje",
@@ -76,7 +81,7 @@
    "ejercicio": "Reescribir un fragmento de noticia o prosa cotidiana transformándolo en un poema de 10 a 14 líneas en verso libre, donde los cortes de línea respondan estrictamente a la respiración y a la tensión emocional."
   },
   {
-   "fecha": "2026-10-24",
+   "fecha": "2026-10-31",
    "sesion": 8,
    "modulo": "II",
    "modulo_nombre": "Lírica, poética y lenguaje",
@@ -86,7 +91,7 @@
    "ejercicio": "Escribir un poema breve (12 versos) sobre una pérdida o una obsesión, bajo una restricción tajante: prohibido usar palabras abstractas (“dolor”, “olvido”, “alma”, “corazón”) y forzar asociaciones sensoriales insólitas."
   },
   {
-   "fecha": "2026-10-31",
+   "fecha": "2026-11-07",
    "sesion": 9,
    "modulo": "II",
    "modulo_nombre": "Lírica, poética y lenguaje",
@@ -96,7 +101,7 @@
    "ejercicio": "Composición de un poema asumiendo la voz de un elemento no humano (un río contaminado, una ceiba centenaria, una máquina abandonada) o de un personaje histórico observado desde su vulnerabilidad privada."
   },
   {
-   "fecha": "2026-11-07",
+   "fecha": "2026-11-14",
    "sesion": 10,
    "modulo": "II",
    "modulo_nombre": "Lírica, poética y lenguaje",
@@ -106,7 +111,7 @@
    "ejercicio": "Escribir una serie de 3 poemínimos o una estampa poética inspirada en un rincón específico del Centro Histórico de Villahermosa o el malecón."
   },
   {
-   "fecha": "2026-11-14",
+   "fecha": "2026-11-21",
    "sesion": 11,
    "modulo": "II",
    "modulo_nombre": "Lírica, poética y lenguaje",
@@ -116,7 +121,7 @@
    "ejercicio": "Redacción de un poema en prosa de una cuartilla centrado en una experiencia táctil de la infancia o en un sueño recurrente."
   },
   {
-   "fecha": "2026-11-21",
+   "fecha": "2026-11-28",
    "sesion": 12,
    "modulo": "II",
    "modulo_nombre": "Lírica, poética y lenguaje",
@@ -126,7 +131,7 @@
    "ejercicio": "Taller Intensivo de Ebanistería: Tomar los 3 mejores poemas elaborados durante el módulo y someterlos a una poda del 40 % de palabras, reajustando la disposición de las estrofas en la página."
   },
   {
-   "fecha": "2026-11-28",
+   "fecha": "2026-12-05",
    "sesion": 13,
    "modulo": "III",
    "modulo_nombre": "Ensayo y filosofía de la prosa",
@@ -136,7 +141,7 @@
    "ejercicio": "Elección de una paradoja o contradicción cotidiana (ejemplo: “la tiranía de la puntualidad” o “el placer de perder cosas”) y elaboración de un mapa de ideas cruzadas para un ensayo de 3 páginas."
   },
   {
-   "fecha": "2026-12-05",
+   "fecha": "2026-12-12",
    "sesion": 14,
    "modulo": "III",
    "modulo_nombre": "Ensayo y filosofía de la prosa",
@@ -146,7 +151,7 @@
    "ejercicio": "Redacción de dos cuartillas argumentativas donde se entrelace una referencia cultural o libresca con una anécdota personal cómica o desconcertante."
   },
   {
-   "fecha": "2026-12-12",
+   "fecha": "2026-12-19",
    "sesion": 15,
    "modulo": "III",
    "modulo_nombre": "Ensayo y filosofía de la prosa",
@@ -154,16 +159,6 @@
    "eje": "El ensayo como ariete contra el sentido común y los lugares comunes de época. El uso de la ironía, el humor sutil, el escepticismo pedagógico y la provocación dialéctica.",
    "lecturas": "G. K. Chesterton, Correr tras el propio sombrero; Wisława Szymborska, Lecturas no obligatorias.",
    "ejercicio": "Escritura de un alegato apasionado pero argumentado que defienda una postura impopular o refute una verdad aceptada por todos (ejemplo: “el sobrevalorado valor del éxito”)."
-  },
-  {
-   "fecha": "2026-12-19",
-   "sesion": 16,
-   "modulo": "III",
-   "modulo_nombre": "Ensayo y filosofía de la prosa",
-   "titulo": "La Orfebrería de la Prosa: El Ensayo sobre lo Ínfimo",
-   "eje": "El “ensayo-objeto”: la capacidad de asombro ante lo minúsculo o lo descartado. Cómo derivar reflexiones filosóficas, estéticas o históricas profundas a partir de objetos domésticos ordinarios.",
-   "lecturas": "Luigi Amara, La promiscuidad de los encendedores y Los elásticos; Alma Guillermoprieto, Harinas.",
-   "ejercicio": "Escribir una pieza de 400 palabras explorando la biografía secreta y las implicaciones existenciales de un objeto de bolsillo (unas llaves, una moneda falsa, un paraguas roto)."
   },
   {
    "fecha": "2026-12-26",
@@ -177,6 +172,16 @@
   },
   {
    "fecha": "2027-01-09",
+   "sesion": 16,
+   "modulo": "III",
+   "modulo_nombre": "Ensayo y filosofía de la prosa",
+   "titulo": "La Orfebrería de la Prosa: El Ensayo sobre lo Ínfimo",
+   "eje": "El “ensayo-objeto”: la capacidad de asombro ante lo minúsculo o lo descartado. Cómo derivar reflexiones filosóficas, estéticas o históricas profundas a partir de objetos domésticos ordinarios.",
+   "lecturas": "Luigi Amara, La promiscuidad de los encendedores y Los elásticos; Alma Guillermoprieto, Harinas.",
+   "ejercicio": "Escribir una pieza de 400 palabras explorando la biografía secreta y las implicaciones existenciales de un objeto de bolsillo (unas llaves, una moneda falsa, un paraguas roto)."
+  },
+  {
+   "fecha": "2027-01-16",
    "sesion": 17,
    "modulo": "III",
    "modulo_nombre": "Ensayo y filosofía de la prosa",
@@ -186,7 +191,7 @@
    "ejercicio": "Escribir un texto que parta de un error o ridículo del propio autor para reflexionar sobre un dilema moral de nuestra época."
   },
   {
-   "fecha": "2027-01-16",
+   "fecha": "2027-01-23",
    "sesion": 18,
    "modulo": "III",
    "modulo_nombre": "Ensayo y filosofía de la prosa",
@@ -196,7 +201,7 @@
    "ejercicio": "Reescritura completa y estructuración en limpio del ensayo desarrollado a lo largo del módulo (extensión: 3 a 5 cuartillas)."
   },
   {
-   "fecha": "2027-01-23",
+   "fecha": "2027-01-30",
    "sesion": 19,
    "modulo": "IV",
    "modulo_nombre": "Crónica literaria y edición",
@@ -206,7 +211,7 @@
    "ejercicio": "Puesta en común de notas de campo tomadas durante la semana en un espacio público de Villahermosa (Mercado Pino Suárez, Parque Tomás Garrido, transporte público o malecón). Selección del ángulo narrativo."
   },
   {
-   "fecha": "2027-01-30",
+   "fecha": "2027-02-06",
    "sesion": 20,
    "modulo": "IV",
    "modulo_nombre": "Crónica literaria y edición",
@@ -216,7 +221,7 @@
    "ejercicio": "Transcripción y reelaboración narrativa de un fragmento de testimonio oral real, transformándolo en una escena dinámica con diálogos vivos y caracterización gestual."
   },
   {
-   "fecha": "2027-02-06",
+   "fecha": "2027-02-13",
    "sesion": 21,
    "modulo": "IV",
    "modulo_nombre": "Crónica literaria y edición",
@@ -226,7 +231,7 @@
    "ejercicio": "Redacción y ensamblaje del borrador completo de la crónica testimonial (4 a 6 cuartillas)."
   },
   {
-   "fecha": "2027-02-13",
+   "fecha": "2027-02-20",
    "sesion": 22,
    "modulo": "IV",
    "modulo_nombre": "Crónica literaria y edición",
@@ -236,7 +241,7 @@
    "ejercicio": "Intercambio cruzado de originales para ejecutar una corrección de estilo minuciosa a mano con tinta roja sobre el texto de un compañero."
   },
   {
-   "fecha": "2027-02-20",
+   "fecha": "2027-02-27",
    "sesion": 23,
    "modulo": "IV",
    "modulo_nombre": "Crónica literaria y edición",
@@ -246,7 +251,7 @@
    "ejercicio": "Selección colectiva de textos, ordenamiento del índice temático y redacción del prefacio coral de la Antología del Taller Literario “Letras y Voces”."
   },
   {
-   "fecha": "2027-02-27",
+   "fecha": "2027-03-06",
    "sesion": 24,
    "modulo": "IV",
    "modulo_nombre": "Crónica literaria y edición",

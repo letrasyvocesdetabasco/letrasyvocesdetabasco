@@ -317,7 +317,7 @@ const areas = [
       <p class="prosa mt-4">Todo lo que hacemos se sostiene con el trabajo voluntario de los socios y con aportaciones de la comunidad. Hay varias maneras de ayudar.</p>
       <div class="mt-10 grid gap-4 md:grid-cols-3">
         {[['Asiste y comparte', 'Ven al taller, trae a alguien que quiera escribir y comparte nuestras publicaciones en redes.', '/taller-literario', 'Ir al taller'],
-          ['Compra un libro o un boleto', 'Las antologías y la rifa cultural financian la impresión de los libros y los materiales del taller.', RIFA_ACTIVA ? '/rifa' : '/publicaciones', RIFA_ACTIVA ? 'Ver la rifa' : 'Ver libros'],
+          ['Compra un libro', 'La venta de nuestras antologías financia la impresión de nuevos libros y los materiales del taller.', '/publicaciones', 'Ver libros'],
           ['Hazte socio o aliado', 'Escritores, maestros, librerías e instituciones pueden sumarse con convenios y donativos en especie.', '/contacto?asunto=Hacerme+socio', 'Escribirnos']].map(([t, d, h, b], i) => (
           <div class="pieza-viva aparece flex flex-col p-7" style={`--i:${i}`}><h3 class="font-display text-xl font-bold">{t}</h3><p class="mt-3 flex-1 text-grafito">{d}</p><a href={h} class="boton-oscuro mt-6 w-fit">{b}</a></div>
         ))}

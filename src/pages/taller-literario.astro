@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SesionTaller from '../components/sitio/SesionTaller.astro';
 import { DATOS_GENERALES_TALLER as T } from '../data/taller';
-import { TALLER, SESIONES, modulos, fechaLarga, lecturas, sesionVigente } from '../lib/taller';
+import { TALLER, SESIONES, modulos, fechaLarga, lecturas, sesionVigente, esVacacion } from '../lib/taller';
 import { CONTACTO, wa } from '../lib/sitio';
 import { personaPorNombre } from '../lib/personas';
 const coordinador = personaPorNombre(T.titularAcademico.nombre);
@@ -10,13 +10,14 @@ const coordinador = personaPorNombre(T.titularAcademico.nombre);
 const mods = modulos();
 const { proxima } = sesionVigente();
 const recesos = TALLER.calendario.filter((s) => !s.sesion);
+const vacaciones = recesos.filter(esVacacion);
 const preguntas = [
   ['¿Cuánto cuesta?', 'Nada. El taller es gratuito y abierto; no hay inscripción ni requisitos de admisión.'],
   ['¿Puedo llegar a mitad del ciclo?', 'Sí. Cada sábado es una sesión completa: lectura, ejercicio y clínica de textos. Puedes llegar a cualquiera.'],
   ['¿Necesito haber publicado o tener experiencia?', 'No. Hay quienes escriben desde hace años y quienes empiezan. La mesa es intergeneracional.'],
   ['¿Qué debo llevar?', 'Libreta o computadora, y si quieres, un texto tuyo para leer en voz alta en la clínica.'],
   ['¿Hay constancia?', 'Quienes asisten de manera regular reciben constancia de Letras y Voces de Tabasco y la Librería Universitaria UJAT, y pueden participar en la antología del taller.'],
-  ['¿Qué pasa en vacaciones?', `Seguimos el calendario escolar de la UJAT: no hay sesión el ${recesos.map((r) => fechaLarga(r.fecha, false)).join(' ni el ')}.`],
+  ['¿Qué pasa en vacaciones?', `Seguimos el calendario escolar de la UJAT: no hay sesión el ${vacaciones.map((r) => fechaLarga(r.fecha, false)).join(' ni el ')}.`],
 ];
 ---
 <BaseLayout title="Taller literario gratuito · Letras y Voces de Tabasco" description="Taller literario gratuito todos los sábados de 11:00 a 13:00 h en la Librería Universitaria UJAT, Villahermosa. Narrativa, poesía, ensayo y crónica en 24 sesiones.">
@@ -90,7 +91,7 @@ const preguntas = [
                 const receso = recesos.filter((r) => r.fecha < s.fecha && r.fecha > previa);
                 return (
                   <>
-                    {receso.length > 0 && <li class="rounded-pieza border border-dashed border-linea px-5 py-4 text-sm text-tenue">Vacaciones de invierno UJAT: sin sesión el {receso.map((r) => fechaLarga(r.fecha, false)).join(' y el ')}.</li>}
+                    {receso.length > 0 && <li class="rounded-pieza border border-dashed border-linea px-5 py-4 text-sm text-tenue">{esVacacion(receso[0]) ? 'Vacaciones de invierno UJAT: sin' : 'Sin'} sesión el {receso.map((r) => fechaLarga(r.fecha, false)).join(' y el ')}{esVacacion(receso[0]) ? '' : ' por ajustes en la programación de la sede'}.</li>}
                     <li data-fecha={s.fecha} id={`sesion-${s.sesion}`} class:list={['sesion group rounded-pieza border bg-superficie transition', proxima?.fecha === s.fecha ? 'border-naranja shadow-alta' : 'border-linea']}>
                       <details>
                         <summary class="grid cursor-pointer list-none grid-cols-[3.5rem_1fr_auto] items-start gap-4 p-5 sm:p-6 [&::-webkit-details-marker]:hidden">

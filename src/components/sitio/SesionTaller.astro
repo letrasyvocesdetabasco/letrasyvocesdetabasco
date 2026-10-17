@@ -1,6 +1,6 @@
 ---
 // Tarjeta «próxima sesión del taller»: se calcula al compilar y se recalcula en el navegador con la fecha real.
-import { SESIONES, TALLER, sesionVigente, fechaLarga, lecturas, TOTAL_SESIONES } from '../../lib/taller';
+import { SESIONES, TALLER, sesionVigente, fechaLarga, lecturas, TOTAL_SESIONES, motivoReceso } from '../../lib/taller';
 interface Props { oscuro?: boolean; compacta?: boolean; }
 const { oscuro = false, compacta = false } = Astro.props;
 const { proxima, recesos, esHoy } = sesionVigente();
@@ -27,7 +27,7 @@ const lec = proxima ? lecturas(proxima).slice(0, 2) : [];
           {lec.map((x) => <li><span class="font-semibold">{x.autor}</span>{x.obra && <span class="voz">, {x.obra}</span>}</li>)}
         </ul>
       )}
-      {recesos.length > 0 && <p class="mt-3 text-xs opacity-70" data-st-receso>Sin sesión el {recesos.map((r) => fechaLarga(r.fecha, false)).join(' y el ')} por vacaciones de la UJAT.</p>}
+      {recesos.length > 0 && <p class="mt-3 text-xs opacity-70" data-st-receso>Sin sesión el {recesos.map((r) => fechaLarga(r.fecha, false)).join(' y el ')} {motivoReceso(recesos[0])}.</p>}
     </>
   ) : (
     <p class="font-serif text-xl">El ciclo del taller concluyó. Pronto anunciaremos el siguiente.</p>

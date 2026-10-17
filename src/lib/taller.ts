@@ -3,7 +3,7 @@ import cal from '../data/taller_calendario.json';
 
 export interface Sesion {
   fecha: string; sesion?: number; modulo?: string; modulo_nombre?: string; titulo?: string;
-  eje?: string; lecturas?: string; ejercicio?: string; nota?: string;
+  eje?: string; lecturas?: string; ejercicio?: string; nota?: string; sin_taller?: string;
 }
 export const TALLER = cal as { nombre: string; horario: string; sede: string; acceso: string; calendario_base: string; calendario: Sesion[] };
 export const SESIONES = TALLER.calendario.filter((s) => s.sesion);
@@ -26,6 +26,9 @@ export function sesionVigente(hoy = hoyMx()) {
   const recesos = TALLER.calendario.filter((s) => !s.sesion && s.fecha >= hoy && (!proxima || s.fecha < proxima.fecha));
   return { proxima, anterior, recesos, esHoy: proxima?.fecha === hoy };
 }
+/** Motivo legible de un sábado sin sesión. */
+export function esVacacion(s: Sesion) { return (s.sin_taller || '').startsWith('Vacaciones'); }
+export function motivoReceso(s: Sesion) { return esVacacion(s) ? 'por vacaciones de la UJAT' : 'por ajustes en la programación de la sede'; }
 export function modulos() {
   const m = new Map<string, { modulo: string; nombre: string; sesiones: Sesion[] }>();
   for (const s of SESIONES) {
