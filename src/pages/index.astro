@@ -146,9 +146,9 @@ const areas = [
         <div>
           <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f0d28a]"><span class="h-2 w-2 rounded-full bg-[#f0d28a]"></span>Novedad editorial · ya está impreso</p>
           <h2 class="mt-4 font-display text-4xl font-extrabold leading-[1.02] sm:text-5xl">Animalia <span class="font-serif font-medium italic text-[#f0d28a]">Literaria</span></h2>
-          <p class="mt-4 max-w-2xl text-lg text-white/80">{TEXTOS_ANIMALIA.length} textos de {AUTORES_ANIMALIA.length} autores sobre el jaguar, el manatí, el coyote y los animales que nos acompañan. Mientras preparamos su primera presentación, puedes leerlo completo aquí, gratis y en línea.</p>
+          <p class="mt-4 max-w-2xl text-lg text-white/80">{TEXTOS_ANIMALIA.length} textos de {AUTORES_ANIMALIA.length} autores sobre el jaguar, el manatí, el coyote y los animales que nos acompañan. {ANIMALIA.lecturaAbierta ? 'Ya puedes leerlo completo aquí, gratis y en línea.' : 'Ya está impreso: muy pronto anunciaremos su presentación y abriremos aquí la lectura en línea.'}</p>
           <div class="mt-7 flex flex-wrap gap-3">
-            <a href={ANIMALIA.lector} class="boton-primario !min-h-[50px] !px-7">Leer el libro en línea</a>
+            {ANIMALIA.lecturaAbierta ? <a href={ANIMALIA.lector} class="boton-primario !min-h-[50px] !px-7">Leer el libro en línea</a> : <a href="/boletin" class="boton-primario !min-h-[50px] !px-7">Avísenme de la presentación</a>}
             <a href={ANIMALIA.ficha} class="boton-claro !min-h-[50px] !px-7">Índice y autores</a>
           </div>
         </div>

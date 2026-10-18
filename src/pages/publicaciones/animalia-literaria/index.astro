@@ -10,29 +10,32 @@ const lirica = TEXTOS_ANIMALIA.filter((t) => t.parte === 'lirica');
 const autores = AUTORES_ANIMALIA.map((nombre) => ({ nombre, socio: personaPorNombre(nombre), textos: TEXTOS_ANIMALIA.filter((t) => t.autor === nombre) }));
 const liliana = personaPorNombre(A.prologuista);
 const prologo = INDICE_ANIMALIA.find((e) => e.titulo === 'Prólogo')!;
+const abierta = A.lecturaAbierta;
+const Enlace = abierta ? 'a' : 'div';
+const enlace = (p: number) => (abierta ? { href: `${A.lector}?p=${p}` } : {});
 const jsonLd = {
   '@context': 'https://schema.org', '@type': 'Book', name: `${A.titulo}: ${A.subtitulo}`, url: new URL(A.ficha, SITIO).href,
   image: new URL(A.portada, SITIO).href, inLanguage: 'es', bookFormat: 'https://schema.org/Paperback', numberOfPages: 131, datePublished: '2026-08',
-  bookEdition: 'Primera edición', genre: ['Narrativa', 'Poesía', 'Antología'], isAccessibleForFree: true,
+  bookEdition: 'Primera edición', genre: ['Narrativa', 'Poesía', 'Antología'], ...(abierta ? { isAccessibleForFree: true } : {}),
   editor: { '@type': 'Person', name: A.compilador }, publisher: { '@type': 'Organization', name: A.sello },
   author: AUTORES_ANIMALIA.map((n) => ({ '@type': 'Person', name: n })), description: A.contraportada[0],
-  potentialAction: { '@type': 'ReadAction', target: new URL(A.lector, SITIO).href },
+  ...(abierta ? { potentialAction: { '@type': 'ReadAction', target: new URL(A.lector, SITIO).href } } : {}),
 };
 ---
-<BaseLayout title="Animalia Literaria (2026) · Antología de narrativa y lírica · Letras y Voces de Tabasco" description="Animalia Literaria: diecinueve textos de dieciséis autores sobre el reino animal. Impresa en agosto de 2026 por Letras y Voces de Tabasco. Léela gratis en línea." image={A.imagenSocial} tipo="book" jsonLd={jsonLd}>
+<BaseLayout title="Animalia Literaria (2026) · Antología de narrativa y lírica · Letras y Voces de Tabasco" description="Animalia Literaria: diecinueve textos de dieciséis autores sobre el reino animal. Impresa en agosto de 2026 por Letras y Voces de Tabasco; presentación y lectura en línea, próximamente." image={A.imagenSocial} tipo="book" jsonLd={jsonLd}>
   <!-- PORTADA -->
   <section class="relative isolate overflow-hidden bg-[#0b3b47] text-white">
     <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_20%_40%,rgb(196_154_60/0.35),transparent_55%),radial-gradient(ellipse_at_90%_100%,rgb(239_123_56/0.25),transparent_50%)]"></div>
     <div class="grano absolute inset-0 -z-10"></div>
     <div class="envoltura grid gap-12 py-14 sm:py-20 lg:grid-cols-[0.95fr_1.1fr] lg:items-center lg:gap-16 lg:py-24">
       <div class="entra flex justify-center lg:justify-start" style="--i:0">
-        <a href={A.lector} class="libro3d" aria-label="Abrir el libro en el lector en línea" data-libro3d>
+        <Enlace {...(abierta ? { href: A.lector, 'aria-label': 'Abrir el libro en el lector en línea' } : {})} class="libro3d" data-libro3d>
           <span class="libro3d-cuerpo">
             <img src={A.portada} alt="Portada de Animalia Literaria, antología de Letras y Voces de Tabasco, edición 2026" class="libro3d-frente" width="1200" height="1840" fetchpriority="high" />
             <span class="libro3d-brillo" aria-hidden="true"></span>
           </span>
           <span class="libro3d-sombra" aria-hidden="true"></span>
-        </a>
+        </Enlace>
       </div>
       <div>
         <nav class="entra flex flex-wrap items-center gap-2 text-xs text-white/60" aria-label="Migas" style="--i:0"><a href="/publicaciones" class="hover:text-white">Publicaciones</a><span>/</span><span>Fondo contemporáneo</span></nav>
@@ -44,13 +47,20 @@ const jsonLd = {
           {[[TEXTOS_ANIMALIA.length, 'textos'], [AUTORES_ANIMALIA.length, 'autores'], [131, 'páginas'], [2, 'géneros']].map(([n, t]) => <div><dd class="font-display text-3xl font-extrabold leading-none numero sm:text-4xl">{n}</dd><dt class="mt-1 text-xs text-white/55">{t}</dt></div>)}
         </dl>
         <div class="entra mt-8 flex flex-wrap gap-3" style="--i:6">
-          <a href={A.lector} class="boton-primario !min-h-[54px] !px-7 !text-base">
-            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 5.5C5 4 8.5 4 12 6c3.5-2 7-2 10-.5V19c-3-1.5-6.5-1.5-10 .5-3.5-2-7-2-10-.5Z"/><path d="M12 6v13.5"/></svg>
-            Leer en línea, gratis
-          </a>
+          {abierta ? (
+            <a href={A.lector} class="boton-primario !min-h-[54px] !px-7 !text-base">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 5.5C5 4 8.5 4 12 6c3.5-2 7-2 10-.5V19c-3-1.5-6.5-1.5-10 .5-3.5-2-7-2-10-.5Z"/><path d="M12 6v13.5"/></svg>
+              Leer en línea, gratis
+            </a>
+          ) : (
+            <a href="/boletin" class="boton-primario !min-h-[54px] !px-7 !text-base">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 5.5C5 4 8.5 4 12 6c3.5-2 7-2 10-.5V19c-3-1.5-6.5-1.5-10 .5-3.5-2-7-2-10-.5Z"/><path d="M12 6v13.5"/></svg>
+              Avísenme de la presentación
+            </a>
+          )}
           <a href={wa('Hola, me interesa un ejemplar impreso de «Animalia Literaria».')} target="_blank" rel="noopener" class="boton-claro !min-h-[54px] !px-7 !text-base">Quiero un ejemplar</a>
         </div>
-        <p class="entra mt-5 text-sm text-white/55" style="--i:7">Edición completa para leer en pantalla. No está disponible para descarga.</p>
+        <p class="entra mt-5 text-sm text-white/55" style="--i:7">{abierta ? 'Edición completa para leer en pantalla. No está disponible para descarga.' : 'Lectura en línea, próximamente: se abrirá después de la presentación del libro.'}</p>
       </div>
     </div>
   </section>
@@ -68,7 +78,7 @@ const jsonLd = {
     <div class="envoltura">
       <div class="flex flex-wrap items-end justify-between gap-6">
         <div><p class="etiqueta">Índice general</p><h2 class="titular-l mt-4">Diecinueve textos, dos caminos</h2></div>
-        <a href={`${A.lector}?p=${prologo.pagina}`} class="boton-contorno">Empezar por el prólogo</a>
+        {abierta ? <a href={`${A.lector}?p=${prologo.pagina}`} class="boton-contorno">Empezar por el prólogo</a> : <span class="chip chip-naranja !py-2">Lectura en línea: próximamente</span>}
       </div>
       <div class="mt-12 grid gap-10 lg:grid-cols-2">
         {[{ t: 'Parte I · Narrativa', l: narrativa }, { t: 'Parte II · Lírica', l: lirica }].map((g) => (
@@ -77,11 +87,11 @@ const jsonLd = {
             <ol class="divide-y divide-linea">
               {g.l.map((e, k) => (
                 <li class="aparece" style={`--i:${k % 8}`}>
-                  <a href={`${A.lector}?p=${e.pagina}`} class="group grid grid-cols-[2.2rem_1fr_auto] items-baseline gap-3 py-4 transition hover:bg-superficie/60">
+                  <Enlace {...enlace(e.pagina)} class="group grid grid-cols-[2.2rem_1fr_auto] items-baseline gap-3 py-4 transition hover:bg-superficie/60">
                     <span class="font-display text-sm font-extrabold text-naranja-tinta numero">{String(e.n).padStart(2, '0')}</span>
                     <span class="min-w-0"><span class="block font-serif text-[1.3rem] font-medium italic leading-tight group-hover:text-naranja-tinta">{e.titulo}</span><span class="block truncate text-sm text-grafito">{e.autor}</span></span>
-                    <span class="flex items-center gap-2 text-xs text-tenue"><span class="numero">p. {e.paginaImpresa}</span><span class="font-display font-bold text-naranja-tinta opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100">Leer →</span></span>
-                  </a>
+                    <span class="flex items-center gap-2 text-xs text-tenue"><span class="numero">p. {e.paginaImpresa}</span>{abierta && <span class="font-display font-bold text-naranja-tinta opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100">Leer →</span>}</span>
+                  </Enlace>
                 </li>
               ))}
             </ol>
@@ -99,7 +109,7 @@ const jsonLd = {
     <ul class="mt-12 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">
       {autores.map((x, i) => (
         <li class="aparece" style={`--i:${i % 8}`}>
-          <a href={x.socio ? `/autores#${x.socio.id}` : `${A.lector}?p=${x.textos[0].pagina}`} class="group flex items-center gap-4">
+          <a href={x.socio ? `/autores#${x.socio.id}` : abierta ? `${A.lector}?p=${x.textos[0].pagina}` : '#indice'} class="group flex items-center gap-4">
             {x.socio?.foto
               ? <img src={x.socio.foto} alt={`Retrato de ${x.nombre}`} loading="lazy" class="retrato h-20 w-16 shrink-0 rounded-xl object-top group-hover:grayscale-0" width="160" height="200" />
               : <span class="grid h-20 w-16 shrink-0 place-items-center rounded-xl bg-[#0b3b47] font-display text-lg font-bold text-[#f0d28a]">{iniciales(x.nombre)}</span>}
@@ -122,7 +132,7 @@ const jsonLd = {
       </div>
       <div>
         <p class="font-serif text-[1.45rem] leading-snug text-white/85 sm:text-[1.65rem]">«{A.prologoInicio}»</p>
-        <a href={`${A.lector}?p=${prologo.pagina}`} class="enlace-vivo mt-6 inline-block font-display text-sm font-bold text-naranja">Seguir leyendo el prólogo →</a>
+        {abierta && <a href={`${A.lector}?p=${prologo.pagina}`} class="enlace-vivo mt-6 inline-block font-display text-sm font-bold text-naranja">Seguir leyendo el prólogo →</a>}
       </div>
     </div>
   </section>
@@ -149,8 +159,18 @@ const jsonLd = {
       </div>
       <div class="pieza p-7">
         <p class="etiqueta">Lectura en línea</p>
-        <p class="mt-3 text-grafito">La edición completa, con sus 133 páginas e ilustraciones al óleo, puede leerse gratis en pantalla. Por respeto a los derechos de los autores, el libro no se ofrece para descarga.</p>
-        <a href={A.lector} class="boton-oscuro mt-5">Abrir el libro</a>
+        {abierta ? (
+          <>
+            <p class="mt-3 text-grafito">La edición completa, con sus 133 páginas e ilustraciones al óleo, puede leerse gratis en pantalla. Por respeto a los derechos de los autores, el libro no se ofrece para descarga.</p>
+            <a href={A.lector} class="boton-oscuro mt-5">Abrir el libro</a>
+          </>
+        ) : (
+          <>
+            <p class="mt-3 font-display text-lg font-bold">Próximamente</p>
+            <p class="mt-2 text-grafito">Después de la presentación, la edición completa con sus ilustraciones al óleo podrá leerse gratis en pantalla. Suscríbete al boletín y te avisamos el día que se abra.</p>
+            <a href="/boletin" class="boton-oscuro mt-5">Suscribirme al boletín</a>
+          </>
+        )}
       </div>
     </div>
   </section>

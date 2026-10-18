@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Boletin from '../../components/sitio/Boletin.astro';
+import { BOLETIN, SECCIONES_BOLETIN, NUMEROS_PUBLICOS, NUMEROS_BOLETIN } from '../../data/boletin';
+const proximo = NUMEROS_BOLETIN.find((n) => n.estado !== 'enviado');
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+---
+<BaseLayout title={`Boletín «${BOLETIN.nombre}» · Letras y Voces de Tabasco`} description={`«${BOLETIN.nombre}», la carta mensual de Letras y Voces de Tabasco: agenda del taller gratuito, novedades editoriales, un texto para leer completo, efemérides y videos. Gratis, una vez al mes.`}>
+  <section class="relative isolate overflow-hidden bg-noche text-white">
+    <div class="absolute -right-40 -top-40 -z-10 h-[38rem] w-[38rem] rounded-full bg-naranja/20 blur-[140px]"></div>
+    <div class="grano absolute inset-0 -z-10"></div>
+    <div class="envoltura grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.15fr_1fr] lg:items-center">
+      <div>
+        <p class="etiqueta etiqueta-clara entra" style="--i:0">Boletín mensual · gratuito</p>
+        <h1 class="mt-6 font-serif text-[clamp(3.4rem,8vw,6.5rem)] font-medium italic leading-[0.95] entra" style="--i:1">{BOLETIN.nombre}</h1>
+        <p class="entra mt-5 max-w-xl text-xl text-white/80" style="--i:2">{BOLETIN.subtitulo}. Lo que leeremos en el taller, lo que publica nuestro fondo editorial y un texto para leer completo, en tu correo {BOLETIN.periodicidad.toLowerCase()}.</p>
+        <ul class="entra mt-8 grid gap-2 text-white/75 sm:grid-cols-2" style="--i:3">
+          {['Agenda del taller gratuito', 'Novedades y presentaciones', 'Un poema o relato del mes', 'Videos y lecturas en voz alta'].map((t) => <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-naranja"></span>{t}</li>)}
+        </ul>
+      </div>
+      <div class="entra rounded-[1.75rem] bg-white/[0.06] p-7 ring-1 ring-white/15 backdrop-blur sm:p-9" style="--i:2">
+        <p class="font-display text-2xl font-bold">Recíbelo en tu correo</p>
+        <p class="mt-2 text-sm text-white/60">Sin publicidad. Solo noticias de la Sociedad y buena lectura.</p>
+        <div class="mt-6"><Boletin completo origen="boletin" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="envoltura py-20 sm:py-24">
+    <div class="grid gap-6 lg:grid-cols-[1fr_1.3fr] lg:items-end">
+      <div><p class="etiqueta">Qué trae cada número</p><h2 class="titular-l mt-4">Ocho secciones, unos minutos de lectura</h2></div>
+      <p class="text-grafito lg:justify-self-end lg:text-right">Cada número sigue la misma estructura para que encuentres rápido lo que buscas. Puedes leerlo también aquí, en la web.</p>
+    </div>
+    <ol class="mt-12 grid gap-px overflow-hidden rounded-pieza border border-linea bg-linea sm:grid-cols-2 lg:grid-cols-4">
+      {SECCIONES_BOLETIN.map((s, i) => (
+        <li class="aparece bg-superficie p-6" style={`--i:${i % 4}`}>
+          <span class="font-display text-3xl font-extrabold text-naranja numero">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="mt-3 font-display text-lg font-bold">{s.titulo}</h3>
+          <p class="mt-2 text-sm text-grafito">{s.descripcion}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="bg-hundido py-20 sm:py-24">
+    <div class="envoltura">
+      <p class="etiqueta">Números</p>
+      <h2 class="titular-l mt-4">Archivo del boletín</h2>
+      {NUMEROS_PUBLICOS.length > 0 ? (
+        <ul class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {NUMEROS_PUBLICOS.map((n) => (
+            <li><a href={`/boletin/${n.slug}`} class="pieza-viva flex h-full flex-col p-6">
+              <span class="text-xs font-semibold uppercase tracking-[0.14em] text-naranja-tinta">Núm. {n.numero} · {n.mes}</span>
+              <span class="mt-3 font-serif text-xl font-medium italic leading-snug">{n.asunto.replace(/^Entre ríos, núm\. \d+:\s*/, '')}</span>
+              <span class="mt-auto pt-5 text-sm font-semibold text-naranja-tinta">Leer este número →</span>
+            </a></li>
+          ))}
+        </ul>
+      ) : (
+        <div class="mt-10 pieza flex flex-wrap items-center justify-between gap-6 p-7">
+          <div>
+            <p class="font-display text-xl font-bold">El primer número está en preparación</p>
+            <p class="mt-1 text-grafito">{proximo ? `Saldrá en ${proximo.mes}${proximo.fechaEnvio ? `, la primera semana de ${MESES[Number(proximo.fechaEnvio.slice(5, 7)) - 1]}` : ''}.` : 'Muy pronto.'} Suscríbete y llegará a tu correo.</p>
+          </div>
+          <a href="#" data-subir class="boton-oscuro">Suscribirme</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="envoltura py-20 sm:py-24">
+    <div class="grid gap-8 lg:grid-cols-3">
+      {[['Doble confirmación', 'Después de suscribirte recibirás un correo con un botón para confirmar. Así nos aseguramos de que nadie inscriba tu dirección sin tu permiso.'],
+        ['Baja con un clic', 'Cada número trae un enlace para darte de baja de inmediato, sin preguntas ni trámites.'],
+        ['Tus datos, solo para esto', 'Guardamos tu correo y, si nos lo das, tu nombre y tus intereses. No los compartimos ni los usamos con fines comerciales.']].map(([t, d]) => (
+        <div class="pieza p-7"><h3 class="font-display text-lg font-bold">{t}</h3><p class="mt-2 text-grafito">{d}</p></div>
+      ))}
+    </div>
+    <p class="mt-6 text-sm text-tenue">Consulta el <a href="/privacidad" class="enlace">aviso de privacidad</a>. Para cualquier duda: {BOLETIN.responderA}.</p>
+  </section>
+  <script>
+    function init() { document.querySelector('[data-subir]')?.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(() => document.querySelector<HTMLInputElement>('#boletin-boletin')?.focus(), 500); }); }
+    document.addEventListener('astro:page-load', init);
+  </script>
+</BaseLayout>

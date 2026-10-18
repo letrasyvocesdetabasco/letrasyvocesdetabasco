@@ -1,17 +1,38 @@
 ---
-// Formulario del boletín: usa Supabase si está configurado; si no, abre el correo.
+// Formulario del boletín «Entre ríos».
+// Orden de preferencia: 1) aplicación web de Google Apps Script (BOLETIN.endpoint), 2) Supabase, 3) correo de solicitud.
+// Con el script, la persona recibe un correo para confirmar (doble confirmación) antes de quedar suscrita.
 import { CONTACTO } from '../../lib/sitio';
-interface Props { oscuro?: boolean; origen?: string; }
-const { oscuro = true, origen = 'pie' } = Astro.props;
+import { BOLETIN } from '../../data/boletin';
+interface Props { oscuro?: boolean; origen?: string; completo?: boolean; }
+const { oscuro = true, origen = 'pie', completo = false } = Astro.props;
+const intereses = ['Taller literario', 'Publicaciones y presentaciones', 'Escuela Gorostiza', 'Lecturas, audio y video'];
 ---
-<form data-boletin data-origen={origen} class="grid gap-2" novalidate>
+<form data-boletin data-origen={origen} data-endpoint={BOLETIN.endpoint} data-correo={CONTACTO.correo} class="grid gap-3" novalidate>
+  {completo && (
+    <label class="grid gap-1.5 text-sm font-semibold">¿Cómo te llamas? <span class="font-normal text-tenue">(opcional)</span>
+      <input type="text" name="nombre" maxlength="80" autocomplete="given-name" class:list={['campo font-normal', oscuro && 'campo-oscuro']} />
+    </label>
+  )}
   <label class="sr-only" for={`boletin-${origen}`}>Tu correo electrónico</label>
   <div class="flex gap-2">
     <input id={`boletin-${origen}`} type="email" name="correo" required placeholder="tu@correo.com" autocomplete="email" class:list={['campo !rounded-full', oscuro && 'campo-oscuro']} />
     <button type="submit" class:list={['boton shrink-0', oscuro ? 'bg-white text-carbon hover:bg-naranja hover:text-white' : 'boton-oscuro']}>Suscribirme</button>
   </div>
-  <p data-msg class:list={['min-h-[1.25rem] text-xs', oscuro ? 'text-white/60' : 'text-tenue']}>Lecturas, taller y novedades del fondo editorial. Sin ruido, una vez al mes.</p>
-  <input type="hidden" name="correo-fallback" value={CONTACTO.correo} />
+  {completo && (
+    <fieldset class="mt-1">
+      <legend class="text-sm font-semibold">Me interesa sobre todo <span class="font-normal text-tenue">(opcional)</span></legend>
+      <div class="mt-2 flex flex-wrap gap-2">
+        {intereses.map((i) => (
+          <label class="cursor-pointer"><input type="checkbox" name="intereses" value={i} class="peer sr-only" /><span class:list={['chip peer-checked:border-naranja peer-checked:bg-naranja peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-naranja', oscuro && '!border-white/20 !bg-white/5 !text-white/80']}>{i}</span></label>
+        ))}
+      </div>
+    </fieldset>
+  )}
+  <input type="text" name="sitio_web" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+  <p data-msg aria-live="polite" class:list={['min-h-[1.25rem] text-xs', oscuro ? 'text-white/60' : 'text-tenue']}>
+    {completo ? <>Te enviaremos un correo para confirmar. Puedes darte de baja cuando quieras. <a href="/privacidad" class="underline">Aviso de privacidad</a>.</> : 'Lecturas, taller y novedades del fondo editorial. Una vez al mes.'}
+  </p>
 </form>
 <script>
   import { suscribirBoletin, SUPABASE_ACTIVO } from '../../lib/supabase';
@@ -20,18 +41,34 @@ const { oscuro = true, origen = 'pie' } = Astro.props;
       f.dataset.listo = '1';
       f.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const correo = (f.elements.namedItem('correo') as HTMLInputElement).value.trim();
+        const datos = new FormData(f);
+        const correo = String(datos.get('correo') || '').trim().toLowerCase();
+        const nombre = String(datos.get('nombre') || '').trim();
+        const intereses = datos.getAll('intereses').map(String).join(', ');
         const msg = f.querySelector('[data-msg]')!;
-        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(correo)) { msg.textContent = 'Escribe un correo válido.'; return; }
-        if (!SUPABASE_ACTIVO) {
-          const fb = (f.elements.namedItem('correo-fallback') as HTMLInputElement).value;
-          location.href = `mailto:${fb}?subject=${encodeURIComponent('Suscripción al boletín')}&body=${encodeURIComponent(`Hola, quiero recibir el boletín en ${correo}.`)}`;
-          msg.textContent = 'Se abrió tu correo para completar la suscripción.'; return;
+        const boton = f.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+        if (datos.get('sitio_web')) { msg.textContent = 'Gracias.'; return; }
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(correo)) { msg.textContent = 'Escribe un correo válido.'; return; }
+        const endpoint = f.dataset.endpoint;
+        if (endpoint) {
+          boton.disabled = true; msg.textContent = 'Un momento…';
+          try {
+            const r = await fetch(endpoint, { method: 'POST', body: new URLSearchParams({ correo, nombre, intereses, origen: f.dataset.origen || 'web', pagina: location.pathname }) });
+            const j = await r.json().catch(() => ({ ok: r.ok }));
+            if (j.ok) { msg.textContent = j.estado === 'confirmado' ? 'Ya estabas suscrito. ¡Gracias por seguir con nosotros!' : 'Revisa tu correo y confirma tu suscripción con un clic (si no lo ves, busca en «spam» o «promociones»).'; f.reset(); }
+            else msg.textContent = 'No pudimos registrarte. Inténtalo de nuevo o escríbenos.';
+          } catch { msg.textContent = 'No pudimos registrarte. Inténtalo de nuevo o escríbenos.'; }
+          boton.disabled = false; return;
         }
-        msg.textContent = 'Un momento…';
-        const r = await suscribirBoletin(correo, '', f.dataset.origen);
-        msg.textContent = r.ok ? '¡Listo! Gracias por acompañarnos.' : r.error === 'duplicado' ? 'Ese correo ya está suscrito.' : 'No pudimos registrarte. Inténtalo más tarde.';
-        if (r.ok) f.reset();
+        if (SUPABASE_ACTIVO) {
+          msg.textContent = 'Un momento…';
+          const r = await suscribirBoletin(correo, nombre, f.dataset.origen);
+          msg.textContent = r.ok ? '¡Listo! Gracias por acompañarnos.' : r.error === 'duplicado' ? 'Ese correo ya está suscrito.' : 'No pudimos registrarte. Inténtalo más tarde.';
+          if (r.ok) f.reset(); return;
+        }
+        const cuerpo = `Hola, quiero recibir el boletín «Entre ríos» en ${correo}.${nombre ? `\nMi nombre: ${nombre}` : ''}${intereses ? `\nMe interesa: ${intereses}` : ''}`;
+        location.href = `mailto:${f.dataset.correo}?subject=${encodeURIComponent('Suscripción al boletín')}&body=${encodeURIComponent(cuerpo)}`;
+        msg.textContent = 'Se abrió tu correo con la solicitud lista: solo envíala.';
       });
     });
   }

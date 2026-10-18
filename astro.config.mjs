@@ -8,6 +8,6 @@ export default defineConfig({
   base: '/',
   trailingSlash: 'ignore',
   output: 'static',
-  integrations: [tailwind({ applyBaseStyles: false }), sitemap({ filter: (p) => !p.includes('/taller/') })],
+  integrations: [tailwind({ applyBaseStyles: false }), sitemap({ filter: (p) => !p.includes('/taller/') && !p.includes('/leer') })],
   prefetch: { prefetchAll: true, defaultStrategy: 'viewport' },
 });

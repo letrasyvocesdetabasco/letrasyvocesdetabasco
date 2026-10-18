@@ -11,6 +11,9 @@ export const ANIMALIA = {
   prologuista: 'Liliana Chuzeville Córdoba',
   edicion: 'Primera edición: agosto de 2026',
   estado: 'Impreso en agosto de 2026 · presentación próximamente',
+  /** Interruptor de la lectura en línea. Se abre el día de la presentación (ver scripts/lector/LEEME.md). */
+  lecturaAbierta: false,
+  avisoLectura: 'La lectura en línea se abrirá después de la presentación del libro.',
   portada: '/assets/portadas/animalia_literaria_portada_oficial.webp',
   portadaChica: '/assets/portadas/web/animalia_literaria_portada_oficial.webp',
   imagenSocial: '/assets/portadas/animalia_literaria_og.jpg',

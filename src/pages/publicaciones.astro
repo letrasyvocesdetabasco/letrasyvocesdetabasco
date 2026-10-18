@@ -30,9 +30,9 @@ const fondoPortada = (c?: string) => { const m = (c || '').match(/from-([a-z]+(?
       <div class="p-6 sm:pl-0">
         <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[#f0d28a]">Novedad · impreso en agosto de 2026</p>
         <p class="mt-2 font-display text-3xl font-extrabold leading-tight">Animalia <span class="font-serif font-medium italic text-[#f0d28a]">Literaria</span></p>
-        <p class="mt-2 max-w-xl text-white/75">{TEXTOS_ANIMALIA.length} textos de narrativa y lírica de {AUTORES_ANIMALIA.length} autores. Su primera presentación se anunciará pronto; mientras, el libro completo puede leerse aquí.</p>
+        <p class="mt-2 max-w-xl text-white/75">{TEXTOS_ANIMALIA.length} textos de narrativa y lírica de {AUTORES_ANIMALIA.length} autores. {ANIMALIA.lecturaAbierta ? 'El libro completo ya puede leerse aquí, gratis y en línea.' : 'Ya está impreso. Muy pronto anunciaremos su presentación y abriremos la lectura en línea.'}</p>
       </div>
-      <div class="px-6 pb-6 lg:pb-0 lg:pr-10"><span class="boton-primario">Leer en línea →</span></div>
+      <div class="px-6 pb-6 lg:pb-0 lg:pr-10"><span class="boton-primario">{ANIMALIA.lecturaAbierta ? 'Leer en línea →' : 'Conocer el libro →'}</span></div>
     </a>
   </section>
 

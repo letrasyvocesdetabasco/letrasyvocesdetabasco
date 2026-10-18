@@ -1,3 +1,4 @@
+import { ANIMALIA } from './animalia';
 export interface Libro {
   id: string;
   titulo: string;
@@ -46,8 +47,8 @@ export const CATALOGO_EDITORIAL: Libro[] = [
     portadaImg: '/assets/portadas/web/animalia_literaria_portada_oficial.webp',
     portadaColor: 'from-amber-950 to-stone-900',
     fichaUrl: '/publicaciones/animalia-literaria',
-    lecturaEnLinea: '/publicaciones/animalia-literaria/leer',
-    nota: 'Impreso en agosto de 2026. Su primera presentación pública se anunciará muy pronto.',
+    lecturaEnLinea: ANIMALIA.lecturaAbierta ? ANIMALIA.lector : undefined,
+    nota: 'Impreso en agosto de 2026. La presentación y la lectura en línea se anunciarán muy pronto.',
     sinopsis: 'Una travesía íntima hacia el pulso secreto de la naturaleza. A través del mito, la lírica y la memoria viva, diecinueve textos de dieciséis autores trazan un puente entre el ser humano y el reino animal: del rugido ancestral del jaguar y el misterio del coyote en el semidesierto, al canto del manatí en los ríos tabasqueños y la noble lealtad del perro guardián.',
     autoresDetallados: [
       'Juan David Pérez Cabrera',

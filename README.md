@@ -20,12 +20,13 @@ npm run preview
 | `/glosario` | Glosario literario (métrica, figuras, géneros, narrativa, oficio) | `src/data/glosario.ts` |
 | `/taller-literario` | Taller sabatino gratuito y calendario | `src/data/taller_calendario.json` |
 | `/publicaciones` | Fondo editorial | `src/data/libros.ts` |
-| `/publicaciones/animalia-literaria`, `…/leer` | Ficha del libro y lector en línea sin descarga | `src/data/animalia.ts`, `src/data/animalia_lector.json`, `public/lectura/al/` (ver `scripts/lector/LEEME.md`) |
+| `/publicaciones/animalia-literaria`, `…/leer` | Ficha del libro y lector en línea sin descarga (cerrado hasta la presentación: `lecturaAbierta` en `src/data/animalia.ts`) | `src/data/animalia.ts`, `src/data/animalia_lector.json`, `public/lectura/al/` (ver `scripts/lector/LEEME.md`) |
 | `/videos` | Producciones de LVT («Literatura animada al óleo») y videos recomendados verificados | `src/data/videos.ts` |
 | `/EEJG` | Escuela de Escritores «José Gorostiza» | `src/data/escuela.ts` |
 | `/historia`, `/autores` | Nosotros, mesa directiva y padrón (con retratos en `public/assets/personas/`) | `src/data/historia.ts`, `src/data/autores.ts` |
 | `/descargas` | Convocatorias, socios, recursos y memoria gráfica | `src/data/convocatorias.ts`, `src/data/galeria.ts` |
 | `/rifa` | Rifa cultural (tablero público) | `src/data/boletos_rifa.json` |
+| `/boletin`, `/boletin/<número>` | Boletín mensual «Entre ríos»: suscripción, archivo y versión para correo (ver `docs/BOLETIN.md`) | `src/data/boletin.ts`, `boletin/apps-script/` |
 | `/contacto`, `/buscar`, `/privacidad` | Contacto y boletín, buscador Pagefind, aviso de privacidad | — |
 
 ## Añadir un autor

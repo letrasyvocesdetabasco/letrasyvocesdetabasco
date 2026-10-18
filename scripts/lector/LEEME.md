@@ -9,6 +9,18 @@ página de impresión vacía, marca de lectura en el margen inferior, nombres de
 con `Disallow: /lectura/`. Ninguna página web puede impedir del todo una captura de pantalla; estas medidas
 evitan la descarga directa del libro.
 
+## Estado actual: lectura cerrada hasta la presentación
+`lecturaAbierta: false` en `src/data/animalia.ts`. Mientras esté cerrada, `/publicaciones/animalia-literaria/leer`
+muestra «Próximamente» y las páginas protegidas no se publican: están guardadas fuera del repositorio en
+`~/Escritorio/ENTREGA_FINAL_IMPRENTA_ANIMALIA_LITERARIA/06_LECTOR_WEB_PAGINAS_PROTEGIDAS/al`.
+
+### Abrir la lectura el día de la presentación
+```bash
+cp -a ~/Escritorio/ENTREGA_FINAL_IMPRENTA_ANIMALIA_LITERARIA/06_LECTOR_WEB_PAGINAS_PROTEGIDAS/al public/lectura/
+# en src/data/animalia.ts: lecturaAbierta: true
+npm run build && git add public/lectura src/data/animalia.ts && git commit -m "feat: abre la lectura en línea de Animalia Literaria" && git push
+```
+
 ## Regenerar las páginas (si cambia el PDF)
 ```bash
 D="$HOME/Escritorio/ENTREGA_FINAL_IMPRENTA_ANIMALIA_LITERARIA/01_ARCHIVOS_PARA_IMPRENTA_PDF_FINAL"

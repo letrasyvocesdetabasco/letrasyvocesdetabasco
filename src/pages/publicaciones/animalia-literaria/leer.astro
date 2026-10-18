@@ -3,11 +3,15 @@
 // imagen barajada en piezas que el navegador recompone en un lienzo (canvas). Ver scripts/README_LECTOR.md.
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Logo from '../../../components/sitio/Logo.astro';
+import { wa } from '../../../lib/sitio';
 import { ANIMALIA, INDICE_ANIMALIA } from '../../../data/animalia';
 import manifiesto from '../../../data/animalia_lector.json';
-const datos = { ...manifiesto, indice: INDICE_ANIMALIA.map((e) => ({ t: e.titulo, a: e.autor ?? '', p: e.pagina, s: !!e.seccion, n: e.n ?? 0 })) };
+const abierta = ANIMALIA.lecturaAbierta;
+const datos = abierta ? { ...manifiesto, indice: INDICE_ANIMALIA.map((e) => ({ t: e.titulo, a: e.autor ?? '', p: e.pagina, s: !!e.seccion, n: e.n ?? 0 })) } : null;
 ---
-<BaseLayout title="Leer «Animalia Literaria» en línea · Letras y Voces de Tabasco" description="Lee en línea la antología Animalia Literaria (2026): diecinueve textos de narrativa y lírica sobre el reino animal. Lectura gratuita, solo en pantalla." image={ANIMALIA.imagenSocial} inmersivo sinIndexar>
+<BaseLayout title="Leer «Animalia Literaria» en línea · Letras y Voces de Tabasco" description="Lee en línea la antología Animalia Literaria (2026): diecinueve textos de narrativa y lírica sobre el reino animal. Lectura gratuita, solo en pantalla." image={ANIMALIA.imagenSocial} inmersivo={abierta} sinIndexar>
+  {abierta ? (
+    <>
   <section id="lector" class="fixed inset-0 z-40 flex select-none flex-col bg-[#171513] text-white" data-modo="doble" aria-label="Lector de Animalia Literaria" style="padding-top: env(safe-area-inset-top, 0px)">
     <!-- Barra superior -->
     <header class="relative z-20 flex h-14 shrink-0 items-center gap-2 border-b border-white/10 bg-[#171513]/90 px-3 backdrop-blur sm:h-16 sm:px-5">
@@ -110,6 +114,26 @@ const datos = { ...manifiesto, indice: INDICE_ANIMALIA.map((e) => ({ t: e.titulo
   </div>
 
   <script type="application/json" id="datos-lector" set:html={JSON.stringify(datos)} />
+    </>
+  ) : (
+  <section class="relative isolate overflow-hidden bg-[#0b3b47] text-white">
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_25%_40%,rgb(196_154_60/0.35),transparent_55%)]"></div>
+      <div class="grano absolute inset-0 -z-10"></div>
+      <div class="envoltura grid min-h-[70vh] items-center gap-12 py-16 sm:py-24 lg:grid-cols-[auto_1fr] lg:gap-16">
+        <img src={ANIMALIA.portadaChica} alt="Portada de Animalia Literaria" width="800" height="1227" class="entra mx-auto w-48 rounded-[2px_7px_7px_2px] shadow-[0_40px_70px_-25px_rgb(0_0_0/0.75)] sm:w-60" style="--i:0" />
+        <div>
+          <p class="entra inline-flex items-center gap-2.5 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f0d28a] ring-1 ring-white/15" style="--i:1">Lectura en línea · próximamente</p>
+          <h1 class="titular-hero entra mt-6 !text-[clamp(2.4rem,5.4vw,4.6rem)]" style="--i:2">Muy pronto podrás leer <em class="!text-[#f0d28a]">Animalia Literaria</em> aquí.</h1>
+          <p class="entra mt-6 max-w-xl text-lg text-white/80" style="--i:3">{ANIMALIA.avisoLectura} El libro ya está impreso; primero lo presentaremos con sus autores y, ese mismo día, abriremos la edición completa para leer en pantalla.</p>
+          <div class="entra mt-8 flex flex-wrap gap-3" style="--i:4">
+            <a href="/boletin" class="boton-primario !min-h-[52px] !px-7">Avísenme por correo</a>
+            <a href={wa('Hola, quiero que me avisen de la presentación de «Animalia Literaria».')} target="_blank" rel="noopener" class="boton-claro !min-h-[52px] !px-7">Avísenme por WhatsApp</a>
+            <a href={ANIMALIA.ficha} class="boton-claro !min-h-[52px] !px-7">Ver índice y autores</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
 
   <style>
     #lector { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }

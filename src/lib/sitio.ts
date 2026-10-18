@@ -23,6 +23,7 @@ export const NAV = [
   { href: '/historia', texto: 'Nosotros' },
 ];
 export const NAV_SECUNDARIA = [
+  { href: '/boletin', texto: 'Boletín «Entre ríos»' },
   { href: '/glosario', texto: 'Glosario literario' },
   { href: '/autores', texto: 'Padrón de autores' },
   { href: '/descargas', texto: 'Convocatorias y recursos' },

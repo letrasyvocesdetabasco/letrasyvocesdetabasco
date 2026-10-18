@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Boletin from '../../../components/sitio/Boletin.astro';
+import VideoYouTube from '../../../components/sitio/VideoYouTube.astro';
+import { BOLETIN, NUMEROS_BOLETIN, numeroPorSlug } from '../../../data/boletin';
+import { ensamblar } from '../../../lib/boletin';
+import { fechaLarga } from '../../../lib/taller';
+import { CONTACTO } from '../../../lib/sitio';
+export function getStaticPaths() { return NUMEROS_BOLETIN.map((n) => ({ params: { slug: n.slug } })); }
+const n = numeroPorSlug(Astro.params.slug!)!;
+const x = ensamblar(n);
+const borrador = n.estado === 'borrador';
+const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+---
+<BaseLayout title={`${BOLETIN.nombre}, núm. ${n.numero} · ${n.mes} · Letras y Voces de Tabasco`} description={n.preencabezado} sinIndexar={borrador}>
+  {borrador && (
+    <div class="bg-naranja text-white"><p class="envoltura py-2.5 text-center text-sm font-semibold">Vista previa · este número todavía no se ha enviado. <a href={`/boletin/${n.slug}/correo.html`} class="underline">Ver la versión para correo</a></p></div>
+  )}
+  <header class="relative isolate overflow-hidden bg-noche text-white">
+    <div class="grano absolute inset-0 -z-10"></div>
+    <div class="envoltura py-14 sm:py-20">
+      <nav class="flex flex-wrap items-center gap-2 text-xs text-white/60" aria-label="Migas"><a href="/boletin" class="hover:text-white">Boletín</a><span>/</span><span>Núm. {n.numero}</span></nav>
+      <div class="mt-8 flex flex-wrap items-end justify-between gap-6">
+        <h1 class="font-serif text-[clamp(3.2rem,8vw,6rem)] font-medium italic leading-[0.95]">{BOLETIN.nombre}</h1>
+        <p class="pb-2 text-right font-display text-sm font-bold uppercase tracking-[0.14em] text-white/60">Núm. {n.numero}<br />{n.mes}</p>
+      </div>
+      <p class="mt-4 max-w-2xl text-lg text-white/70">{BOLETIN.subtitulo}</p>
+    </div>
+    <div class="h-1.5 bg-naranja"></div>
+  </header>
+
+  <article class="envoltura grid gap-16 py-16 lg:grid-cols-[1fr_20rem]">
+    <div class="min-w-0">
+      <!-- Carta -->
+      <section>
+        <p class="font-serif text-2xl italic">{n.carta.saludo}</p>
+        <div class="prosa mt-4 !max-w-none">{n.carta.parrafos.map((p) => <p>{p}</p>)}</div>
+        <p class="mt-6 font-display font-bold">{n.carta.firma}<span class="block text-sm font-normal text-tenue">{n.carta.cargo}</span></p>
+      </section>
+
+      <!-- Agenda -->
+      <section class="mt-16">
+        <p class="etiqueta">Agenda</p>
+        <h2 class="titular-m mt-3">Lo que viene</h2>
+        <p class="mt-2 text-grafito">Taller literario gratuito, sábados de 11:00 a 13:00 h · {CONTACTO.sedeTaller}.</p>
+        <ol class="mt-6 border-t border-linea">
+          {x.agenda.map((a) => (
+            <li class="grid grid-cols-[4.5rem_1fr] gap-4 border-b border-linea py-4">
+              <div class="text-center"><span class:list={['block font-display text-3xl font-extrabold leading-none numero', a.tipo === 'Sin taller' ? 'text-tenue' : 'text-naranja']}>{a.dia}</span><span class="text-[0.7rem] font-semibold tracking-[0.12em] text-tenue">{a.mes}</span></div>
+              <div><p class="text-xs font-semibold uppercase tracking-[0.12em] text-tenue">{a.tipo} · <span class="normal-case tracking-normal">{fechaLarga(a.fecha)}</span></p>
+                <p class="mt-1 font-serif text-xl italic leading-snug">{a.enlace ? <a href={a.enlace} class="hover:text-naranja-tinta">{a.titulo}</a> : a.titulo}</p>
+                {a.detalle && <p class="mt-1 text-sm text-grafito">{a.detalle}</p>}</div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <!-- Fondo editorial -->
+      <section class="mt-16 grid gap-6 overflow-hidden rounded-[1.5rem] bg-[#0b3b47] p-7 text-white sm:grid-cols-[8rem_1fr] sm:p-9">
+        {n.editorial.imagen && <a href={n.editorial.enlace}><img src={n.editorial.imagen} alt="" class="w-28 rounded-[2px_6px_6px_2px] shadow-alta sm:w-full" loading="lazy" /></a>}
+        <div><p class="etiqueta etiqueta-clara">Fondo editorial</p><h2 class="mt-3 font-display text-2xl font-extrabold">{n.editorial.titulo}</h2><p class="mt-3 text-white/80">{n.editorial.texto}</p><a href={n.editorial.enlace} class="boton-primario mt-5">{n.editorial.textoEnlace}</a></div>
+      </section>
+
+      <!-- Texto del mes -->
+      {x.texto && (
+        <section class="mt-16">
+          <p class="etiqueta">Texto del mes</p>
+          <div class="mt-4 rounded-[1.5rem] border border-linea bg-superficie p-7 sm:p-10">
+            <h2 class="font-serif text-3xl font-medium italic">{x.texto.titulo}</h2>
+            <p class="mt-1 text-grafito">{x.texto.autor} · {x.texto.obra}</p>
+            <div class="mt-6 font-serif text-xl leading-relaxed">{x.texto.texto.split(/\n\s*\n/).map((e) => <p class="mb-5 whitespace-pre-line last:mb-0">{e}</p>)}</div>
+            <p class="mt-6 text-sm text-tenue">Obra en dominio público · <a href={`/sala-de-lectura/${x.texto.id}`} class="enlace">Leer en la Sala de lectura</a>{x.autorTexto && <> · <a href={`/escritores/${x.autorTexto.id}`} class="enlace">Sobre {x.autorTexto.nombreCorto}</a></>}</p>
+          </div>
+        </section>
+      )}
+
+      <!-- Palabra del oficio -->
+      {x.palabra && (
+        <section class="mt-10 rounded-[1.5rem] bg-noche p-7 text-white sm:p-9">
+          <p class="etiqueta etiqueta-clara">Palabra del oficio</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold">{x.palabra.termino}</h2>
+          <p class="mt-3 text-white/80">{x.palabra.definicion}</p>
+          {x.palabra.ejemplo && <blockquote class="mt-5 border-l-4 border-naranja pl-4 font-serif text-xl italic" set:html={x.palabra.ejemplo.replace(/\s*\/\s*/g, '<br />')} />}
+          {x.palabra.autorEjemplo && <p class="mt-1 pl-5 text-sm text-white/50">{x.palabra.autorEjemplo}</p>}
+          <a href={`/glosario#${x.palabra.id}`} class="enlace-vivo mt-5 inline-block text-sm font-semibold text-naranja">Más términos en el glosario →</a>
+        </section>
+      )}
+
+      <!-- Ver y escuchar -->
+      <section class="mt-16">
+        <p class="etiqueta">Para ver y escuchar</p>
+        {x.video && (
+          <div class="mt-4">
+            <VideoYouTube id={x.video.id} titulo={`${x.video.titulo} · ${x.video.autor}`} miniatura={x.video.miniatura} />
+            <p class="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-tenue">{x.video.etiqueta}</p>
+            <h3 class="mt-1 font-serif text-2xl italic">{x.video.titulo} <span class="font-sans text-base not-italic text-grafito">· {x.video.autor}</span></h3>
+            <p class="mt-2 text-grafito">{x.video.descripcion}</p>
+          </div>
+        )}
+        {x.pista && <a href={`/audioteca#${x.pista.id}`} class="pieza-viva mt-6 flex items-center gap-4 p-5"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-naranja text-white"><svg class="h-4 w-4 translate-x-[1px]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></span><span><span class="block text-xs font-semibold uppercase tracking-[0.12em] text-tenue">Audioteca</span><span class="block font-serif text-lg italic">{x.pista.titulo}</span><span class="block text-sm text-grafito">{x.pista.autor} · {x.pista.declamador}</span></span></a>}
+      </section>
+
+      <!-- Participa -->
+      <section class="mt-16">
+        <p class="etiqueta">Participa</p>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          {n.participa.map((p) => <div class="pieza p-6"><h3 class="font-display text-lg font-bold">{p.titulo}</h3><p class="mt-2 text-grafito">{p.texto}</p><a href={p.enlace} class="enlace mt-3 inline-block text-sm">{p.textoEnlace}</a></div>)}
+        </div>
+        {n.gracias && <p class="mt-6 rounded-pieza bg-naranja/10 p-5 text-tinta">{n.gracias}</p>}
+      </section>
+    </div>
+
+    <!-- Lateral -->
+    <aside class="grid content-start gap-6 lg:sticky lg:top-28 lg:self-start">
+      {x.efemerides.length > 0 && (
+        <div class="pieza p-6">
+          <p class="etiqueta">Efemérides de {MESES[n.mesEfemerides - 1]}</p>
+          <ul class="mt-4 grid gap-3">
+            {x.efemerides.map((e) => (
+              <li><a href={`/escritores/${e.id}`} class="group flex items-center gap-3">
+                <img src={e.foto} alt="" class="retrato h-12 w-10 shrink-0 rounded-lg object-top group-hover:grayscale-0" loading="lazy" />
+                <span class="min-w-0"><span class="block text-sm"><b class="font-display text-naranja-tinta numero">{e.dia}</b> · <span class="font-semibold group-hover:text-naranja-tinta">{e.nombre}</span></span><span class="block truncate font-serif text-sm italic text-grafito">{e.titulo}</span></span>
+              </a></li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <div class="rounded-pieza bg-noche p-6 text-white">
+        <p class="font-display text-lg font-bold">¿Te gustó? Recíbelo cada mes</p>
+        <div class="mt-4"><Boletin origen={`numero-${n.numero}`} /></div>
+      </div>
+    </aside>
+  </article>
+</BaseLayout>
