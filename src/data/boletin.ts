@@ -12,7 +12,7 @@ export const BOLETIN = {
    * URL de la aplicación web de Google Apps Script que recibe las suscripciones
    * (ver docs/BOLETIN.md). Mientras esté vacía, el formulario abre un correo de solicitud.
    */
-  endpoint: '',
+  endpoint: 'https://bot.letrasyvocesdetabasco.org/boletin/suscribir',
   avisoPrivacidad: '/privacidad',
 };
 
