@@ -1,0 +1,16 @@
+---
+// Tarjeta de un libro del fondo editorial que ya puede leerse completo en línea.
+import { CORAZON_ABIERTO as C } from '../../data/a_corazon_abierto';
+---
+{C.lecturaAbierta && (
+  <a href={C.ficha} class="group relative isolate mt-5 grid items-center gap-5 overflow-hidden rounded-[1.5rem] border border-linea bg-superficie p-5 transition duration-500 ease-suave hover:-translate-y-0.5 hover:shadow-alta sm:grid-cols-[5.5rem_1fr_auto] sm:gap-7 sm:p-6">
+    <div class="absolute inset-y-0 left-0 -z-10 w-1.5 bg-[#933c6f]"></div>
+    <img src={C.portadaChica} alt="Portada de A corazón abierto" loading="lazy" width="480" height="744" class="w-20 rounded-[2px_5px_5px_2px] shadow-[0_16px_30px_-12px_rgb(0_0_0/0.55)] transition duration-700 ease-suave group-hover:rotate-[-2deg] sm:w-full" />
+    <div class="min-w-0">
+      <p class="text-xs font-semibold uppercase tracking-[0.14em] text-[#933c6f] dark:text-[#e8a3c6]">Ya puedes leerlo en línea · gratis</p>
+      <p class="mt-1.5 font-display text-2xl font-extrabold leading-tight sm:text-[1.75rem]">A corazón <span class="font-serif font-medium italic text-[#933c6f] dark:text-[#e8a3c6]">abierto</span></p>
+      <p class="mt-1 text-grafito">Poemario de {C.autora}: treinta poemas, del dolor a la esperanza.</p>
+    </div>
+    <span class="boton-oscuro justify-self-start group-hover:bg-naranja sm:justify-self-end">Leer ahora →</span>
+  </a>
+)}

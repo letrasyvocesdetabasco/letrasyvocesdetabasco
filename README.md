@@ -20,6 +20,7 @@ npm run preview
 | `/glosario` | Glosario literario (métrica, figuras, géneros, narrativa, oficio) | `src/data/glosario.ts` |
 | `/taller-literario` | Taller sabatino gratuito y calendario | `src/data/taller_calendario.json` |
 | `/publicaciones` | Fondo editorial | `src/data/libros.ts` |
+| `/publicaciones/a-corazon-abierto`, `…/leer` | Ficha del poemario y lector en línea sin descarga (abierto) | `src/data/a_corazon_abierto.ts`, `src/data/a_corazon_abierto_lector.json`, `public/lectura/ca/` (ver `scripts/lector/LEEME.md`) |
 | `/publicaciones/animalia-literaria`, `…/leer` | Ficha del libro y lector en línea sin descarga (cerrado hasta la presentación: `lecturaAbierta` en `src/data/animalia.ts`) | `src/data/animalia.ts`, `src/data/animalia_lector.json`, `public/lectura/al/` (ver `scripts/lector/LEEME.md`) |
 | `/videos` | Producciones de LVT («Literatura animada al óleo») y videos recomendados verificados | `src/data/videos.ts` |
 | `/EEJG` | Escuela de Escritores «José Gorostiza» | `src/data/escuela.ts` |

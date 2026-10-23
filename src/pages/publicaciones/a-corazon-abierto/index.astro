@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Libro3D from '../../../components/sitio/Libro3D.astro';
+import { CORAZON_ABIERTO as C, SECCIONES_CORAZON, POEMAS_CORAZON } from '../../../data/a_corazon_abierto';
+import { personaPorNombre } from '../../../lib/personas';
+import { wa, SITIO } from '../../../lib/sitio';
+
+const autora = personaPorNombre(C.autora);
+const abierta = C.lecturaAbierta;
+const Enlace = abierta ? 'a' : 'div';
+const enlace = (p: number) => (abierta ? { href: `${C.lector}?p=${p}` } : {});
+const fotos = [1, 2, 3, 4].map((n) => `/assets/galeria/web/evento_cacao_0${n}.webp`);
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Book', name: C.titulo, alternativeHeadline: C.subtitulo, url: new URL(C.ficha, SITIO).href,
+  image: new URL(C.portada, SITIO).href, inLanguage: 'es', isbn: C.isbn, numberOfPages: 82, datePublished: '2026', genre: 'Poesía',
+  author: { '@type': 'Person', name: C.autora }, publisher: { '@type': 'Organization', name: 'Sociedad de Escritores «Letras y Voces de Tabasco», A.C.' },
+  description: C.contraportada[0], ...(abierta ? { isAccessibleForFree: true, potentialAction: { '@type': 'ReadAction', target: new URL(C.lector, SITIO).href } } : {}),
+};
+---
+<BaseLayout title="A corazón abierto (2026) · Poemario de María de los Ángeles Cervantes Rosas · Letras y Voces de Tabasco" description="A corazón abierto: treinta poemas en seis ejes, del dolor a la esperanza, de María de los Ángeles Cervantes Rosas. Léelo completo en línea, gratis." image={C.imagenSocial} tipo="book" jsonLd={jsonLd}>
+  <!-- PORTADA -->
+  <section class="relative isolate overflow-hidden bg-[#1f0d19] text-white">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_18%_40%,rgb(147_60_111/0.6),transparent_55%),radial-gradient(ellipse_at_92%_100%,rgb(239_123_56/0.2),transparent_50%)]"></div>
+    <div class="grano absolute inset-0 -z-10"></div>
+    <div class="envoltura grid gap-12 py-14 sm:py-20 lg:grid-cols-[0.95fr_1.1fr] lg:items-center lg:gap-16 lg:py-24">
+      <div class="entra flex justify-center lg:justify-start" style="--i:0">
+        <Libro3D src={C.portada} alt="Portada de A corazón abierto: un rostro pintado al óleo entre flores, con una mariposa sobre el ojo" ancho={694} alto={1075} href={abierta ? C.lector : undefined} etiqueta="Abrir el libro en el lector en línea" />
+      </div>
+      <div>
+        <nav class="entra flex flex-wrap items-center gap-2 text-xs text-white/60" aria-label="Migas" style="--i:0"><a href="/publicaciones" class="hover:text-white">Publicaciones</a><span>/</span><span>Fondo contemporáneo</span></nav>
+        <p class="entra mt-6 inline-flex items-center gap-2.5 rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#f3b5d2] ring-1 ring-white/15" style="--i:1"><span class="relative flex h-2.5 w-2.5"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#f3b5d2] opacity-70"></span><span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#f3b5d2]"></span></span>{abierta ? 'Poemario · lectura en línea gratuita' : 'Poemario'}</p>
+        <h1 class="titular-hero entra mt-6 !text-[clamp(2.8rem,6.4vw,5.6rem)]" style="--i:2">A corazón <em class="!text-[#f3b5d2]">abierto</em></h1>
+        <p class="entra mt-3 font-serif text-2xl italic text-white/80" style="--i:3">{C.subtitulo}</p>
+        <a href={autora ? `/autores#${autora.id}` : '#autora'} class="entra group mt-6 inline-flex items-center gap-3" style="--i:3">
+          {autora?.foto && <img src={autora.foto} alt="" class="h-11 w-11 rounded-full object-cover object-top ring-2 ring-white/20" width="88" height="88" />}
+          <span class="font-display font-bold group-hover:text-[#f3b5d2]">{C.autora}</span>
+        </a>
+        <p class="entra mt-6 max-w-xl text-[1.06rem] leading-relaxed text-white/80" style="--i:4">{C.contraportada[0]}</p>
+        <dl class="entra mt-8 grid max-w-lg grid-cols-4 gap-4 border-y border-white/15 py-5" style="--i:5">
+          {[[POEMAS_CORAZON.length, 'poemas'], [SECCIONES_CORAZON.length, 'secciones'], [82, 'páginas'], [2026, 'edición']].map(([n, t]) => <div><dd class="font-display text-3xl font-extrabold leading-none numero sm:text-4xl">{n}</dd><dt class="mt-1 text-xs text-white/55">{t}</dt></div>)}
+        </dl>
+        <div class="entra mt-8 flex flex-wrap gap-3" style="--i:6">
+          {abierta && (
+            <a href={C.lector} class="boton-primario !min-h-[54px] !px-7 !text-base">
+              <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 5.5C5 4 8.5 4 12 6c3.5-2 7-2 10-.5V19c-3-1.5-6.5-1.5-10 .5-3.5-2-7-2-10-.5Z"/><path d="M12 6v13.5"/></svg>
+              Leer en línea, gratis
+            </a>
+          )}
+          <a href={wa('Hola, me interesa un ejemplar impreso de «A corazón abierto».')} target="_blank" rel="noopener" class="boton-claro !min-h-[54px] !px-7 !text-base">Quiero un ejemplar</a>
+        </div>
+        {abierta && <p class="entra mt-5 text-sm text-white/55" style="--i:7">Edición completa para leer en pantalla. No está disponible para descarga.</p>}
+      </div>
+    </div>
+  </section>
+
+  <!-- EPÍGRAFE -->
+  <section class="envoltura py-20 sm:py-28">
+    <figure class="mx-auto max-w-4xl text-center">
+      <blockquote class="cita-gigante aparece !text-[clamp(1.6rem,3.4vw,2.9rem)]">{C.epigrafe.versos.map((v, i) => <>{i === 0 ? '«' : ''}{v}{i === C.epigrafe.versos.length - 1 ? '»' : ''}<br /></>)}</blockquote>
+      <figcaption class="mt-8 flex items-center justify-center gap-4 text-grafito"><span class="h-px w-12 bg-naranja"></span>{abierta ? <a href={`${C.lector}?p=${C.epigrafe.pagina}`} class="enlace">De «{C.epigrafe.poema}», página {C.epigrafe.pagina}</a> : <span>De «{C.epigrafe.poema}», página {C.epigrafe.pagina}</span>}<span class="h-px w-12 bg-naranja"></span></figcaption>
+    </figure>
+  </section>
+
+  <!-- CONTENIDO -->
+  <section id="contenido" class="bg-hundido py-20 sm:py-24">
+    <div class="envoltura">
+      <div class="grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-end">
+        <div><p class="etiqueta">Contenido</p><h2 class="titular-l mt-4">Treinta poemas, seis ejes</h2></div>
+        <div class="lg:justify-self-end lg:text-right">
+          <p class="text-grafito">{C.contraportada[1]}</p>
+          {abierta && <a href={`${C.lector}?p=7`} class="boton-contorno mt-5">Empezar por el prólogo</a>}
+        </div>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {SECCIONES_CORAZON.map((s, i) => (
+          <article class="aparece flex flex-col rounded-pieza border border-linea bg-superficie p-6 sm:p-7" style={`--i:${i % 3}`}>
+            <Enlace {...enlace(s.pagina)} class="group flex items-baseline gap-4 border-b border-linea pb-4">
+              <span class="font-serif text-4xl font-medium italic leading-none text-[#933c6f] dark:text-[#e8a3c6]">{s.numero}</span>
+              <span class="font-display text-sm font-bold uppercase tracking-[0.12em] group-hover:text-naranja-tinta">{s.titulo}</span>
+            </Enlace>
+            <ol class="mt-2">
+              {s.poemas.map((p) => (
+                <li>
+                  <Enlace {...enlace(p.pagina)} class="group flex items-baseline gap-3 py-2">
+                    <span class="font-serif text-[1.2rem] italic leading-snug group-hover:text-naranja-tinta">{p.titulo}</span>
+                    <span class="min-w-4 flex-1 translate-y-[-0.3rem] border-b border-dotted border-linea"></span>
+                    <span class="text-xs text-tenue numero">{p.pagina}</span>
+                  </Enlace>
+                </li>
+              ))}
+            </ol>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- LA AUTORA -->
+  <section id="autora" class="envoltura grid gap-12 py-20 sm:py-24 lg:grid-cols-[auto_1fr] lg:items-center lg:gap-16">
+    {autora?.foto && (
+      <div class="relative mx-auto w-56 sm:w-64 lg:mx-0">
+        <div class="absolute -inset-3 -z-10 rotate-[-3deg] rounded-[1.75rem] bg-[#933c6f]/15"></div>
+        <img src={autora.foto} alt={`Retrato de ${C.autora}`} class="aspect-[4/5] w-full rounded-[1.5rem] object-cover object-top" loading="lazy" width="512" height="640" />
+      </div>
+    )}
+    <div>
+      <p class="etiqueta">Acerca de la autora</p>
+      <h2 class="titular-l mt-4 max-w-[18ch]">{C.autora}</h2>
+      <div class="prosa mt-6">{C.semblanza.map((p) => <p>{p}</p>)}<p>También es pintora: la portada del libro reproduce uno de sus óleos sobre tela.</p></div>
+      <div class="mt-6 flex flex-wrap gap-3">
+        {autora && <a href={`/autores#${autora.id}`} class="boton-oscuro">Ver su ficha de socia</a>}
+        {abierta && <a href={`${C.lector}?p=79`} class="boton-contorno">Leer «Acerca de la autora»</a>}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRÓLOGO -->
+  <section class="bg-noche py-20 text-white sm:py-24">
+    <div class="envoltura grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:items-center">
+      <div><p class="etiqueta etiqueta-clara">Prólogo</p><p class="mt-3 font-display text-2xl font-bold leading-tight">{C.prologuista}</p></div>
+      <div>
+        <p class="font-serif text-[1.45rem] leading-snug text-white/85 sm:text-[1.65rem]">«{C.prologo[0]}»</p>
+        <p class="mt-5 font-serif text-xl italic text-white/60">«{C.prologo[1]}»</p>
+        {abierta && <a href={`${C.lector}?p=7`} class="enlace-vivo mt-6 inline-block font-display text-sm font-bold text-naranja">Leer el prólogo completo →</a>}
+      </div>
+    </div>
+  </section>
+
+  <!-- FICHA Y PRESENTACIÓN -->
+  <section class="envoltura grid gap-10 py-20 sm:py-24 lg:grid-cols-[1.2fr_1fr]">
+    <div>
+      <p class="etiqueta">Ficha técnica</p>
+      <h2 class="titular-m mt-4">Del dolor a la esperanza</h2>
+      <p class="mt-3 max-w-2xl text-grafito">{C.contraportada[2]}</p>
+      <dl class="mt-8 grid gap-px overflow-hidden rounded-pieza border border-linea bg-linea sm:grid-cols-2">
+        {C.fichaTecnica.map(([k, v]) => <div class="bg-superficie p-5"><dt class="text-xs font-semibold uppercase tracking-[0.12em] text-tenue">{k}</dt><dd class="mt-1 font-display font-bold">{v}</dd></div>)}
+        <div class="bg-superficie p-5 sm:col-span-2"><dt class="text-xs font-semibold uppercase tracking-[0.12em] text-tenue">Revisión, edición y distribución</dt><dd class="mt-1 font-display font-bold">Comité Editorial de la Sociedad de Escritores «Letras y Voces de Tabasco», A.C.</dd></div>
+      </dl>
+    </div>
+    <div class="grid content-start gap-5">
+      <div class="overflow-hidden rounded-[1.5rem] bg-[#1f0d19] text-white">
+        <div class="grid grid-cols-2 gap-px bg-white/10">
+          {fotos.map((f, i) => <img src={f} alt={i === 0 ? 'Presentación de A corazón abierto en la Casa Universitaria Cacao y Chocolate' : ''} class="aspect-[4/3] w-full object-cover" loading="lazy" />)}
+        </div>
+        <div class="p-7">
+          <p class="etiqueta etiqueta-clara">Presentación</p>
+          <h3 class="mt-3 font-display text-xl font-extrabold leading-tight">{C.presentacion.fecha}</h3>
+          <p class="mt-1 text-white/70">{C.presentacion.lugar}</p>
+          <a href="/descargas#memoria" class="enlace-vivo mt-4 inline-block text-sm font-semibold text-[#f3b5d2]">Ver las fotos →</a>
+        </div>
+      </div>
+      <div class="pieza p-7">
+        <p class="etiqueta">Lectura en línea</p>
+        {abierta ? (
+          <>
+            <p class="mt-3 text-grafito">El poemario completo, con sus {C.totalPaginas} páginas y la cubierta original, puede leerse gratis en pantalla. Por respeto a los derechos de la autora, el libro no se ofrece para descarga.</p>
+            <a href={C.lector} class="boton-oscuro mt-5">Abrir el libro</a>
+          </>
+        ) : (
+          <p class="mt-3 text-grafito">La lectura en línea no está disponible por ahora. Escríbenos si quieres un ejemplar impreso.</p>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

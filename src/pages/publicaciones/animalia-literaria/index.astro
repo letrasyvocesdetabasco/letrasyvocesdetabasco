@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Libro3D from '../../../components/sitio/Libro3D.astro';
 import { ANIMALIA, INDICE_ANIMALIA, TEXTOS_ANIMALIA, AUTORES_ANIMALIA } from '../../../data/animalia';
 import { personaPorNombre, iniciales } from '../../../lib/personas';
 import { wa, SITIO } from '../../../lib/sitio';
@@ -29,13 +30,7 @@ const jsonLd = {
     <div class="grano absolute inset-0 -z-10"></div>
     <div class="envoltura grid gap-12 py-14 sm:py-20 lg:grid-cols-[0.95fr_1.1fr] lg:items-center lg:gap-16 lg:py-24">
       <div class="entra flex justify-center lg:justify-start" style="--i:0">
-        <Enlace {...(abierta ? { href: A.lector, 'aria-label': 'Abrir el libro en el lector en línea' } : {})} class="libro3d" data-libro3d>
-          <span class="libro3d-cuerpo">
-            <img src={A.portada} alt="Portada de Animalia Literaria, antología de Letras y Voces de Tabasco, edición 2026" class="libro3d-frente" width="1200" height="1840" fetchpriority="high" />
-            <span class="libro3d-brillo" aria-hidden="true"></span>
-          </span>
-          <span class="libro3d-sombra" aria-hidden="true"></span>
-        </Enlace>
+        <Libro3D src={A.portada} alt="Portada de Animalia Literaria, antología de Letras y Voces de Tabasco, edición 2026" ancho={1200} alto={1840} href={abierta ? A.lector : undefined} etiqueta="Abrir el libro en el lector en línea" />
       </div>
       <div>
         <nav class="entra flex flex-wrap items-center gap-2 text-xs text-white/60" aria-label="Migas" style="--i:0"><a href="/publicaciones" class="hover:text-white">Publicaciones</a><span>/</span><span>Fondo contemporáneo</span></nav>
@@ -175,26 +170,4 @@ const jsonLd = {
     </div>
   </section>
 
-  <style>
-    .libro3d { --w: clamp(14rem, 28vw, 20rem); position: relative; display: block; width: var(--w); aspect-ratio: 1200 / 1840; perspective: 1600px; }
-    .libro3d-cuerpo { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateY(-20deg) rotateX(4deg); transform-origin: 40% 50%; transition: transform 1s cubic-bezier(.16,1,.3,1); }
-    .libro3d:hover .libro3d-cuerpo, .libro3d:focus-visible .libro3d-cuerpo { transform: rotateY(-6deg) rotateX(2deg) translateY(-6px); }
-    .libro3d-frente { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 2px 7px 7px 2px;
-      box-shadow: 3px 2px 0 -1px #f6f0e4, 5px 4px 0 -1px #ddd3c1, 7px 6px 0 -2px #f6f0e4, 9px 8px 0 -2px #d8ccb7, 11px 10px 0 -3px #f3ecdf, 13px 12px 0 -3px #cfc2ab, 40px 50px 70px -25px rgb(0 0 0 / .75); }
-    .libro3d-cuerpo::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 7%; z-index: 2; border-radius: 2px 0 0 2px; pointer-events: none;
-      background: linear-gradient(90deg, rgb(0 0 0 / .35), rgb(255 255 255 / .18) 35%, rgb(0 0 0 / .12) 60%, transparent); }
-    .libro3d-brillo { position: absolute; inset: 0; z-index: 3; background: linear-gradient(105deg, rgb(255 255 255 / 0) 30%, rgb(255 255 255 / .2) 45%, rgb(255 255 255 / 0) 60%); background-size: 250% 100%; background-position: 120% 0; transition: background-position 1.2s cubic-bezier(.16,1,.3,1); border-radius: 2px 7px 7px 2px; pointer-events: none; }
-    .libro3d:hover .libro3d-brillo { background-position: -40% 0; }
-    .libro3d-sombra { position: absolute; left: 6%; right: -8%; bottom: -5%; height: 8%; background: radial-gradient(ellipse at center, rgb(0 0 0 / .5), transparent 70%); filter: blur(10px); z-index: -1; }
-    @media (prefers-reduced-motion: reduce) { .libro3d-cuerpo, .libro3d-brillo { transition: none; } }
-  </style>
-  <script>
-    function init() {
-      const l = document.querySelector<HTMLElement>('[data-libro3d]'); if (!l || !matchMedia('(hover:hover)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const c = l.querySelector<HTMLElement>('.libro3d-cuerpo')!;
-      l.addEventListener('pointermove', (e) => { const r = l.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5; c.style.transform = `rotateY(${-10 + x * 18}deg) rotateX(${3 - y * 8}deg)`; });
-      l.addEventListener('pointerleave', () => { c.style.transform = ''; });
-    }
-    document.addEventListener('astro:page-load', init);
-  </script>
 </BaseLayout>

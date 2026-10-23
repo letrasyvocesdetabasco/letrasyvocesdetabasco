@@ -1,4 +1,5 @@
 import { ANIMALIA } from './animalia';
+import { CORAZON_ABIERTO } from './a_corazon_abierto';
 export interface Libro {
   id: string;
   titulo: string;
@@ -81,13 +82,17 @@ export const CATALOGO_EDITORIAL: Libro[] = [
     isbn: '978-607-29-8439-4',
     indautor: '03-2026-012017574600-14',
     coeditores: 'Sociedad de Escritores «Letras y Voces de Tabasco», A.C.',
-    paginas: 88,
+    prologo: 'Abel Pérez Sánchez',
+    paginas: 82,
     fondo: 'Contemporáneo',
     disponibilidad: 'Venta / Distribución',
-    portadaImg: '/assets/portadas/portada_acorazonabierto.png',
+    portadaImg: CORAZON_ABIERTO.portadaChica,
     portadaColor: 'from-rose-950 to-neutral-900',
-    sinopsis: 'Obra testimonial y lírica estructurada en seis secciones temáticas: Susurros que gritan, Cicatrices colectivas, Vínculos y puentes, Latidos del corazón, Quimeras del querer y Horizonte de esperanzas. Presentada en la Casa Universitaria Cacao y Chocolate.',
-    fragmentoMuestra: '¿Cuándo se acorta la distancia del amor? En cualquier momento y yendo por la vida con metas y proyectos retadores... María de los Ángeles Cervantes Rosas retrata con precisión esas heridas y esperanzas del corazón.'
+    fichaUrl: CORAZON_ABIERTO.ficha,
+    lecturaEnLinea: CORAZON_ABIERTO.lecturaAbierta ? CORAZON_ABIERTO.lector : undefined,
+    nota: CORAZON_ABIERTO.lecturaAbierta ? 'El poemario completo puede leerse gratis en línea.' : undefined,
+    sinopsis: 'Treinta poemas en seis secciones: Susurros que gritan, Cicatrices colectivas, Vínculos y puentes, Latidos del corazón, Quimeras del querer y Horizonte de esperanzas. Un recorrido íntimo y colectivo del dolor a la esperanza. Presentado el 30 de mayo de 2026 en la Casa Universitaria Cacao y Chocolate.',
+    fragmentoMuestra: 'Gracias por impulsarme cuando yo dudo,\npor ver en mí lo que a veces no veo,\npor admirar mis pasos, no mostrarte rudo,\ny levantarme con tu amor sincero.'
   },
   {
     id: 'tardes-tabasquenas',

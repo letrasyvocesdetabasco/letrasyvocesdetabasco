@@ -13,6 +13,7 @@ import { SESIONES as SES } from '../lib/taller';
 import VideoYouTube from '../components/sitio/VideoYouTube.astro';
 import { VIDEOS_LVT, VIDEOS_RECOMENDADOS, CANAL_YOUTUBE } from '../data/videos';
 import { ANIMALIA, TEXTOS_ANIMALIA, AUTORES_ANIMALIA } from '../data/animalia';
+import LeerEnLinea from '../components/sitio/LeerEnLinea.astro';
 import { MESA_DIRECTIVA, cargo } from '../lib/personas';
 
 const tabasco = ESCRITORES.filter((x) => x.bloque === 'tabasquenos').slice(0, 10);
@@ -154,6 +155,7 @@ const areas = [
         </div>
       </div>
     </div>
+    <LeerEnLinea />
   </section>
 
   <!-- QUÉ HACEMOS -->

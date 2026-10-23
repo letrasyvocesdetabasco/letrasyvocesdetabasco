@@ -1,0 +1,20 @@
+---
+// Lector en línea de «A corazón abierto» (solo lectura, sin descarga). Ver scripts/lector/LEEME.md.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import LectorLibro from '../../../components/lector/LectorLibro.astro';
+import { CORAZON_ABIERTO as C, INDICE_CORAZON } from '../../../data/a_corazon_abierto';
+import manifiesto from '../../../data/a_corazon_abierto_lector.json';
+const abierta = C.lecturaAbierta;
+---
+<BaseLayout title="Leer «A corazón abierto» en línea · Letras y Voces de Tabasco" description="Lee en línea A corazón abierto, poemario de María de los Ángeles Cervantes Rosas: treinta poemas del dolor a la esperanza. Lectura gratuita, solo en pantalla." image={C.imagenSocial} inmersivo={abierta} sinIndexar>
+  {abierta ? (
+    <LectorLibro titulo={C.titulo} ficha={C.ficha} indice={INDICE_CORAZON} manifiesto={manifiesto} clave="lvt-corazon-pagina" />
+  ) : (
+    <section class="envoltura grid min-h-[60vh] place-items-center py-20 text-center">
+      <div>
+        <h1 class="titular-l">La lectura en línea de <em>A corazón abierto</em> no está disponible por ahora.</h1>
+        <a href={C.ficha} class="boton-oscuro mt-8">Ver la ficha del libro</a>
+      </div>
+    </section>
+  )}
+</BaseLayout>

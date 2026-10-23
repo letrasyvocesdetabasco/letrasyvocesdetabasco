@@ -1,0 +1,374 @@
+---
+// Lector en línea de un libro, solo lectura: no existe PDF publicado. Cada página se sirve como imagen barajada
+// en piezas que el navegador recompone en un lienzo (canvas). Las páginas se generan con scripts/lector/barajar.py.
+import Logo from '../sitio/Logo.astro';
+import type { EntradaLector, ManifiestoLector } from '../../lib/lector';
+interface Props {
+  titulo: string;
+  ficha: string;
+  indice: EntradaLector[];
+  manifiesto: ManifiestoLector;
+  /** Clave para recordar la última página leída en este navegador */
+  clave: string;
+  /** Páginas del principio con folio en números romanos (sin contar la portada) */
+  romanas?: number;
+}
+const { titulo, ficha, indice, manifiesto, clave, romanas = 0 } = Astro.props;
+const total = manifiesto.paginas.length;
+const datos = { ...manifiesto, titulo, clave, romanas, indice: indice.map((e) => ({ t: e.titulo, a: e.autor ?? '', p: e.pagina, s: !!e.seccion, n: e.n ?? 0 })) };
+---
+<section id="lector" class="fixed inset-0 z-40 flex select-none flex-col bg-[#171513] text-white" data-modo="doble" aria-label={`Lector de ${titulo}`} style="padding-top: env(safe-area-inset-top, 0px)">
+  <!-- Barra superior -->
+  <header class="relative z-20 flex h-14 shrink-0 items-center gap-2 border-b border-white/10 bg-[#171513]/90 px-3 backdrop-blur sm:h-16 sm:px-5">
+    <a href={ficha} class="grid h-10 w-10 shrink-0 place-items-center rounded-full text-white/70 transition hover:bg-white/10 hover:text-white" aria-label="Volver a la ficha del libro">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    </a>
+    <a href="/" class="hidden shrink-0 md:block" aria-label="Letras y Voces de Tabasco"><Logo claro clase="h-8" /></a>
+    <span class="mx-2 hidden h-6 w-px bg-white/15 md:block"></span>
+    <div class="min-w-0 flex-1">
+      <p class="truncate font-serif text-[1.05rem] italic leading-tight sm:text-lg">{titulo}</p>
+      <p class="truncate text-[0.7rem] text-white/50 sm:text-xs" data-l-seccion>Portada</p>
+    </div>
+    <div class="flex shrink-0 items-center gap-1">
+      <button type="button" class="lector-btn" data-l-indice aria-label="Índice" title="Índice (I)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+      </button>
+      <button type="button" class="lector-btn hidden sm:grid" data-l-modo aria-label="Cambiar entre una y dos páginas" title="Una o dos páginas (D)">
+        <svg data-ic-doble viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="8" height="16" rx="1"/><rect x="13" y="4" width="8" height="16" rx="1"/></svg>
+        <svg data-ic-una class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="7" y="4" width="10" height="16" rx="1"/></svg>
+      </button>
+      <button type="button" class="lector-btn" data-l-zoom="-1" aria-label="Alejar" title="Alejar (−)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6"/></svg>
+      </button>
+      <button type="button" class="lector-btn" data-l-zoom="1" aria-label="Acercar" title="Acercar (+)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg>
+      </button>
+      <button type="button" class="lector-btn hidden sm:grid" data-l-completa aria-label="Pantalla completa" title="Pantalla completa (F)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Escenario -->
+  <div id="escenario" class="relative flex-1 overflow-auto overscroll-contain" style="touch-action: pan-x pan-y pinch-zoom">
+    <div class="grano pointer-events-none absolute inset-0"></div>
+    <div id="libro-marco" class="relative grid min-h-full min-w-full place-items-center p-4 sm:p-8">
+      <div id="libro" class="relative" style="perspective: 2400px">
+        <canvas data-hoja="izq" class="hoja absolute left-0 top-0"></canvas>
+        <canvas data-hoja="der" class="hoja absolute top-0"></canvas>
+        <div data-lomo class="pointer-events-none absolute top-0 h-full w-16 -translate-x-1/2" aria-hidden="true"></div>
+        <div data-volteo class="pointer-events-none absolute top-0 hidden" style="transform-style: preserve-3d">
+          <canvas data-cara="frente" class="absolute inset-0 h-full w-full" style="backface-visibility: hidden"></canvas>
+          <canvas data-cara="reverso" class="absolute inset-0 h-full w-full" style="backface-visibility: hidden; transform: rotateY(180deg)"></canvas>
+          <div data-sombra class="absolute inset-0"></div>
+        </div>
+        <div data-escudo class="absolute inset-0 z-10" aria-hidden="true"></div>
+        <div data-cargando class="pointer-events-none absolute inset-0 z-10 hidden place-items-center"><span class="h-9 w-9 animate-spin rounded-full border-2 border-white/20 border-t-naranja"></span></div>
+      </div>
+    </div>
+    <button type="button" data-l-ir="-1" class="lector-flecha left-2 sm:left-5" aria-label="Página anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button type="button" data-l-ir="1" class="lector-flecha right-2 sm:right-5" aria-label="Página siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+  </div>
+
+  <!-- Barra inferior -->
+  <footer class="relative z-20 flex shrink-0 items-center gap-3 border-t border-white/10 bg-[#171513]/90 px-4 py-3 backdrop-blur sm:gap-5 sm:px-6" style="padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.75rem)">
+    <span class="hidden w-28 shrink-0 text-xs text-white/50 sm:block" data-l-folio>Portada</span>
+    <input type="range" min="0" max={total - 1} value="0" step="1" data-l-barra class="lector-barra h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-white/15" aria-label="Ir a la página" />
+    <span class="w-24 shrink-0 text-right text-xs text-white/70 numero sm:w-28" data-l-cuenta>1 / {total}</span>
+  </footer>
+
+  <!-- Índice -->
+  <aside data-l-panel class="absolute inset-y-0 left-0 z-30 flex w-[min(24rem,88vw)] -translate-x-full flex-col bg-[#211e1b] shadow-alta transition-transform duration-500 ease-suave" aria-label="Índice del libro">
+    <div class="flex h-14 items-center justify-between border-b border-white/10 px-5 sm:h-16">
+      <p class="etiqueta etiqueta-clara">Índice general</p>
+      <button type="button" class="lector-btn" data-l-cerrar aria-label="Cerrar índice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <ol class="flex-1 overflow-y-auto px-3 py-3">
+      {indice.map((e) => (
+        <li>
+          <button type="button" data-l-saltar={e.pagina} class:list={['grid w-full grid-cols-[1.8rem_1fr_auto] items-baseline gap-2 rounded-xl px-3 py-2.5 text-left transition hover:bg-white/[0.06]', e.seccion && 'mt-2']}>
+            <span class="font-display text-xs font-bold text-naranja numero">{e.n ?? ''}</span>
+            <span class="min-w-0">
+              <span class:list={['block leading-tight', e.seccion ? 'font-display text-sm font-bold uppercase tracking-[0.08em] text-white/80' : 'font-serif text-[1.05rem] italic']}>{e.titulo}</span>
+              {e.autor && !e.seccion && <span class="block truncate text-xs text-white/45">{e.autor}</span>}
+            </span>
+            <span class="text-xs text-white/35 numero">{e.paginaImpresa ?? ''}</span>
+          </button>
+        </li>
+      ))}
+    </ol>
+    <p class="border-t border-white/10 px-5 py-4 text-xs leading-relaxed text-white/40">Lectura gratuita en línea. Esta edición no se ofrece para descarga: si quieres el libro impreso, <a href="/contacto?asunto=Publicaciones+y+antolog%C3%ADas" class="underline hover:text-white">escríbenos</a>.</p>
+  </aside>
+  <div data-l-velo class="absolute inset-0 z-[25] hidden bg-black/50"></div>
+
+  <!-- Bienvenida / continuar -->
+  <div data-l-continuar class="absolute bottom-24 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-3 rounded-full bg-white px-2 py-2 pl-5 text-sm text-carbon shadow-alta">
+    <span>¿Seguir donde te quedaste? <b data-l-continuar-p class="numero"></b></span>
+    <button type="button" class="boton-primario !min-h-[36px] !px-4 !text-xs" data-l-continuar-si>Continuar</button>
+    <button type="button" class="grid h-8 w-8 place-items-center rounded-full text-tenue hover:bg-hundido" data-l-continuar-no aria-label="Empezar desde el inicio">✕</button>
+  </div>
+  <div data-l-aviso role="status" class="pointer-events-none absolute left-1/2 top-20 z-40 -translate-x-1/2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-carbon opacity-0 shadow-alta transition duration-300"></div>
+</section>
+
+<div class="solo-impresion">
+  <p>«{titulo}» solo puede leerse en línea en letrasyvocesdetabasco.org. Para obtener un ejemplar impreso escribe a contacto@letrasyvocesdetabasco.org.</p>
+</div>
+
+<script type="application/json" id="datos-lector" set:html={JSON.stringify(datos)} />
+
+<style>
+  #lector { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  #lector canvas { -webkit-user-drag: none; }
+  .lector-btn:not(.hidden) { display: grid; }
+  @media (min-width: 640px) { .lector-btn.hidden { display: grid; } }
+  .lector-btn { height: 2.5rem; width: 2.5rem; place-items: center; border-radius: 9999px; color: rgb(255 255 255 / .7); transition: background .2s, color .2s; }
+  .lector-btn:hover { background: rgb(255 255 255 / .1); color: #fff; }
+  .lector-btn svg { height: 1.25rem; width: 1.25rem; }
+  .lector-btn[aria-pressed="true"] { background: rgb(239 123 56 / .9); color: #fff; }
+  .lector-flecha { position: absolute; top: 50%; z-index: 15; display: grid; height: 3.25rem; width: 3.25rem; transform: translateY(-50%); place-items: center; border-radius: 9999px; background: rgb(23 21 19 / .65); color: rgb(255 255 255 / .8); backdrop-filter: blur(8px); border: 1px solid rgb(255 255 255 / .12); transition: background .2s, transform .3s, opacity .3s; }
+  .lector-flecha:hover { background: rgb(239 123 56); color: #fff; transform: translateY(-50%) scale(1.06); }
+  .lector-flecha:disabled { opacity: 0; pointer-events: none; }
+  .lector-flecha svg { height: 1.4rem; width: 1.4rem; }
+  @media (max-width: 640px) { .lector-flecha { height: 2.75rem; width: 2.75rem; background: rgb(23 21 19 / .45); } }
+  .hoja { background: #fff; box-shadow: 0 30px 60px -20px rgb(0 0 0 / .65), 0 4px 10px rgb(0 0 0 / .3); }
+  [data-modo="doble"] .hoja[data-hoja="izq"] { border-radius: 4px 0 0 4px; }
+  [data-modo="doble"] .hoja[data-hoja="der"] { border-radius: 0 4px 4px 0; }
+  [data-solo] .hoja { border-radius: 3px 8px 8px 3px; }
+  [data-lomo] { background: linear-gradient(90deg, transparent, rgb(0 0 0 / .14) 42%, rgb(0 0 0 / .26) 50%, rgb(255 255 255 / .06) 53%, rgb(0 0 0 / .1) 60%, transparent); }
+  [data-modo="una"] [data-lomo], [data-solo] [data-lomo] { display: none; }
+  [data-volteo] { will-change: transform; }
+  [data-volteo].hacia-adelante { transform-origin: left center; animation: voltea-adelante .72s cubic-bezier(.45,.05,.35,1) forwards; }
+  [data-volteo].hacia-atras { transform-origin: right center; animation: voltea-atras .72s cubic-bezier(.45,.05,.35,1) forwards; }
+  @keyframes voltea-adelante { from { transform: rotateY(0deg); } to { transform: rotateY(-180deg); } }
+  @keyframes voltea-atras { from { transform: rotateY(0deg); } to { transform: rotateY(180deg); } }
+  [data-sombra] { pointer-events: none; }
+  .hacia-adelante [data-sombra] { background: linear-gradient(90deg, rgb(0 0 0 / .25), transparent 40%); animation: sombra-volteo .72s ease forwards; }
+  .hacia-atras [data-sombra] { background: linear-gradient(270deg, rgb(0 0 0 / .25), transparent 40%); animation: sombra-volteo .72s ease forwards; }
+  @keyframes sombra-volteo { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+  .entra-izq { animation: hoja-izq .45s cubic-bezier(.16,1,.3,1); }
+  .entra-der { animation: hoja-der .45s cubic-bezier(.16,1,.3,1); }
+  @keyframes hoja-izq { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+  @keyframes hoja-der { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+  .lector-barra::-webkit-slider-thumb { -webkit-appearance: none; height: 1.1rem; width: 1.1rem; border-radius: 9999px; background: #EF7B38; box-shadow: 0 0 0 4px rgb(239 123 56 / .25); cursor: pointer; }
+  .lector-barra::-moz-range-thumb { height: 1.1rem; width: 1.1rem; border: 0; border-radius: 9999px; background: #EF7B38; cursor: pointer; }
+  [data-l-panel].abierto { transform: translateX(0); }
+  .solo-impresion { display: none; }
+  @media print {
+    #lector, #reproductor { display: none !important; }
+    .solo-impresion { display: block !important; padding: 3rem; font: 16pt Georgia, serif; }
+  }
+  @media (prefers-reduced-motion: reduce) { [data-volteo].hacia-adelante, [data-volteo].hacia-atras { animation-duration: .01ms; } }
+</style>
+
+<script>
+  type Entrada = { t: string; a: string; p: number; s: boolean; n: number };
+  type Datos = { ancho: number; alto: number; cols: number; filas: number; pad: number; sal: number; base: string; paginas: (string | null)[]; indice: Entrada[]; titulo: string; clave: string; romanas: number };
+
+  const romano = (n: number) => { let r = ''; for (const [v, s] of [[10, 'x'], [9, 'ix'], [5, 'v'], [4, 'iv'], [1, 'i']] as [number, string][]) while (n >= v) { r += s; n -= v; } return r; };
+
+  function iniciarLector() {
+    const raiz = document.getElementById('lector'); if (!raiz || raiz.dataset.listo) return; raiz.dataset.listo = '1';
+    const D: Datos = JSON.parse(document.getElementById('datos-lector')!.textContent!);
+    const TOTAL = D.paginas.length, ULTIMA = TOTAL - 1;
+    const TW = D.ancho / D.cols, TH = D.alto / D.filas, CW = TW + 2 * D.pad, CH = TH + 2 * D.pad, RATIO = D.ancho / D.alto;
+    const $ = <T extends Element>(s: string) => raiz.querySelector<T>(s)!;
+    const escenario = $<HTMLDivElement>('#escenario'), libro = $<HTMLDivElement>('#libro');
+    const cIzq = $<HTMLCanvasElement>('[data-hoja="izq"]'), cDer = $<HTMLCanvasElement>('[data-hoja="der"]');
+    const volteo = $<HTMLDivElement>('[data-volteo]'), caraF = $<HTMLCanvasElement>('[data-cara="frente"]'), caraR = $<HTMLCanvasElement>('[data-cara="reverso"]');
+    const lomo = $<HTMLDivElement>('[data-lomo]'), cargando = $<HTMLDivElement>('[data-cargando]');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---------- Permutación determinista (idéntica a la del generador) ----------
+    const mulberry32 = (a: number) => () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const perms = new Map<number, number[]>();
+    const perm = (i: number) => { let p = perms.get(i); if (p) return p; const r = mulberry32((i * 2654435761 + D.sal) >>> 0); p = [...Array(D.cols * D.filas).keys()]; for (let k = p.length - 1; k > 0; k--) { const j = Math.floor(r() * (k + 1)); [p[k], p[j]] = [p[j], p[k]]; } perms.set(i, p); return p; };
+
+    // ---------- Carga de páginas (blobs comprimidos en memoria, mapas de bits solo los cercanos) ----------
+    const blobs = new Map<number, Promise<Blob | null>>();
+    const mapas = new Map<number, Promise<ImageBitmap | null>>();
+    const blob = (i: number) => { if (!blobs.has(i)) { const n = D.paginas[i]; blobs.set(i, n ? fetch(D.base + n, { credentials: 'omit' }).then((r) => (r.ok ? r.blob() : null)).catch(() => null) : Promise.resolve(null)); } return blobs.get(i)!; };
+    const mapa = (i: number) => {
+      if (!mapas.has(i)) mapas.set(i, blob(i).then((b) => (b ? createImageBitmap(b) : null)));
+      if (mapas.size > 8) { for (const [k, v] of mapas) { if (Math.abs(k - actual) > 4) { v.then((m) => m?.close()); mapas.delete(k); } if (mapas.size <= 8) break; } }
+      return mapas.get(i)!;
+    };
+
+    // ---------- Dibujo ----------
+    let anchoHoja = 0, altoHoja = 0;
+    const dpr = () => Math.min(window.devicePixelRatio || 1, 2.5);
+    const preparar = (c: HTMLCanvasElement) => { const r = dpr(); c.width = Math.round(anchoHoja * r); c.height = Math.round(altoHoja * r); c.style.width = anchoHoja + 'px'; c.style.height = altoHoja + 'px'; const x = c.getContext('2d')!; x.imageSmoothingQuality = 'high'; return x; };
+    async function dibujar(c: HTMLCanvasElement, i: number | null) {
+      const x = preparar(c), w = c.width, h = c.height;
+      if (i === null) { x.fillStyle = '#efe8dc'; x.fillRect(0, 0, w, h); return; } // guarda interior
+      x.fillStyle = '#ffffff'; x.fillRect(0, 0, w, h);
+      if (!D.paginas[i]) return;
+      const bm = await mapa(i); if (!bm) { x.fillStyle = '#999'; x.font = `${14 * dpr()}px Inter, sans-serif`; x.textAlign = 'center'; x.fillText('No se pudo cargar esta página', w / 2, h / 2); return; }
+      const s = w / D.ancho, p = perm(i);
+      for (let j = 0; j < p.length; j++) {
+        const k = p[j], sx = (j % D.cols) * CW + D.pad, sy = Math.floor(j / D.cols) * CH + D.pad;
+        const col = k % D.cols, fil = Math.floor(k / D.cols);
+        const dx0 = Math.round(col * TW * s), dx1 = Math.round((col + 1) * TW * s), dy0 = Math.round(fil * TH * (h / D.alto)), dy1 = Math.round((fil + 1) * TH * (h / D.alto));
+        x.drawImage(bm, sx, sy, TW, TH, dx0, dy0, dx1 - dx0, dy1 - dy0);
+      }
+      if (i > 0 && i < ULTIMA) { // marca de lectura en el margen inferior
+        x.fillStyle = 'rgba(80,72,64,.32)'; x.font = `${Math.max(7, anchoHoja * 0.016) * dpr()}px Inter, system-ui, sans-serif`; x.textAlign = 'center';
+        x.fillText(`${D.titulo} · Letras y Voces de Tabasco · lectura en línea`, w / 2, h - Math.max(6, altoHoja * 0.012) * dpr());
+      }
+    }
+
+    // ---------- Modelo de vistas ----------
+    let modo: 'doble' | 'una' = innerWidth >= 900 && innerWidth / innerHeight > 1.05 ? 'doble' : 'una';
+    let zoom = 1, actual = 0, ocupado = false;
+    type Vista = { izq: number | null; der: number | null; solo?: number };
+    const vista = (p: number): Vista => {
+      if (modo === 'una') return { izq: null, der: p, solo: p };
+      if (p === 0) return { izq: null, der: 0, solo: 0 };
+      if (p === ULTIMA) return { izq: null, der: ULTIMA, solo: ULTIMA };
+      if (p === 1) return { izq: null, der: 1 };
+      const izq = p % 2 === 0 ? p : p - 1; return { izq, der: izq + 1 <= ULTIMA - 1 ? izq + 1 : null };
+    };
+    const siguiente = (p: number, dir: number) => {
+      if (modo === 'una') return Math.min(ULTIMA, Math.max(0, p + dir));
+      const v = vista(p);
+      if (dir > 0) { if (v.solo === 0) return 1; const ultimaVisible = v.der ?? v.izq!; return ultimaVisible >= ULTIMA - 1 ? ULTIMA : ultimaVisible + 1; }
+      if (v.solo === ULTIMA) return ULTIMA - 1; if (v.solo === 0) return 0; if (v.izq === null) return 0; return Math.max(1, v.izq - 1);
+    };
+
+    const medir = () => {
+      const cs = getComputedStyle($('#libro-marco')); const padX = parseFloat(cs.paddingLeft) * 2, padY = parseFloat(cs.paddingTop) * 2;
+      const W = escenario.clientWidth - padX - (modo === 'doble' ? 120 : 0), H = escenario.clientHeight - padY;
+      const porAncho = modo === 'doble' ? W / 2 : W;
+      anchoHoja = Math.floor(Math.min(porAncho, H * RATIO) * zoom); altoHoja = Math.floor(anchoHoja / RATIO);
+    };
+    const colocar = (v: Vista) => {
+      const doble = modo === 'doble' && v.solo === undefined;
+      raiz.dataset.modo = modo; raiz.toggleAttribute('data-solo', !doble);
+      if (doble) { libro.style.width = anchoHoja * 2 + 'px'; libro.style.height = altoHoja + 'px'; cIzq.style.left = '0px'; cDer.style.left = anchoHoja + 'px'; cIzq.hidden = false; lomo.style.left = anchoHoja + 'px'; }
+      else { libro.style.width = anchoHoja + 'px'; libro.style.height = altoHoja + 'px'; cDer.style.left = '0px'; cIzq.hidden = true; }
+    };
+    const pintar = async (v: Vista) => { colocar(v); const t = setTimeout(() => cargando.style.display = 'grid', 180); await Promise.all([modo === 'doble' && v.solo === undefined ? dibujar(cIzq, v.izq) : Promise.resolve(), dibujar(cDer, v.der)]); clearTimeout(t); cargando.style.display = ''; };
+
+    // ---------- Interfaz ----------
+    const folio = (p: number) => p === 0 ? 'Portada' : p === ULTIMA ? 'Contraportada' : p <= D.romanas ? `Página ${romano(p)}` : `Página ${p - D.romanas}`;
+    const seccion = (p: number) => { let e = D.indice[0]; for (const x of D.indice) if (x.p <= p) e = x; return e; };
+    const barra = $<HTMLInputElement>('[data-l-barra]');
+    const actualizarUI = () => {
+      const v = vista(actual), vis = [v.izq, v.der].filter((x) => x !== null) as number[];
+      $('[data-l-cuenta]').textContent = vis.length > 1 ? `${vis[0] + 1}–${vis[1] + 1} / ${TOTAL}` : `${(vis[0] ?? 0) + 1} / ${TOTAL}`;
+      $('[data-l-folio]').textContent = folio(vis[vis.length - 1] ?? 0);
+      const e = seccion(vis[vis.length - 1] ?? 0); $('[data-l-seccion]').textContent = e.a && !e.s ? `${e.t} · ${e.a}` : e.t;
+      barra.value = String(actual);
+      $<HTMLButtonElement>('[data-l-ir="-1"]').disabled = actual === 0;
+      $<HTMLButtonElement>('[data-l-ir="1"]').disabled = actual === ULTIMA;
+      raiz.querySelectorAll<HTMLButtonElement>('[data-l-saltar]').forEach((b) => b.classList.toggle('bg-white/[0.08]', Number(b.dataset.lSaltar) === e.p));
+      $('[data-ic-doble]').classList.toggle('hidden', modo !== 'doble'); $('[data-ic-una]').classList.toggle('hidden', modo === 'doble');
+      try { localStorage.setItem(D.clave, String(actual)); } catch {}
+      const u = new URL(location.href); u.searchParams.set('p', String(actual)); history.replaceState(history.state, '', u);
+      // precarga
+      for (let d = 1; d <= 4; d++) { if (actual + d <= ULTIMA) blob(actual + d); if (actual - d >= 0 && d <= 2) blob(actual - d); }
+    };
+
+    async function ir(destino: number, animar = true) {
+      destino = Math.max(0, Math.min(ULTIMA, destino));
+      if (ocupado) return; const antes = vista(actual), despues = vista(destino);
+      if (antes.izq === despues.izq && antes.der === despues.der && antes.solo === despues.solo) { actual = destino; actualizarUI(); return; }
+      ocupado = true; const dir = destino > actual ? 1 : -1; actual = destino;
+      const volteable = animar && !reduce && modo === 'doble' && antes.solo === undefined && despues.solo === undefined && Math.abs(destino - (antes.der ?? antes.izq ?? 0)) <= 2;
+      if (volteable) {
+        volteo.style.width = anchoHoja + 'px'; volteo.style.height = altoHoja + 'px';
+        if (dir > 0) {
+          await Promise.all([dibujar(caraF, antes.der), dibujar(caraR, despues.izq)]);
+          volteo.style.left = anchoHoja + 'px'; volteo.hidden = false; volteo.className = 'pointer-events-none absolute top-0';
+          await dibujar(cDer, despues.der);
+          volteo.classList.add('hacia-adelante'); await new Promise((r) => setTimeout(r, 720));
+          await dibujar(cIzq, despues.izq);
+        } else {
+          await Promise.all([dibujar(caraF, antes.izq), dibujar(caraR, despues.der)]);
+          volteo.style.left = '0px'; volteo.hidden = false; volteo.className = 'pointer-events-none absolute top-0';
+          await dibujar(cIzq, despues.izq);
+          volteo.classList.add('hacia-atras'); await new Promise((r) => setTimeout(r, 720));
+          await dibujar(cDer, despues.der);
+        }
+        volteo.hidden = true; volteo.className = 'pointer-events-none absolute top-0 hidden';
+      } else {
+        await pintar(despues);
+        if (animar && !reduce) { libro.classList.remove('entra-izq', 'entra-der'); void libro.offsetWidth; libro.classList.add(dir > 0 ? 'entra-der' : 'entra-izq'); }
+      }
+      ocupado = false; actualizarUI();
+    }
+    const redibujar = async () => { medir(); await pintar(vista(actual)); actualizarUI(); };
+
+    // ---------- Controles ----------
+    raiz.querySelectorAll<HTMLButtonElement>('[data-l-ir]').forEach((b) => b.addEventListener('click', () => ir(siguiente(actual, Number(b.dataset.lIr)))));
+    barra.addEventListener('input', () => { $('[data-l-cuenta]').textContent = `${Number(barra.value) + 1} / ${TOTAL}`; $('[data-l-folio]').textContent = folio(Number(barra.value)); });
+    barra.addEventListener('change', () => ir(Number(barra.value), false));
+    $('[data-l-modo]').addEventListener('click', () => { modo = modo === 'doble' ? 'una' : 'doble'; redibujar(); });
+    raiz.querySelectorAll<HTMLButtonElement>('[data-l-zoom]').forEach((b) => b.addEventListener('click', () => { zoom = Math.min(2.6, Math.max(1, +(zoom + Number(b.dataset.lZoom) * 0.4).toFixed(1))); redibujar(); }));
+    $('[data-l-completa]').addEventListener('click', () => { document.fullscreenElement ? document.exitFullscreen() : raiz.requestFullscreen?.().catch(() => {}); });
+    const panel = $<HTMLElement>('[data-l-panel]'), velo = $<HTMLElement>('[data-l-velo]');
+    const indice = (abrir: boolean) => { panel.classList.toggle('abierto', abrir); velo.classList.toggle('hidden', !abrir); $('[data-l-indice]').setAttribute('aria-pressed', String(abrir)); };
+    $('[data-l-indice]').addEventListener('click', () => indice(!panel.classList.contains('abierto')));
+    $('[data-l-cerrar]').addEventListener('click', () => indice(false)); velo.addEventListener('click', () => indice(false));
+    raiz.querySelectorAll<HTMLButtonElement>('[data-l-saltar]').forEach((b) => b.addEventListener('click', () => { indice(false); ir(Number(b.dataset.lSaltar), false); }));
+
+    // Toques y deslizamientos sobre el libro
+    const escudo = $<HTMLDivElement>('[data-escudo]'); let x0 = 0, y0 = 0, t0 = 0;
+    escudo.addEventListener('pointerdown', (e) => { x0 = e.clientX; y0 = e.clientY; t0 = Date.now(); });
+    escudo.addEventListener('pointerup', (e) => {
+      if (zoom > 1) return; const dx = e.clientX - x0, dy = e.clientY - y0;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { ir(siguiente(actual, dx < 0 ? 1 : -1)); return; }
+      if (Date.now() - t0 < 350 && Math.abs(dx) < 8) { const r = escudo.getBoundingClientRect(); const rel = (e.clientX - r.left) / r.width; if (rel > 0.62) ir(siguiente(actual, 1)); else if (rel < 0.38) ir(siguiente(actual, -1)); }
+    });
+
+    // Protección de lectura: sin menú contextual, arrastre, guardado ni impresión
+    const aviso = (t: string) => { const a = $<HTMLElement>('[data-l-aviso]'); a.textContent = t; a.style.opacity = '1'; clearTimeout((a as any)._t); (a as any)._t = setTimeout(() => (a.style.opacity = '0'), 2400); };
+    raiz.addEventListener('contextmenu', (e) => { e.preventDefault(); aviso('Este libro se lee en línea; no se puede descargar.'); });
+    raiz.addEventListener('dragstart', (e) => e.preventDefault());
+    const teclas = (e: KeyboardEvent) => {
+      const k = e.key.toLowerCase();
+      if ((e.ctrlKey || e.metaKey) && ['s', 'p', 'u'].includes(k)) { e.preventDefault(); aviso('Este libro solo puede leerse en línea.'); return; }
+      if ((e.target as HTMLElement).tagName === 'INPUT') return;
+      if (k === 'arrowright' || k === 'pagedown' || k === ' ') { e.preventDefault(); ir(siguiente(actual, 1)); }
+      else if (k === 'arrowleft' || k === 'pageup') { e.preventDefault(); ir(siguiente(actual, -1)); }
+      else if (k === 'home') ir(0, false); else if (k === 'end') ir(ULTIMA, false);
+      else if (k === 'i') indice(!panel.classList.contains('abierto'));
+      else if (k === 'escape') indice(false);
+      else if (k === 'f') $<HTMLButtonElement>('[data-l-completa]').click();
+      else if (k === 'd') $<HTMLButtonElement>('[data-l-modo]').click();
+      else if (k === '+' || k === '=') $<HTMLButtonElement>('[data-l-zoom="1"]').click();
+      else if (k === '-') $<HTMLButtonElement>('[data-l-zoom="-1"]').click();
+    };
+    const teclaSoltada = (e: KeyboardEvent) => { if (e.key === 'PrintScreen') aviso(`Gracias por leer ${D.titulo}.`); };
+    let rt = 0; const alRedimensionar = () => { clearTimeout(rt); rt = window.setTimeout(redibujar, 140); };
+    document.addEventListener('keydown', teclas);
+    document.addEventListener('keyup', teclaSoltada);
+    addEventListener('resize', alRedimensionar);
+    document.addEventListener('fullscreenchange', alRedimensionar);
+    document.body.style.overflow = 'hidden';
+    // Al salir del lector (navegación con transiciones) se retiran todos los oyentes globales
+    document.addEventListener('astro:before-swap', () => {
+      document.removeEventListener('keydown', teclas); document.removeEventListener('keyup', teclaSoltada);
+      removeEventListener('resize', alRedimensionar); document.removeEventListener('fullscreenchange', alRedimensionar);
+      clearTimeout(rt); document.body.style.overflow = '';
+      for (const m of mapas.values()) m.then((b) => b?.close());
+      if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    }, { once: true });
+
+    // Página inicial: ?p= en la URL o propuesta de continuar
+    const pUrl = Number(new URLSearchParams(location.search).get('p'));
+    let guardada = 0; try { guardada = Number(localStorage.getItem(D.clave)) || 0; } catch {}
+    actual = Number.isFinite(pUrl) && pUrl > 0 ? Math.min(ULTIMA, pUrl) : 0;
+    redibujar();
+    if (!pUrl && guardada > 2 && guardada < ULTIMA) {
+      const c = $<HTMLElement>('[data-l-continuar]'); c.style.display = 'flex'; $('[data-l-continuar-p]').textContent = folio(guardada).toLowerCase();
+      $('[data-l-continuar-si]').addEventListener('click', () => { c.style.display = 'none'; ir(guardada, false); });
+      $('[data-l-continuar-no]').addEventListener('click', () => { c.style.display = 'none'; });
+      setTimeout(() => (c.style.display = 'none'), 12000);
+    }
+  }
+  document.addEventListener('astro:page-load', iniciarLector);
+</script>
