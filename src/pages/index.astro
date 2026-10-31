@@ -9,7 +9,7 @@ import { PISTAS, aPistaJSON } from '../lib/voces';
 import { CATALOGO_EDITORIAL } from '../data/libros';
 import { RIFA_ACTIVA, wa, portadaWeb } from '../lib/sitio';
 import { resumen } from '../lib/rifa';
-import { SESIONES as SES } from '../lib/taller';
+import { SESIONES as SES, TOTAL_SESIONES } from '../lib/taller';
 import VideoYouTube from '../components/sitio/VideoYouTube.astro';
 import { VIDEOS_LVT, VIDEOS_RECOMENDADOS, CANAL_YOUTUBE } from '../data/videos';
 import { ANIMALIA, TEXTOS_ANIMALIA, AUTORES_ANIMALIA } from '../data/animalia';
@@ -41,7 +41,7 @@ const agenda = [
   { iso: '2026-11-12', dia: '12', mes: 'nov', tipo: 'Efeméride', titulo: 'Día Nacional del Libro', detalle: 'Natalicio de Sor Juana · lectura especial en el taller del sábado 14', href: '/escritores/sor-juana', accion: 'Leer a Sor Juana' },
 ].filter((e) => e.iso >= hoy).sort((a, b) => a.iso.localeCompare(b.iso)).slice(0, 4);
 const areas = [
-  { href: '/taller-literario', titulo: 'Taller literario', texto: 'Cada sábado en la Librería Universitaria UJAT. Narrativa, poesía, ensayo y crónica en 24 sesiones. Sin costo y sin requisitos.', dato: `${SES.length} sesiones`, img: '/assets/galeria/web/evento_cacao_04.webp' },
+  { href: '/taller-literario', titulo: 'Taller literario', texto: 'Cada sábado en la Librería Universitaria UJAT. Narrativa, poesía, ensayo y crónica en 24 sesiones. Sin costo y sin requisitos.', dato: `${TOTAL_SESIONES} sesiones`, img: '/assets/galeria/web/evento_cacao_04.webp' },
   { href: '/escritores-ilustres', titulo: 'Escritores ilustres', texto: `${ESCRITORES.length} fichas con vida, obra y citas con fuente: Tabasco, México y el mundo.`, dato: `${ESCRITORES.length} autores`, img: '/assets/galeria/web/presentacion_tardes_opalos_autores.webp' },
   { href: '/sala-de-lectura', titulo: 'Sala de lectura', texto: 'Poemas, sonetos y relatos de dominio público para leer completos, con tipografía cuidada y texto del día.', dato: `${LECTURAS.length} textos`, img: '/assets/galeria/web/presentacion_tardes_opalos_grupal.webp' },
   { href: '/audioteca', titulo: 'Audioteca', texto: 'Lírica y narrativa en la voz de sus autores y de los miembros de la Sociedad. Escucha mientras lees.', dato: `${PISTAS.length} grabaciones`, img: '/assets/galeria/web/presentacion_leyendas_voces_grupal.webp' },
@@ -77,7 +77,7 @@ const areas = [
 
   <section class="envoltura">
     <dl class="grid grid-cols-2 gap-x-6 gap-y-8 border-b border-linea py-10 sm:grid-cols-4">
-      {[[anios, 'años de trayectoria'], [SES.length, 'sesiones gratuitas por ciclo'], [ESCRITORES.length, 'escritores en el canon'], [LECTURAS.length + PISTAS.length, 'textos y grabaciones para leer y oír']].map(([n, t]) => (
+      {[[anios, 'años de trayectoria'], [TOTAL_SESIONES, 'sesiones gratuitas por ciclo'], [ESCRITORES.length, 'escritores en el canon'], [LECTURAS.length + PISTAS.length, 'textos y grabaciones para leer y oír']].map(([n, t]) => (
         <div><dt class="sr-only">{t}</dt><dd class="cifra-grande contador" data-hasta={n}>{n}</dd><dd class="mt-2 text-sm text-grafito">{t}</dd></div>
       ))}
     </dl>

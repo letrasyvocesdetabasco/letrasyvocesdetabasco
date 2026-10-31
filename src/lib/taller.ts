@@ -6,7 +6,9 @@ export interface Sesion {
   eje?: string; lecturas?: string; ejercicio?: string; nota?: string; sin_taller?: string;
 }
 export const TALLER = cal as { nombre: string; horario: string; sede: string; acceso: string; calendario_base: string; calendario: Sesion[] };
-export const SESIONES = TALLER.calendario.filter((s) => s.sesion);
+/** Sábados cancelados (sin_taller sin número de sesión): la sesión de esa fecha no se imparte y el temario avanza. */
+const CANCELADAS = new Set(TALLER.calendario.filter((s) => !s.sesion && s.sin_taller).map((s) => s.fecha));
+export const SESIONES = TALLER.calendario.filter((s) => s.sesion && !CANCELADAS.has(s.fecha));
 export const TOTAL_SESIONES = 24;
 
 const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -28,7 +30,11 @@ export function sesionVigente(hoy = hoyMx()) {
 }
 /** Motivo legible de un sábado sin sesión. */
 export function esVacacion(s: Sesion) { return (s.sin_taller || '').startsWith('Vacaciones'); }
-export function motivoReceso(s: Sesion) { return esVacacion(s) ? 'por vacaciones de la UJAT' : 'por ajustes en la programación de la sede'; }
+export function motivoReceso(s: Sesion) {
+  if (esVacacion(s)) return 'por vacaciones de la UJAT';
+  const m = (s.sin_taller || '').trim();
+  return m ? 'por ' + m.charAt(0).toLowerCase() + m.slice(1) : 'por ajustes en la programación de la sede';
+}
 export function modulos() {
   const m = new Map<string, { modulo: string; nombre: string; sesiones: Sesion[] }>();
   for (const s of SESIONES) {

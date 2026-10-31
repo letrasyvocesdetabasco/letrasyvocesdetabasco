@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SesionTaller from '../components/sitio/SesionTaller.astro';
 import { DATOS_GENERALES_TALLER as T } from '../data/taller';
-import { TALLER, SESIONES, modulos, fechaLarga, lecturas, sesionVigente, esVacacion } from '../lib/taller';
+import { TALLER, SESIONES, modulos, fechaLarga, lecturas, sesionVigente, esVacacion, motivoReceso } from '../lib/taller';
 import { CONTACTO, wa } from '../lib/sitio';
 import { personaPorNombre } from '../lib/personas';
 const coordinador = personaPorNombre(T.titularAcademico.nombre);
@@ -91,7 +91,7 @@ const preguntas = [
                 const receso = recesos.filter((r) => r.fecha < s.fecha && r.fecha > previa);
                 return (
                   <>
-                    {receso.length > 0 && <li class="rounded-pieza border border-dashed border-linea px-5 py-4 text-sm text-tenue">{esVacacion(receso[0]) ? 'Vacaciones de invierno UJAT: sin' : 'Sin'} sesión el {receso.map((r) => fechaLarga(r.fecha, false)).join(' y el ')}{esVacacion(receso[0]) ? '' : ' por ajustes en la programación de la sede'}.</li>}
+                    {receso.length > 0 && <li class="rounded-pieza border border-dashed border-linea px-5 py-4 text-sm text-tenue">{esVacacion(receso[0]) ? 'Vacaciones de invierno UJAT: sin' : 'Sin'} sesión el {receso.map((r) => fechaLarga(r.fecha, false)).join(' y el ')}{esVacacion(receso[0]) ? '' : ' ' + motivoReceso(receso[0])}.</li>}
                     <li data-fecha={s.fecha} id={`sesion-${s.sesion}`} class:list={['sesion group rounded-pieza border bg-superficie transition', proxima?.fecha === s.fecha ? 'border-naranja shadow-alta' : 'border-linea']}>
                       <details>
                         <summary class="grid cursor-pointer list-none grid-cols-[3.5rem_1fr_auto] items-start gap-4 p-5 sm:p-6 [&::-webkit-details-marker]:hidden">

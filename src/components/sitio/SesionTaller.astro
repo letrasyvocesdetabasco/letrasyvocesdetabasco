@@ -4,7 +4,7 @@ import { SESIONES, TALLER, sesionVigente, fechaLarga, lecturas, TOTAL_SESIONES, 
 interface Props { oscuro?: boolean; compacta?: boolean; }
 const { oscuro = false, compacta = false } = Astro.props;
 const { proxima, recesos, esHoy } = sesionVigente();
-const mini = TALLER.calendario.map((s) => ({ f: s.fecha, n: s.sesion ?? null, t: s.titulo ?? '', m: s.modulo_nombre ?? '', l: s.lecturas ?? '' }));
+const mini = TALLER.calendario.filter((s) => !s.sesion || SESIONES.includes(s)).map((s) => ({ f: s.fecha, n: s.sesion ?? null, t: s.titulo ?? '', m: s.modulo_nombre ?? '', l: s.lecturas ?? '' }));
 const lec = proxima ? lecturas(proxima).slice(0, 2) : [];
 ---
 <article data-sesion-taller class:list={['relative overflow-hidden rounded-pieza p-6 sm:p-7', oscuro ? 'bg-white/[0.06] text-white ring-1 ring-white/15 backdrop-blur-md' : 'pieza shadow-suave']}>
