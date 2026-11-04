@@ -32,6 +32,22 @@ export interface VideoLVT {
 
 export const VIDEOS_LVT: VideoLVT[] = [
   {
+    id: 'IIZoSVpLN7M',
+    titulo: 'Accidente Desafortunado',
+    serie: 'Cortometraje animado',
+    formato: 'Cuento animado',
+    genero: 'narrativa',
+    obra: '«Accidente Desafortunado», cuento publicado en la antología «Animalia Literaria» (Canis lupus familiaris)',
+    autorObra: 'Juan David Pérez Cabrera',
+    duracionSegundos: 317,
+    publicado: '2026-11-04',
+    realizacion: 'Escrita y realizada por Juan David Pérez Cabrera',
+    sinopsis: 'Al caer la tarde, un padre y su hijo de 14 años regresan a casa por la carretera. Un perro cruza el camino y el padre no alcanza a frenar. Lo que pasa después marcará el verdadero nacimiento del muchacho.',
+    descripcion: '«Nací a los 14 años de edad, y fui un accidente.» Cortometraje animado basado en el cuento de Juan David Pérez Cabrera publicado en la antología «Animalia Literaria». Contiene escenas que pueden afectar a personas sensibles (violencia sugerida hacia un animal).',
+    miniatura: '/assets/videos/IIZoSVpLN7M.webp',
+    miniaturaChica: '/assets/videos/IIZoSVpLN7M_640.webp',
+  },
+  {
     id: '2DC8OTKaFss',
     titulo: 'La historia de una hora',
     serie: 'Literatura animada al óleo',

@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoYouTube from '../components/sitio/VideoYouTube.astro';
+import { VIDEOS_LVT, CANAL_YOUTUBE, duracionISO } from '../data/videos';
+import { SITIO } from '../lib/sitio';
+
+const v = VIDEOS_LVT.find((x) => x.id === 'IIZoSVpLN7M')!;
+const fotogramas = [
+  ['fotograma_01_ojo', 'El ojo del muchacho y el título'],
+  ['fotograma_02_carretera_titulo', 'La carretera al caer la tarde'],
+  ['fotograma_03_recuerdo_jonron', 'Un recuerdo: el jonrón'],
+  ['fotograma_04_carretera_coche', 'El coche en la carretera'],
+  ['fotograma_05_padre_hijo_perro', 'El padre, el hijo y el perro'],
+  ['fotograma_06_atardecer_final', 'El atardecer final'],
+];
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'VideoObject',
+  name: 'Accidente Desafortunado · Cortometraje animado', description: v.sinopsis,
+  thumbnailUrl: new URL(v.miniatura, SITIO).href, uploadDate: '2026-11-04T20:00:00-06:00',
+  duration: duracionISO(v.duracionSegundos), embedUrl: `https://www.youtube-nocookie.com/embed/${v.id}`,
+  contentUrl: `https://www.youtube.com/watch?v=${v.id}`, inLanguage: 'es',
+  creator: { '@type': 'Person', name: 'Juan David Pérez Cabrera' },
+  publisher: { '@type': 'Organization', name: 'Sociedad de Escritores Letras y Voces de Tabasco, A.C.' },
+};
+---
+<BaseLayout title="Accidente Desafortunado · Cortometraje animado · Letras y Voces de Tabasco" description="«Nací a los 14 años de edad, y fui un accidente.» Cortometraje animado de Juan David Pérez Cabrera basado en su cuento de la antología «Animalia Literaria». Estreno: 4 de noviembre de 2026, 20:00 h." image={v.miniatura} tipo="video.other" jsonLd={jsonLd}>
+  <section class="relative isolate overflow-hidden bg-noche text-white">
+    <img src={v.miniatura} alt="" class="absolute inset-0 -z-20 h-full w-full object-cover opacity-30" fetchpriority="high" />
+    <div class="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgb(14_13_12/0.96)_20%,rgb(14_13_12/0.75)_60%,rgb(14_13_12/0.45))]"></div>
+    <div class="envoltura py-16 sm:py-24">
+      <p class="etiqueta etiqueta-clara">Cortometraje animado · Estreno 4 de noviembre de 2026, 20:00 h</p>
+      <h1 class="titular-hero mt-6 max-w-[14ch]">Accidente Desafortunado</h1>
+      <p class="mt-6 max-w-2xl font-serif text-[1.35rem] italic leading-snug text-white/85 sm:text-2xl">«Nací a los 14 años de edad, y fui un accidente.»</p>
+      <p class="mt-4 max-w-2xl text-white/70">Escrita y realizada por Juan David Pérez Cabrera, basada en su cuento publicado en la antología «Animalia Literaria» (Canis lupus familiaris). Una producción de Letras y Voces de Tabasco A.C.</p>
+    </div>
+  </section>
+
+  <section class="envoltura py-14 sm:py-20">
+    <VideoYouTube id={v.id} titulo="Accidente Desafortunado · Juan David Pérez Cabrera" miniatura={v.miniatura} duracionSegundos={v.duracionSegundos} grande />
+    <p class="mt-4 text-sm text-grafito">Advertencia: contiene escenas que pueden afectar a personas sensibles (violencia sugerida hacia un animal). Duración: 5 min 16 s. Subtítulos en español disponibles en YouTube.</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" rel="noopener" class="boton-primario">Verla en YouTube</a>
+      <a href={CANAL_YOUTUBE.suscribirse} target="_blank" rel="noopener" class="boton-claro">Suscríbete al canal</a>
+    </div>
+  </section>
+
+  <section class="envoltura grid gap-10 pb-16 lg:grid-cols-[1.4fr_1fr] sm:pb-20">
+    <div>
+      <p class="etiqueta">Sinopsis</p>
+      <p class="mt-4 font-serif text-xl leading-relaxed">{v.sinopsis}</p>
+    </div>
+    <dl class="grid gap-4 rounded-pieza bg-hundido p-6 text-sm">
+      <div><dt class="font-semibold">Guion, dirección y realización</dt><dd class="text-grafito">Juan David Pérez Cabrera</dd></div>
+      <div><dt class="font-semibold">Basada en</dt><dd class="text-grafito">El cuento «Accidente Desafortunado», antología «Animalia Literaria» (Canis lupus familiaris)</dd></div>
+      <div><dt class="font-semibold">Producción</dt><dd class="text-grafito">Sociedad de Escritores Letras y Voces de Tabasco, A.C.</dd></div>
+      <div><dt class="font-semibold">Duración</dt><dd class="text-grafito">5 min 16 s · Español</dd></div>
+    </dl>
+  </section>
+
+  <section class="envoltura pb-20 sm:pb-28">
+    <p class="etiqueta">Fotogramas</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {fotogramas.map(([f, alt]) => (
+        <img src={`/assets/videos/accidente/${f}.webp`} alt={`${alt} · Accidente Desafortunado`} width="1280" height="720" loading="lazy" class="w-full rounded-pieza" />
+      ))}
+    </div>
+    <p class="mt-10"><a href="/videos" class="underline">Ver todas las producciones de Letras y Voces</a></p>
+  </section>
+</BaseLayout>
