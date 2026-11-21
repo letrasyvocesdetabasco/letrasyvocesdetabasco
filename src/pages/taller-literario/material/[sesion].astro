@@ -1,0 +1,25 @@
+---
+// Material de clase de una sesión del taller: solo lectura en pantalla, sin descarga.
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import VisorMaterial from '../../../components/lector/VisorMaterial.astro';
+import material from '../../../data/material_taller.json';
+import { lecturas } from '../../../lib/taller';
+
+export function getStaticPaths() {
+  return material.sesiones.map((s) => ({ params: { sesion: `sesion-${s.sesion}` }, props: { s } }));
+}
+const { s } = Astro.props as { s: (typeof material.sesiones)[number] };
+const lec = lecturas(s as any);
+---
+<BaseLayout title={`Sesión ${s.sesion}: ${s.titulo} · Material del taller · Letras y Voces de Tabasco`} description={`Material de clase de la sesión ${s.sesion} del Taller Literario «Letras y Voces»: diapositivas, ficha de trabajo y cuaderno de lecturas. Consulta en línea.`} sinIndexar>
+  <section class="envoltura py-10 sm:py-14">
+    <p><a href="/taller-literario/material" class="enlace text-sm">← Material de todas las sesiones</a></p>
+    <p class="etiqueta mt-6">Taller literario «Letras y Voces» · Módulo {s.modulo}: {s.modulo_nombre}</p>
+    <h1 class="titular-l mt-4">Sesión {s.sesion}: {s.titulo}</h1>
+    {lec.length > 0 && <p class="mt-4 text-grafito">Leemos a {lec.map((x) => x.autor).join(', ')}.</p>}
+    <p class="mt-2 text-sm text-tenue">Material para consultar en pantalla; no se descarga.</p>
+  </section>
+  <section class="envoltura pb-20">
+    <VisorMaterial documentos={s.documentos} marca={`Taller Literario «Letras y Voces» · Sesión ${s.sesion} · consulta en línea`} />
+  </section>
+</BaseLayout>

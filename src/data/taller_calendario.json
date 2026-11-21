@@ -122,6 +122,11 @@
     },
     {
       "fecha": "2026-11-21",
+      "sesion": null,
+      "sin_taller": "Eventos institucionales de la UJAT a los que fue comisionado el personal de la Librería Universitaria"
+    },
+    {
+      "fecha": "2026-11-21",
       "sesion": 11,
       "modulo": "II",
       "modulo_nombre": "Lírica, poética y lenguaje",

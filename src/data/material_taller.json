@@ -1,0 +1,157 @@
+{
+ "sesiones": [
+  {
+   "sesion": 10,
+   "titulo": "Poesía de la Experiencia e Itinerarios Urbanos",
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "fecha": "2026-11-14",
+   "lecturas": "Eduardo Lizalde, El tigre en la casa; Efraín Huerta, Poemas urbanos y los célebres Poemínimos.",
+   "documentos": [
+    {
+     "slug": "diapositivas",
+     "titulo": "Diapositivas",
+     "ancho": 1536,
+     "alto": 864,
+     "cols": 4,
+     "filas": 8,
+     "pad": 6,
+     "sal": 16267451,
+     "base": "/lectura/taller/df5243fcc1/",
+     "paginas": [
+      "1f1d2145f91797ab.webp",
+      "8376f95165d15710.webp",
+      "710c7c2dede7f2b4.webp",
+      "283259c4a6bbb1f3.webp",
+      "501fa52624636cb0.webp",
+      "b117803228808e3d.webp",
+      "8132118c9123b710.webp",
+      "a472e52af4d67f56.webp",
+      "cb79d8d467217e29.webp",
+      "102bd8d36494f933.webp",
+      "a537cf7d432424ea.webp",
+      "773559378ad71796.webp",
+      "d1d16d865a4d455c.webp",
+      "dba38b8794f362a8.webp",
+      "a4b5dc6354d83410.webp",
+      "f3dc74e35097cd33.webp",
+      "05f69e28b9750fcb.webp",
+      "34b169023c930719.webp",
+      "dc417a8c2b8f2041.webp",
+      "ba9ae08015558b7b.webp"
+     ]
+    },
+    {
+     "slug": "ficha",
+     "titulo": "Ficha de trabajo",
+     "ancho": 1224,
+     "alto": 1584,
+     "cols": 4,
+     "filas": 8,
+     "pad": 6,
+     "sal": 2916718,
+     "base": "/lectura/taller/31c235a117/",
+     "paginas": [
+      "9ac1ae4e40e94c09.webp",
+      "34ce5be50993ea13.webp"
+     ]
+    },
+    {
+     "slug": "lecturas",
+     "titulo": "Cuaderno de lecturas",
+     "ancho": 1224,
+     "alto": 1584,
+     "cols": 4,
+     "filas": 8,
+     "pad": 6,
+     "sal": 14329076,
+     "base": "/lectura/taller/1ac4f1de1b/",
+     "paginas": [
+      "97a8c694cd8f5834.webp",
+      "d33f7118370749e8.webp",
+      "32a28e7a3ea5768d.webp",
+      "56be5526b07387fd.webp",
+      "4c5533334ff55a56.webp",
+      "d9a2b84ee7725253.webp"
+     ]
+    }
+   ]
+  },
+  {
+   "sesion": 11,
+   "titulo": "Hibridación Lírica: La Prosa Poética",
+   "modulo": "II",
+   "modulo_nombre": "Lírica, poética y lenguaje",
+   "fecha": "2026-11-21",
+   "lecturas": "Charles Baudelaire, Pequeños poemas en prosa; Oliverio Girondo, En la masmédula; Pura López Colomé, textos selectos.",
+   "documentos": [
+    {
+     "slug": "diapositivas",
+     "titulo": "Diapositivas",
+     "ancho": 1536,
+     "alto": 864,
+     "cols": 4,
+     "filas": 8,
+     "pad": 6,
+     "sal": 16713919,
+     "base": "/lectura/taller/1d49f3a863/",
+     "paginas": [
+      "0a997477c26f3685.webp",
+      "69061cb0e630cd6b.webp",
+      "d4287d321cdfc63d.webp",
+      "1980ed696f100900.webp",
+      "1c6a920baa044254.webp",
+      "b7d439e508c747c5.webp",
+      "4d0c10db091830e7.webp",
+      "a1a22804d1df6741.webp",
+      "ce837531c0a9b390.webp",
+      "fe3af684325e65e9.webp",
+      "5ec0006fe6edf8a8.webp",
+      "2bf43dde66132908.webp",
+      "28539d117d1be16a.webp",
+      "728835659ef6b420.webp",
+      "6890a71bac46ed1d.webp",
+      "8f70cc9428bf0c30.webp",
+      "7b7449b55537fe5c.webp",
+      "45083c034b93cb88.webp",
+      "ea91d3f2c6d8d115.webp"
+     ]
+    },
+    {
+     "slug": "ficha",
+     "titulo": "Ficha de trabajo",
+     "ancho": 1224,
+     "alto": 1584,
+     "cols": 4,
+     "filas": 8,
+     "pad": 6,
+     "sal": 14524405,
+     "base": "/lectura/taller/42a2604e45/",
+     "paginas": [
+      "6180e25d8447e79c.webp",
+      "40df73a3ace18ea5.webp"
+     ]
+    },
+    {
+     "slug": "lecturas",
+     "titulo": "Cuaderno de lecturas",
+     "ancho": 1224,
+     "alto": 1584,
+     "cols": 4,
+     "filas": 8,
+     "pad": 6,
+     "sal": 10071772,
+     "base": "/lectura/taller/0944521d49/",
+     "paginas": [
+      "2ecded354cfb1cca.webp",
+      "15f25e783826ca28.webp",
+      "2535dc87d6ef136a.webp",
+      "77bd652fd6460e67.webp",
+      "a533f8aebea79978.webp",
+      "b21aebd4a449d296.webp"
+     ]
+    }
+   ]
+  }
+ ]
+}
